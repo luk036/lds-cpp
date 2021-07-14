@@ -1,11 +1,11 @@
 #include <fmt/format.h>
-#include <greeter/greeter.h>
+#include <lds/greeter.h>
 
-using namespace greeter;
+using namespace lds;
 
-Greeter::Greeter(std::string _name) : name(std::move(_name)) {}
+LDSCpp::LDSCpp(std::string _name) : name(std::move(_name)) {}
 
-std::string Greeter::greet(LanguageCode lang) const {
+std::string LDSCpp::greet(LanguageCode lang) const {
   switch (lang) {
     default:
     case LanguageCode::EN:
