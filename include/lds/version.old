@@ -1,0 +1,3 @@
+#pragma once
+
+#define LDS_VERSION "1.0"

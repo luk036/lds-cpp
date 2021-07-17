@@ -36,7 +36,7 @@ auto main(int argc, char** argv) -> int {
   }
 
   if (result["version"].as<bool>()) {
-    std::cout << "LDSCpp, version " << LDSCPP_VERSION << std::endl;
+    std::cout << "Lds, version " << LDS_VERSION << std::endl;
     return 0;
   }
 
@@ -46,7 +46,7 @@ auto main(int argc, char** argv) -> int {
     return 1;
   }
 
-  lds::LDSCpp lds(name);
+  lds::Lds lds(name);
   std::cout << lds.greet(langIt->second) << std::endl;
 
   return 0;

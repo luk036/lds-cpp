@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
 
-project(LDSCppStandalone LANGUAGES CXX)
+project(LdsStandalone LANGUAGES CXX)
 
 # --- Import tools ----
 
@@ -18,14 +18,14 @@ CPMAddPackage(
   OPTIONS "CXXOPTS_BUILD_EXAMPLES NO" "CXXOPTS_BUILD_TESTS NO" "CXXOPTS_ENABLE_INSTALL YES"
 )
 
-CPMAddPackage(NAME LDSCpp SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/..)
+CPMAddPackage(NAME Lds SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/..)
 
 # ---- Create standalone executable ----
 
 file(GLOB sources CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/source/*.cpp)
 
-add_executable(LDSCppStandalone ${sources})
+add_executable(LdsStandalone ${sources})
 
-set_target_properties(LDSCppStandalone PROPERTIES CXX_STANDARD 17 OUTPUT_NAME "LDSCpp")
+set_target_properties(LdsStandalone PROPERTIES CXX_STANDARD 17 OUTPUT_NAME "Lds")
 
-target_link_libraries(LDSCppStandalone LDSCpp::LDSCpp cxxopts GSL)
+target_link_libraries(LdsStandalone Lds::Lds cxxopts GSL)

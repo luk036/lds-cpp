@@ -3,9 +3,9 @@
 
 using namespace lds;
 
-LDSCpp::LDSCpp(std::string _name) : name(std::move(_name)) {}
+Lds::Lds(std::string _name) : name(std::move(_name)) {}
 
-std::string LDSCpp::greet(LanguageCode lang) const {
+std::string Lds::greet(LanguageCode lang) const {
   switch (lang) {
     default:
     case LanguageCode::EN:

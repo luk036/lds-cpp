@@ -4,10 +4,10 @@
 
 #include <string>
 
-TEST_CASE("LDSCpp") {
+TEST_CASE("Lds") {
   using namespace lds;
 
-  LDSCpp lds("Tests");
+  Lds lds("Tests");
 
   CHECK(lds.greet(LanguageCode::EN) == "Hello, Tests!");
   CHECK(lds.greet(LanguageCode::DE) == "Hallo Tests!");
@@ -15,7 +15,7 @@ TEST_CASE("LDSCpp") {
   CHECK(lds.greet(LanguageCode::FR) == "Bonjour Tests!");
 }
 
-TEST_CASE("LDSCpp version") {
-  static_assert(std::string_view(LDSCPP_VERSION) == std::string_view("1.0"));
-  CHECK(std::string(LDSCPP_VERSION) == std::string("1.0"));
+TEST_CASE("Lds version") {
+  static_assert(std::string_view(LDS_VERSION) == std::string_view("1.0"));
+  CHECK(std::string(LDS_VERSION) == std::string("1.0"));
 }

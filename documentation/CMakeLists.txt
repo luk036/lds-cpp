@@ -1,19 +1,19 @@
 cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
 
-project(LDSCppDocs)
+project(LdsDocs)
 
 # ---- Dependencies ----
 
 include(../cmake/CPM.cmake)
 
 CPMAddPackage("gh:mosra/m.css#42d4a9a48f31f5df6e246c948403b54b50574a2a")
-CPMAddPackage(NAME LDSCpp SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/..)
+CPMAddPackage(NAME Lds SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/..)
 
 # ---- Doxygen variables ----
 
 # set Doxyfile variables
-set(DOXYGEN_PROJECT_NAME LDSCpp)
-set(DOXYGEN_PROJECT_VERSION ${LDSCpp_VERSION})
+set(DOXYGEN_PROJECT_NAME Lds)
+set(DOXYGEN_PROJECT_VERSION ${Lds_VERSION})
 set(DOXYGEN_PROJECT_ROOT "${CMAKE_CURRENT_LIST_DIR}/..")
 set(DOXYGEN_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/doxygen")
 

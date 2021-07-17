@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
 
 # Note: update this to your new project's name and version
 project(
-  LDSCpp
+  Lds
   VERSION 1.0
   LANGUAGES CXX
 )
@@ -25,7 +25,6 @@ include(cmake/CPM.cmake)
 
 # PackageProject.cmake will be used to make our target installable
 CPMAddPackage("gh:TheLartians/PackageProject.cmake@1.6.0")
-CPMAddPackage("gh:microsoft/GSL@3.1.0")
 
 CPMAddPackage(
   NAME fmt
@@ -33,6 +32,8 @@ CPMAddPackage(
   GITHUB_REPOSITORY fmtlib/fmt
   OPTIONS "FMT_INSTALL YES" # create an installable target
 )
+
+CPMAddPackage("gh:microsoft/GSL@3.1.0")
 
 # ---- Add source files ----
 
@@ -44,19 +45,19 @@ file(GLOB_RECURSE sources CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/source/
 # ---- Create library ----
 
 # Note: for header-only libraries change all PUBLIC flags to INTERFACE and create an interface
-# target: add_library(LDSCpp INTERFACE)
-add_library(LDSCpp ${headers} ${sources})
+# target: add_library(Lds INTERFACE)
+add_library(Lds ${headers} ${sources})
 
-set_target_properties(LDSCpp PROPERTIES CXX_STANDARD 17)
+set_target_properties(Lds PROPERTIES CXX_STANDARD 17)
 
 # being a cross-platform target, we enforce standards conformance on MSVC
-target_compile_options(LDSCpp PUBLIC "$<$<COMPILE_LANG_AND_ID:CXX,MSVC>:/permissive->")
+target_compile_options(Lds PUBLIC "$<$<COMPILE_LANG_AND_ID:CXX,MSVC>:/permissive->")
 
 # Link dependencies
-target_link_libraries(LDSCpp PRIVATE fmt::fmt GSL)
+target_link_libraries(Lds PRIVATE fmt::fmt GSL)
 
 target_include_directories(
-  LDSCpp PUBLIC $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
+  Lds PUBLIC $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
                  $<INSTALL_INTERFACE:include/${PROJECT_NAME}-${PROJECT_VERSION}>
 )
 

@@ -4,13 +4,13 @@
 
 namespace lds {
 
-  /**  Language codes to be used with the LDSCpp class */
+  /**  Language codes to be used with the Lds class */
   enum class LanguageCode { EN, DE, ES, FR };
 
   /**
    * @brief A class for saying hello in multiple languages
    */
-  class LDSCpp {
+  class Lds {
     std::string name;
 
   public:
@@ -18,7 +18,7 @@ namespace lds {
      * @brief Creates a new lds
      * @param name the name to greet
      */
-    LDSCpp(std::string name);
+    Lds(std::string name);
 
     /**
      * @brief Creates a localized string containing the greeting
