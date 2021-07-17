@@ -5,17 +5,17 @@
 #include <string>
 
 TEST_CASE("Lds") {
-  using namespace lds;
+    using namespace lds;
 
-  Lds lds("Tests");
+    Lds lds("Tests");
 
-  CHECK(lds.greet(LanguageCode::EN) == "Hello, Tests!");
-  CHECK(lds.greet(LanguageCode::DE) == "Hallo Tests!");
-  CHECK(lds.greet(LanguageCode::ES) == "¡Hola Tests!");
-  CHECK(lds.greet(LanguageCode::FR) == "Bonjour Tests!");
+    CHECK(lds.greet(LanguageCode::EN) == "Hello, Tests!");
+    CHECK(lds.greet(LanguageCode::DE) == "Hallo Tests!");
+    CHECK(lds.greet(LanguageCode::ES) == "¡Hola Tests!");
+    CHECK(lds.greet(LanguageCode::FR) == "Bonjour Tests!");
 }
 
 TEST_CASE("Lds version") {
-  static_assert(std::string_view(LDS_VERSION) == std::string_view("1.0"));
-  CHECK(std::string(LDS_VERSION) == std::string("1.0"));
+    static_assert(std::string_view(LDS_VERSION) == std::string_view("1.0"));
+    CHECK(std::string(LDS_VERSION) == std::string("1.0"));
 }
