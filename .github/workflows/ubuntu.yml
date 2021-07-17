@@ -12,7 +12,7 @@ on:
 
 env:
   CTEST_OUTPUT_ON_FAILURE: 1
-  CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+  CODECOV_TOKEN: '27ff93df-435c-46d6-9b33-44717160c2dc'
   CPM_SOURCE_CACHE: ${{ github.workspace }}/cpm_modules
 
 jobs:
