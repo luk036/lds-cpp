@@ -62,7 +62,7 @@ namespace lds {
     class sphere_n {
       private:
         vdcorput _vdc;
-        unsigned long _n;
+        size_t _n;
         std::variant<std::unique_ptr<sphere_n>, std::unique_ptr<sphere>> _Sgen;
         double _range_t;
         double _t0;
