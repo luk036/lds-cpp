@@ -17,7 +17,8 @@ include(../cmake/CPM.cmake)
 
 CPMAddPackage("gh:onqtam/doctest#2.4.5")
 CPMAddPackage("gh:TheLartians/Format.cmake@1.7.0")
-CPMAddPackage("gh:microsoft/GSL@3.1.0")
+
+include(../specific.cmake)
 
 if(TEST_INSTALLED_VERSION)
   find_package(Lds REQUIRED)
@@ -29,13 +30,14 @@ endif()
 
 file(GLOB sources CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/source/*.cpp)
 add_executable(LdsTests ${sources})
-target_link_libraries(LdsTests doctest::doctest Lds::Lds GSL)
+target_link_libraries(LdsTests doctest::doctest Lds::Lds GSL xtensor)
 set_target_properties(LdsTests PROPERTIES CXX_STANDARD 17)
 
 # enable compiler warnings
 if(NOT TEST_INSTALLED_VERSION)
   if(CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR CMAKE_CXX_COMPILER_ID MATCHES "GNU")
-    target_compile_options(Lds PUBLIC -Wall -Wpedantic -Wextra -Werror)
+    # target_compile_options(Lds PUBLIC -Wall -Wpedantic -Wextra -Werror)
+    target_compile_options(Lds PUBLIC -Wall -Wextra -Werror)
   elseif(MSVC)
     target_compile_options(Lds PUBLIC /W4 /WX)
     target_compile_definitions(LdsTests PUBLIC DOCTEST_CONFIG_USE_STD_HEADERS)
