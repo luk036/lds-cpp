@@ -56,7 +56,7 @@ set_target_properties(Lds PROPERTIES CXX_STANDARD 17)
 target_compile_options(Lds PUBLIC "$<$<COMPILE_LANG_AND_ID:CXX,MSVC>:/permissive->")
 
 # Link dependencies
-target_link_libraries(Lds PRIVATE fmt::fmt GSL xtensor)
+target_link_libraries(Lds PRIVATE fmt::fmt GSL)
 
 target_include_directories(
   Lds PUBLIC $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
