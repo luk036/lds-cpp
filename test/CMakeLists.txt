@@ -30,7 +30,7 @@ endif()
 
 file(GLOB sources CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/source/*.cpp)
 add_executable(LdsTests ${sources})
-target_link_libraries(LdsTests doctest::doctest Lds::Lds GSL)
+target_link_libraries(LdsTests doctest::doctest Lds::Lds GSL xtensor)
 set_target_properties(LdsTests PROPERTIES CXX_STANDARD 17)
 
 # enable compiler warnings
