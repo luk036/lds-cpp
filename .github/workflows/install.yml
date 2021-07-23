@@ -33,12 +33,10 @@ jobs:
           rm -rf build
 
       - name: configure
-        run: cmake -Stest -Bbuild -DTEST_INSTALLED_VERSION=1
+        run: cmake -Stest_installed -Bbuild
 
       - name: build
         run: cmake --build build --config Debug -j4
 
-      - name: test
-        run: |
-          cd build
-          ctest --build-config Debug
+      - name: run
+        run: ./build/test_installed/Lds
