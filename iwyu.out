@@ -1,0 +1,98 @@
+Consolidate compiler generated dependencies of target Lds
+[ 14%] Building CXX object CMakeFiles/Lds.dir/source/greeter.cpp.o
+Warning: include-what-you-use reported diagnostics:
+
+/data/data/com.termux/files/home/github/lds-cpp/source/greeter.cpp should add these lines:
+#include <iosfwd>         // for string
+#include <string>         // for basic_string
+#include <type_traits>    // for move
+
+/data/data/com.termux/files/home/github/lds-cpp/source/greeter.cpp should remove these lines:
+
+The full include-list for /data/data/com.termux/files/home/github/lds-cpp/source/greeter.cpp:
+#include <fmt/format.h>   // for format
+#include <lds/greeter.h>  // for Lds, LanguageCode, LanguageCode::DE, Langua...
+#include <iosfwd>         // for string
+#include <string>         // for basic_string
+#include <type_traits>    // for move
+---
+
+[ 28%] Building CXX object CMakeFiles/Lds.dir/source/low_discr_seq_n.cpp.o
+Warning: include-what-you-use reported diagnostics:
+
+/data/data/com.termux/files/home/github/lds-cpp/source/low_discr_seq_n.cpp should add these lines:
+#include <stddef.h>                     // for size_t
+#include <cmath>                        // for cos, sin, sqrt
+#include <gsl/span>                     // for span
+#include <memory>                       // for unique_ptr, make_unique
+#include <type_traits>                  // for move, remove_reference<>::type
+#include <variant>                      // for visit, variant
+#include <vector>                       // for vector
+#include <xtensor/xaccessible.hpp>      // for xconst_accessible
+#include <xtensor/xbuilder.hpp>         // for linspace
+#include <xtensor/xfunction.hpp>        // for xfunction
+#include <xtensor/xgenerator.hpp>       // for xgenerator
+#include <xtensor/xiterator.hpp>        // for linear_begin
+#include <xtensor/xlayout.hpp>          // for layout_type, layout_type::row...
+#include <xtensor/xmath.hpp>            // for cos, interp, pow, sin, numeri...
+#include <xtensor/xoperation.hpp>       // for xfunction_type_t, operator*
+#include <xtensor/xtensor.hpp>          // for xtensor_container
+#include <xtensor/xtensor_forward.hpp>  // for xtensor, xarray
+#include "lds/low_discr_seq.hpp"        // for sphere, circle, vdcorput
+
+/data/data/com.termux/files/home/github/lds-cpp/source/low_discr_seq_n.cpp should remove these lines:
+- #include <xtensor/xadapt.hpp>  // lines 3-3
+- #include <xtensor/xarray.hpp>  // lines 4-4
+
+The full include-list for /data/data/com.termux/files/home/github/lds-cpp/source/low_discr_seq_n.cpp:
+#include <stddef.h>                     // for size_t
+#include <cassert>                      // for assert
+#include <cmath>                        // for cos, sin, sqrt
+#include <gsl/span>                     // for span
+#include <lds/low_discr_seq_n.hpp>      // for sphere_n, cylin_n, sphere3
+#include <memory>                       // for unique_ptr, make_unique
+#include <type_traits>                  // for move, remove_reference<>::type
+#include <variant>                      // for visit, variant
+#include <vector>                       // for vector
+#include <xtensor/xaccessible.hpp>      // for xconst_accessible
+#include <xtensor/xbuilder.hpp>         // for linspace
+#include <xtensor/xfunction.hpp>        // for xfunction
+#include <xtensor/xgenerator.hpp>       // for xgenerator
+#include <xtensor/xiterator.hpp>        // for linear_begin
+#include <xtensor/xlayout.hpp>          // for layout_type, layout_type::row...
+#include <xtensor/xmath.hpp>            // for cos, interp, pow, sin, numeri...
+#include <xtensor/xoperation.hpp>       // for xfunction_type_t, operator*
+#include <xtensor/xtensor.hpp>          // for xtensor_container
+#include <xtensor/xtensor_forward.hpp>  // for xtensor, xarray
+#include "lds/low_discr_seq.hpp"        // for sphere, circle, vdcorput
+---
+
+[ 42%] Linking CXX static library libLds.a
+[ 42%] Built target Lds
+Consolidate compiler generated dependencies of target LdsTests
+[ 57%] Building CXX object test/CMakeFiles/LdsTests.dir/source/main.cpp.o
+[ 71%] Linking CXX executable LdsTests
+[ 71%] Built target LdsTests
+Consolidate compiler generated dependencies of target LdsStandalone
+[ 85%] Building CXX object standalone/CMakeFiles/LdsStandalone.dir/source/main.cpp.o
+Warning: include-what-you-use reported diagnostics:
+
+/data/data/com.termux/files/home/github/lds-cpp/standalone/source/main.cpp should add these lines:
+#include <memory>         // for shared_ptr
+#include <utility>        // for pair
+
+/data/data/com.termux/files/home/github/lds-cpp/standalone/source/main.cpp should remove these lines:
+
+The full include-list for /data/data/com.termux/files/home/github/lds-cpp/standalone/source/main.cpp:
+#include <lds/greeter.h>  // for LanguageCode, LanguageCode::DE, LanguageCod...
+#include <lds/version.h>  // for LDS_VERSION
+#include <cxxopts.hpp>    // for value, OptionAdder, Options, OptionValue
+#include <iostream>       // for string, operator<<, endl, basic_ostream
+#include <memory>         // for shared_ptr
+#include <string>         // for char_traits, hash, operator==
+#include <unordered_map>  // for operator==, unordered_map, __hash_map_const...
+#include <utility>        // for pair
+---
+
+[100%] Linking CXX executable Lds
+[100%] Built target LdsStandalone
