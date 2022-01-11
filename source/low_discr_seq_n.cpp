@@ -1,7 +1,25 @@
-#include <cassert>
-#include <lds/low_discr_seq_n.hpp>
-#include <xtensor/xadapt.hpp>  // for xtensor
-#include <xtensor/xarray.hpp>
+#include <stddef.h>  // for size_t
+
+#include <cassert>                      // for assert
+#include <cmath>                        // for cos, sin, sqrt
+#include <gsl/span>                     // for span
+#include <lds/low_discr_seq_n.hpp>      // for sphere_n, cylin_n, sphere3
+#include <memory>                       // for unique_ptr, make_unique
+#include <type_traits>                  // for move, remove_reference<>::type
+#include <variant>                      // for visit, variant
+#include <vector>                       // for vector
+#include <xtensor/xaccessible.hpp>      // for xconst_accessible
+#include <xtensor/xbuilder.hpp>         // for linspace
+#include <xtensor/xfunction.hpp>        // for xfunction
+#include <xtensor/xgenerator.hpp>       // for xgenerator
+#include <xtensor/xiterator.hpp>        // for linear_begin
+#include <xtensor/xlayout.hpp>          // for layout_type, layout_type::row...
+#include <xtensor/xmath.hpp>            // for cos, interp, pow, sin, numeri...
+#include <xtensor/xoperation.hpp>       // for xfunction_type_t, operator*
+#include <xtensor/xtensor.hpp>          // for xtensor_container
+#include <xtensor/xtensor_forward.hpp>  // for xtensor, xarray
+
+#include "lds/low_discr_seq.hpp"  // for sphere, circle, vdcorput
 
 using Arr = xt::xarray<double, xt::layout_type::row_major>;
 
