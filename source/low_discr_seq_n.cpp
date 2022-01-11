@@ -40,13 +40,13 @@ namespace lds {
      *
      * @return std::vector<double>
      */
-    auto sphere3::operator()() -> std::vector<double> {
+    auto sphere3::operator()() -> std::tuple<double, double, double, double> {
         const auto ti = halfPI * this->_vdc();  // map to [0, pi/2];
         const auto xi = xt::interp(xt::xtensor<double, 1>{ti}, getSp3().t, getSp3().x);
         const auto cosxi = std::cos(xi[0]);
         const auto sinxi = std::sin(xi[0]);
-        const auto S = this->_sphere2();
-        return {sinxi * S[0], sinxi * S[1], sinxi * S[2], cosxi};
+        const auto [s0, s1, s2] = this->_sphere2();
+        return {sinxi * s0, sinxi * s1, sinxi * s2, cosxi};
     }
 
     /**
@@ -59,7 +59,7 @@ namespace lds {
         auto n = base.size();
         assert(n >= 2);
         if (n == 2) {
-            this->_Cgen = std::make_unique<circle>(base[1]);
+            this->_Cgen = std::make_unique<cylin_2>(base[1]);
         } else {
             this->_Cgen = std::make_unique<cylin_n>(base.last(n - 1));
         }
@@ -147,7 +147,7 @@ namespace lds {
         auto n = this->_n;
         assert(n >= 3);
         if (n == 3) {
-            this->_Sgen = std::make_unique<sphere>(base.subspan(1, 2));
+            this->_Sgen = std::make_unique<sphere_2>(base.subspan(1, 2));
         } else {
             this->_Sgen = std::make_unique<sphere_n>(base.last(n - 1));
         }

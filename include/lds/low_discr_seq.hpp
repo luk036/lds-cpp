@@ -2,7 +2,7 @@
 
 #include <cmath>  // import sin, cos, acos, sqrt
 #include <gsl/span>
-#include <vector>
+#include <tuple>
 
 namespace lds {
 
@@ -85,7 +85,7 @@ namespace lds {
          *
          * @return auto
          */
-        auto operator()() -> std::vector<double> { return {this->_vdc0(), this->_vdc1()}; }
+        auto operator()() -> std::tuple<double, double> { return {this->_vdc0(), this->_vdc1()}; }
 
         /**
          * @brief
@@ -119,7 +119,7 @@ namespace lds {
          *
          * @return auto
          */
-        auto operator()() -> std::vector<double> {
+        auto operator()() -> std::tuple<double, double> {
             const auto theta = this->_vdc() * twoPI;  // map to [0, 2*pi];
             return {std::sin(theta), std::cos(theta)};
         }
@@ -155,11 +155,11 @@ namespace lds {
          *
          * @return auto
          */
-        auto operator()() -> std::vector<double> {
+        auto operator()() -> std::tuple<double, double, double> {
             const auto cosphi = 2 * this->_vdc() - 1;  // map to [-1, 1];
             const auto sinphi = std::sqrt(1 - cosphi * cosphi);
-            auto cc = this->_cirgen();
-            return {sinphi * cc[0], sinphi * cc[1], cosphi};
+            auto [c, s] = this->_cirgen();
+            return {sinphi * c, sinphi * s, cosphi};
         }
 
         /**
@@ -197,7 +197,7 @@ namespace lds {
          *
          * @return auto
          */
-        auto operator()() -> std::vector<double> {
+        auto operator()() -> std::tuple<double, double, double, double> {
             const auto phi = this->_vdc0() * twoPI;  // map to [0, 2*pi];
             const auto psy = this->_vdc1() * twoPI;  // map to [0, 2*pi];
             // auto zzz = this->_vdc2() * 2 - 1; // map to [-1., 1.];
@@ -220,52 +220,6 @@ namespace lds {
             this->_vdc0.reseed(seed);
             this->_vdc1.reseed(seed);
             this->_vdc2.reseed(seed);
-        }
-    };
-
-    /**
-     * @brief Halton(n) sequence generator
-     *
-     */
-    class halton_n {
-      private:
-        std::vector<vdcorput> _vec_vdc;
-
-      public:
-        /**
-         * @brief Construct a new halton n object
-         *
-         * @param n
-         * @param base
-         */
-        halton_n(gsl::span<const unsigned> base) {
-            for (auto&& b : base) {
-                this->_vec_vdc.emplace_back(vdcorput(b));
-            }
-        }
-
-        /**
-         * @brief
-         *
-         * @return auto
-         */
-        auto operator()() -> std::vector<double> {
-            auto res = std::vector<double>{};
-            for (auto& vdc : this->_vec_vdc) {
-                res.emplace_back(vdc());
-            }
-            return res;
-        }
-
-        /**
-         * @brief
-         *
-         * @param seed
-         */
-        auto reseed(unsigned seed) -> void {
-            for (auto& vdc : this->_vec_vdc) {
-                vdc.reseed(seed);
-            }
         }
     };
 
