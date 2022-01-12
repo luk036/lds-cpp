@@ -1,4 +1,3 @@
-#include <lds/greeter.h>  // for LanguageCode, LanguageCode::DE, LanguageCod...
 #include <lds/version.h>  // for LDS_VERSION
 
 #include <cxxopts.hpp>    // for value, OptionAdder, Options, OptionValue
@@ -48,8 +47,8 @@ auto main(int argc, char** argv) -> int {
         return 1;
     }
 
-    lds::Lds lds(name);
-    std::cout << lds.greet(langIt->second) << std::endl;
+    // lds::Lds lds(name);
+    // std::cout << lds.greet(langIt->second) << std::endl;
 
     return 0;
 }
