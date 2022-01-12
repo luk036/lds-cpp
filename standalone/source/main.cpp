@@ -1,3 +1,4 @@
+#include <lds/greeter.h>  // for Lds
 #include <lds/version.h>  // for LDS_VERSION
 
 #include <cxxopts.hpp>    // for value, OptionAdder, Options, OptionValue
