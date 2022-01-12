@@ -1,6 +1,8 @@
-#include <doctest/doctest.h>  // for ResultBuilder, CHECK
+#include <doctest/doctest.h>  // for Approx, ResultBuilder, TestCase
 
-#include <lds/low_discr_seq_n.hpp>  // for circle, halton, sphere
+#include <gsl/span>                 // for span
+#include <lds/low_discr_seq_n.hpp>  // for cylin_n, halton_n, sphere3, sphere_n
+#include <vector>                   // for vector
 
 TEST_CASE("sphere3") {
     unsigned base[] = {2, 3, 5, 7};

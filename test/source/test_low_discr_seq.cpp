@@ -1,6 +1,7 @@
-#include <doctest/doctest.h>  // for ResultBuilder, CHECK
+#include <doctest/doctest.h>  // for Approx, ResultBuilder, TestCase, CHECK
 
-#include <lds/low_discr_seq.hpp>  // for circle, halton, sphere
+#include <gsl/span>               // for span
+#include <lds/low_discr_seq.hpp>  // for circle, halton, sphere, sphere3_hopf
 
 TEST_CASE("circle") {
     auto cgen = lds::circle(2);

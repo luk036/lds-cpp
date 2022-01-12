@@ -3,8 +3,9 @@
 #include <cassert>                      // for assert
 #include <cmath>                        // for cos, sin, sqrt
 #include <gsl/span>                     // for span
-#include <lds/low_discr_seq_n.hpp>      // for sphere_n, cylin_n, sphere3
+#include <lds/low_discr_seq_n.hpp>      // for sphere_n, cylin_n, cylin_2
 #include <memory>                       // for unique_ptr, make_unique
+#include <tuple>                        // for tuple
 #include <type_traits>                  // for move, remove_reference<>::type
 #include <variant>                      // for visit, variant
 #include <vector>                       // for vector
@@ -19,7 +20,7 @@
 #include <xtensor/xtensor.hpp>          // for xtensor_container
 #include <xtensor/xtensor_forward.hpp>  // for xtensor, xarray
 
-#include "lds/low_discr_seq.hpp"  // for sphere, circle, vdcorput
+#include "lds/low_discr_seq.hpp"  // for vdcorput, sphere
 
 using Arr = xt::xarray<double, xt::layout_type::row_major>;
 
