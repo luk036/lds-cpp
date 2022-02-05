@@ -6,7 +6,7 @@
 
 namespace lds {
 
-    static const auto twoPI = 2 * std::acos(-1.);
+    static const auto twoPI = 2.0 * std::acos(-1.0);
 
     /**
      * @brief van der Corput sequence
@@ -16,8 +16,8 @@ namespace lds {
      * @return double
      */
     inline constexpr auto vdc(unsigned k, unsigned base = 2) noexcept -> double {
-        auto vdc = 0.;
-        auto denom = 1.;
+        auto vdc = 0.0;
+        auto denom = 1.0;
         while (k != 0) {
             denom *= base;
             auto remainder = k % base;
@@ -156,7 +156,7 @@ namespace lds {
          * @return auto
          */
         auto operator()() -> std::tuple<double, double, double> {
-            const auto cosphi = 2 * this->_vdc() - 1;  // map to [-1, 1];
+            const auto cosphi = 2.0 * this->_vdc() - 1.0;  // map to [-1, 1];
             const auto sinphi = std::sqrt(1 - cosphi * cosphi);
             auto [c, s] = this->_cirgen();
             return {sinphi * c, sinphi * s, cosphi};
@@ -206,7 +206,7 @@ namespace lds {
             // auto sin_eta = std::sin(eta);
             auto vd = this->_vdc2();
             const auto cos_eta = std::sqrt(vd);
-            const auto sin_eta = std::sqrt(1 - vd);
+            const auto sin_eta = std::sqrt(1.0 - vd);
             return {cos_eta * std::cos(psy), cos_eta * std::sin(psy), sin_eta * std::cos(phi + psy),
                     sin_eta * std::sin(phi + psy)};
         }
