@@ -32,7 +32,7 @@ namespace lds {
      */
     struct Sp3Table {
         double _pi{xt::numeric_constants<double>::PI};
-        xt::xtensor<double, 1> x{xt::linspace(0., _pi, 300)};
+        xt::xtensor<double, 1> x{xt::linspace(0.0, _pi, 300)};
         xt::xtensor<double, 1> t{0.5 * (x - xt::sin(x) * xt::cos(x))};
 
         /**
