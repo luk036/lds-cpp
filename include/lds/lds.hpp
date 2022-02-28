@@ -1,9 +1,13 @@
+#pragma once
+
 #include <array>
 #include <cmath>
 #include <gsl/span>
 
-namespace lds {
+namespace lds2 {
 
+    using gsl::span;
+    using std::array;
     using std::cos;
     using std::sin;
     using std::sqrt;
@@ -37,14 +41,6 @@ namespace lds {
         auto reseed(size_t seed) { this->count = seed; }
     };
 
-    //   public:
-    //     type Output = double;
-    //     extern "rust-call" fn call_once(self, _arg: ()) -> Self::Output {
-    //         this->count += 1;
-    //         vdc(this->count, this->base)
-    //     }
-    // }
-
     /**
      * @brief Halton sequence generator
      *
@@ -54,9 +50,11 @@ namespace lds {
         Vdcorput vdc1;
 
       public:
-        explicit Halton(gsl::span<const size_t> base) : vdc0(base[0]), vdc1(base[1]) {}
+        explicit Halton(span<const size_t> base) : vdc0(base[0]), vdc1(base[1]) {}
 
-        auto pop() -> std::array<double, 2> { return {this->vdc0.pop(), this->vdc1.pop()}; }
+        auto pop() -> array<double, 2> {  //
+            return {this->vdc0.pop(), this->vdc1.pop()};
+        }
 
         /**
          * @brief
@@ -79,8 +77,7 @@ namespace lds {
       public:
         explicit Circle(size_t base) : vdc(base) {}
 
-        auto pop() -> std::array<double, 2> {
-            // const auto two_pi = 2.0 * (-1.0 ).acos(); // ???
+        auto pop() -> array<double, 2> {
             const auto theta = this->vdc.pop() * TWO_PI;  // map to [0, 2*pi];
             return {sin(theta), cos(theta)};
         }
@@ -97,9 +94,9 @@ namespace lds {
         Circle cirgen;
 
       public:
-        explicit Sphere(gsl::span<const size_t> base) : vdcgen(base[0]), cirgen(base[1]) {}
+        explicit Sphere(span<const size_t> base) : vdcgen(base[0]), cirgen(base[1]) {}
 
-        auto pop() -> std::array<double, 3> {
+        auto pop() -> array<double, 3> {
             const auto cosphi = 2.0 * this->vdcgen.pop() - 1.0;  // map to [-1, 1];
             const auto sinphi = sqrt(1.0 - cosphi * cosphi);
             const auto [c, s] = this->cirgen.pop();
@@ -122,10 +119,10 @@ namespace lds {
         Vdcorput vdc2;
 
       public:
-        explicit Sphere3Hopf(gsl::span<const size_t> base)
+        explicit Sphere3Hopf(span<const size_t> base)
             : vdc0(base[0]), vdc1(base[1]), vdc2(base[2]) {}
 
-        auto pop() -> std::array<double, 4> {
+        auto pop() -> array<double, 4> {
             const auto phi = this->vdc0.pop() * TWO_PI;  // map to [0, 2*pi];
             const auto psy = this->vdc1.pop() * TWO_PI;  // map to [0, 2*pi];
             const auto vd = this->vdc2.pop();
@@ -145,4 +142,4 @@ namespace lds {
             this->vdc2.reseed(seed);
         }
     };
-}  // namespace lds
+}  // namespace lds2

@@ -28,4 +28,4 @@ namespace lds {
         std::string greet(LanguageCode lang = LanguageCode::EN) const;
     };
 
-}  // namespace xnetwork
+}  // namespace lds
