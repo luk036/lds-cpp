@@ -4,7 +4,6 @@
 
 #include <array>               // for array
 #include <cassert>             // for assert
-#include <cmath>               // for cos, sin, sqrt
 #include <gsl/span>            // for span
 #include <memory>              // for unique_ptr, make_unique
 #include <type_traits>         // for move, remove_reference<>::type
@@ -68,7 +67,7 @@ namespace lds2 {
 
     class CylinN;
 
-    using CylinVariant = typename std::variant<std::unique_ptr<Circle>, std::unique_ptr<CylinN> >;
+    using CylinVariant = std::variant<std::unique_ptr<Circle>, std::unique_ptr<CylinN> >;
 
     /** Generate using cylindrical coordinate method */
     class CylinN {
@@ -132,7 +131,7 @@ namespace lds2 {
     class SphereN;
 
     using SphereVariant =
-        typename std::variant<std::unique_ptr<Sphere3>, std::unique_ptr<SphereN> >;
+        std::variant<std::unique_ptr<Sphere3>, std::unique_ptr<SphereN> >;
 
     /** Generate Sphere-3 Halton sequence */
     class SphereN {
