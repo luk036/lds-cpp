@@ -29,9 +29,8 @@ namespace lds2 {
 
       public:
         /**
-         * @brief Construct a new halton n object
+         * @brief Construct a new Halton N object
          *
-         * @param n
          * @param base
          */
         explicit HaltonN(span<const size_t> base) {
@@ -43,7 +42,7 @@ namespace lds2 {
         /**
          * @brief
          *
-         * @return auto
+         * @return vector<double>
          */
         auto pop() -> vector<double> {
             auto res = vector<double>{};
@@ -58,7 +57,7 @@ namespace lds2 {
          *
          * @param seed
          */
-        auto reseed(size_t seed) {
+        auto reseed(size_t seed) -> void {
             for (auto& vdc : this->vdcs) {
                 vdc.reseed(seed);
             }
@@ -78,7 +77,6 @@ namespace lds2 {
         /**
          * @brief Construct a new cylin n::cylin n object
          *
-         * @param n
          * @param base
          */
         explicit CylinN(span<const size_t> base) : vdc{base[0]} {
@@ -113,9 +111,19 @@ namespace lds2 {
          */
         explicit Sphere3(span<const size_t> base);
 
+        /**
+         * @brief Get the tp object
+         *
+         * @return const Arr&
+         */
         auto get_tp() const -> const Arr& { return this->tp; }
 
-        auto reseed(size_t seed) {
+        /**
+         * @brief
+         *
+         * @param seed
+         */
+        auto reseed(size_t seed) -> void {
             this->vdc.reseed(seed);
             this->sphere2.reseed(seed);
         }
@@ -123,15 +131,14 @@ namespace lds2 {
         /**
          * @brief
          *
-         * @return vector<double>
+         * @return array<double, 4>
          */
         auto pop() -> array<double, 4>;
     };
 
     class SphereN;
 
-    using SphereVariant =
-        std::variant<std::unique_ptr<Sphere3>, std::unique_ptr<SphereN> >;
+    using SphereVariant = std::variant<std::unique_ptr<Sphere3>, std::unique_ptr<SphereN> >;
 
     /** Generate Sphere-3 Halton sequence */
     class SphereN {
@@ -140,14 +147,34 @@ namespace lds2 {
         Arr tp;
 
       public:
+        /**
+         * @brief Construct a new Sphere N object
+         *
+         * @param base
+         */
         explicit SphereN(span<const size_t> base);
 
+        /**
+         * @brief Get the tp object
+         *
+         * @return const Arr&
+         */
         auto get_tp() const -> const Arr& { return this->tp; }
 
+        /**
+         * @brief Get the tp minus1 object
+         *
+         * @return const Arr&
+         */
         auto get_tp_minus1() const -> const Arr& {
             return std::visit([](const auto& t) -> const Arr& { return t->get_tp(); }, this->s_gen);
         }
 
+        /**
+         * @brief
+         *
+         * @return vector<double>
+         */
         auto pop() -> vector<double>;
     };
 

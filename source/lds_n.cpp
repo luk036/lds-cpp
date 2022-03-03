@@ -64,9 +64,19 @@ namespace lds2 {
         return res;
     }
 
+    /**
+     * @brief Construct a new Sphere 3:: Sphere 3 object
+     *
+     * @param base
+     */
     Sphere3::Sphere3(span<const size_t> base)
         : vdc{base[0]}, sphere2{base.subspan(1, 2)}, tp{0.5 * (X - SINE + NEG_COSINE)} {}
 
+    /**
+     * @brief
+     *
+     * @return array<double, 4>
+     */
     auto Sphere3::pop() -> array<double, 4> {
         const auto ti = HALF_PI * this->vdc.pop();  // map to [0, pi/2];
         const auto xi = xt::interp(xt::xtensor<double, 1>{ti}, this->tp, X);
@@ -76,6 +86,11 @@ namespace lds2 {
         return {sinxi * s0, sinxi * s1, sinxi * s2, cosxi};
     }
 
+    /**
+     * @brief Construct a new Sphere N:: Sphere N object
+     *
+     * @param base
+     */
     SphereN::SphereN(gsl::span<const size_t> base) : vdc{base[0]} {
         const auto n = base.size();
         assert(n >= 4);
@@ -91,6 +106,11 @@ namespace lds2 {
         this->tp = ((n - 1.0) * tp_minus2 + NEG_COSINE * xt::pow(SINE, n - 1.0)) / n;
     }
 
+    /**
+     * @brief
+     *
+     * @return vector<double>
+     */
     auto SphereN::pop() -> vector<double> {
         const auto vd = this->vdc.pop();
         const auto ti = this->tp[0] + this->tp[this->tp.size() - 1] * vd;  // map to [t0, tm-1];

@@ -14,6 +14,13 @@ namespace lds2 {
 
     static const auto TWO_PI = 2.0 * std::acos(-1.0);
 
+    /**
+     * @brief Van der Corput sequence
+     *
+     * @param k
+     * @param base
+     * @return double
+     */
     inline auto vdc(size_t k, const size_t base) -> double {
         auto vdc = 0.0;
         auto denom = 1.0;
@@ -26,18 +33,38 @@ namespace lds2 {
         return vdc;
     }
 
+    /**
+     * @brief Van der Corput sequence generator
+     *
+     */
     class Vdcorput {
         size_t count;
         size_t base;
 
       public:
+        /**
+         * @brief Construct a new Vdcorput object
+         *
+         * @param base
+         */
         explicit Vdcorput(size_t base) : count{0}, base{base} {}
 
+        /**
+         * @brief
+         *
+         * @return double
+         */
         auto pop() -> double {
             this->count += 1;
             return vdc(this->count, this->base);
         }
 
+        /**
+         * @brief
+         *
+         * @param seed
+         * @return auto
+         */
         auto reseed(size_t seed) { this->count = seed; }
     };
 
@@ -50,8 +77,18 @@ namespace lds2 {
         Vdcorput vdc1;
 
       public:
+        /**
+         * @brief Construct a new Halton object
+         *
+         * @param base
+         */
         explicit Halton(span<const size_t> base) : vdc0(base[0]), vdc1(base[1]) {}
 
+        /**
+         * @brief
+         *
+         * @return array<double, 2>
+         */
         auto pop() -> array<double, 2> {  //
             return {this->vdc0.pop(), this->vdc1.pop()};
         }
@@ -61,7 +98,7 @@ namespace lds2 {
          *
          * @param seed
          */
-        auto reseed(size_t seed) {
+        auto reseed(size_t seed) -> void {
             this->vdc0.reseed(seed);
             this->vdc1.reseed(seed);
         }
@@ -75,14 +112,29 @@ namespace lds2 {
         Vdcorput vdc;
 
       public:
+        /**
+         * @brief Construct a new Circle object
+         *
+         * @param base
+         */
         explicit Circle(size_t base) : vdc(base) {}
 
+        /**
+         * @brief
+         *
+         * @return array<double, 2>
+         */
         auto pop() -> array<double, 2> {
             const auto theta = this->vdc.pop() * TWO_PI;  // map to [0, 2*pi];
             return {sin(theta), cos(theta)};
         }
 
-        auto reseed(size_t seed) { this->vdc.reseed(seed); }
+        /**
+         * @brief
+         *
+         * @param seed
+         */
+        auto reseed(size_t seed) -> void { this->vdc.reseed(seed); }
     };
 
     /**
@@ -94,8 +146,18 @@ namespace lds2 {
         Circle cirgen;
 
       public:
+        /**
+         * @brief Construct a new Sphere object
+         *
+         * @param base
+         */
         explicit Sphere(span<const size_t> base) : vdcgen(base[0]), cirgen(base[1]) {}
 
+        /**
+         * @brief
+         *
+         * @return array<double, 3>
+         */
         auto pop() -> array<double, 3> {
             const auto cosphi = 2.0 * this->vdcgen.pop() - 1.0;  // map to [-1, 1];
             const auto sinphi = sqrt(1.0 - cosphi * cosphi);
@@ -103,7 +165,12 @@ namespace lds2 {
             return {sinphi * c, sinphi * s, cosphi};
         }
 
-        auto reseed(size_t seed) {
+        /**
+         * @brief
+         *
+         * @param seed
+         */
+        auto reseed(size_t seed) -> void {
             this->cirgen.reseed(seed);
             this->vdcgen.reseed(seed);
         }
@@ -119,9 +186,19 @@ namespace lds2 {
         Vdcorput vdc2;
 
       public:
+        /**
+         * @brief Construct a new Sphere 3 Hopf object
+         *
+         * @param base
+         */
         explicit Sphere3Hopf(span<const size_t> base)
             : vdc0(base[0]), vdc1(base[1]), vdc2(base[2]) {}
 
+        /**
+         * @brief
+         *
+         * @return array<double, 4>
+         */
         auto pop() -> array<double, 4> {
             const auto phi = this->vdc0.pop() * TWO_PI;  // map to [0, 2*pi];
             const auto psy = this->vdc1.pop() * TWO_PI;  // map to [0, 2*pi];
@@ -136,7 +213,12 @@ namespace lds2 {
             };
         }
 
-        auto reseed(size_t seed) {
+        /**
+         * @brief
+         *
+         * @param seed
+         */
+        auto reseed(size_t seed) -> void {
             this->vdc0.reseed(seed);
             this->vdc1.reseed(seed);
             this->vdc2.reseed(seed);
