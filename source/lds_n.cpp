@@ -70,7 +70,7 @@ namespace lds2 {
      * @param base
      */
     Sphere3::Sphere3(span<const size_t> base)
-        : vdc{base[0]}, sphere2{base.subspan(1, 2)}, tp{0.5 * (X - SINE + NEG_COSINE)} {}
+        : vdc{base[0]}, sphere2{base.subspan(1, 2)}, tp{0.5 * (X - SINE * NEG_COSINE)} {}
 
     /**
      * @brief
@@ -92,17 +92,18 @@ namespace lds2 {
      * @param base
      */
     SphereN::SphereN(gsl::span<const size_t> base) : vdc{base[0]} {
-        const auto n = base.size();
-        assert(n >= 4);
+        const auto m = base.size();
+        assert(m >= 4);
         Arr tp_minus2;
-        if (n == 4) {
+        if (m == 4) {
             tp_minus2 = NEG_COSINE;
             this->s_gen = std::make_unique<Sphere3>(base.subspan(1, 3));
         } else {
-            auto s_minus1 = std::make_unique<SphereN>(base.last(n - 1));
+            auto s_minus1 = std::make_unique<SphereN>(base.last(m - 1));
             tp_minus2 = s_minus1->get_tp_minus1();
             this->s_gen = std::move(s_minus1);
         }
+        auto n = m - 1;
         this->tp = ((n - 1.0) * tp_minus2 + NEG_COSINE * xt::pow(SINE, n - 1.0)) / n;
     }
 
@@ -113,7 +114,7 @@ namespace lds2 {
      */
     auto SphereN::pop() -> vector<double> {
         const auto vd = this->vdc.pop();
-        const auto ti = this->tp[0] + this->tp[this->tp.size() - 1] * vd;  // map to [t0, tm-1];
+        const auto ti = this->tp[0] + (this->tp[this->tp.size() - 1] - this->tp[0]) * vd;  // map to [t0, tm-1];
         const auto xi = xt::interp(xt::xtensor<double, 1>{ti}, this->tp, X);
         const auto sinphi = sin(xi[0]);
         auto res = std::visit(
