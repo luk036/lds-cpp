@@ -8,6 +8,7 @@
 #include <memory>                       // for unique_ptr, make_unique
 #include <tuple>                        // for tuple
 #include <type_traits>                  // for move, remove_reference<>::type
+#include <unordered_map>                // for unordered_map
 #include <variant>                      // for visit, variant
 #include <vector>                       // for vector
 #include <xtensor/xaccessible.hpp>      // for xconst_accessible
@@ -19,7 +20,7 @@
 #include <xtensor/xmath.hpp>            // for cos, interp, pow, sin, numeri...
 #include <xtensor/xoperation.hpp>       // for xfunction_type_t, operator*
 #include <xtensor/xtensor.hpp>          // for xtensor_container
-#include <xtensor/xtensor_forward.hpp>  // for xtensor, xarray
+#include <xtensor/xarray.hpp>           // for xtensor, xarray
 
 namespace lds2 {
     using gsl::span;
@@ -28,6 +29,7 @@ namespace lds2 {
     using std::sin;
     using std::sqrt;
     using std::vector;
+    using std::unordered_map;
 
     using Arr = xt::xarray<double, xt::layout_type::row_major>;
     static const double PI = xt::numeric_constants<double>::PI;
@@ -64,13 +66,23 @@ namespace lds2 {
         return res;
     }
 
+    static auto get_tp(size_t n) -> const Arr& {
+        static auto cache = unordered_map<size_t, Arr>{{0, X}, {1, NEG_COSINE}};
+        if (cache.find(n) != cache.end()) {
+            return cache[n];
+        }
+        const auto& tp_minus2 = get_tp(n - 2);
+        cache[n] = ((n - 1.0) * tp_minus2 + NEG_COSINE * xt::pow(SINE, n - 1.0)) / n;
+        return cache[n];
+    }
+
     /**
      * @brief Construct a new Sphere 3:: Sphere 3 object
      *
      * @param base
      */
     Sphere3::Sphere3(span<const size_t> base)
-        : vdc{base[0]}, sphere2{base.subspan(1, 2)}, tp{0.5 * (X - SINE * NEG_COSINE)} {}
+        : vdc{base[0]}, sphere2{base.subspan(1, 2)} {}
 
     /**
      * @brief
@@ -79,7 +91,8 @@ namespace lds2 {
      */
     auto Sphere3::pop() -> array<double, 4> {
         const auto ti = HALF_PI * this->vdc.pop();  // map to [0, pi/2];
-        const auto xi = xt::interp(xt::xtensor<double, 1>{ti}, this->tp, X);
+        const auto& tp = get_tp(3);
+        const auto xi = xt::interp(xt::xtensor<double, 1>{ti}, tp, X);
         const auto cosxi = cos(xi[0]);
         const auto sinxi = sin(xi[0]);
         const auto [s0, s1, s2] = this->sphere2.pop();
@@ -96,15 +109,15 @@ namespace lds2 {
         assert(m >= 4);
         Arr tp_minus2;
         if (m == 4) {
-            tp_minus2 = NEG_COSINE;
+            // tp_minus2 = NEG_COSINE;
             this->s_gen = std::make_unique<Sphere3>(base.subspan(1, 3));
         } else {
             auto s_minus1 = std::make_unique<SphereN>(base.last(m - 1));
-            tp_minus2 = s_minus1->get_tp_minus1();
+            // tp_minus2 = s_minus1->get_tp_minus1();
             this->s_gen = std::move(s_minus1);
         }
-        auto n = m - 1;
-        this->tp = ((n - 1.0) * tp_minus2 + NEG_COSINE * xt::pow(SINE, n - 1.0)) / n;
+        this->n = m - 1;
+        // this->tp = ((n - 1.0) * tp_minus2 + NEG_COSINE * xt::pow(SINE, n - 1.0)) / n;
     }
 
     /**
@@ -114,8 +127,9 @@ namespace lds2 {
      */
     auto SphereN::pop() -> vector<double> {
         const auto vd = this->vdc.pop();
-        const auto ti = this->tp[0] + (this->tp[this->tp.size() - 1] - this->tp[0]) * vd;  // map to [t0, tm-1];
-        const auto xi = xt::interp(xt::xtensor<double, 1>{ti}, this->tp, X);
+        const auto& tp = get_tp(this->n);
+        const auto ti = tp[0] + (tp[tp.size() - 1] - tp[0]) * vd;  // map to [t0, tm-1];
+        const auto xi = xt::interp(xt::xtensor<double, 1>{ti}, tp, X);
         const auto sinphi = sin(xi[0]);
         auto res = std::visit(
             [](auto& t) {

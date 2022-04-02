@@ -9,13 +9,12 @@
 #include <type_traits>         // for move, remove_reference<>::type
 #include <variant>             // for visit, variant
 #include <vector>              // for vector
-#include <xtensor/xarray.hpp>  // for xtensor, xarray
+// #include <xtensor/xarray.hpp>  // for xtensor, xarray
 
 #include "lds.hpp"  // for Vdcorput, Sphere
 
 namespace lds2 {
-
-    using Arr = xt::xarray<double, xt::layout_type::row_major>;
+    // using Arr = xt::xarray<double, xt::layout_type::row_major>;
     using gsl::span;
     using std::array;
     using std::vector;
@@ -25,6 +24,7 @@ namespace lds2 {
      *
      */
     class HaltonN {
+      private:
         vector<Vdcorput> vdcs;
 
       public:
@@ -101,7 +101,7 @@ namespace lds2 {
     class Sphere3 {
         Vdcorput vdc;
         Sphere sphere2;
-        Arr tp;
+        // Arr tp;
 
       public:
         /**
@@ -116,7 +116,7 @@ namespace lds2 {
          *
          * @return const Arr&
          */
-        auto get_tp() const -> const Arr& { return this->tp; }
+        // auto get_tp() const -> const Arr& { return this->tp; }
 
         /**
          * @brief
@@ -142,9 +142,10 @@ namespace lds2 {
 
     /** Generate Sphere-3 Halton sequence */
     class SphereN {
+        size_t n;
         Vdcorput vdc;
         SphereVariant s_gen;
-        Arr tp;
+        // Arr tp;
 
       public:
         /**
@@ -153,22 +154,6 @@ namespace lds2 {
          * @param base
          */
         explicit SphereN(span<const size_t> base);
-
-        /**
-         * @brief Get the tp object
-         *
-         * @return const Arr&
-         */
-        auto get_tp() const -> const Arr& { return this->tp; }
-
-        /**
-         * @brief Get the tp minus1 object
-         *
-         * @return const Arr&
-         */
-        auto get_tp_minus1() const -> const Arr& {
-            return std::visit([](const auto& t) -> const Arr& { return t->get_tp(); }, this->s_gen);
-        }
 
         /**
          * @brief
