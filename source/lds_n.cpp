@@ -1,26 +1,26 @@
 #include <stddef.h>  // for size_t
 
-#include <cassert>                      // for assert
-#include <cmath>                        // for cos, sin, sqrt
-#include <gsl/span>                     // for span
-#include <lds/lds.hpp>                  // for vdcorput, sphere
-#include <lds/lds_n.hpp>                // for sphere_n, cylin_n, cylin_2
-#include <memory>                       // for unique_ptr, make_unique
-#include <tuple>                        // for tuple
-#include <type_traits>                  // for move, remove_reference<>::type
-#include <unordered_map>                // for unordered_map
-#include <variant>                      // for visit, variant
-#include <vector>                       // for vector
-#include <xtensor/xaccessible.hpp>      // for xconst_accessible
-#include <xtensor/xbuilder.hpp>         // for linspace
-#include <xtensor/xfunction.hpp>        // for xfunction
-#include <xtensor/xgenerator.hpp>       // for xgenerator
-#include <xtensor/xiterator.hpp>        // for linear_begin
-#include <xtensor/xlayout.hpp>          // for layout_type, layout_type::row...
-#include <xtensor/xmath.hpp>            // for cos, interp, pow, sin, numeri...
-#include <xtensor/xoperation.hpp>       // for xfunction_type_t, operator*
-#include <xtensor/xtensor.hpp>          // for xtensor_container
-#include <xtensor/xarray.hpp>           // for xtensor, xarray
+#include <cassert>                  // for assert
+#include <cmath>                    // for cos, sin, sqrt
+#include <gsl/span>                 // for span
+#include <lds/lds.hpp>              // for vdcorput, sphere
+#include <lds/lds_n.hpp>            // for sphere_n, cylin_n, cylin_2
+#include <memory>                   // for unique_ptr, make_unique
+#include <tuple>                    // for tuple
+#include <type_traits>              // for move, remove_reference<>::type
+#include <unordered_map>            // for unordered_map
+#include <variant>                  // for visit, variant
+#include <vector>                   // for vector
+#include <xtensor/xaccessible.hpp>  // for xconst_accessible
+#include <xtensor/xarray.hpp>       // for xtensor, xarray
+#include <xtensor/xbuilder.hpp>     // for linspace
+#include <xtensor/xfunction.hpp>    // for xfunction
+#include <xtensor/xgenerator.hpp>   // for xgenerator
+#include <xtensor/xiterator.hpp>    // for linear_begin
+#include <xtensor/xlayout.hpp>      // for layout_type, layout_type::row...
+#include <xtensor/xmath.hpp>        // for cos, interp, pow, sin, numeri...
+#include <xtensor/xoperation.hpp>   // for xfunction_type_t, operator*
+#include <xtensor/xtensor.hpp>      // for xtensor_container
 
 namespace lds2 {
     using gsl::span;
@@ -28,8 +28,8 @@ namespace lds2 {
     using std::cos;
     using std::sin;
     using std::sqrt;
-    using std::vector;
     using std::unordered_map;
+    using std::vector;
 
     using Arr = xt::xarray<double, xt::layout_type::row_major>;
     static const double PI = xt::numeric_constants<double>::PI;
@@ -81,8 +81,7 @@ namespace lds2 {
      *
      * @param base
      */
-    Sphere3::Sphere3(span<const size_t> base)
-        : vdc{base[0]}, sphere2{base.subspan(1, 2)} {}
+    Sphere3::Sphere3(span<const size_t> base) : vdc{base[0]}, sphere2{base.subspan(1, 2)} {}
 
     /**
      * @brief
