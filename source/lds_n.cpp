@@ -143,8 +143,8 @@ namespace lds2 {
                 }
             },
             this->s_gen);
-        for (auto& xi : res) {
-            xi *= sinphi;
+        for (auto& elem : res) {
+            elem *= sinphi;
         }
         res.emplace_back(cos(xi[0]));
         return res;
