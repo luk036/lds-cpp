@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>lds::sphere_n class | Lds</title>
+  <title>lds/lds.hpp file | Lds</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -49,72 +49,52 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacelds.html">lds</a>::<wbr/></span>sphere_n <span class="m-thin">class</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="low__discr__seq__n_8hpp.html">&lt;lds/low_discr_seq_n.hpp&gt;</a></div>
+          <span class="m-breadcrumb"><a href="dir_20e875b46f774aaa37c5fd6616e1d097.html">lds</a>/</span>lds.hpp <span class="m-thin">file</span>
         </h1>
-        <div class="m-block m-default">
+        <p><span></span></p>
+        <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
-                <li><a href="#pub-methods">Public functions</a></li>
+                <li><a href="#namespaces">Namespaces</a></li>
+                <li><a href="#nested-classes">Classes</a></li>
               </ul>
             </li>
           </ul>
-        </div>
-<p>Generate Sphere-3 Halton sequence</p>
-        <section id="typeless-methods">
-          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
+        </nav>
+        <section id="namespaces">
+          <h2><a href="#namespaces">Namespaces</a></h2>
           <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper"><a href="#adf6312c4d2a17bf88e21b0b792cbe05e" class="m-doc">sphere_n</a>(</span><span class="m-doc-wrap">gsl::span&lt;const unsigned&gt; base)</span>
-            </dt>
-            <dd>Construct a new sphere n object.</dd>
+            <dt>namespace <a href="namespacelds2.html" class="m-doc">lds2</a></dt>
+            <dd><span></span></dd>
           </dl>
         </section>
-        <section id="pub-methods">
-          <h2><a href="#pub-methods">Public functions</a></h2>
+        <section id="nested-classes">
+          <h2><a href="#nested-classes">Classes</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a168dda104e549e3b2eb9a8af371dc62d" class="m-doc">operator()</a>(</span><span class="m-doc-wrap">) -&gt; std::vector&lt; double &gt; -&gt; auto</span>
+              class <a href="classlds2_1_1_vdcorput.html" class="m-doc">lds2::Vdcorput</a>
             </dt>
-            <dd></dd>
+            <dd>Van der Corput sequence generator.</dd>
+            <dt>
+              class <a href="classlds2_1_1_halton.html" class="m-doc">lds2::Halton</a>
+            </dt>
+            <dd><a href="classlds2_1_1_halton.html" class="m-doc">Halton</a> sequence generator.</dd>
+            <dt>
+              class <a href="classlds2_1_1_circle.html" class="m-doc">lds2::Circle</a>
+            </dt>
+            <dd><a href="classlds2_1_1_circle.html" class="m-doc">Circle</a> sequence generator.</dd>
+            <dt>
+              class <a href="classlds2_1_1_sphere.html" class="m-doc">lds2::Sphere</a>
+            </dt>
+            <dd><a href="classlds2_1_1_sphere.html" class="m-doc">Sphere</a> sequence generator.</dd>
+            <dt>
+              class <a href="classlds2_1_1_sphere3_hopf.html" class="m-doc">lds2::Sphere3Hopf</a>
+            </dt>
+            <dd>S(3) sequence generator by Hopf.</dd>
           </dl>
-        </section>
-        <section>
-          <h2>Function documentation</h2>
-          <section class="m-doc-details" id="adf6312c4d2a17bf88e21b0b792cbe05e"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper"> lds::<wbr />sphere_n::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#adf6312c4d2a17bf88e21b0b792cbe05e" class="m-doc-self">sphere_n</a>(</span><span class="m-doc-wrap">gsl::span&lt;const unsigned&gt; base)</span></span>
-            </h3>
-            <p>Construct a new sphere n object.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">base</td>
-                  <td>sequence base</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a168dda104e549e3b2eb9a8af371dc62d"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">auto lds::<wbr />sphere_n::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a168dda104e549e3b2eb9a8af371dc62d" class="m-doc-self">operator()</a>(</span><span class="m-doc-wrap">) -&gt; std::vector&lt; double &gt;</span></span>
-            </h3>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>std::vector&lt;double&gt;</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
         </section>
       </div>
     </div>
@@ -154,13 +134,13 @@
     </div>
   </div>
 </div>
-<script src="search-v1.js"></script>
-<script src="searchdata-v1.js" async="async"></script>
+<script src="search-v2.js"></script>
+<script src="searchdata-v2.js" async="async"></script>
 <footer><nav>
   <div class="m-container">
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
-        <p>Lds. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+        <p>Lds. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.6 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
       </div>
     </div>
   </div>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>lds::halton class | Lds</title>
+  <title>lds2::Circle class | Lds</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -49,11 +49,11 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacelds.html">lds</a>::<wbr/></span>halton <span class="m-thin">class</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="low__discr__seq_8hpp.html">&lt;lds/low_discr_seq.hpp&gt;</a></div>
+          <span class="m-breadcrumb"><a href="namespacelds2.html">lds2</a>::<wbr/></span>Circle <span class="m-thin">class</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="lds_8hpp.html">&lt;lds/lds.hpp&gt;</a></div>
         </h1>
-        <p>Halton sequence generator.</p>
-        <div class="m-block m-default">
+        <p><a href="classlds2_1_1_circle.html" class="m-doc">Circle</a> sequence generator.</p>
+        <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
@@ -64,36 +64,36 @@
               </ul>
             </li>
           </ul>
-        </div>
+        </nav>
         <section id="typeless-methods">
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper"><a href="#a16485f884c87f952d35672ebf82d142c" class="m-doc">halton</a>(</span><span class="m-doc-wrap">gsl::span&lt;const unsigned&gt; base) <span class="m-label m-flat m-info">explicit</span>  <span class="m-label m-flat m-primary">constexpr</span> <span class="m-label m-flat m-success">noexcept</span></span>
+              <span class="m-doc-wrap-bumper"><a href="#ae41e798076c4ebdacac8e9ecb8c740a4" class="m-doc">Circle</a>(</span><span class="m-doc-wrap">size_t base) <span class="m-label m-flat m-info">explicit</span> </span>
             </dt>
-            <dd>Construct a new halton object.</dd>
+            <dd>Construct a new <a href="classlds2_1_1_circle.html" class="m-doc">Circle</a> object.</dd>
           </dl>
         </section>
         <section id="pub-methods">
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#af7ac3332444589cdd38370a334822d4a" class="m-doc">operator()</a>(</span><span class="m-doc-wrap">) -&gt; std::vector&lt; double &gt; -&gt; auto</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#ad08fc0296af56656a5f77a62953fee2a" class="m-doc">pop</a>(</span><span class="m-doc-wrap">) -&gt; array&lt; double, 2 &gt; -&gt; auto</span>
             </dt>
             <dd></dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a7426e3cee96343190adfe3109b7ebafb" class="m-doc">reseed</a>(</span><span class="m-doc-wrap">unsigned seed) noexcept -&gt; void -&gt; auto <span class="m-label m-flat m-primary">constexpr</span></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a7cb3ae373ea1e7c10ed3905614a140d6" class="m-doc">reseed</a>(</span><span class="m-doc-wrap">size_t seed) -&gt; void -&gt; auto</span>
             </dt>
             <dd></dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="a16485f884c87f952d35672ebf82d142c"><div>
+          <section class="m-doc-details" id="ae41e798076c4ebdacac8e9ecb8c740a4"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"> lds::<wbr />halton::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a16485f884c87f952d35672ebf82d142c" class="m-doc-self">halton</a>(</span><span class="m-doc-wrap">gsl::span&lt;const unsigned&gt; base) <span class="m-label m-info">explicit</span>  <span class="m-label m-primary">constexpr</span> <span class="m-label m-success">noexcept</span></span></span>
+              <span class="m-doc-wrap-bumper"> lds2::<wbr />Circle::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae41e798076c4ebdacac8e9ecb8c740a4" class="m-doc-self">Circle</a>(</span><span class="m-doc-wrap">size_t base) <span class="m-label m-info">explicit</span> </span></span>
             </h3>
-            <p>Construct a new halton object.</p>
+            <p>Construct a new <a href="classlds2_1_1_circle.html" class="m-doc">Circle</a> object.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -106,22 +106,22 @@
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="af7ac3332444589cdd38370a334822d4a"><div>
+          <section class="m-doc-details" id="ad08fc0296af56656a5f77a62953fee2a"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">auto lds::<wbr />halton::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af7ac3332444589cdd38370a334822d4a" class="m-doc-self">operator()</a>(</span><span class="m-doc-wrap">) -&gt; std::vector&lt; double &gt;</span></span>
+              <span class="m-doc-wrap-bumper">auto lds2::<wbr />Circle::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad08fc0296af56656a5f77a62953fee2a" class="m-doc-self">pop</a>(</span><span class="m-doc-wrap">) -&gt; array&lt; double, 2 &gt;</span></span>
             </h3>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>auto</td>
+                  <td>array&lt;double, 2&gt;</td>
                 </tr>
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a7426e3cee96343190adfe3109b7ebafb"><div>
+          <section class="m-doc-details" id="a7cb3ae373ea1e7c10ed3905614a140d6"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">auto lds::<wbr />halton::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7426e3cee96343190adfe3109b7ebafb" class="m-doc-self">reseed</a>(</span><span class="m-doc-wrap">unsigned seed) noexcept -&gt; void <span class="m-label m-primary">constexpr</span></span></span>
+              <span class="m-doc-wrap-bumper">auto lds2::<wbr />Circle::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7cb3ae373ea1e7c10ed3905614a140d6" class="m-doc-self">reseed</a>(</span><span class="m-doc-wrap">size_t seed) -&gt; void</span></span>
             </h3>
             <table class="m-table m-fullwidth m-flat">
               <thead>
@@ -174,13 +174,13 @@
     </div>
   </div>
 </div>
-<script src="search-v1.js"></script>
-<script src="searchdata-v1.js" async="async"></script>
+<script src="search-v2.js"></script>
+<script src="searchdata-v2.js" async="async"></script>
 <footer><nav>
   <div class="m-container">
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
-        <p>Lds. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+        <p>Lds. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.6 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
       </div>
     </div>
   </div>
