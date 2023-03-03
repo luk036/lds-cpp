@@ -2,11 +2,9 @@
 
 #include <array>
 #include <cmath>
-#include <gsl/span>
 
 namespace lds2 {
 
-using gsl::span;
 using std::array;
 using std::cos;
 using std::sin;
@@ -65,7 +63,7 @@ public:
    * @param seed
    * @return auto
    */
-  auto reseed(size_t seed) { this->count = seed; }
+  auto reseed(size_t seed) -> void { this->count = seed; }
 };
 
 /**
@@ -82,7 +80,7 @@ public:
    *
    * @param base
    */
-  explicit Halton(span<const size_t> base) : vdc0(base[0]), vdc1(base[1]) {}
+  explicit Halton(const size_t base[]) : vdc0(base[0]), vdc1(base[1]) {}
 
   /**
    * @brief
@@ -151,7 +149,7 @@ public:
    *
    * @param base
    */
-  explicit Sphere(span<const size_t> base) : vdcgen(base[0]), cirgen(base[1]) {}
+  explicit Sphere(const size_t base[]) : vdcgen(base[0]), cirgen(base[1]) {}
 
   /**
    * @brief
@@ -191,7 +189,7 @@ public:
    *
    * @param base
    */
-  explicit Sphere3Hopf(span<const size_t> base)
+  explicit Sphere3Hopf(const size_t base[])
       : vdc0(base[0]), vdc1(base[1]), vdc2(base[2]) {}
 
   /**
