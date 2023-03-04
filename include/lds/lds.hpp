@@ -10,7 +10,13 @@ using std::cos;
 using std::sin;
 using std::sqrt;
 
+#if __cpp_constexpr >= 201304
+#define CONSTEXPR14 constexpr
+constexpr const auto TWO_PI = 2.0 * std::acos(-1.0);
+#else
+#define CONSTEXPR14 inline
 static const auto TWO_PI = 2.0 * std::acos(-1.0);
+#endif
 
 /**
  * @brief Van der Corput sequence
@@ -19,7 +25,7 @@ static const auto TWO_PI = 2.0 * std::acos(-1.0);
  * @param base
  * @return double
  */
-inline auto vdc(size_t k, const size_t base) -> double {
+CONSTEXPR14 auto vdc(size_t k, const size_t base) -> double {
   auto vdc = 0.0;
   auto denom = 1.0;
   while (k != 0) {
@@ -45,14 +51,14 @@ public:
    *
    * @param base
    */
-  explicit Vdcorput(size_t base) : count{0}, base{base} {}
+  CONSTEXPR14 explicit Vdcorput(size_t base) : count{0}, base{base} {}
 
   /**
    * @brief
    *
    * @return double
    */
-  auto pop() -> double {
+  CONSTEXPR14 auto pop() -> double {
     this->count += 1;
     return vdc(this->count, this->base);
   }
@@ -63,7 +69,7 @@ public:
    * @param seed
    * @return auto
    */
-  auto reseed(size_t seed) -> void { this->count = seed; }
+  CONSTEXPR14 auto reseed(size_t seed) -> void { this->count = seed; }
 };
 
 /**
@@ -80,14 +86,15 @@ public:
    *
    * @param base
    */
-  explicit Halton(const size_t base[]) : vdc0(base[0]), vdc1(base[1]) {}
+  CONSTEXPR14 explicit Halton(const size_t base[])
+      : vdc0(base[0]), vdc1(base[1]) {}
 
   /**
    * @brief
    *
    * @return array<double, 2>
    */
-  auto pop() -> array<double, 2> { //
+  CONSTEXPR14 auto pop() -> array<double, 2> { //
     return {this->vdc0.pop(), this->vdc1.pop()};
   }
 
@@ -96,7 +103,7 @@ public:
    *
    * @param seed
    */
-  auto reseed(size_t seed) -> void {
+  CONSTEXPR14 auto reseed(size_t seed) -> void {
     this->vdc0.reseed(seed);
     this->vdc1.reseed(seed);
   }
@@ -115,14 +122,14 @@ public:
    *
    * @param base
    */
-  explicit Circle(size_t base) : vdc(base) {}
+  CONSTEXPR14 explicit Circle(size_t base) : vdc(base) {}
 
   /**
    * @brief
    *
    * @return array<double, 2>
    */
-  auto pop() -> array<double, 2> {
+  CONSTEXPR14 auto pop() -> array<double, 2> {
     const auto theta = this->vdc.pop() * TWO_PI; // map to [0, 2*pi];
     return {sin(theta), cos(theta)};
   }
@@ -132,7 +139,7 @@ public:
    *
    * @param seed
    */
-  auto reseed(size_t seed) -> void { this->vdc.reseed(seed); }
+  CONSTEXPR14 auto reseed(size_t seed) -> void { this->vdc.reseed(seed); }
 };
 
 /**
@@ -149,14 +156,15 @@ public:
    *
    * @param base
    */
-  explicit Sphere(const size_t base[]) : vdcgen(base[0]), cirgen(base[1]) {}
+  CONSTEXPR14 explicit Sphere(const size_t base[])
+      : vdcgen(base[0]), cirgen(base[1]) {}
 
   /**
    * @brief
    *
    * @return array<double, 3>
    */
-  auto pop() -> array<double, 3> {
+  CONSTEXPR14 auto pop() -> array<double, 3> {
     const auto cosphi = 2.0 * this->vdcgen.pop() - 1.0; // map to [-1, 1];
     const auto sinphi = sqrt(1.0 - cosphi * cosphi);
     const auto arr = this->cirgen.pop();
@@ -168,7 +176,7 @@ public:
    *
    * @param seed
    */
-  auto reseed(size_t seed) -> void {
+  CONSTEXPR14 auto reseed(size_t seed) -> void {
     this->cirgen.reseed(seed);
     this->vdcgen.reseed(seed);
   }
@@ -189,7 +197,7 @@ public:
    *
    * @param base
    */
-  explicit Sphere3Hopf(const size_t base[])
+  CONSTEXPR14 explicit Sphere3Hopf(const size_t base[])
       : vdc0(base[0]), vdc1(base[1]), vdc2(base[2]) {}
 
   /**
@@ -197,7 +205,7 @@ public:
    *
    * @return array<double, 4>
    */
-  auto pop() -> array<double, 4> {
+  CONSTEXPR14 auto pop() -> array<double, 4> {
     const auto phi = this->vdc0.pop() * TWO_PI; // map to [0, 2*pi];
     const auto psy = this->vdc1.pop() * TWO_PI; // map to [0, 2*pi];
     const auto vd = this->vdc2.pop();
@@ -216,7 +224,7 @@ public:
    *
    * @param seed
    */
-  auto reseed(size_t seed) -> void {
+  CONSTEXPR14 auto reseed(size_t seed) -> void {
     this->vdc0.reseed(seed);
     this->vdc1.reseed(seed);
     this->vdc2.reseed(seed);
