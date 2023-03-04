@@ -129,7 +129,7 @@ public:
    *
    * @return array<double, 2>
    */
-  CONSTEXPR14 auto pop() -> array<double, 2> {
+  inline auto pop() -> array<double, 2> {
     const auto theta = this->vdc.pop() * TWO_PI; // map to [0, 2*pi];
     return {sin(theta), cos(theta)};
   }
@@ -164,7 +164,7 @@ public:
    *
    * @return array<double, 3>
    */
-  CONSTEXPR14 auto pop() -> array<double, 3> {
+  inline auto pop() -> array<double, 3> {
     const auto cosphi = 2.0 * this->vdcgen.pop() - 1.0; // map to [-1, 1];
     const auto sinphi = sqrt(1.0 - cosphi * cosphi);
     const auto arr = this->cirgen.pop();
@@ -205,7 +205,7 @@ public:
    *
    * @return array<double, 4>
    */
-  CONSTEXPR14 auto pop() -> array<double, 4> {
+  inline auto pop() -> array<double, 4> {
     const auto phi = this->vdc0.pop() * TWO_PI; // map to [0, 2*pi];
     const auto psy = this->vdc1.pop() * TWO_PI; // map to [0, 2*pi];
     const auto vd = this->vdc2.pop();
