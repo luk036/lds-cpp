@@ -10,12 +10,12 @@ using std::cos;
 using std::sin;
 using std::sqrt;
 
+constexpr const auto TWO_PI = 6.283185307179586;
+
 #if __cpp_constexpr >= 201304
 #define CONSTEXPR14 constexpr
-constexpr const auto TWO_PI = 2.0 * std::acos(-1.0);
 #else
 #define CONSTEXPR14 inline
-static const auto TWO_PI = 2.0 * std::acos(-1.0);
 #endif
 
 /**
