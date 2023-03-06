@@ -29,10 +29,10 @@ CONSTEXPR14 auto vdc(size_t k, const size_t base) -> double {
   auto vdc = 0.0;
   auto denom = 1.0;
   while (k != 0) {
-    denom *= base;
     const auto remainder = k % base;
+    denom *= double(base);
     k /= base;
-    vdc += remainder / denom;
+    vdc += double(remainder) / denom;
   }
   return vdc;
 }
