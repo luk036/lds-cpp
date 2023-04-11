@@ -5,26 +5,26 @@
 TEST_CASE("Circle") {
   auto cgen = lds2::Circle(2);
   const auto arr = cgen.pop();
-  CHECK(arr[0] == doctest::Approx(0.0));
+  CHECK_EQ(arr[0], doctest::Approx(0.0));
 }
 
 TEST_CASE("Halton") {
   const size_t base[] = {2, 3};
   auto hgen = lds2::Halton(base);
   const auto arr = hgen.pop();
-  CHECK(arr[0] == doctest::Approx(0.5));
+  CHECK_EQ(arr[0], doctest::Approx(0.5));
 }
 
 TEST_CASE("Sphere") {
   const size_t base[] = {2, 3};
   auto sgen = lds2::Sphere(base);
   const auto arr = sgen.pop();
-  CHECK(arr[0] == doctest::Approx(0.8660254038));
+  CHECK_EQ(arr[0], doctest::Approx(0.8660254038));
 }
 
 TEST_CASE("Sphere3Hopf") {
   const size_t base[] = {2, 3, 5};
   auto shfgen = lds2::Sphere3Hopf(base);
   const auto arr = shfgen.pop();
-  CHECK(arr[0] == doctest::Approx(-0.2236067977));
+  CHECK_EQ(arr[0], doctest::Approx(-0.2236067977));
 }
