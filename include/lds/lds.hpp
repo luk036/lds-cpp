@@ -3,6 +3,16 @@
 #include <array>
 #include <cmath>
 
+#if __cpp_constexpr >= 201304
+#define CONSTEXPR14 constexpr
+#else
+#define CONSTEXPR14 inline
+#endif
+
+#ifndef M_PI
+#define M_PI 3.14159265358979323846264338327950288
+#endif
+
 namespace lds2 {
 
 using std::array;
@@ -10,13 +20,7 @@ using std::cos;
 using std::sin;
 using std::sqrt;
 
-constexpr const auto TWO_PI = 6.283185307179586;
-
-#if __cpp_constexpr >= 201304
-#define CONSTEXPR14 constexpr
-#else
-#define CONSTEXPR14 inline
-#endif
+constexpr const auto TWO_PI = 2.0 * M_PI;
 
 /**
  * @brief Van der Corput sequence
