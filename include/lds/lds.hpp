@@ -15,11 +15,6 @@
 
 namespace lds2 {
 
-using std::array;
-using std::cos;
-using std::sin;
-using std::sqrt;
-
 constexpr const auto TWO_PI = 2.0 * M_PI;
 
 /**
@@ -32,10 +27,9 @@ constexpr const auto TWO_PI = 2.0 * M_PI;
 CONSTEXPR14 auto vdc(size_t k, const size_t base) -> double {
   auto vdc = 0.0;
   auto denom = 1.0;
-  while (k != 0) {
+  for (; k != 0; k /= base) {
     const auto remainder = k % base;
     denom *= double(base);
-    k /= base;
     vdc += double(remainder) / denom;
   }
   return vdc;
@@ -96,9 +90,9 @@ public:
   /**
    * @brief
    *
-   * @return array<double, 2>
+   * @return std::array<double, 2>
    */
-  CONSTEXPR14 auto pop() -> array<double, 2> { //
+  CONSTEXPR14 auto pop() -> std::array<double, 2> { //
     return {this->vdc0.pop(), this->vdc1.pop()};
   }
 
@@ -131,11 +125,11 @@ public:
   /**
    * @brief
    *
-   * @return array<double, 2>
+   * @return std::array<double, 2>
    */
-  inline auto pop() -> array<double, 2> {
-    const auto theta = this->vdc.pop() * TWO_PI; // map to [0, 2*pi];
-    return {sin(theta), cos(theta)};
+  inline auto pop() -> std::array<double, 2> {
+    auto theta = this->vdc.pop() * TWO_PI; // map to [0, 2*pi];
+    return {std::sin(theta), std::cos(std::move(theta))};
   }
 
   /**
@@ -166,13 +160,13 @@ public:
   /**
    * @brief
    *
-   * @return array<double, 3>
+   * @return std::array<double, 3>
    */
-  inline auto pop() -> array<double, 3> {
-    const auto cosphi = 2.0 * this->vdcgen.pop() - 1.0; // map to [-1, 1];
-    const auto sinphi = sqrt(1.0 - cosphi * cosphi);
-    const auto arr = this->cirgen.pop();
-    return {sinphi * arr[0], sinphi * arr[1], cosphi};
+  inline auto pop() -> std::array<double, 3> {
+    auto cosphi = 2.0 * this->vdcgen.pop() - 1.0; // map to [-1, 1];
+    auto sinphi = std::sqrt(1.0 - cosphi * cosphi);
+    auto arr = this->cirgen.pop();
+    return {sinphi * arr[0], std::move(sinphi) * arr[1], std::move(cosphi)};
   }
 
   /**
@@ -207,19 +201,19 @@ public:
   /**
    * @brief
    *
-   * @return array<double, 4>
+   * @return std::array<double, 4>
    */
-  inline auto pop() -> array<double, 4> {
-    const auto phi = this->vdc0.pop() * TWO_PI; // map to [0, 2*pi];
-    const auto psy = this->vdc1.pop() * TWO_PI; // map to [0, 2*pi];
-    const auto vd = this->vdc2.pop();
-    const auto cos_eta = sqrt(vd);
-    const auto sin_eta = sqrt(1.0 - vd);
+  inline auto pop() -> std::array<double, 4> {
+    auto phi = this->vdc0.pop() * TWO_PI; // map to [0, 2*pi];
+    auto psy = this->vdc1.pop() * TWO_PI; // map to [0, 2*pi];
+    auto vd = this->vdc2.pop();
+    auto cos_eta = std::sqrt(vd);
+    auto sin_eta = std::sqrt(1.0 - std::move(vd));
     return {
-        cos_eta * cos(psy),
-        cos_eta * sin(psy),
-        sin_eta * cos(phi + psy),
-        sin_eta * sin(phi + psy),
+        cos_eta * std::cos(psy),
+        std::move(cos_eta) * std::sin(psy),
+        sin_eta * std::cos(phi + psy),
+        std::move(sin_eta) * std::sin(std::move(phi) + std::move(psy)),
     };
   }
 
