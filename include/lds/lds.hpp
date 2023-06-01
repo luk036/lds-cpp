@@ -195,7 +195,8 @@ public:
    *
    * @param base
    */
-  CONSTEXPR14 Sphere3Hopf(const size_t base0, const size_t base1, const size_t base2)
+  CONSTEXPR14 Sphere3Hopf(const size_t base0, const size_t base1,
+                          const size_t base2)
       : vdc0(base0), vdc1(base1), vdc2(base2) {}
 
   /**
