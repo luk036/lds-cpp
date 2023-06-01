@@ -84,8 +84,8 @@ public:
    *
    * @param base
    */
-  CONSTEXPR14 explicit Halton(const size_t base[])
-      : vdc0(base[0]), vdc1(base[1]) {}
+  CONSTEXPR14 Halton(const size_t base0, const size_t base1)
+      : vdc0(base0), vdc1(base1) {}
 
   /**
    * @brief
@@ -154,8 +154,8 @@ public:
    *
    * @param base
    */
-  CONSTEXPR14 explicit Sphere(const size_t base[])
-      : vdcgen(base[0]), cirgen(base[1]) {}
+  CONSTEXPR14 Sphere(const size_t base0, const size_t base1)
+      : vdcgen(base0), cirgen(base1) {}
 
   /**
    * @brief
@@ -195,8 +195,8 @@ public:
    *
    * @param base
    */
-  CONSTEXPR14 explicit Sphere3Hopf(const size_t base[])
-      : vdc0(base[0]), vdc1(base[1]), vdc2(base[2]) {}
+  CONSTEXPR14 Sphere3Hopf(const size_t base0, const size_t base1, const size_t base2)
+      : vdc0(base0), vdc1(base1), vdc2(base2) {}
 
   /**
    * @brief
