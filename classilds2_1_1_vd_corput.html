@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Lds</title>
+  <title>ilds2::VdCorput class | Lds</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -34,7 +34,7 @@
           </ol>
           <ol class="m-col-t-6 m-col-m-none" start="3">
             <li><a href="annotated.html">Classes</a></li>
-            <li><a href="files.html" id="m-navbar-current">Files</a></li>
+            <li><a href="files.html">Files</a></li>
             <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
               <use href="#m-doc-search-icon-path" />
             </svg></a></li>
@@ -48,42 +48,100 @@
   <div class="m-container m-container-inflatable">
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
-        <h1>Files</h1>
-        <ul class="m-doc">
-          <li class="m-doc-collapsible">
-            <a href="#" onclick="return toggle(this)">dir</a> <a href="dir_138aff360eb965c43b94267b8d1ce09e.html" class="m-doc">documentation</a> <span class="m-doc"><span></span></span>
-            <ul class="m-doc">
-              <li>dir <a href="dir_31a378c84b956866319ca9d9294f1959.html" class="m-doc">pages</a> <span class="m-doc"><span></span></span></li>
-            </ul>
-          </li>
-          <li class="m-doc-collapsible">
-            <a href="#" onclick="return toggle(this)">dir</a> <a href="dir_20e875b46f774aaa37c5fd6616e1d097.html" class="m-doc">lds</a> <span class="m-doc"><span></span></span>
-            <ul class="m-doc">
-              <li>file <a href="greeter_8h.html" class="m-doc">greeter.h</a> <span class="m-doc"><span></span></span></li>
-              <li>file <a href="ilds_8hpp.html" class="m-doc">ilds.hpp</a> <span class="m-doc"><span></span></span></li>
-              <li>file <a href="lds_8hpp.html" class="m-doc">lds.hpp</a> <span class="m-doc"><span></span></span></li>
-              <li>file <a href="lds__n_8hpp.html" class="m-doc">lds_n.hpp</a> <span class="m-doc"><span></span></span></li>
-            </ul>
-          </li>
-          <li>file <a href="about_8dox.html" class="m-doc">about.dox</a> <span class="m-doc"><span></span></span></li>
-          <li>file <a href="_r_e_a_d_m_e_8md.html" class="m-doc">README.md</a> <span class="m-doc"><span></span></span></li>
-        </ul>
-        <script>
-        function toggle(e) {
-            e.parentElement.className = e.parentElement.className == 'm-doc-collapsible' ?
-                'm-doc-expansible' : 'm-doc-collapsible';
-            return false;
-        }
-        /* Collapse all nodes marked as such. Doing it via JS instead of
-           directly in markup so disabling it doesn't harm usability. The list
-           is somehow regenerated on every iteration and shrinks as I change
-           the classes. It's not documented anywhere and I'm not sure if this
-           is the same across browsers, so I am going backwards in that list to
-           be sure. */
-        var collapsed = document.getElementsByClassName("collapsed");
-        for(var i = collapsed.length - 1; i >= 0; --i)
-            collapsed[i].className = 'm-doc-expansible';
-        </script>
+        <h1>
+          <span class="m-breadcrumb"><a href="namespaceilds2.html">ilds2</a>::<wbr/></span>VdCorput <span class="m-thin">class</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="ilds_8hpp.html">&lt;lds/ilds.hpp&gt;</a></div>
+        </h1>
+        <p>Van der Corput sequence generator.</p>
+        <nav class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#pub-methods">Public functions</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a6a5901126d030103e5cb70ae089b4192" class="m-doc">VdCorput</a>(</span><span class="m-doc-wrap">size_t base,
+              unsigned int scale) -&gt; <a href="ilds_8hpp.html#a46d983a6cf6b8e418426de1b7e33dc46" class="m-doc">CONSTEXPR14</a> <span class="m-label m-flat m-info">explicit</span> </span>
+            </dt>
+            <dd>Construct a new Vdcorputorput object.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a77a26abd10470b1916393428c02ebec2" class="m-doc">pop</a>(</span><span class="m-doc-wrap">) -&gt; size_t -&gt; auto</span>
+            </dt>
+            <dd></dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a390a2583f6e74a08e576361681f8dbb5" class="m-doc">reseed</a>(</span><span class="m-doc-wrap">size_t seed) -&gt; void -&gt; <a href="ilds_8hpp.html#a46d983a6cf6b8e418426de1b7e33dc46" class="m-doc">CONSTEXPR14</a> auto</span>
+            </dt>
+            <dd></dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a6a5901126d030103e5cb70ae089b4192"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="ilds_8hpp.html#a46d983a6cf6b8e418426de1b7e33dc46" class="m-doc">CONSTEXPR14</a> ilds2::<wbr />VdCorput::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6a5901126d030103e5cb70ae089b4192" class="m-doc-self">VdCorput</a>(</span><span class="m-doc-wrap">size_t base,
+              unsigned int scale) <span class="m-label m-info">explicit</span> </span></span>
+            </h3>
+            <p>Construct a new Vdcorputorput object.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">base</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>scale</td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a77a26abd10470b1916393428c02ebec2"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">auto ilds2::<wbr />VdCorput::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a77a26abd10470b1916393428c02ebec2" class="m-doc-self">pop</a>(</span><span class="m-doc-wrap">) -&gt; size_t</span></span>
+            </h3>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>double</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a390a2583f6e74a08e576361681f8dbb5"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="ilds_8hpp.html#a46d983a6cf6b8e418426de1b7e33dc46" class="m-doc">CONSTEXPR14</a> auto ilds2::<wbr />VdCorput::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a390a2583f6e74a08e576361681f8dbb5" class="m-doc-self">reseed</a>(</span><span class="m-doc-wrap">size_t seed) -&gt; void</span></span>
+            </h3>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">seed</td>
+                  <td></td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>auto</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+        </section>
       </div>
     </div>
   </div>
