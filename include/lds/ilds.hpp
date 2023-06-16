@@ -36,7 +36,7 @@ CONSTEXPR14 auto vdc_i(size_t k, size_t base, unsigned int scale) -> size_t {
  * @brief Van der Corput sequence generator
  *
  */
-class Vdcorput {
+class VdCorput {
   size_t count;
   size_t base;
   unsigned int scale;
@@ -47,7 +47,7 @@ public:
    *
    * @param base
    */
-  CONSTEXPR14 explicit Vdcorput(size_t base, unsigned int scale)
+  CONSTEXPR14 explicit VdCorput(size_t base, unsigned int scale)
       : count{0}, base{base}, scale{scale} {}
 
   /**
@@ -74,8 +74,8 @@ public:
  *
  */
 class Halton {
-  Vdcorput vdc0;
-  Vdcorput vdc1;
+  VdCorput vdc0;
+  VdCorput vdc1;
 
 public:
   /**

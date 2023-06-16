@@ -41,17 +41,17 @@ CONSTEXPR14 auto vdc(size_t k, const size_t base) -> double {
  * @brief Van der Corput sequence generator
  *
  */
-class Vdcorput {
+class VdCorput {
   size_t count;
   size_t base;
 
 public:
   /**
-   * @brief Construct a new Vdcorput object
+   * @brief Construct a new VdCorput object
    *
    * @param base
    */
-  CONSTEXPR14 explicit Vdcorput(size_t base) : count{0}, base{base} {}
+  CONSTEXPR14 explicit VdCorput(size_t base) : count{0}, base{base} {}
 
   /**
    * @brief
@@ -77,8 +77,8 @@ public:
  *
  */
 class Halton {
-  Vdcorput vdc0;
-  Vdcorput vdc1;
+  VdCorput vdc0;
+  VdCorput vdc1;
 
 public:
   /**
@@ -114,7 +114,7 @@ public:
  *
  */
 class Circle {
-  Vdcorput vdc;
+  VdCorput vdc;
 
 public:
   /**
@@ -147,7 +147,7 @@ public:
  *
  */
 class Sphere {
-  Vdcorput vdcgen;
+  VdCorput vdcgen;
   Circle cirgen;
 
 public:
@@ -187,9 +187,9 @@ public:
  *
  */
 class Sphere3Hopf {
-  Vdcorput vdc0;
-  Vdcorput vdc1;
-  Vdcorput vdc2;
+  VdCorput vdc0;
+  VdCorput vdc1;
+  VdCorput vdc2;
 
 public:
   /**

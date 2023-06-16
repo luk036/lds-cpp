@@ -4,7 +4,7 @@
 #include <stddef.h> // for size_t
 #include <vector>   // for vector
 
-#include "lds.hpp" // for Vdcorput, Sphere
+#include "lds.hpp" // for VdCorput, Sphere
 
 namespace lds2 {
 using std::vector;
@@ -15,7 +15,7 @@ using std::vector;
  */
 class HaltonN {
 private:
-  vector<Vdcorput> vdcs;
+  vector<VdCorput> vdcs;
 
 public:
   /**
@@ -25,7 +25,7 @@ public:
    */
   explicit HaltonN(const vector<size_t> &base) {
     for (const auto &b : base) {
-      this->vdcs.emplace_back(Vdcorput(b));
+      this->vdcs.emplace_back(VdCorput(b));
     }
   }
 
