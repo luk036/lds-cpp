@@ -1,27 +1,36 @@
-set_languages("c++2b")
-
+-- set_languages("c++20")
 add_rules("mode.debug", "mode.release", "mode.coverage")
--- add_requires("fmt", {alias = "fmt"})
 add_requires("doctest", {alias = "doctest"})
+-- add_requires("fmt 7.1.3", {alias = "fmt"})
+add_requires("benchmark", {alias = "benchmark"})
 
 if is_mode("coverage") then
     add_cxflags("-ftest-coverage", "-fprofile-arcs", {force = true})
 end
 
--- header only
 if is_plat("linux") then
     set_warnings("all", "error")
     add_cxflags("-Wconversion", {force = true})
 end
 
+rule("cppfront")
+    set_extensions(".cpp2")
+    on_load(function (target)
+        local rule = target:rule("c++.build"):clone()
+        rule:add("deps", "cppfront", {order = true})
+        target:rule_add(rule)
+    end)
+    on_build_file(function (target, sourcefile, opt)
+        print("build cppfront file")
+    end)
 
-target("test_lds")
+
+target("test")
     set_kind("binary")
-    add_includedirs("include", {public = true})
-    add_files("test/source/*.cpp")
-    add_packages("doctest")
+    add_rules("cppfront")
+    add_files("test/source/*.cpp2")
 
---
+
 -- If you want to known more usage about xmake, please see https://xmake.io
 --
 -- ## FAQ

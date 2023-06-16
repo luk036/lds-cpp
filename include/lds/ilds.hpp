@@ -20,7 +20,7 @@ using std::array;
  * @param base
  * @return double
  */
-CONSTEXPR14 auto vdc_i(size_t k, size_t base, unsigned int scale) -> size_t {
+inline auto vdc_i(size_t k, size_t base, unsigned int scale) -> size_t {
   size_t vdc{0};
   auto factor = size_t(std::pow(base, std::move(scale)));
   while (k != 0U) {
@@ -55,7 +55,7 @@ public:
    *
    * @return double
    */
-  CONSTEXPR14 auto pop() -> size_t {
+  inline auto pop() -> size_t {
     this->count += 1;
     return vdc_i(this->count, this->base, this->scale);
   }
@@ -91,7 +91,7 @@ public:
    *
    * @return array<double, 2>
    */
-  CONSTEXPR14 auto pop() -> array<size_t, 2> { //
+  inline auto pop() -> array<size_t, 2> { //
     return {this->vdc0.pop(), this->vdc1.pop()};
   }
 
