@@ -139,7 +139,7 @@ public:
    *
    * @return std::array<double, 2>
    */
-  CONSTEXPR14 auto pop()->std::array<double, 2> { //
+  CONSTEXPR14 auto pop() -> std::array<double, 2> { //
     return {this->vdc0.pop(), this->vdc1.pop()};
   }
 
@@ -153,7 +153,7 @@ public:
    *
    * @param seed
    */
-  CONSTEXPR14 auto reseed(size_t seed)->void {
+  CONSTEXPR14 auto reseed(size_t seed) -> void {
     this->vdc0.reseed(seed);
     this->vdc1.reseed(seed);
   }
@@ -300,7 +300,6 @@ public:
  * and z coordinates of the point, and the fourth element represents the w
  * coordinate. The `reseed()` method is used to reset the state of the sequence
  * generator to a specific seed value.
- *
  */
 class Sphere3Hopf {
   VdCorput vdc0;
