@@ -52,43 +52,78 @@
           <span class="m-breadcrumb"><a href="namespacelds2.html">lds2</a>::<wbr/></span>Sphere3Hopf <span class="m-thin">class</span>
           <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="lds_8hpp.html">&lt;lds/lds.hpp&gt;</a></div>
         </h1>
-        <p>S(3) sequence generator by Hopf.</p>
+        <p>S(3) sequence generator by Hopf fibration.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
+                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
                 <li><a href="#pub-methods">Public functions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
+<p>The <code><a href="classlds2_1_1_sphere3_hopf.html" class="m-doc">Sphere3Hopf</a></code> class is a sequence generator that generates points on a 3-sphere using the Hopf fibration. It uses three instances of the <code><a href="classlds2_1_1_vd_corput.html" class="m-doc">VdCorput</a></code> class to generate the sequence values and maps them to points on the 3-sphere. The <code><a href="classlds2_1_1_sphere3_hopf.html#aefc6920ddb200472b9e4c41c8d8549a8" class="m-doc">pop()</a></code> method returns the next point on the 3-sphere as a <code>std::array&lt;double, 4&gt;</code>, where the first three elements represent the x, y, and z coordinates of the point, and the fourth element represents the w coordinate. The <code><a href="classlds2_1_1_sphere3_hopf.html#adc31a4980e32cf894b7d1fa3b758077e" class="m-doc">reseed()</a></code> method is used to reset the state of the sequence generator to a specific seed value.</p>
+        <section id="typeless-methods">
+          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a39df0eaa2755eefc37a99d74d0d60595" class="m-doc">Sphere3Hopf</a>(</span><span class="m-doc-wrap">const size_t base0,
+              const size_t base1,
+              const size_t base2)</span>
+            </dt>
+            <dd>Construct a new <a href="classlds2_1_1_sphere.html" class="m-doc">Sphere</a> 3 Hopf object.</dd>
+          </dl>
+        </section>
         <section id="pub-methods">
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
-            <dt id="a2b3fc5c4f8879dae7acc44fa5684f20d">
-              <span class="m-doc-wrap-bumper">auto <a href="#a2b3fc5c4f8879dae7acc44fa5684f20d" class="m-doc-self">Sphere3Hopf</a>(</span><span class="m-doc-wrap">const size_t base0,
-              const size_t base1,
-              const size_t base2) -&gt; <a href="ilds_8hpp.html#a46d983a6cf6b8e418426de1b7e33dc46" class="m-doc">CONSTEXPR14</a></span>
-            </dt>
-            <dd>Construct a new <a href="classlds2_1_1_sphere.html" class="m-doc">Sphere</a> 3 Hopf object.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#aefc6920ddb200472b9e4c41c8d8549a8" class="m-doc">pop</a>(</span><span class="m-doc-wrap">) -&gt; std::array&lt; double, 4 &gt; -&gt; auto</span>
             </dt>
-            <dd></dd>
+            <dd>pop</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#adc31a4980e32cf894b7d1fa3b758077e" class="m-doc">reseed</a>(</span><span class="m-doc-wrap">size_t seed) -&gt; void -&gt; <a href="ilds_8hpp.html#a46d983a6cf6b8e418426de1b7e33dc46" class="m-doc">CONSTEXPR14</a> auto</span>
             </dt>
-            <dd></dd>
+            <dd>reseed</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a39df0eaa2755eefc37a99d74d0d60595"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> lds2::<wbr />Sphere3Hopf::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a39df0eaa2755eefc37a99d74d0d60595" class="m-doc-self">Sphere3Hopf</a>(</span><span class="m-doc-wrap">const size_t base0,
+              const size_t base1,
+              const size_t base2)</span></span>
+            </h3>
+            <p>Construct a new <a href="classlds2_1_1_sphere.html" class="m-doc">Sphere</a> 3 Hopf object.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">base0</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>base1</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>base2</td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
           <section class="m-doc-details" id="aefc6920ddb200472b9e4c41c8d8549a8"><div>
             <h3>
               <span class="m-doc-wrap-bumper">auto lds2::<wbr />Sphere3Hopf::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aefc6920ddb200472b9e4c41c8d8549a8" class="m-doc-self">pop</a>(</span><span class="m-doc-wrap">) -&gt; std::array&lt; double, 4 &gt;</span></span>
             </h3>
+            <p>pop</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
@@ -97,11 +132,13 @@
                 </tr>
               </tfoot>
             </table>
+<p>The <code><a href="classlds2_1_1_sphere3_hopf.html#aefc6920ddb200472b9e4c41c8d8549a8" class="m-doc">pop()</a></code> function is used to generate the next value in the sequence. In the <code><a href="classlds2_1_1_vd_corput.html" class="m-doc">VdCorput</a></code> class, <code><a href="classlds2_1_1_sphere3_hopf.html#aefc6920ddb200472b9e4c41c8d8549a8" class="m-doc">pop()</a></code> increments the count and calculates the Van der Corput sequence value for that count and base. In the <code><a href="classlds2_1_1_halton.html" class="m-doc">Halton</a></code> class, <code><a href="classlds2_1_1_sphere3_hopf.html#aefc6920ddb200472b9e4c41c8d8549a8" class="m-doc">pop()</a></code> returns the next point in the <a href="classlds2_1_1_halton.html" class="m-doc">Halton</a> sequence as a <code>std::array&lt;double, 2&gt;</code>. Similarly, in the <code><a href="classlds2_1_1_circle.html" class="m-doc">Circle</a></code> class, <code><a href="classlds2_1_1_sphere3_hopf.html#aefc6920ddb200472b9e4c41c8d8549a8" class="m-doc">pop()</a></code> returns the next point on the unit circle as a <code>std::array&lt;double, 2&gt;</code>. In the <code><a href="classlds2_1_1_sphere.html" class="m-doc">Sphere</a></code> class, <code><a href="classlds2_1_1_sphere3_hopf.html#aefc6920ddb200472b9e4c41c8d8549a8" class="m-doc">pop()</a></code> returns the next point on the unit sphere as a <code>std::array&lt;double, 3&gt;</code>. And in the <code><a href="classlds2_1_1_sphere3_hopf.html" class="m-doc">Sphere3Hopf</a></code> class, <code><a href="classlds2_1_1_sphere3_hopf.html#aefc6920ddb200472b9e4c41c8d8549a8" class="m-doc">pop()</a></code> returns the next point on the 3-sphere using the Hopf fibration as a <code>std::array&lt;double, 4&gt;</code>.</p>
           </div></section>
           <section class="m-doc-details" id="adc31a4980e32cf894b7d1fa3b758077e"><div>
             <h3>
               <span class="m-doc-wrap-bumper"><a href="ilds_8hpp.html#a46d983a6cf6b8e418426de1b7e33dc46" class="m-doc">CONSTEXPR14</a> auto lds2::<wbr />Sphere3Hopf::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#adc31a4980e32cf894b7d1fa3b758077e" class="m-doc-self">reseed</a>(</span><span class="m-doc-wrap">size_t seed) -&gt; void</span></span>
             </h3>
+            <p>reseed</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -113,6 +150,7 @@
                 </tr>
               </tbody>
             </table>
+<p>The <code><a href="classlds2_1_1_sphere3_hopf.html#adc31a4980e32cf894b7d1fa3b758077e" class="m-doc">reseed(size_<wbr />t seed)</a></code> function is used to reset the state of the sequence generator to a specific seed value. This allows the sequence generator to start generating the sequence from the beginning, or from a specific point in the sequence, depending on the value of the seed.</p>
           </div></section>
         </section>
       </div>

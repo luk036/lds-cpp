@@ -64,6 +64,7 @@
             </li>
           </ul>
         </nav>
+<p>The <code><a href="classlds2_1_1_circle.html" class="m-doc">Circle</a></code> class is a sequence generator that generates points on a unit circle using the Van der Corput sequence. It uses the <code><a href="classlds2_1_1_vd_corput.html" class="m-doc">VdCorput</a></code> class to generate the sequence values and maps them to points on the unit circle. The <code><a href="classlds2_1_1_circle.html#a5662f0dce80d62bb37a8ee8efa177d4d" class="m-doc">pop()</a></code> method returns the next point on the unit circle as a <code>std::array&lt;double, 2&gt;</code>, where the first element represents the x-coordinate and the second element represents the y-coordinate of the point. The <code><a href="classlds2_1_1_circle.html#ac335c3e31d0ed5f66a64a23e5d7c702d" class="m-doc">reseed()</a></code> method is used to reset the state of the sequence generator to a specific seed value.</p>
         <section id="pub-methods">
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
@@ -74,11 +75,11 @@
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a5662f0dce80d62bb37a8ee8efa177d4d" class="m-doc">pop</a>(</span><span class="m-doc-wrap">) -&gt; std::array&lt; double, 2 &gt; -&gt; auto</span>
             </dt>
-            <dd></dd>
+            <dd>pop</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#ac335c3e31d0ed5f66a64a23e5d7c702d" class="m-doc">reseed</a>(</span><span class="m-doc-wrap">size_t seed) -&gt; void -&gt; <a href="ilds_8hpp.html#a46d983a6cf6b8e418426de1b7e33dc46" class="m-doc">CONSTEXPR14</a> auto</span>
             </dt>
-            <dd></dd>
+            <dd>reseed</dd>
           </dl>
         </section>
         <section>
@@ -99,11 +100,13 @@
                 </tr>
               </tbody>
             </table>
+<p>The <code><a href="classlds2_1_1_circle.html#a481f24c3cd8254bf50c0da2cdef467f9" class="m-doc">Circle(size_<wbr />t base)</a></code> constructor is initializing a <code><a href="classlds2_1_1_circle.html" class="m-doc">Circle</a></code> object with a given base. The base is used to generate the Van der Corput sequence, which is then mapped to points on the unit circle. The <code>explicit</code> keyword indicates that this constructor can only be used for explicit construction and not for implicit conversions.</p>
           </div></section>
           <section class="m-doc-details" id="a5662f0dce80d62bb37a8ee8efa177d4d"><div>
             <h3>
               <span class="m-doc-wrap-bumper">auto lds2::<wbr />Circle::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5662f0dce80d62bb37a8ee8efa177d4d" class="m-doc-self">pop</a>(</span><span class="m-doc-wrap">) -&gt; std::array&lt; double, 2 &gt;</span></span>
             </h3>
+            <p>pop</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
@@ -112,11 +115,13 @@
                 </tr>
               </tfoot>
             </table>
+<p>The <code><a href="classlds2_1_1_circle.html#a5662f0dce80d62bb37a8ee8efa177d4d" class="m-doc">pop()</a></code> function is used to generate the next value in the sequence. In the <code><a href="classlds2_1_1_vd_corput.html" class="m-doc">VdCorput</a></code> class, <code><a href="classlds2_1_1_circle.html#a5662f0dce80d62bb37a8ee8efa177d4d" class="m-doc">pop()</a></code> increments the count and calculates the Van der Corput sequence value for that count and base. In the <code><a href="classlds2_1_1_halton.html" class="m-doc">Halton</a></code> class, <code><a href="classlds2_1_1_circle.html#a5662f0dce80d62bb37a8ee8efa177d4d" class="m-doc">pop()</a></code> returns the next point in the <a href="classlds2_1_1_halton.html" class="m-doc">Halton</a> sequence as a <code>std::array&lt;double, 2&gt;</code>. Similarly, in the <code><a href="classlds2_1_1_circle.html" class="m-doc">Circle</a></code> class, <code><a href="classlds2_1_1_circle.html#a5662f0dce80d62bb37a8ee8efa177d4d" class="m-doc">pop()</a></code> returns the next point on the unit circle as a <code>std::array&lt;double, 2&gt;</code>. In the <code><a href="classlds2_1_1_sphere.html" class="m-doc">Sphere</a></code> class, <code><a href="classlds2_1_1_circle.html#a5662f0dce80d62bb37a8ee8efa177d4d" class="m-doc">pop()</a></code> returns the next point on the unit sphere as a <code>std::array&lt;double, 3&gt;</code>. And in the <code><a href="classlds2_1_1_sphere3_hopf.html" class="m-doc">Sphere3Hopf</a></code> class, <code><a href="classlds2_1_1_circle.html#a5662f0dce80d62bb37a8ee8efa177d4d" class="m-doc">pop()</a></code> returns the next point on the 3-sphere using the Hopf fibration as a <code>std::array&lt;double, 4&gt;</code>.</p>
           </div></section>
           <section class="m-doc-details" id="ac335c3e31d0ed5f66a64a23e5d7c702d"><div>
             <h3>
               <span class="m-doc-wrap-bumper"><a href="ilds_8hpp.html#a46d983a6cf6b8e418426de1b7e33dc46" class="m-doc">CONSTEXPR14</a> auto lds2::<wbr />Circle::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac335c3e31d0ed5f66a64a23e5d7c702d" class="m-doc-self">reseed</a>(</span><span class="m-doc-wrap">size_t seed) -&gt; void</span></span>
             </h3>
+            <p>reseed</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -128,6 +133,7 @@
                 </tr>
               </tbody>
             </table>
+<p>The <code><a href="classlds2_1_1_circle.html#ac335c3e31d0ed5f66a64a23e5d7c702d" class="m-doc">reseed(size_<wbr />t seed)</a></code> function is used to reset the state of the sequence generator to a specific seed value. This allows the sequence generator to start generating the sequence from the beginning, or from a specific point in the sequence, depending on the value of the seed.</p>
           </div></section>
         </section>
       </div>
