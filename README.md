@@ -11,14 +11,12 @@
 
 # lds-cpp
 
-Low discrepany sequence for modern C++
+Low discrepancy sequence for modern C++
 
-- This library requires C++17 or above.
-- This library depends on Xtensor.
+- This library requires C++11 or above.
 
-## Features
+## ✨ Features
 
-- Support N-Sphere
 - [Modern CMake practices](https://pabloariasal.github.io/2018/02/19/its-time-to-do-cmake-right/)
 - Integrated test suite
 - Continuous integration via [GitHub Actions](https://help.github.com/en/actions/)
@@ -28,6 +26,10 @@ Low discrepany sequence for modern C++
 - Installable target with automatic versioning information and header generation via [PackageProject.cmake](https://github.com/TheLartians/PackageProject.cmake)
 - Automatic [documentation](https://thelartians.github.io/ModernCppStarter) and deployment with [Doxygen](https://www.doxygen.nl) and [GitHub Pages](https://pages.github.com)
 - Support for [sanitizer tools, and more](#additional-tools)
+
+## Used In
+
+* [sphere-n-cpp](https://github.com/luk036/sphere-n-cpp)
 
 ## Usage
 
