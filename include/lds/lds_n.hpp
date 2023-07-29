@@ -21,66 +21,66 @@ using std::vector;
  * returns the next point in the sequence as a `std::vector<double>`.
  */
 class HaltonN {
-private:
-  vector<VdCorput> vdcs;
+  private:
+    vector<VdCorput> vdcs;
 
-public:
-  /**
-   * @brief Construct a new Halton N object
-   *
-   * The `HaltonN(const vector<size_t> &base)` is a constructor for
-   * the `HaltonN` class. It takes one parameter `base`, which is
-   * used as the bases for generating the HaltonN sequence. The `explicit`
-   * keyword indicates that this constructor can only be used for explicit
-   * construction and not for implicit conversions.
-   *
-   * @param[in] base
-   */
-  explicit HaltonN(const vector<size_t> &base) {
-    for (const auto &b : base) {
-      this->vdcs.emplace_back(VdCorput(b));
+  public:
+    /**
+     * @brief Construct a new Halton N object
+     *
+     * The `HaltonN(const vector<size_t> &base)` is a constructor for
+     * the `HaltonN` class. It takes one parameter `base`, which is
+     * used as the bases for generating the HaltonN sequence. The `explicit`
+     * keyword indicates that this constructor can only be used for explicit
+     * construction and not for implicit conversions.
+     *
+     * @param[in] base
+     */
+    explicit HaltonN(const vector<size_t> &base) {
+        for (const auto &b : base) {
+            this->vdcs.emplace_back(VdCorput(b));
+        }
     }
-  }
 
-  /**
-   * @brief pop
-   *
-   * The `pop()` function is used to generate the next value in the sequence. In
-   * the `VdCorput` class, `pop()` increments the count and calculates the Van
-   * der Corput sequence value for that count and base. In the `HaltonN` class,
-   * `pop()` returns the next point in the Halton sequence as a
-   * `std::vector<double>`. Similarly, in the `Circle` class, `pop()` returns
-   * the next point on the unit circle as a `std::array<double, 2>`. In the
-   * `Sphere` class, `pop()` returns the next point on the unit sphere as a
-   * `std::array<double, 3>`. And in the `Sphere3Hopf` class, `pop()` returns
-   * the next point on the 3-sphere using the Hopf fibration as a
-   * `std::array<double, 4>`.
-   *
-   * @return vector<double>
-   */
-  auto pop() -> vector<double> {
-    auto res = vector<double>{};
-    for (auto &vdc : this->vdcs) {
-      res.emplace_back(vdc.pop());
+    /**
+     * @brief pop
+     *
+     * The `pop()` function is used to generate the next value in the sequence.
+     * In the `VdCorput` class, `pop()` increments the count and calculates the
+     * Van der Corput sequence value for that count and base. In the `HaltonN`
+     * class, `pop()` returns the next point in the Halton sequence as a
+     * `std::vector<double>`. Similarly, in the `Circle` class, `pop()` returns
+     * the next point on the unit circle as a `std::array<double, 2>`. In the
+     * `Sphere` class, `pop()` returns the next point on the unit sphere as a
+     * `std::array<double, 3>`. And in the `Sphere3Hopf` class, `pop()` returns
+     * the next point on the 3-sphere using the Hopf fibration as a
+     * `std::array<double, 4>`.
+     *
+     * @return vector<double>
+     */
+    auto pop() -> vector<double> {
+        auto res = vector<double>{};
+        for (auto &vdc : this->vdcs) {
+            res.emplace_back(vdc.pop());
+        }
+        return res;
     }
-    return res;
-  }
 
-  /**
-   * @brief reseed
-   *
-   * The `reseed(size_t seed)` function is used to reset the state of the
-   * sequence generator to a specific seed value. This allows the sequence
-   * generator to start generating the sequence from the beginning, or from a
-   * specific point in the sequence, depending on the value of the seed.
-   *
-   * @param[in] seed
-   */
-  auto reseed(size_t seed) -> void {
-    for (auto &vdc : this->vdcs) {
-      vdc.reseed(seed);
+    /**
+     * @brief reseed
+     *
+     * The `reseed(size_t seed)` function is used to reset the state of the
+     * sequence generator to a specific seed value. This allows the sequence
+     * generator to start generating the sequence from the beginning, or from a
+     * specific point in the sequence, depending on the value of the seed.
+     *
+     * @param[in] seed
+     */
+    auto reseed(size_t seed) -> void {
+        for (auto &vdc : this->vdcs) {
+            vdc.reseed(seed);
+        }
     }
-  }
 };
 
 // First 1000 prime numbers;
