@@ -13,9 +13,9 @@ jobs:
     name: Build and publish documentation
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         with:
           path: "**/cpm_modules"
           key: ${{ github.workflow }}-cpm-modules-${{ hashFiles('**/CMakeLists.txt', '**/*.cmake') }}
@@ -27,11 +27,11 @@ jobs:
 
       - name: Build
         run: |
-          cmake -S. -Bbuild
+          cmake -Sdocumentation -Bbuild
           cmake --build build --target GenerateDocs
 
       - name: Publish
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build/documentation/doxygen/html
+          publish_dir: ./build/doxygen/html

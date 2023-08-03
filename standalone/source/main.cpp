@@ -1,12 +1,10 @@
-#include <lds/greeter.h> // for Lds
-#include <lds/version.h> // for LDS_VERSION
+#include <lds/greeter.h>
+#include <lds/version.h>
 
-#include <cxxopts.hpp>   // for value, OptionAdder, Options, OptionValue
-#include <iostream>      // for string, operator<<, endl, basic_ostream
-#include <memory>        // for shared_ptr
-#include <string>        // for char_traits, hash, operator==
-#include <unordered_map> // for operator==, unordered_map, __hash_map_const...
-#include <utility>       // for pair
+#include <cxxopts.hpp>
+#include <iostream>
+#include <string>
+#include <unordered_map>
 
 auto main(int argc, char **argv) -> int {
     const std::unordered_map<std::string, lds::LanguageCode> languages{
@@ -48,8 +46,8 @@ auto main(int argc, char **argv) -> int {
         return 1;
     }
 
-    // lds::Lds lds(name);
-    // std::cout << lds.greet(langIt->second) << std::endl;
+    lds::Lds lds(name);
+    std::cout << lds.greet(langIt->second) << std::endl;
 
     return 0;
 }

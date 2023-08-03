@@ -1,6 +1,7 @@
 #pragma once
 
-#include <string>
+#include <iosfwd> // for string
+#include <string> // for basic_string
 
 namespace lds {
 
@@ -15,7 +16,7 @@ class Lds {
 
   public:
     /**
-     * @brief Creates a new xn
+     * @brief Creates a new lds
      * @param name the name to greet
      */
     Lds(std::string name);
