@@ -89,4 +89,8 @@ const size_t PRIME_TABLE[] = {
     7759, 7789, 7793, 7817, 7823, 7829, 7841, 7853, 7867, 7873, 7877, 7879,
     7883, 7901, 7907, 7919,
 };
+
+// make macOS compiler happy
+size_t dummy(size_t i) { return PRIME_TABLE[i]; }
+
 } // namespace lds2
