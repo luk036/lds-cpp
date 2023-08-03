@@ -1,5 +1,5 @@
-#include <lds/greeter.h>
 #include <fmt/format.h>
+#include <lds/greeter.h>
 
 using namespace lds;
 
