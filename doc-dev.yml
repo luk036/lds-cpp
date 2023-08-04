@@ -1,5 +1,0 @@
-name: lds-cpp
-channels:
-  - conda-forge
-dependencies:
-  - doxygen
