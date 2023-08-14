@@ -27,7 +27,7 @@ Low discrepancy Sequence Generation in Modern C++
 - Automatic [documentation](https://thelartians.github.io/ModernCppStarter) and deployment with [Doxygen](https://www.doxygen.nl) and [GitHub Pages](https://pages.github.com)
 - Support for [sanitizer tools, and more](#additional-tools)
 
-## Used In
+## Used by
 
 * [sphere-n-cpp](https://github.com/luk036/sphere-n-cpp)
 
