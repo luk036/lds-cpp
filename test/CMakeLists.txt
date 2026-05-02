@@ -14,10 +14,17 @@ include(../cmake/tools.cmake)
 # ---- Dependencies ----
 
 include(../cmake/CPM.cmake)
-include(../specific.cmake)
+include(../cmake/specific.cmake)
 
-CPMAddPackage("gh:doctest/doctest@2.4.9")
+CPMAddPackage("gh:doctest/doctest@2.4.11")
 CPMAddPackage("gh:TheLartians/Format.cmake@1.7.3")
+
+CPMAddPackage(
+  NAME rapidcheck
+  GITHUB_REPOSITORY emil-e/rapidcheck
+  GIT_TAG master
+  OPTIONS "RC_BUILD_TESTS OFF" "RC_BUILD_EXAMPLES OFF" "RC_INSTALL OFF"
+)
 
 if(TEST_INSTALLED_VERSION)
   find_package(Lds REQUIRED)
@@ -29,15 +36,29 @@ endif()
 
 file(GLOB sources CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/source/*.cpp)
 add_executable(${PROJECT_NAME} ${sources})
-target_link_libraries(${PROJECT_NAME} doctest::doctest Lds::Lds)
-set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 17)
+target_link_libraries(${PROJECT_NAME} doctest::doctest Lds::Lds ${SPECIFIC_LIBS})
+set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 20)
+
+if(rapidcheck_ADDED)
+  target_compile_definitions(${PROJECT_NAME} PRIVATE RAPIDCHECK_H)
+  if(TARGET rapidcheck::rapidcheck)
+    target_link_libraries(${PROJECT_NAME} rapidcheck::rapidcheck)
+  else()
+    target_include_directories(${PROJECT_NAME} PRIVATE ${rapidcheck_SOURCE_DIR}/include)
+    if(TARGET rapidcheck)
+      target_link_libraries(${PROJECT_NAME} rapidcheck)
+    endif()
+  endif()
+endif()
 
 # enable compiler warnings
 if(NOT TEST_INSTALLED_VERSION)
   if(CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR CMAKE_CXX_COMPILER_ID MATCHES "GNU")
-    target_compile_options(Lds PUBLIC -Wall -Wpedantic -Wextra -Werror)
+    target_compile_options(
+      Lds PUBLIC -Wall -Wpedantic -Wextra -Werror -Wno-deprecated-literal-operator
+    )
   elseif(MSVC)
-    target_compile_options(Lds PUBLIC /W4 /WX /wd4819)
+    target_compile_options(Lds PUBLIC /W4 /WX /wd4459 /wd4819 /wd4996)
     target_compile_definitions(${PROJECT_NAME} PUBLIC DOCTEST_CONFIG_USE_STD_HEADERS)
   endif()
 endif()
@@ -46,12 +67,8 @@ endif()
 
 enable_testing()
 
-# Note: doctest and similar testing frameworks can automatically configure CMake tests. For other
-# testing frameworks add the tests target instead: add_test(NAME ${PROJECT_NAME} COMMAND
-# ${PROJECT_NAME})
-
-include(${doctest_SOURCE_DIR}/scripts/cmake/doctest.cmake)
-doctest_discover_tests(${PROJECT_NAME})
+# Add a single test that runs all tests (both doctest and RapidCheck)
+add_test(NAME LdsAllTests COMMAND ${PROJECT_NAME})
 
 # ---- code coverage ----
 

@@ -1,11 +1,17 @@
-#include <doctest/doctest.h> // for Approx, ResultBuilder, TestCase
+#include <doctest/doctest.h>  // for Approx, ResultBuilder, TestCase
 
-#include <lds/lds_n.hpp> // for cylin_n, halton_n, sphere3, sphere_n
+#include <lds/lds_n.hpp>  // for halton_n
 #include <vector>
-
 TEST_CASE("HaltonN") {
-    const std::vector<size_t> base = {2, 3, 5, 7};
-    auto hgen = lds2::HaltonN(base);
-    const auto res = hgen.pop();
+    auto hgen = lds::HaltonN({2, 3, 5});
+    hgen.reseed(1);
+    auto res = hgen.pop();
+    CHECK_EQ(res[0], doctest::Approx(0.25));
+    CHECK_EQ(res[1], doctest::Approx(2.0 / 3.0));
+    CHECK_EQ(res[2], doctest::Approx(2.0 / 5.0));
+    hgen.reseed(0);
+    res = hgen.pop();
     CHECK_EQ(res[0], doctest::Approx(0.5));
+    CHECK_EQ(res[1], doctest::Approx(1.0 / 3.0));
+    CHECK_EQ(res[2], doctest::Approx(1.0 / 5.0));
 }

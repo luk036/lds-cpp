@@ -1,109 +1,128 @@
 #pragma once
 
 #include <array>
+#include <atomic>
 #include <cmath>
+#include <cstddef>
 
-namespace ilds2 {
+namespace ilds {
 
-using std::array;
+    using std::array;
 
-#if __cpp_constexpr >= 201304
-#define CONSTEXPR14 constexpr
-#else
-#define CONSTEXPR14 inline
-#endif
-
-/**
- * @brief Van der Corput sequence
- *
- * @param k
- * @param base
- * @return double
- */
-inline auto vdc_i(size_t k, size_t base, unsigned int scale) -> size_t {
-    size_t vdc{0};
-    auto factor = size_t(std::pow(base, std::move(scale)));
-    while (k != 0U) {
-        const auto remainder = k % base;
-        factor /= base;
-        k /= base;
-        vdc += remainder * factor;
-    }
-    return vdc;
-}
-
-/**
- * @brief Van der Corput sequence generator
- *
- */
-class VdCorput {
-    size_t count;
-    size_t base;
-    unsigned int scale;
-
-  public:
+    // Constants for magic numbers
     /**
-     * @brief Construct a new Vdcorputorput object
+     * @brief Default number of digits for the Van der Corput sequence
      *
-     * @param base
+     * This value determines the precision/scale of the integer Halton sequence.
+     * Default is 10 digits.
      */
-    CONSTEXPR14 explicit VdCorput(size_t base, unsigned int scale)
-        : count{0}, base{base}, scale{scale} {}
+    constexpr unsigned int DEFAULT_SCALE = 10;
 
     /**
-     * @brief
+     * @brief Van der Corput sequence generator
      *
-     * @return double
+     * Implementation based on pre-calculating the scale factor.
+     *
      */
-    inline auto pop() -> size_t {
-        this->count += 1;
-        return vdc_i(this->count, this->base, this->scale);
-    }
+    template <size_t Base = 2>
+    class VdCorput {
+        std::atomic<size_t> _count;  ///< Current count in the sequence
+        size_t _factor;              ///< Precomputed scale factor (base^scale)
+
+      public:
+        /**
+         * @brief Construct a new VdCorput object
+         *
+         * @param[in] scale The number of digits (default: 10)
+         */
+        explicit VdCorput(unsigned int scale = DEFAULT_SCALE)
+            : _count{0}, _factor{static_cast<size_t>(std::pow(Base, scale))} {}
+
+        /**
+         * @brief Increments count and calculates the next value in the sequence.
+         *
+         * @return size_t
+         */
+        [[nodiscard]] auto pop() -> size_t {
+            this->_count.fetch_add(1, std::memory_order_relaxed);
+
+            size_t count = this->_count.load(std::memory_order_relaxed);
+            size_t reslt = 0;
+            size_t factor = this->_factor;
+
+            while (count != 0) {
+                const size_t remainder = count % Base;
+                factor /= Base;
+                count /= Base;
+                reslt += remainder * factor;
+            }
+            return reslt;
+        }
+
+        /**
+         * @brief Resets the state of the sequence generator.
+         *
+         * @param[in] seed
+         */
+        auto reseed(const size_t seed) -> void {
+            this->_count.store(seed, std::memory_order_relaxed);
+        }
+
+        VdCorput(VdCorput&&) noexcept = delete;
+        VdCorput& operator=(VdCorput&&) noexcept = delete;
+    };
 
     /**
-     * @brief
+     * @brief Halton sequence generator
      *
-     * @param seed
-     * @return auto
+     * @verbatim
+     *     Integer Halton([2,3], [2,2]):
+     *     pop() -> [1, 4]   (VdC_i(2,2,2), VdC_i(2,3,2))
+     *     pop() -> [2, 5]   (next in each sequence)
+     *     ...
+     * @endverbatim
      */
-    CONSTEXPR14 auto reseed(size_t seed) -> void { this->count = seed; }
-};
+    template <size_t Base1, size_t Base2>
+    class Halton {
+        VdCorput<Base1> vdc0;
+        VdCorput<Base2> vdc1;
 
-/**
- * @brief Halton sequence generator
- *
- */
-class Halton {
-    VdCorput vdc0;
-    VdCorput vdc1;
+      public:
+        /**
+         * @brief Construct a new Halton object
+         *
+         * Constructs a Halton sequence generator with the specified bases and scale values.
+         *
+         * @param[in] base array of two size_t values representing the bases for the two Van der
+         * Corput generators
+         * @param[in] scale array of two unsigned int values representing the number of digits for
+         * each generator
+         */
+        Halton(const std::array<unsigned int, 2>& scale)
+            : vdc0(scale[0]), vdc1(scale[1]) {}
 
-  public:
-    /**
-     * @brief Construct a new Halton object
-     *
-     * @param base
-     */
-    CONSTEXPR14 explicit Halton(const size_t base[], const unsigned int scale[])
-        : vdc0(base[0], scale[0]), vdc1(base[1], scale[1]) {}
+        /**
+         * @brief Generate the next point in the Halton sequence
+         *
+         * Returns the next point in the Halton sequence as an array of two size_t values.
+         *
+         * @return array<size_t, 2> the next point in the sequence
+         */
+        inline auto pop() -> array<size_t, 2> {  //
+            return {this->vdc0.pop(), this->vdc1.pop()};
+        }
 
-    /**
-     * @brief
-     *
-     * @return array<double, 2>
-     */
-    inline auto pop() -> array<size_t, 2> { //
-        return {this->vdc0.pop(), this->vdc1.pop()};
-    }
+        /**
+         * @brief Reset the state of the Halton sequence generator
+         *
+         * Resets the state of the sequence generator to a specific seed value.
+         *
+         * @param[in] seed the seed value to reset the sequence generator to
+         */
+        auto reseed(const size_t seed) -> void {
+            this->vdc0.reseed(seed);
+            this->vdc1.reseed(seed);
+        }
+    };
 
-    /**
-     * @brief
-     *
-     * @param seed
-     */
-    CONSTEXPR14 auto reseed(size_t seed) -> void {
-        this->vdc0.reseed(seed);
-        this->vdc1.reseed(seed);
-    }
-};
-
-} // namespace ilds2
+}  // namespace ilds

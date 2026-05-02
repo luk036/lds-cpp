@@ -3,11 +3,11 @@
 #include <string>
 #include <cmath>
 
-vdc: (k: u64, base: u64) -> double = {
+vdc: (count: u64, base: u64) -> double = {
     res := 0.0;
     denom := 1.0;
-    while k != 0 next k /= base {
-        remainder := k % base;
+    while count != 0 next count /= base {
+        remainder := count % base;
         denom *= base;
         res += remainder / denom;
     }
@@ -21,7 +21,7 @@ Vdcorput: type = {
     operator=: (out this, b: u64) {
         this.base = b;
     }
-        
+
     pop: (inout this) -> double = {
         this.count += 1;
         return vdc(this.count, this.base);
@@ -38,7 +38,7 @@ Circle: type = {
     operator=: (out this, b: u64) {
         this.vdc = b;
     }
-        
+
     pop: (inout this) -> std::array<double, 2> = {
         theta := this.vdc.pop() * 2.0 * 3.1415926;
         return (std::sin(theta), std::cos(theta));
@@ -57,7 +57,7 @@ Halton: type = {
         this.vdc0 = b0;
         this.vdc1 = b1;
     }
-        
+
     pop: (inout this) -> std::array<double, 2> = {
         return (this.vdc0.pop(), this.vdc1.pop());
     }
