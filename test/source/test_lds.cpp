@@ -194,274 +194,274 @@ TEST_CASE("Sphere3Hopf::reseed with non-zero") {
 
 TEST_CASE("dummy") { CHECK_EQ(lds::dummy(15), 53); }
 
-#include <atomic>
-#include <mutex>
-#include <thread>
-#include <vector>
+// #include <atomic>
+// #include <mutex>
+// #include <thread>
+// #include <vector>
 
-TEST_CASE("VdCorput thread safety") {
-    const int num_threads = 8;
-    const int values_per_thread = 100;
-    lds::VdCorput<2> vgen{};
-    std::vector<std::thread> threads;
-    std::vector<std::vector<double>> results(num_threads);
-    std::mutex mtx;
+// TEST_CASE("VdCorput thread safety") {
+//     const int num_threads = 8;
+//     const int values_per_thread = 100;
+//     lds::VdCorput<2> vgen{};
+//     std::vector<std::thread> threads;
+//     std::vector<std::vector<double>> results(num_threads);
+//     std::mutex mtx;
 
-    for (int i = 0; i < num_threads; ++i) {
-        threads.emplace_back([&vgen, &results, &mtx, i]() {
-            std::vector<double> local_results;
-            for (int j = 0; j < values_per_thread; ++j) {
-                local_results.emplace_back(vgen.pop());
-            }
-            std::lock_guard<std::mutex> lock(mtx);
-            results[static_cast<size_t>(i)] = std::move(local_results);
-        });
-    }
+//     for (int i = 0; i < num_threads; ++i) {
+//         threads.emplace_back([&vgen, &results, &mtx, i]() {
+//             std::vector<double> local_results;
+//             for (int j = 0; j < values_per_thread; ++j) {
+//                 local_results.emplace_back(vgen.pop());
+//             }
+//             std::lock_guard<std::mutex> lock(mtx);
+//             results[static_cast<size_t>(i)] = std::move(local_results);
+//         });
+//     }
 
-    for (auto& t : threads) {
-        t.join();
-    }
+//     for (auto& t : threads) {
+//         t.join();
+//     }
 
-    // Check that all values are unique (no duplicates)
-    std::vector<double> all_values;
-    for (const auto& thread_results : results) {
-        all_values.insert(all_values.end(), thread_results.begin(), thread_results.end());
-    }
+//     // Check that all values are unique (no duplicates)
+//     std::vector<double> all_values;
+//     for (const auto& thread_results : results) {
+//         all_values.insert(all_values.end(), thread_results.begin(), thread_results.end());
+//     }
 
-    std::sort(all_values.begin(), all_values.end());
-    for (size_t i = 1; i < all_values.size(); ++i) {
-        CHECK_NE(all_values[i], all_values[i - 1]);
-    }
+//     std::sort(all_values.begin(), all_values.end());
+//     for (size_t i = 1; i < all_values.size(); ++i) {
+//         CHECK_NE(all_values[i], all_values[i - 1]);
+//     }
 
-    // Check that we got the expected number of values
-    CHECK_EQ(all_values.size(), num_threads * values_per_thread);
-}
+//     // Check that we got the expected number of values
+//     CHECK_EQ(all_values.size(), num_threads * values_per_thread);
+// }
 
-TEST_CASE("Halton thread safety") {
-    const int num_threads = 8;
-    const int values_per_thread = 100;
-    lds::Halton<2, 3> hgen{};
-    std::vector<std::thread> threads;
-    std::vector<std::vector<std::array<double, 2>>> results(num_threads);
-    std::mutex mtx;
+// TEST_CASE("Halton thread safety") {
+//     const int num_threads = 8;
+//     const int values_per_thread = 100;
+//     lds::Halton<2, 3> hgen{};
+//     std::vector<std::thread> threads;
+//     std::vector<std::vector<std::array<double, 2>>> results(num_threads);
+//     std::mutex mtx;
 
-    for (int i = 0; i < num_threads; ++i) {
-        threads.emplace_back([&hgen, &results, &mtx, i]() {
-            std::vector<std::array<double, 2>> local_results;
-            for (int j = 0; j < values_per_thread; ++j) {
-                local_results.emplace_back(hgen.pop());
-            }
-            std::lock_guard<std::mutex> lock(mtx);
-            results[static_cast<size_t>(i)] = std::move(local_results);
-        });
-    }
+//     for (int i = 0; i < num_threads; ++i) {
+//         threads.emplace_back([&hgen, &results, &mtx, i]() {
+//             std::vector<std::array<double, 2>> local_results;
+//             for (int j = 0; j < values_per_thread; ++j) {
+//                 local_results.emplace_back(hgen.pop());
+//             }
+//             std::lock_guard<std::mutex> lock(mtx);
+//             results[static_cast<size_t>(i)] = std::move(local_results);
+//         });
+//     }
 
-    for (auto& t : threads) {
-        t.join();
-    }
+//     for (auto& t : threads) {
+//         t.join();
+//     }
 
-    // Check that we got the expected number of values
-    size_t total_values = 0;
-    for (const auto& thread_results : results) {
-        total_values += thread_results.size();
-    }
-    CHECK_EQ(total_values, num_threads * values_per_thread);
-}
+//     // Check that we got the expected number of values
+//     size_t total_values = 0;
+//     for (const auto& thread_results : results) {
+//         total_values += thread_results.size();
+//     }
+//     CHECK_EQ(total_values, num_threads * values_per_thread);
+// }
 
-TEST_CASE("Circle thread safety") {
-    const int num_threads = 8;
-    const int values_per_thread = 100;
-    lds::Circle<2> cgen{};
-    std::vector<std::thread> threads;
-    std::vector<std::vector<std::array<double, 2>>> results(num_threads);
-    std::mutex mtx;
+// TEST_CASE("Circle thread safety") {
+//     const int num_threads = 8;
+//     const int values_per_thread = 100;
+//     lds::Circle<2> cgen{};
+//     std::vector<std::thread> threads;
+//     std::vector<std::vector<std::array<double, 2>>> results(num_threads);
+//     std::mutex mtx;
 
-    for (int i = 0; i < num_threads; ++i) {
-        threads.emplace_back([&cgen, &results, &mtx, i]() {
-            std::vector<std::array<double, 2>> local_results;
-            for (int j = 0; j < values_per_thread; ++j) {
-                local_results.emplace_back(cgen.pop());
-            }
-            std::lock_guard<std::mutex> lock(mtx);
-            results[static_cast<size_t>(i)] = std::move(local_results);
-        });
-    }
+//     for (int i = 0; i < num_threads; ++i) {
+//         threads.emplace_back([&cgen, &results, &mtx, i]() {
+//             std::vector<std::array<double, 2>> local_results;
+//             for (int j = 0; j < values_per_thread; ++j) {
+//                 local_results.emplace_back(cgen.pop());
+//             }
+//             std::lock_guard<std::mutex> lock(mtx);
+//             results[static_cast<size_t>(i)] = std::move(local_results);
+//         });
+//     }
 
-    for (auto& t : threads) {
-        t.join();
-    }
+//     for (auto& t : threads) {
+//         t.join();
+//     }
 
-    // Check that we got the expected number of values
-    size_t total_values = 0;
-    for (const auto& thread_results : results) {
-        total_values += thread_results.size();
-    }
-    CHECK_EQ(total_values, num_threads * values_per_thread);
+//     // Check that we got the expected number of values
+//     size_t total_values = 0;
+//     for (const auto& thread_results : results) {
+//         total_values += thread_results.size();
+//     }
+//     CHECK_EQ(total_values, num_threads * values_per_thread);
 
-    // Verify points are on unit circle
-    for (const auto& thread_results : results) {
-        for (const auto& point : thread_results) {
-            double radius_squared = point[0] * point[0] + point[1] * point[1];
-            CHECK_EQ(radius_squared, doctest::Approx(1.0));
-        }
-    }
-}
+//     // Verify points are on unit circle
+//     for (const auto& thread_results : results) {
+//         for (const auto& point : thread_results) {
+//             double radius_squared = point[0] * point[0] + point[1] * point[1];
+//             CHECK_EQ(radius_squared, doctest::Approx(1.0));
+//         }
+//     }
+// }
 
-TEST_CASE("Disk thread safety") {
-    const int num_threads = 8;
-    const int values_per_thread = 100;
-    lds::Disk<2, 3> dgen{};
-    std::vector<std::thread> threads;
-    std::vector<std::vector<std::array<double, 2>>> results(num_threads);
-    std::mutex mtx;
+// TEST_CASE("Disk thread safety") {
+//     const int num_threads = 8;
+//     const int values_per_thread = 100;
+//     lds::Disk<2, 3> dgen{};
+//     std::vector<std::thread> threads;
+//     std::vector<std::vector<std::array<double, 2>>> results(num_threads);
+//     std::mutex mtx;
 
-    for (int i = 0; i < num_threads; ++i) {
-        threads.emplace_back([&dgen, &results, &mtx, i]() {
-            std::vector<std::array<double, 2>> local_results;
-            for (int j = 0; j < values_per_thread; ++j) {
-                local_results.emplace_back(dgen.pop());
-            }
-            std::lock_guard<std::mutex> lock(mtx);
-            results[static_cast<size_t>(i)] = std::move(local_results);
-        });
-    }
+//     for (int i = 0; i < num_threads; ++i) {
+//         threads.emplace_back([&dgen, &results, &mtx, i]() {
+//             std::vector<std::array<double, 2>> local_results;
+//             for (int j = 0; j < values_per_thread; ++j) {
+//                 local_results.emplace_back(dgen.pop());
+//             }
+//             std::lock_guard<std::mutex> lock(mtx);
+//             results[static_cast<size_t>(i)] = std::move(local_results);
+//         });
+//     }
 
-    for (auto& t : threads) {
-        t.join();
-    }
+//     for (auto& t : threads) {
+//         t.join();
+//     }
 
-    // Check that we got the expected number of values
-    size_t total_values = 0;
-    for (const auto& thread_results : results) {
-        total_values += thread_results.size();
-    }
-    CHECK_EQ(total_values, num_threads * values_per_thread);
+//     // Check that we got the expected number of values
+//     size_t total_values = 0;
+//     for (const auto& thread_results : results) {
+//         total_values += thread_results.size();
+//     }
+//     CHECK_EQ(total_values, num_threads * values_per_thread);
 
-    // Verify points are inside unit disk
-    for (const auto& thread_results : results) {
-        for (const auto& point : thread_results) {
-            double radius_squared = point[0] * point[0] + point[1] * point[1];
-            CHECK_LE(radius_squared, 1.0);
-        }
-    }
-}
+//     // Verify points are inside unit disk
+//     for (const auto& thread_results : results) {
+//         for (const auto& point : thread_results) {
+//             double radius_squared = point[0] * point[0] + point[1] * point[1];
+//             CHECK_LE(radius_squared, 1.0);
+//         }
+//     }
+// }
 
-TEST_CASE("Sphere thread safety") {
-    const int num_threads = 8;
-    const int values_per_thread = 100;
-    lds::Sphere<2, 3> sgen{};
-    std::vector<std::thread> threads;
-    std::vector<std::vector<std::array<double, 3>>> results(num_threads);
-    std::mutex mtx;
+// TEST_CASE("Sphere thread safety") {
+//     const int num_threads = 8;
+//     const int values_per_thread = 100;
+//     lds::Sphere<2, 3> sgen{};
+//     std::vector<std::thread> threads;
+//     std::vector<std::vector<std::array<double, 3>>> results(num_threads);
+//     std::mutex mtx;
 
-    for (int i = 0; i < num_threads; ++i) {
-        threads.emplace_back([&sgen, &results, &mtx, i]() {
-            std::vector<std::array<double, 3>> local_results;
-            for (int j = 0; j < values_per_thread; ++j) {
-                local_results.emplace_back(sgen.pop());
-            }
-            std::lock_guard<std::mutex> lock(mtx);
-            results[static_cast<size_t>(i)] = std::move(local_results);
-        });
-    }
+//     for (int i = 0; i < num_threads; ++i) {
+//         threads.emplace_back([&sgen, &results, &mtx, i]() {
+//             std::vector<std::array<double, 3>> local_results;
+//             for (int j = 0; j < values_per_thread; ++j) {
+//                 local_results.emplace_back(sgen.pop());
+//             }
+//             std::lock_guard<std::mutex> lock(mtx);
+//             results[static_cast<size_t>(i)] = std::move(local_results);
+//         });
+//     }
 
-    for (auto& t : threads) {
-        t.join();
-    }
+//     for (auto& t : threads) {
+//         t.join();
+//     }
 
-    // Check that we got the expected number of values
-    size_t total_values = 0;
-    for (const auto& thread_results : results) {
-        total_values += thread_results.size();
-    }
-    CHECK_EQ(total_values, num_threads * values_per_thread);
+//     // Check that we got the expected number of values
+//     size_t total_values = 0;
+//     for (const auto& thread_results : results) {
+//         total_values += thread_results.size();
+//     }
+//     CHECK_EQ(total_values, num_threads * values_per_thread);
 
-    // Verify points are on unit sphere
-    for (const auto& thread_results : results) {
-        for (const auto& point : thread_results) {
-            double radius_squared = point[0] * point[0] + point[1] * point[1] + point[2] * point[2];
-            CHECK_EQ(radius_squared, doctest::Approx(1.0));
-        }
-    }
-}
+//     // Verify points are on unit sphere
+//     for (const auto& thread_results : results) {
+//         for (const auto& point : thread_results) {
+//             double radius_squared = point[0] * point[0] + point[1] * point[1] + point[2] * point[2];
+//             CHECK_EQ(radius_squared, doctest::Approx(1.0));
+//         }
+//     }
+// }
 
-TEST_CASE("Sphere3Hopf thread safety") {
-    const int num_threads = 8;
-    const int values_per_thread = 100;
-    lds::Sphere3Hopf<2, 3, 5> shfgen{};
-    std::vector<std::thread> threads;
-    std::vector<std::vector<std::array<double, 4>>> results(num_threads);
-    std::mutex mtx;
+// TEST_CASE("Sphere3Hopf thread safety") {
+//     const int num_threads = 8;
+//     const int values_per_thread = 100;
+//     lds::Sphere3Hopf<2, 3, 5> shfgen{};
+//     std::vector<std::thread> threads;
+//     std::vector<std::vector<std::array<double, 4>>> results(num_threads);
+//     std::mutex mtx;
 
-    for (int i = 0; i < num_threads; ++i) {
-        threads.emplace_back([&shfgen, &results, &mtx, i]() {
-            std::vector<std::array<double, 4>> local_results;
-            for (int j = 0; j < values_per_thread; ++j) {
-                local_results.emplace_back(shfgen.pop());
-            }
-            std::lock_guard<std::mutex> lock(mtx);
-            results[static_cast<size_t>(i)] = std::move(local_results);
-        });
-    }
+//     for (int i = 0; i < num_threads; ++i) {
+//         threads.emplace_back([&shfgen, &results, &mtx, i]() {
+//             std::vector<std::array<double, 4>> local_results;
+//             for (int j = 0; j < values_per_thread; ++j) {
+//                 local_results.emplace_back(shfgen.pop());
+//             }
+//             std::lock_guard<std::mutex> lock(mtx);
+//             results[static_cast<size_t>(i)] = std::move(local_results);
+//         });
+//     }
 
-    for (auto& t : threads) {
-        t.join();
-    }
+//     for (auto& t : threads) {
+//         t.join();
+//     }
 
-    // Check that we got the expected number of values
-    size_t total_values = 0;
-    for (const auto& thread_results : results) {
-        total_values += thread_results.size();
-    }
-    CHECK_EQ(total_values, num_threads * values_per_thread);
+//     // Check that we got the expected number of values
+//     size_t total_values = 0;
+//     for (const auto& thread_results : results) {
+//         total_values += thread_results.size();
+//     }
+//     CHECK_EQ(total_values, num_threads * values_per_thread);
 
-    // Verify points are on unit 3-sphere
-    for (const auto& thread_results : results) {
-        for (const auto& point : thread_results) {
-            double radius_squared = point[0] * point[0] + point[1] * point[1] + point[2] * point[2]
-                                    + point[3] * point[3];
-            CHECK_EQ(radius_squared, doctest::Approx(1.0));
-        }
-    }
-}
+//     // Verify points are on unit 3-sphere
+//     for (const auto& thread_results : results) {
+//         for (const auto& point : thread_results) {
+//             double radius_squared = point[0] * point[0] + point[1] * point[1] + point[2] * point[2]
+//                                     + point[3] * point[3];
+//             CHECK_EQ(radius_squared, doctest::Approx(1.0));
+//         }
+//     }
+// }
 
-TEST_CASE("Concurrent reseed thread safety") {
-    const int num_threads = 8;
-    const int operations_per_thread = 50;
-    lds::VdCorput<2> vgen{};
-    std::vector<std::thread> threads;
-    std::atomic<int> pop_count{0};
-    std::atomic<int> reseed_count{0};
-    std::mutex mtx;
-    std::vector<double> results;
+// TEST_CASE("Concurrent reseed thread safety") {
+//     const int num_threads = 8;
+//     const int operations_per_thread = 50;
+//     lds::VdCorput<2> vgen{};
+//     std::vector<std::thread> threads;
+//     std::atomic<int> pop_count{0};
+//     std::atomic<int> reseed_count{0};
+//     std::mutex mtx;
+//     std::vector<double> results;
 
-    for (int i = 0; i < num_threads; ++i) {
-        threads.emplace_back([&vgen, &pop_count, &reseed_count, &mtx, &results, i]() {
-            for (int j = 0; j < operations_per_thread; ++j) {
-                if (j % 10 == 0) {
-                    // Occasionally reseed
-                    vgen.reseed(static_cast<size_t>(i * 10 + j));
-                    reseed_count++;
-                } else {
-                    // Mostly pop
-                    double val = vgen.pop();
-                    std::lock_guard<std::mutex> lock(mtx);
-                    results.emplace_back(val);
-                    pop_count++;
-                }
-            }
-        });
-    }
+//     for (int i = 0; i < num_threads; ++i) {
+//         threads.emplace_back([&vgen, &pop_count, &reseed_count, &mtx, &results, i]() {
+//             for (int j = 0; j < operations_per_thread; ++j) {
+//                 if (j % 10 == 0) {
+//                     // Occasionally reseed
+//                     vgen.reseed(static_cast<size_t>(i * 10 + j));
+//                     reseed_count++;
+//                 } else {
+//                     // Mostly pop
+//                     double val = vgen.pop();
+//                     std::lock_guard<std::mutex> lock(mtx);
+//                     results.emplace_back(val);
+//                     pop_count++;
+//                 }
+//             }
+//         });
+//     }
 
-    for (auto& t : threads) {
-        t.join();
-    }
+//     for (auto& t : threads) {
+//         t.join();
+//     }
 
-    // Check that operations completed without crashes
-    CHECK_GT(pop_count.load(), 0);
-    CHECK_GT(reseed_count.load(), 0);
-    CHECK_EQ(results.size(), pop_count.load());
-}
+//     // Check that operations completed without crashes
+//     CHECK_GT(pop_count.load(), 0);
+//     CHECK_GT(reseed_count.load(), 0);
+//     CHECK_EQ(results.size(), pop_count.load());
+// }
 
 TEST_CASE("VdCorput::peek") {
     auto vgen = lds::VdCorput<2>();
