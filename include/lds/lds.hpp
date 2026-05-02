@@ -1,7 +1,6 @@
 #pragma once
 
 #include <array>
-#include <atomic>
 #include <cmath>
 #include <cstddef>
 #include <iterator>
@@ -116,14 +115,15 @@ namespace lds {
      * @param[in] base base of the sequence
      * @return double
      */
-    constexpr auto vdc(size_t count, const size_t base) -> double {
+    template <size_t Base = 2>
+    constexpr auto vdc(size_t cnt) -> double {
         auto reslt = 0.0;
         auto denom = 1.0;
-        auto temp_count = count;
-        while (temp_count != 0) {
-            const auto remainder = temp_count % base;
-            temp_count /= base;
-            denom *= double(base);
+        auto count = cnt;
+        while (count != 0) {
+            const auto remainder = count % Base;
+            count /= Base;
+            denom *= double(Base);
             reslt += double(remainder) / denom;
         }
         return reslt;
@@ -148,9 +148,9 @@ namespace lds {
      *     ...
      * @endverbatim
      */
+    template <size_t Base = 2>
     class VdCorput {
-        std::atomic<size_t> count;
-        size_t base;
+        size_t count;
         std::array<double, MAX_REVERSE_BITS> rev_lst;
 
       public:
@@ -163,10 +163,10 @@ namespace lds {
          *
          * @param[in] base the base of the Van der Corput sequence
          */
-        explicit VdCorput(const size_t base) : count{0}, base{base}, rev_lst{} {
+        constexpr VdCorput() : count{0}, rev_lst{} {
             double reverse = 1.0;
             for (size_t i = 0; i < MAX_REVERSE_BITS; ++i) {
-                reverse /= double(base);
+                reverse /= double(Base);
                 this->rev_lst[i] = reverse;
             }
         }
@@ -180,14 +180,13 @@ namespace lds {
          *
          * @return double the next value in the sequence
          */
-        auto pop() -> double {
-            size_t count_value
-                = this->count.fetch_add(1, std::memory_order_relaxed) + 1;  // ignore 0
+        constexpr auto pop() -> double {
+            size_t count_value = ++this->count;  // ignore 0
             size_t idx = 0;
             double res = 0.0;
             while (count_value != 0) {
-                const auto remainder = count_value % this->base;
-                count_value /= this->base;
+                const auto remainder = count_value % Base;
+                count_value /= Base;
                 res += this->rev_lst[idx] * double(remainder);
                 ++idx;
             }
@@ -199,13 +198,13 @@ namespace lds {
          *
          * @return double the next value in the sequence
          */
-        [[nodiscard]] auto peek() -> double {
-            size_t count_value = this->count.load(std::memory_order_relaxed) + 1;
+        [[nodiscard]] constexpr auto peek() -> double {
+            size_t count_value = this->count + 1;
             size_t idx = 0;
             double res = 0.0;
             while (count_value != 0) {
-                const auto remainder = count_value % this->base;
-                count_value /= this->base;
+                const auto remainder = count_value % Base;
+                count_value /= Base;
                 res += this->rev_lst[idx] * double(remainder);
                 ++idx;
             }
@@ -218,7 +217,7 @@ namespace lds {
          * @param[in] n number of values to generate
          * @return std::vector<double> vector of values
          */
-        [[nodiscard]] auto batch(size_t n) -> std::vector<double> {
+        [[nodiscard]] constexpr auto batch(size_t n) -> std::vector<double> {
             std::vector<double> result;
             result.reserve(n);
             for (size_t i = 0; i < n; ++i) {
@@ -232,7 +231,7 @@ namespace lds {
          *
          * @param[in] n number of values to skip
          */
-        auto skip(size_t n) -> void { this->count.fetch_add(n, std::memory_order_relaxed); }
+        constexpr auto skip(size_t n) -> void { this->count += n; }
 
         /**
          * @brief reseed
@@ -244,8 +243,8 @@ namespace lds {
          *
          * @param[in] seed the seed value to reset the sequence generator to
          */
-        auto reseed(const size_t seed) -> void {
-            this->count.store(seed, std::memory_order_relaxed);
+        constexpr auto reseed(const size_t seed) -> void {
+            this->count = seed;
         }
 
         /**
@@ -253,8 +252,8 @@ namespace lds {
          *
          * @return size_t current index in the sequence
          */
-        [[nodiscard]] auto get_index() const -> size_t {
-            return this->count.load(std::memory_order_relaxed);
+        [[nodiscard]] constexpr auto get_index() const -> size_t {
+            return this->count;
         }
 
         /**
@@ -262,7 +261,7 @@ namespace lds {
          *
          * @return GeneratorIterator<VdCorput, double>
          */
-        auto begin() -> GeneratorIterator<VdCorput, double> {
+        constexpr auto begin() -> GeneratorIterator<VdCorput, double> {
             return GeneratorIterator<VdCorput, double>(this);
         }
 
@@ -273,131 +272,12 @@ namespace lds {
          *
          * @return GeneratorIterator<VdCorput, double>
          */
-        [[nodiscard]] auto end() const -> GeneratorIterator<VdCorput, double> {
+        [[nodiscard]] constexpr auto end() const -> GeneratorIterator<VdCorput, double> {
             return GeneratorIterator<VdCorput, double>(nullptr, std::numeric_limits<size_t>::max());
         }
 
         VdCorput(VdCorput&&) noexcept = delete;
         VdCorput& operator=(VdCorput&&) noexcept = delete;
-    };
-
-    /**
-     * @brief Halton sequence generator
-     *
-     * The `Halton` class is a sequence generator that generates points in a
-     * 2-dimensional space using the Halton sequence. The Halton sequence is a
-     * low-discrepancy sequence that is commonly used in quasi-Monte Carlo methods.
-     * It is generated by iterating over two different bases and calculating the
-     * fractional parts of the numbers in those bases. The `Halton` class keeps
-     * track of the current count and bases, and provides a `pop()` method that
-     * returns the next point in the sequence as a `std::array<double, 2>`.
-     *
-     * @verbatim
-     *     Halton(2,3) sequence:
-     *     pop() -> (0.5, 0.333)  (VdC(2) -> 0.5, VdC(3) -> 0.333)
-     *     pop() -> (0.25, 0.666) (VdC(2) -> 0.25, VdC(3) -> 0.666)
-     *     pop() -> (0.75, 0.111) (VdC(2) -> 0.75, VdC(3) -> 0.111)
-     *     ...
-     * @endverbatim
-     */
-    class Halton {
-        VdCorput vdc0;
-        VdCorput vdc1;
-
-      public:
-        /**
-         * @brief Construct a new Halton object
-         *
-         * Constructs a Halton sequence generator with the specified bases for the
-         * two dimensions.
-         *
-         * @param[in] base0 the base for the first dimension
-         * @param[in] base1 the base for the second dimension
-         */
-        Halton(const size_t base0, const size_t base1) : vdc0(base0), vdc1(base1) {}
-
-        /**
-         * @brief Generate the next point in the Halton sequence
-         *
-         * Returns the next point in the Halton sequence as an array of two double values.
-         *
-         * @return std::array<double, 2> the next point in the sequence
-         */
-        auto pop() -> std::array<double, 2> {  //
-            return {this->vdc0.pop(), this->vdc1.pop()};
-        }
-
-        /**
-         * @brief Peek at the next value without advancing state
-         *
-         * @return std::array<double, 2> the next point in the sequence
-         */
-        [[nodiscard]] auto peek() -> std::array<double, 2> {
-            return {this->vdc0.peek(), this->vdc1.peek()};
-        }
-
-        /**
-         * @brief Generate multiple values efficiently
-         *
-         * @param[in] n number of values to generate
-         * @return std::vector<std::array<double, 2>> vector of points
-         */
-        [[nodiscard]] auto batch(size_t n) -> std::vector<std::array<double, 2>> {
-            std::vector<std::array<double, 2>> result;
-            result.reserve(n);
-            for (size_t i = 0; i < n; ++i) {
-                result.emplace_back(this->pop());
-            }
-            return result;
-        }
-
-        /**
-         * @brief Skip n values in the sequence
-         *
-         * @param[in] n number of values to skip
-         */
-        auto skip(size_t n) -> void {
-            this->vdc0.skip(n);
-            this->vdc1.skip(n);
-        }
-
-        /**
-         * @brief Reset the state of the Halton sequence generator
-         *
-         * Resets the state of the sequence generator to a specific seed value.
-         *
-         * @param[in] seed the seed value to reset the sequence generator to
-         */
-        auto reseed(const size_t seed) -> void {
-            this->vdc0.reseed(seed);
-            this->vdc1.reseed(seed);
-        }
-
-        /**
-         * @brief Get current index
-         *
-         * @return size_t current index in the sequence
-         */
-        [[nodiscard]] auto get_index() const -> size_t { return this->vdc0.get_index(); }
-
-        /**
-         * @brief Get iterator to beginning
-         *
-         * @return GeneratorIterator<Halton, std::array<double, 2>>
-         */
-        auto begin() -> GeneratorIterator<Halton, std::array<double, 2>> {
-            return GeneratorIterator<Halton, std::array<double, 2>>(this);
-        }
-
-        /**
-         * @brief Get iterator to end (infinite sequence)
-         *
-         * @return GeneratorIterator<Halton, std::array<double, 2>>
-         */
-        [[nodiscard]] auto end() const -> GeneratorIterator<Halton, std::array<double, 2>> {
-            return GeneratorIterator<Halton, std::array<double, 2>>(
-                nullptr, std::numeric_limits<size_t>::max());
-        }
     };
 
     /**
@@ -424,8 +304,9 @@ namespace lds {
      *     than random sampling
      * @endverbatim
      */
+    template <size_t Base = 2>
     class Circle {
-        VdCorput vdc;
+        VdCorput<Base> vdc;
 
       public:
         /**
@@ -436,7 +317,7 @@ namespace lds {
          *
          * @param[in] base the base for the Van der Corput sequence generator
          */
-        explicit Circle(const size_t base) : vdc(base) {}
+        constexpr Circle<Base>() : vdc() {}
 
         /**
          * @brief Generate the next point on the unit circle
@@ -445,7 +326,7 @@ namespace lds {
          *
          * @return std::array<double, 2> the next point on the unit circle
          */
-        auto pop() -> std::array<double, 2> {
+        constexpr auto pop() -> std::array<double, 2> {
             auto theta = this->vdc.pop() * TWO_PI;  // map to [0, 2*pi];
             return {std::cos(theta), std::sin(theta)};
         }
@@ -455,7 +336,7 @@ namespace lds {
          *
          * @return std::array<double, 2> next point on the circle
          */
-        [[nodiscard]] auto peek() -> std::array<double, 2> {
+        [[nodiscard]] constexpr auto peek() -> std::array<double, 2> {
             auto theta = this->vdc.peek() * TWO_PI;  // map to [0, 2*pi];
             return {std::cos(theta), std::sin(theta)};
         }
@@ -466,7 +347,7 @@ namespace lds {
          * @param[in] n number of values to generate
          * @return std::vector<std::array<double, 2>> vector of points
          */
-        [[nodiscard]] auto batch(size_t n) -> std::vector<std::array<double, 2>> {
+        [[nodiscard]] constexpr auto batch(size_t n) -> std::vector<std::array<double, 2>> {
             std::vector<std::array<double, 2>> result;
             result.reserve(n);
             for (size_t i = 0; i < n; ++i) {
@@ -480,7 +361,7 @@ namespace lds {
          *
          * @param[in] n number of values to skip
          */
-        auto skip(size_t n) -> void { this->vdc.skip(n); }
+        constexpr auto skip(size_t n) -> void { this->vdc.skip(n); }
 
         /**
          * @brief Reset the state of the Circle sequence generator
@@ -489,21 +370,21 @@ namespace lds {
          *
          * @param[in] seed the seed value to reset the sequence generator to
          */
-        auto reseed(const size_t seed) -> void { this->vdc.reseed(seed); }
+        constexpr auto reseed(const size_t seed) -> void { this->vdc.reseed(seed); }
 
         /**
          * @brief Get current index
          *
          * @return size_t current index in sequence
          */
-        [[nodiscard]] auto get_index() const -> size_t { return this->vdc.get_index(); }
+        [[nodiscard]] constexpr auto get_index() const -> size_t { return this->vdc.get_index(); }
 
         /**
          * @brief Get iterator to beginning
          *
          * @return GeneratorIterator<Circle, std::array<double, 2>>
          */
-        auto begin() -> GeneratorIterator<Circle, std::array<double, 2>> {
+        constexpr auto begin() -> GeneratorIterator<Circle, std::array<double, 2>> {
             return GeneratorIterator<Circle, std::array<double, 2>>(this);
         }
 
@@ -512,8 +393,125 @@ namespace lds {
          *
          * @return GeneratorIterator<Circle, std::array<double, 2>>
          */
-        [[nodiscard]] auto end() const -> GeneratorIterator<Circle, std::array<double, 2>> {
+        [[nodiscard]] constexpr auto end() const -> GeneratorIterator<Circle, std::array<double, 2>> {
             return GeneratorIterator<Circle, std::array<double, 2>>(
+                nullptr, std::numeric_limits<size_t>::max());
+        }
+    };
+
+    /**
+     * @brief Halton sequence generator
+     *
+     * The `Halton` class is a sequence generator that generates points in a
+     * 2-dimensional space using the Halton sequence. The Halton sequence is a
+     * low-discrepancy sequence that is commonly used in quasi-Monte Carlo methods.
+     * It is generated by iterating over two different bases and calculating the
+     * fractional parts of the numbers in those bases. The `Halton` class keeps
+     * track of the current count and bases, and provides a `pop()` method that
+     * returns the next point in the sequence as a `std::array<double, 2>`.
+     *
+     * @verbatim
+     *     Halton(2,3) sequence:
+     *     pop() -> (0.5, 0.333)  (VdC(2) -> 0.5, VdC(3) -> 0.333)
+     *     pop() -> (0.25, 0.666) (VdC(2) -> 0.25, VdC(3) -> 0.666)
+     *     pop() -> (0.75, 0.111) (VdC(2) -> 0.75, VdC(3) -> 0.111)
+     *     ...
+     * @endverbatim
+     */
+    template <size_t Base0 = 2, size_t Base1 = 3>
+    class Halton {
+        VdCorput<Base0> vdc0;
+        VdCorput<Base1> vdc1;
+
+      public:
+        /**
+         * @brief Construct a new Halton object
+         *
+         * Constructs a Halton sequence generator with the specified bases for the
+         * two dimensions.
+         */
+        constexpr Halton() : vdc0(), vdc1() {}
+
+        /**
+         * @brief Generate the next point in the Halton sequence
+         *
+         * Returns the next point in the Halton sequence as an array of two double values.
+         *
+         * @return std::array<double, 2> the next point in the sequence
+         */
+        constexpr auto pop() -> std::array<double, 2> {  //
+            return {this->vdc0.pop(), this->vdc1.pop()};
+        }
+
+        /**
+         * @brief Peek at the next value without advancing state
+         *
+         * @return std::array<double, 2> the next point in the sequence
+         */
+        [[nodiscard]] constexpr auto peek() -> std::array<double, 2> {
+            return {this->vdc0.peek(), this->vdc1.peek()};
+        }
+
+        /**
+         * @brief Generate multiple values efficiently
+         *
+         * @param[in] n number of values to generate
+         * @return std::vector<std::array<double, 2>> vector of points
+         */
+        [[nodiscard]] constexpr auto batch(size_t n) -> std::vector<std::array<double, 2>> {
+            std::vector<std::array<double, 2>> result;
+            result.reserve(n);
+            for (size_t i = 0; i < n; ++i) {
+                result.emplace_back(this->pop());
+            }
+            return result;
+        }
+
+        /**
+         * @brief Skip n values in the sequence
+         *
+         * @param[in] n number of values to skip
+         */
+        constexpr auto skip(size_t n) -> void {
+            this->vdc0.skip(n);
+            this->vdc1.skip(n);
+        }
+
+        /**
+         * @brief Reset the state of the Halton sequence generator
+         *
+         * Resets the state of the sequence generator to a specific seed value.
+         *
+         * @param[in] seed the seed value to reset the sequence generator to
+         */
+        constexpr auto reseed(const size_t seed) -> void {
+            this->vdc0.reseed(seed);
+            this->vdc1.reseed(seed);
+        }
+
+        /**
+         * @brief Get current index
+         *
+         * @return size_t current index in the sequence
+         */
+        [[nodiscard]] constexpr auto get_index() const -> size_t { return this->vdc0.get_index(); }
+
+        /**
+         * @brief Get iterator to beginning
+         *
+         * @return GeneratorIterator<Halton, std::array<double, 2>>
+         */
+        constexpr auto begin() -> GeneratorIterator<Halton, std::array<double, 2>> {
+            return GeneratorIterator<Halton, std::array<double, 2>>(this);
+        }
+
+        /**
+         * @brief Get iterator to end (infinite sequence)
+         *
+         * @return GeneratorIterator<Halton, std::array<double, 2>>
+         */
+        [[nodiscard]] constexpr auto end() const -> GeneratorIterator<Halton, std::array<double, 2>> {
+            return GeneratorIterator<Halton, std::array<double, 2>>(
                 nullptr, std::numeric_limits<size_t>::max());
         }
     };
@@ -542,9 +540,10 @@ namespace lds {
      *         *****
      * @endverbatim
      */
+    template <size_t Base0 = 2, size_t Base1 = 3>
     class Disk {
-        VdCorput vdc0;
-        VdCorput vdc1;
+        VdCorput<Base0> vdc0;
+        VdCorput<Base1> vdc1;
 
       public:
         /**
@@ -555,7 +554,7 @@ namespace lds {
          * @param[in] base0 the base for the first dimension (angle)
          * @param[in] base1 the base for the second dimension (radius)
          */
-        Disk(const size_t base0, const size_t base1) : vdc0(base0), vdc1(base1) {}
+        constexpr Disk() : vdc0(), vdc1() {}
 
         /**
          * @brief Generate the next point in the unit disk
@@ -564,7 +563,7 @@ namespace lds {
          *
          * @return std::array<double, 2> the next point in the unit disk
          */
-        auto pop() -> std::array<double, 2> {        //
+        constexpr auto pop() -> std::array<double, 2> {        //
             auto theta = this->vdc0.pop() * TWO_PI;  // map to [0, 2*pi];
             auto radius = std::sqrt(this->vdc1.pop());
             return {radius * std::cos(theta), radius * std::sin(theta)};
@@ -575,7 +574,7 @@ namespace lds {
          *
          * @return std::array<double, 2> next point in the disk
          */
-        [[nodiscard]] auto peek() -> std::array<double, 2> {
+        [[nodiscard]] constexpr auto peek() -> std::array<double, 2> {
             auto theta = this->vdc0.peek() * TWO_PI;  // map to [0, 2*pi];
             auto radius = std::sqrt(this->vdc1.peek());
             return {radius * std::cos(theta), radius * std::sin(theta)};
@@ -587,7 +586,7 @@ namespace lds {
          * @param[in] n number of values to generate
          * @return std::vector<std::array<double, 2>> vector of points
          */
-        [[nodiscard]] auto batch(size_t n) -> std::vector<std::array<double, 2>> {
+        [[nodiscard]] constexpr auto batch(size_t n) -> std::vector<std::array<double, 2>> {
             std::vector<std::array<double, 2>> result;
             result.reserve(n);
             for (size_t i = 0; i < n; ++i) {
@@ -601,7 +600,7 @@ namespace lds {
          *
          * @param[in] n number of values to skip
          */
-        auto skip(size_t n) -> void {
+        constexpr auto skip(size_t n) -> void {
             this->vdc0.skip(n);
             this->vdc1.skip(n);
         }
@@ -613,7 +612,7 @@ namespace lds {
          *
          * @param[in] seed the seed value to reset the sequence generator to
          */
-        auto reseed(const size_t seed) -> void {
+        constexpr auto reseed(const size_t seed) -> void {
             this->vdc0.reseed(seed);
             this->vdc1.reseed(seed);
         }
@@ -623,14 +622,14 @@ namespace lds {
          *
          * @return size_t current index in sequence
          */
-        [[nodiscard]] auto get_index() const -> size_t { return this->vdc0.get_index(); }
+        [[nodiscard]] constexpr auto get_index() const -> size_t { return this->vdc0.get_index(); }
 
         /**
          * @brief Get iterator to beginning
          *
          * @return GeneratorIterator<Disk, std::array<double, 2>>
          */
-        auto begin() -> GeneratorIterator<Disk, std::array<double, 2>> {
+        constexpr auto begin() -> GeneratorIterator<Disk, std::array<double, 2>> {
             return GeneratorIterator<Disk, std::array<double, 2>>(this);
         }
 
@@ -639,7 +638,7 @@ namespace lds {
          *
          * @return GeneratorIterator<Disk, std::array<double, 2>>
          */
-        [[nodiscard]] auto end() const -> GeneratorIterator<Disk, std::array<double, 2>> {
+        [[nodiscard]] constexpr auto end() const -> GeneratorIterator<Disk, std::array<double, 2>> {
             return GeneratorIterator<Disk, std::array<double, 2>>(
                 nullptr, std::numeric_limits<size_t>::max());
         }
@@ -670,10 +669,14 @@ namespace lds {
      *       **       **
      *          *****
      * @endverbatim
+     *
+     * @tparam Base0 the base for the Van der Corput generator (phi coordinate)
+     * @tparam Base1 the base for the Circle generator (theta coordinate)
      */
+    template <size_t Base0 = 2, size_t Base1 = 3>    
     class Sphere {
-        VdCorput vdcgen;
-        Circle cirgen;
+        VdCorput<Base0> vdcgen;
+        Circle<Base1> cirgen;
 
       public:
         /**
@@ -681,11 +684,8 @@ namespace lds {
          *
          * Constructs a Sphere sequence generator with the specified bases for generating
          * points on the unit sphere.
-         *
-         * @param[in] base0 the base for the Van der Corput generator (phi coordinate)
-         * @param[in] base1 the base for the Circle generator (theta coordinate)
          */
-        Sphere(const size_t base0, const size_t base1) : vdcgen(base0), cirgen(base1) {}
+        constexpr Sphere() : vdcgen(), cirgen() {}
 
         /**
          * @brief Generate the next point on the unit sphere
@@ -694,7 +694,7 @@ namespace lds {
          *
          * @return std::array<double, 3> the next point on the unit sphere
          */
-        auto pop() -> std::array<double, 3> {
+        constexpr auto pop() -> std::array<double, 3> {
             auto cosphi = (MAPPING_FACTOR * this->vdcgen.pop()) - 1.0;  // map to [-1, 1];
             auto sinphi = std::sqrt(1.0 - (cosphi * cosphi));
             auto arr = this->cirgen.pop();
@@ -706,7 +706,7 @@ namespace lds {
          *
          * @return std::array<double, 3> next point on the sphere
          */
-        [[nodiscard]] auto peek() -> std::array<double, 3> {
+        [[nodiscard]] constexpr auto peek() -> std::array<double, 3> {
             auto cosphi = (MAPPING_FACTOR * this->vdcgen.peek()) - 1.0;  // map to [-1, 1];
             auto sinphi = std::sqrt(1.0 - (cosphi * cosphi));
             auto arr = this->cirgen.peek();
@@ -719,7 +719,7 @@ namespace lds {
          * @param[in] n number of values to generate
          * @return std::vector<std::array<double, 3>> vector of points
          */
-        [[nodiscard]] auto batch(size_t n) -> std::vector<std::array<double, 3>> {
+        [[nodiscard]] constexpr auto batch(size_t n) -> std::vector<std::array<double, 3>> {
             std::vector<std::array<double, 3>> result;
             result.reserve(n);
             for (size_t i = 0; i < n; ++i) {
@@ -733,7 +733,7 @@ namespace lds {
          *
          * @param[in] n number of values to skip
          */
-        auto skip(size_t n) -> void {
+        constexpr auto skip(size_t n) -> void {
             this->vdcgen.skip(n);
             this->cirgen.skip(n);
         }
@@ -745,7 +745,7 @@ namespace lds {
          *
          * @param[in] seed the seed value to reset the sequence generator to
          */
-        auto reseed(const size_t seed) -> void {
+        constexpr auto reseed(const size_t seed) -> void {
             this->cirgen.reseed(seed);
             this->vdcgen.reseed(seed);
         }
@@ -755,14 +755,14 @@ namespace lds {
          *
          * @return size_t current index in sequence
          */
-        [[nodiscard]] auto get_index() const -> size_t { return this->vdcgen.get_index(); }
+        [[nodiscard]] constexpr auto get_index() const -> size_t { return this->vdcgen.get_index(); }
 
         /**
          * @brief Get iterator to beginning
          *
          * @return GeneratorIterator<Sphere, std::array<double, 3>>
          */
-        auto begin() -> GeneratorIterator<Sphere, std::array<double, 3>> {
+        constexpr auto begin() -> GeneratorIterator<Sphere, std::array<double, 3>> {
             return GeneratorIterator<Sphere, std::array<double, 3>>(this);
         }
 
@@ -771,7 +771,7 @@ namespace lds {
          *
          * @return GeneratorIterator<Sphere, std::array<double, 3>>
          */
-        [[nodiscard]] auto end() const -> GeneratorIterator<Sphere, std::array<double, 3>> {
+        [[nodiscard]] constexpr auto end() const -> GeneratorIterator<Sphere, std::array<double, 3>> {
             return GeneratorIterator<Sphere, std::array<double, 3>>(
                 nullptr, std::numeric_limits<size_t>::max());
         }
@@ -804,11 +804,16 @@ namespace lds {
      *       '.           .'
      *         '-.....-'
      * @endverbatim
+     *
+     * @tparam Base0 the base for the first Van der Corput generator (phi coordinate)
+     * @tparam Base1 the base for the second Van der Corput generator (psi coordinate)
+     * @tparam Base2 the base for the third Van der Corput generator (eta coordinate)
      */
+    template <size_t Base0 = 2, size_t Base1 = 3, size_t Base2 = 5>
     class Sphere3Hopf {
-        VdCorput vdc0;
-        VdCorput vdc1;
-        VdCorput vdc2;
+        VdCorput<Base0> vdc0;
+        VdCorput<Base1> vdc1;
+        VdCorput<Base2> vdc2;
 
       public:
         /**
@@ -816,13 +821,8 @@ namespace lds {
          *
          * Constructs a 3-sphere sequence generator using the Hopf fibration with the specified
          * bases.
-         *
-         * @param[in] base0 the base for the first Van der Corput generator (phi coordinate)
-         * @param[in] base1 the base for the second Van der Corput generator (psi coordinate)
-         * @param[in] base2 the base for the third Van der Corput generator (eta coordinate)
          */
-        Sphere3Hopf(const size_t base0, const size_t base1, const size_t base2)
-            : vdc0(base0), vdc1(base1), vdc2(base2) {}
+        constexpr Sphere3Hopf(): vdc0(), vdc1(), vdc2() {}
 
         /**
          * @brief Generate the next point on the 3-sphere using Hopf fibration
@@ -832,7 +832,7 @@ namespace lds {
          *
          * @return std::array<double, 4> the next point on the 3-sphere
          */
-        auto pop() -> std::array<double, 4> {
+        constexpr auto pop() -> std::array<double, 4> {
             auto phi = this->vdc0.pop() * TWO_PI;  // map to [0, 2*pi];
             auto psy = this->vdc1.pop() * TWO_PI;  // map to [0, 2*pi];
             auto vdc = this->vdc2.pop();
@@ -851,7 +851,7 @@ namespace lds {
          *
          * @return std::array<double, 4> next point on the 3-sphere
          */
-        [[nodiscard]] auto peek() -> std::array<double, 4> {
+        [[nodiscard]] constexpr auto peek() -> std::array<double, 4> {
             auto phi = this->vdc0.peek() * TWO_PI;  // map to [0, 2*pi];
             auto psy = this->vdc1.peek() * TWO_PI;  // map to [0, 2*pi];
             auto vdc = this->vdc2.peek();
@@ -871,7 +871,7 @@ namespace lds {
          * @param[in] n number of values to generate
          * @return std::vector<std::array<double, 4>> vector of points
          */
-        [[nodiscard]] auto batch(size_t n) -> std::vector<std::array<double, 4>> {
+        [[nodiscard]] constexpr auto batch(size_t n) -> std::vector<std::array<double, 4>> {
             std::vector<std::array<double, 4>> result;
             result.reserve(n);
             for (size_t i = 0; i < n; ++i) {
@@ -885,7 +885,7 @@ namespace lds {
          *
          * @param[in] n number of values to skip
          */
-        auto skip(size_t n) -> void {
+        constexpr auto skip(size_t n) -> void {
             this->vdc0.skip(n);
             this->vdc1.skip(n);
             this->vdc2.skip(n);
@@ -898,7 +898,7 @@ namespace lds {
          *
          * @param[in] seed the seed value to reset the sequence generator to
          */
-        auto reseed(size_t seed) -> void {
+        constexpr auto reseed(size_t seed) -> void {
             this->vdc0.reseed(seed);
             this->vdc1.reseed(seed);
             this->vdc2.reseed(seed);
@@ -909,14 +909,14 @@ namespace lds {
          *
          * @return size_t current index in sequence
          */
-        [[nodiscard]] auto get_index() const -> size_t { return this->vdc0.get_index(); }
+        [[nodiscard]] constexpr auto get_index() const -> size_t { return this->vdc0.get_index(); }
 
         /**
          * @brief Get iterator to beginning
          *
          * @return GeneratorIterator<Sphere3Hopf, std::array<double, 4>>
          */
-        auto begin() -> GeneratorIterator<Sphere3Hopf, std::array<double, 4>> {
+        constexpr auto begin() -> GeneratorIterator<Sphere3Hopf, std::array<double, 4>> {
             return GeneratorIterator<Sphere3Hopf, std::array<double, 4>>(this);
         }
 
@@ -925,7 +925,7 @@ namespace lds {
          *
          * @return GeneratorIterator<Sphere3Hopf, std::array<double, 4>>
          */
-        [[nodiscard]] auto end() const -> GeneratorIterator<Sphere3Hopf, std::array<double, 4>> {
+        [[nodiscard]] constexpr auto end() const -> GeneratorIterator<Sphere3Hopf, std::array<double, 4>> {
             return GeneratorIterator<Sphere3Hopf, std::array<double, 4>>(
                 nullptr, std::numeric_limits<size_t>::max());
         }

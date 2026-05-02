@@ -157,7 +157,7 @@ TEST_CASE("ClassName::method_name") {
 
 // Multiple assertions in one test
 TEST_CASE("ClassName::pop multiple") {
-    auto obj = lds::ClassName(2);
+    auto obj = lds::ClassName<2>();
     obj.reseed(0);
     CHECK_EQ(res[0], expected1);
     CHECK_EQ(res[1], expected2);

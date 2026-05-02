@@ -1,7 +1,6 @@
 #pragma once
 
 #include <array>
-#include <atomic>
 #include <cmath>
 #include <cstddef>
 
@@ -26,7 +25,7 @@ namespace ilds {
      */
     template <size_t Base = 2>
     class VdCorput {
-        std::atomic<size_t> _count;  ///< Current count in the sequence
+        size_t _count;  ///< Current count in the sequence
         size_t _factor;              ///< Precomputed scale factor (base^scale)
 
       public:
@@ -35,7 +34,7 @@ namespace ilds {
          *
          * @param[in] scale The number of digits (default: 10)
          */
-        explicit VdCorput(unsigned int scale = DEFAULT_SCALE)
+        constexpr explicit VdCorput(unsigned int scale = DEFAULT_SCALE)
             : _count{0}, _factor{static_cast<size_t>(std::pow(Base, scale))} {}
 
         /**
@@ -43,10 +42,8 @@ namespace ilds {
          *
          * @return size_t
          */
-        [[nodiscard]] auto pop() -> size_t {
-            this->_count.fetch_add(1, std::memory_order_relaxed);
-
-            size_t count = this->_count.load(std::memory_order_relaxed);
+        [[nodiscard]] constexpr auto pop() -> size_t {
+            size_t count = ++this->_count;
             size_t reslt = 0;
             size_t factor = this->_factor;
 
@@ -64,8 +61,8 @@ namespace ilds {
          *
          * @param[in] seed
          */
-        auto reseed(const size_t seed) -> void {
-            this->_count.store(seed, std::memory_order_relaxed);
+        constexpr auto reseed(const size_t seed) -> void {
+            this->_count = seed;
         }
 
         VdCorput(VdCorput&&) noexcept = delete;
@@ -93,12 +90,10 @@ namespace ilds {
          *
          * Constructs a Halton sequence generator with the specified bases and scale values.
          *
-         * @param[in] base array of two size_t values representing the bases for the two Van der
-         * Corput generators
          * @param[in] scale array of two unsigned int values representing the number of digits for
          * each generator
          */
-        Halton(const std::array<unsigned int, 2>& scale)
+        constexpr explicit Halton(const std::array<unsigned int, 2>& scale)
             : vdc0(scale[0]), vdc1(scale[1]) {}
 
         /**
@@ -108,7 +103,7 @@ namespace ilds {
          *
          * @return array<size_t, 2> the next point in the sequence
          */
-        inline auto pop() -> array<size_t, 2> {  //
+        constexpr auto pop() -> array<size_t, 2> {  //
             return {this->vdc0.pop(), this->vdc1.pop()};
         }
 
@@ -119,7 +114,7 @@ namespace ilds {
          *
          * @param[in] seed the seed value to reset the sequence generator to
          */
-        auto reseed(const size_t seed) -> void {
+        constexpr auto reseed(const size_t seed) -> void {
             this->vdc0.reseed(seed);
             this->vdc1.reseed(seed);
         }

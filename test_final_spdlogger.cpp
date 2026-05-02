@@ -30,7 +30,7 @@ int main() {
         lds::log_with_spdlog("Testing VdCorput sequence generation");
 
         // Create a VdCorput sequence generator
-        lds::VdCorput vdc(2);
+        lds::VdCorput<2> vdc{};
         std::cout << "→ Generating 5 Van der Corput points...\n";
         for (int i = 0; i < 5; ++i) {
             auto point = vdc.pop();

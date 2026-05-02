@@ -469,7 +469,7 @@ int main() {
 
     // Example 2: Logging with sequence generation
     std::cout << "\nExample 2: Logging with sequence generation\n";
-    lds::VdCorput vdc(2);
+    lds::VdCorput<2> vdc{};
     for (int i = 0; i < 5; ++i) {
         auto point = vdc.pop();
         std::cout << "  Generated point: " << point << '\n';
@@ -534,7 +534,7 @@ int main() {
 void generate_vd_corput_sequence(size_t count) {
     lds::log_with_spdlog("Starting VdCorput sequence generation");
     
-    lds::VdCorput vdc(2);
+    lds::VdCorput<2> vdc{};
     for (size_t i = 0; i < count; ++i) {
         auto point = vdc.pop();
         // Process point

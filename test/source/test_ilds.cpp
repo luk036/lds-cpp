@@ -4,7 +4,7 @@
 #include <lds/ilds.hpp>  // for Halton
 
 TEST_CASE("VdCorput_i") {
-    auto vgen = ilds::VdCorput(10);
+    auto vgen = ilds::VdCorput<2>(10);
     CHECK_EQ(vgen.pop(), 512);
     vgen.reseed(0);
     CHECK_EQ(vgen.pop(), 512);
