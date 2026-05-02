@@ -6,7 +6,7 @@
 
 主要特性包括：
 
-1. Van der Corput 序列
+1. van der Corput 序列
 2. Halton 序列
 3. Circle 序列
 4. Sphere 序列
@@ -40,7 +40,7 @@
 
 ### 序列生成器类
 
-1. **VdCorput** - Van der Corput 序列生成器
+1. **VdCorput** - van der Corput 序列生成器
 2. **Halton** - 二维 Halton 序列生成器
 3. **Circle** - 单位圆上的序列生成器
 4. **Disk** - 单位圆盘上的序列生成器

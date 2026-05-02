@@ -4,7 +4,7 @@
 
 This project is a C++ library for generating various low-discrepancy sequences (LDS). These sequences are more uniform than pseudo-random numbers and are useful in applications like numerical integration and computer graphics.
 
-The core of the library is the Van der Corput sequence, which is extended to implement other sequences like the Halton sequence (for n-dimensions), and sequences mapped to circles and spheres.
+The core of the library is the van der Corput sequence, which is extended to implement other sequences like the Halton sequence (for n-dimensions), and sequences mapped to circles and spheres.
 
 **Key Technologies:**
 

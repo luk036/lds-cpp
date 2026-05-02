@@ -10,7 +10,7 @@ namespace ilds {
 
     // Constants for magic numbers
     /**
-     * @brief Default number of digits for the Van der Corput sequence
+     * @brief Default number of digits for the van der Corput sequence
      *
      * This value determines the precision/scale of the integer Halton sequence.
      * Default is 10 digits.
@@ -18,7 +18,7 @@ namespace ilds {
     constexpr unsigned int DEFAULT_SCALE = 10;
 
     /**
-     * @brief Van der Corput sequence generator
+     * @brief van der Corput sequence generator
      *
      * Implementation based on pre-calculating the scale factor.
      *

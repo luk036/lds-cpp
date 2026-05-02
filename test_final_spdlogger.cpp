@@ -26,12 +26,12 @@ int main() {
         std::cout << "→ Logging initialization message...\n";
         lds::log_with_spdlog("Spdlogger test initialization");
 
-        std::cout << "→ Logging Van der Corput sequence test...\n";
+        std::cout << "→ Logging van der Corput sequence test...\n";
         lds::log_with_spdlog("Testing VdCorput sequence generation");
 
         // Create a VdCorput sequence generator
         lds::VdCorput<2> vdc{};
-        std::cout << "→ Generating 5 Van der Corput points...\n";
+        std::cout << "→ Generating 5 van der Corput points...\n";
         for (int i = 0; i < 5; ++i) {
             auto point = vdc.pop();
             std::cout << "  Point " << i << ": " << point << '\n';

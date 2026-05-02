@@ -30,7 +30,7 @@ This report documents the complete process of integrating the spdlog (v1.12.0) l
 A modern C++ library implementing low discrepancy sequence generators for applications in computer graphics, numerical integration, and Monte Carlo simulations.
 
 **Key Features:**
-- Van der Corput sequences
+- van der Corput sequences
 - Halton sequences (2D and N-dimensional)
 - Circle, Disk, and Sphere sequences
 - 3-Sphere Hopf sequences
@@ -244,7 +244,7 @@ Seven comprehensive test programs were created to verify all aspects of the inte
 **Features:**
 - Tests `lds::log_with_spdlog()` wrapper function
 - Tests direct spdlog API usage
-- Van der Corput sequence generation integration
+- van der Corput sequence generation integration
 - Multiple message logging
 
 **Build Command:**
@@ -381,7 +381,7 @@ File exists!
 - Direct spdlog usage (control test)
 - Dual log file verification
 - Log file content display
-- Van der Corput sequence demonstration
+- van der Corput sequence demonstration
 
 **Build Command:**
 ```bash
@@ -398,8 +398,8 @@ xmake run test_final_spdlogger
 [Part 1] Testing lds::log_with_spdlog()...
 ----------------------------------------
 → Logging initialization message...
-→ Logging Van der Corput sequence test...
-→ Generating 5 Van der Corput points...
+→ Logging van der Corput sequence test...
+→ Generating 5 van der Corput points...
   Point 0: 0.5
   Point 1: 0.25
   Point 2: 0.75

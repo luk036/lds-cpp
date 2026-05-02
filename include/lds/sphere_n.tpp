@@ -86,7 +86,7 @@ namespace lds {
     /**
      * @brief 3-Sphere sequence generator
      *
-     * Generates points on a 3-sphere using a combination of Van der Corput and Sphere generators.
+     * Generates points on a 3-sphere using a combination of van der Corput and Sphere generators.
      */
     class Sphere3 : public SphereGen {
       public:

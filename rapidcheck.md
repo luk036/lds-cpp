@@ -447,7 +447,7 @@ RC_ASSERT(gen.get_index() == seed + static_cast<size_t>(1));
 
 **Problem:** The test "VdCorput sequence is strictly increasing for base 2" was failing with 50 assertion errors showing that subsequent values were not greater than previous ones (e.g., `CHECK(0.25 > 0.5)`).
 
-**Root Cause:** The test was based on an incorrect assumption about the Van der Corput sequence. The sequence is NOT strictly increasing - it oscillates to fill the space evenly. For base 2, the sequence is: 0.5, 0.25, 0.75, 0.125, 0.625, 0.375, 0.875, 0.0625, etc. This is a fundamental property of low-discrepancy sequences designed for quasi-Monte Carlo methods.
+**Root Cause:** The test was based on an incorrect assumption about the van der Corput sequence. The sequence is NOT strictly increasing - it oscillates to fill the space evenly. For base 2, the sequence is: 0.5, 0.25, 0.75, 0.125, 0.625, 0.375, 0.875, 0.0625, etc. This is a fundamental property of low-discrepancy sequences designed for quasi-Monte Carlo methods.
 
 **Solution:** Renamed the test from "VdCorput sequence is strictly increasing for base 2" to "VdCorput generates values in [0,1)" and changed the assertion to check the correct property:
 
@@ -637,7 +637,7 @@ When integrating multiple testing frameworks (doctest + RapidCheck):
 
 ### 3. Property-Based Testing Benefits
 
-RapidCheck discovered a critical misconception about Van der Corput sequences being strictly increasing. This demonstrates the value of property-based testing in:
+RapidCheck discovered a critical misconception about van der Corput sequences being strictly increasing. This demonstrates the value of property-based testing in:
 - Finding edge cases that traditional unit tests might miss
 - Verifying mathematical properties across many inputs
 - Testing behavior consistency across different scenarios
@@ -675,7 +675,7 @@ The RapidCheck integration has been successfully completed for both CMake and xm
 - Effective integration with existing doctest framework
 - Resolution of multiple cross-platform compilation and CTest integration challenges
 
-While some initial challenges were encountered, the integration is now fully functional and provides a solid foundation for property-based testing in the project. The discovered misconception about Van der Corput sequences demonstrates the value of property-based testing in finding edge cases and validating mathematical properties.
+While some initial challenges were encountered, the integration is now fully functional and provides a solid foundation for property-based testing in the project. The discovered misconception about van der Corput sequences demonstrates the value of property-based testing in finding edge cases and validating mathematical properties.
 
 ## References
 
@@ -683,4 +683,4 @@ While some initial challenges were encountered, the integration is now fully fun
 - [CPM.cmake](https://github.com/TheLartians/CPM.cmake)
 - [doctest](https://github.com/doctest/doctest)
 - [xmake](https://xmake.io/)
-- [Van der Corput Sequence](https://en.wikipedia.org/wiki/Van_der_Corput_sequence)
+- [van der Corput Sequence](https://en.wikipedia.org/wiki/Van_der_Corput_sequence)
