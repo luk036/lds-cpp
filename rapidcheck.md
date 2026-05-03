@@ -260,23 +260,6 @@ TEST_CASE("Property-based test: skip advances state correctly") {
               });
 }
 
-TEST_CASE("Property-based test: batch returns correct number of values") {
-    rc::check("batch(n) returns exactly n values",
-              []() {
-                  auto base = static_cast<unsigned long>(*rc::gen::inRange(2, 51));
-                  auto batch_size = static_cast<unsigned long>(*rc::gen::inRange(1, 100));
-                  
-                  lds::VdCorput gen(base);
-                  auto batch = gen.batch(batch_size);
-                  
-                  RC_ASSERT(batch.size() == batch_size);
-                  
-                  for (unsigned long i = 0; i < batch_size; ++i) {
-                      RC_ASSERT(batch[i] >= 0.0 && batch[i] < 1.0);
-                  }
-              });
-}
-
 TEST_CASE("Property-based test: reseed resets generator state") {
     rc::check("reseed(n) produces deterministic sequence",
               []() {
@@ -384,7 +367,7 @@ TEST_CASE("Property-based test: reseed and get_index consistency") {
 - Sphere points: points on unit sphere
 - Halton points: points in unit square
 - Sphere3Hopf points: points on 3-sphere
-- Generator methods: peek, skip, batch, reseed
+- Generator methods: peek, skip, reseed
 - Iterator functionality: iterators produce same values as pop
 
 **RapidCheck patterns demonstrated:**
@@ -617,7 +600,7 @@ cmake --build build_all --config Release
 4. Sphere: points on unit sphere
 5. Halton: points in unit square
 6. 3-Sphere Hopf: points on 3-sphere
-7. Generator methods: peek, skip, batch, reseed
+7. Generator methods: peek, skip, reseed
 8. Iterator functionality
 
 ## Lessons Learned

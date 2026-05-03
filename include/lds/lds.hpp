@@ -5,7 +5,7 @@
 #include <cstddef>
 #include <iterator>
 #include <limits>
-#include <vector>
+// #include <vector>
 
 #ifndef M_PI
 #    define M_PI 3.14159265358979323846264338327950288
@@ -212,21 +212,6 @@ namespace lds {
         }
 
         /**
-         * @brief Generate multiple values efficiently
-         *
-         * @param[in] n number of values to generate
-         * @return std::vector<double> vector of values
-         */
-        [[nodiscard]] constexpr auto batch(unsigned long n) -> std::vector<double> {
-            std::vector<double> result;
-            result.reserve(n);
-            for (unsigned long i = 0; i < n; ++i) {
-                result.emplace_back(this->pop());
-            }
-            return result;
-        }
-
-        /**
          * @brief Skip n values in the sequence
          *
          * @param[in] n number of values to skip
@@ -342,21 +327,6 @@ namespace lds {
         }
 
         /**
-         * @brief Generate multiple values efficiently
-         *
-         * @param[in] n number of values to generate
-         * @return std::vector<std::array<double, 2>> vector of points
-         */
-        [[nodiscard]] constexpr auto batch(unsigned long n) -> std::vector<std::array<double, 2>> {
-            std::vector<std::array<double, 2>> result;
-            result.reserve(n);
-            for (unsigned long i = 0; i < n; ++i) {
-                result.emplace_back(this->pop());
-            }
-            return result;
-        }
-
-        /**
          * @brief Skip n values in the sequence
          *
          * @param[in] n number of values to skip
@@ -450,21 +420,6 @@ namespace lds {
          */
         [[nodiscard]] constexpr auto peek() -> std::array<double, 2> {
             return {this->vdc0.peek(), this->vdc1.peek()};
-        }
-
-        /**
-         * @brief Generate multiple values efficiently
-         *
-         * @param[in] n number of values to generate
-         * @return std::vector<std::array<double, 2>> vector of points
-         */
-        [[nodiscard]] constexpr auto batch(unsigned long n) -> std::vector<std::array<double, 2>> {
-            std::vector<std::array<double, 2>> result;
-            result.reserve(n);
-            for (unsigned long i = 0; i < n; ++i) {
-                result.emplace_back(this->pop());
-            }
-            return result;
         }
 
         /**
@@ -578,21 +533,6 @@ namespace lds {
             auto theta = this->vdc0.peek() * TWO_PI;  // map to [0, 2*pi];
             auto radius = std::sqrt(this->vdc1.peek());
             return {radius * std::cos(theta), radius * std::sin(theta)};
-        }
-
-        /**
-         * @brief Generate multiple values efficiently
-         *
-         * @param[in] n number of values to generate
-         * @return std::vector<std::array<double, 2>> vector of points
-         */
-        [[nodiscard]] constexpr auto batch(unsigned long n) -> std::vector<std::array<double, 2>> {
-            std::vector<std::array<double, 2>> result;
-            result.reserve(n);
-            for (unsigned long i = 0; i < n; ++i) {
-                result.emplace_back(this->pop());
-            }
-            return result;
         }
 
         /**
@@ -711,21 +651,6 @@ namespace lds {
             auto sinphi = std::sqrt(1.0 - (cosphi * cosphi));
             auto arr = this->cirgen.peek();
             return {sinphi * arr[0], sinphi * arr[1], cosphi};
-        }
-
-        /**
-         * @brief Generate multiple values efficiently
-         *
-         * @param[in] n number of values to generate
-         * @return std::vector<std::array<double, 3>> vector of points
-         */
-        [[nodiscard]] constexpr auto batch(unsigned long n) -> std::vector<std::array<double, 3>> {
-            std::vector<std::array<double, 3>> result;
-            result.reserve(n);
-            for (unsigned long i = 0; i < n; ++i) {
-                result.emplace_back(this->pop());
-            }
-            return result;
         }
 
         /**
@@ -863,21 +788,6 @@ namespace lds {
                 sin_eta * std::cos(phi + psy),
                 sin_eta * std::sin(phi + psy),
             };
-        }
-
-        /**
-         * @brief Generate multiple values efficiently
-         *
-         * @param[in] n number of values to generate
-         * @return std::vector<std::array<double, 4>> vector of points
-         */
-        [[nodiscard]] constexpr auto batch(unsigned long n) -> std::vector<std::array<double, 4>> {
-            std::vector<std::array<double, 4>> result;
-            result.reserve(n);
-            for (unsigned long i = 0; i < n; ++i) {
-                result.emplace_back(this->pop());
-            }
-            return result;
         }
 
         /**

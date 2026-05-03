@@ -144,22 +144,6 @@ TEST_CASE("Property-based test: skip advances state correctly") {
     });
 }
 
-TEST_CASE("Property-based test: batch returns correct number of values") {
-    rc::check("batch(n) returns exactly n values", []() {
-        auto base = static_cast<unsigned long>(*rc::gen::inRange(2, 51));
-        auto batch_size = static_cast<unsigned long>(*rc::gen::inRange(1, 100));
-
-        lds::VdCorput gen(base);
-        auto batch = gen.batch(batch_size);
-
-        RC_ASSERT(batch.size() == batch_size);
-
-        for (unsigned long i = 0; i < batch_size; ++i) {
-            RC_ASSERT(batch[i] >= 0.0 && batch[i] < 1.0);
-        }
-    });
-}
-
 TEST_CASE("Property-based test: reseed resets generator state") {
     rc::check("reseed(n) produces deterministic sequence", []() {
         auto base = static_cast<unsigned long>(*rc::gen::inRange(2, 51));

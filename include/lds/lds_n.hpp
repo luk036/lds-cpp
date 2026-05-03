@@ -3,7 +3,6 @@
 #include <array>
 #include <cstddef>
 #include <memory>
-#include <vector>
 
 #include <lds/lds.hpp>
 
@@ -91,15 +90,6 @@ namespace lds {
             std::array<double, N> result;
             for (std::size_t i = 0; i < N; ++i) {
                 result[i] = this->vdcs[i]->peek();
-            }
-            return result;
-        }
-
-        [[nodiscard]] constexpr auto batch(unsigned long n) -> std::vector<std::array<double, N>> {
-            std::vector<std::array<double, N>> result;
-            result.reserve(n);
-            for (unsigned long i = 0; i < n; ++i) {
-                result.emplace_back(this->pop());
             }
             return result;
         }
