@@ -1,6 +1,6 @@
 #include <doctest/doctest.h>  // for Approx, ResultBuilder, TestCase, CHECK
 
-#include <algorithm>       // for std::sort
+// #include <algorithm>       // for std::sort
 #include <lds/lds.hpp>  // for Circle, Halton, Sphere, Sphere3Hopf
 
 TEST_CASE("vdc") { CHECK_EQ(lds::vdc<2>(11), doctest::Approx(0.8125)); }
