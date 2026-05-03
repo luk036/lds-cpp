@@ -11,7 +11,7 @@
 
 namespace lds {
 
-    std::vector<double> linspace(double start, double stop, std::size_t num) {
+    std::vector<double> linspace(double start, double stop, std::unsigned long num) {
         if (num == 1) {
             return {start};
         }
@@ -20,7 +20,7 @@ namespace lds {
         result.reserve(num);
 
         double step = (stop - start) / static_cast<double>(num - 1);
-        for (std::size_t i = 0; i < num; ++i) {
+        for (std::unsigned long i = 0; i < num; ++i) {
             result.emplace_back(start + (static_cast<double>(i) * step));
         }
 
@@ -40,7 +40,7 @@ namespace lds {
             return y_points.back();
         }
 
-        for (std::size_t i = 0; i < x_points.size() - 1; ++i) {
+        for (std::unsigned long i = 0; i < x_points.size() - 1; ++i) {
             if (x_points[i] <= x_value && x_value <= x_points[i + 1]) {
                 // Linear interpolation
                 double t = (x_value - x_points[i]) / (x_points[i + 1] - x_points[i]);
@@ -77,7 +77,7 @@ namespace lds {
                                        const std::vector<double>& sine) {
             std::vector<double> result;
             result.reserve(X.size());
-            for (std::size_t i = 0; i < X.size(); ++i) {
+            for (std::unsigned long i = 0; i < X.size(); ++i) {
                 result.emplace_back((X[i] + neg_cosine[i] * sine[i]) / 2.0);
             }
             return result;
@@ -101,7 +101,7 @@ namespace lds {
         std::vector<double> result;
         result.reserve(tp_minus2.size());
 
-        for (std::size_t i = 0; i < tp_minus2.size(); ++i) {
+        for (std::unsigned long i = 0; i < tp_minus2.size(); ++i) {
             double value = ((n - 1) * tp_minus2[i] + NEG_COSINE[i] * std::pow(SINE[i], n - 1)) / n;
             result.emplace_back(value);
         }

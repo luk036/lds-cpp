@@ -16,7 +16,7 @@ namespace lds {
     constexpr const auto TWO_PI = 2.0 * M_PI;
 
     // Constants for magic numbers
-    constexpr size_t MAX_REVERSE_BITS = 64;
+    constexpr unsigned long MAX_REVERSE_BITS = 64;
     constexpr double MAPPING_FACTOR = 2.0;
 
     /**
@@ -35,7 +35,7 @@ namespace lds {
      */
     template <typename Generator, typename Value> class GeneratorIterator {
         Generator* gen;
-        size_t index;
+        unsigned long index;
 
       public:
         using iterator_category = std::input_iterator_tag;
@@ -44,7 +44,7 @@ namespace lds {
         using pointer = const value_type*;
         using reference = value_type;
 
-        explicit GeneratorIterator(Generator* g = nullptr, size_t idx = 0) : gen{g}, index{idx} {}
+        explicit GeneratorIterator(Generator* g = nullptr, unsigned long idx = 0) : gen{g}, index{idx} {}
 
         /**
          * @brief Dereference operator
@@ -94,7 +94,7 @@ namespace lds {
         /**
          * @brief Get current index
          */
-        [[nodiscard]] auto get_index() const -> size_t { return index; }
+        [[nodiscard]] auto get_index() const -> unsigned long { return index; }
     };
 
     /**
@@ -115,8 +115,8 @@ namespace lds {
      * @param[in] base base of the sequence
      * @return double
      */
-    template <size_t Base = 2>
-    constexpr auto vdc(size_t cnt) -> double {
+    template <unsigned long Base = 2>
+    constexpr auto vdc(unsigned long cnt) -> double {
         auto reslt = 0.0;
         auto denom = 1.0;
         auto count = cnt;
@@ -148,16 +148,16 @@ namespace lds {
      *     ...
      * @endverbatim
      */
-    template <size_t Base = 2>
+    template <unsigned long Base = 2>
     class VdCorput {
-        size_t count;
+        unsigned long count;
         std::array<double, MAX_REVERSE_BITS> rev_lst;
 
       public:
         /**
          * @brief Construct a new VdCorput object
          *
-         * The `VdCorput(size_t base)` constructor is initializing a `VdCorput`
+         * The `VdCorput(unsigned long base)` constructor is initializing a `VdCorput`
          * object with a given base. The base is used to generate the van der Corput
          * sequence.
          *
@@ -165,7 +165,7 @@ namespace lds {
          */
         constexpr VdCorput() : count{0}, rev_lst{} {
             double reverse = 1.0;
-            for (size_t i = 0; i < MAX_REVERSE_BITS; ++i) {
+            for (unsigned long i = 0; i < MAX_REVERSE_BITS; ++i) {
                 reverse /= double(Base);
                 this->rev_lst[i] = reverse;
             }
@@ -181,8 +181,8 @@ namespace lds {
          * @return double the next value in the sequence
          */
         constexpr auto pop() -> double {
-            size_t count_value = ++this->count;  // ignore 0
-            size_t idx = 0;
+            unsigned long count_value = ++this->count;  // ignore 0
+            unsigned long idx = 0;
             double res = 0.0;
             while (count_value != 0) {
                 const auto remainder = count_value % Base;
@@ -199,8 +199,8 @@ namespace lds {
          * @return double the next value in the sequence
          */
         [[nodiscard]] constexpr auto peek() -> double {
-            size_t count_value = this->count + 1;
-            size_t idx = 0;
+            unsigned long count_value = this->count + 1;
+            unsigned long idx = 0;
             double res = 0.0;
             while (count_value != 0) {
                 const auto remainder = count_value % Base;
@@ -217,10 +217,10 @@ namespace lds {
          * @param[in] n number of values to generate
          * @return std::vector<double> vector of values
          */
-        [[nodiscard]] constexpr auto batch(size_t n) -> std::vector<double> {
+        [[nodiscard]] constexpr auto batch(unsigned long n) -> std::vector<double> {
             std::vector<double> result;
             result.reserve(n);
-            for (size_t i = 0; i < n; ++i) {
+            for (unsigned long i = 0; i < n; ++i) {
                 result.emplace_back(this->pop());
             }
             return result;
@@ -231,28 +231,28 @@ namespace lds {
          *
          * @param[in] n number of values to skip
          */
-        constexpr auto skip(size_t n) -> void { this->count += n; }
+        constexpr auto skip(unsigned long n) -> void { this->count += n; }
 
         /**
          * @brief reseed
          *
-         * The `reseed(size_t seed)` function is used to reset the state of the
+         * The `reseed(unsigned long seed)` function is used to reset the state of the
          * sequence generator to a specific seed value. This allows the sequence
          * generator to start generating the sequence from the beginning, or from a
          * specific point in the sequence, depending on the value of the seed.
          *
          * @param[in] seed the seed value to reset the sequence generator to
          */
-        constexpr auto reseed(const size_t seed) -> void {
+        constexpr auto reseed(const unsigned long& seed) -> void {
             this->count = seed;
         }
 
         /**
          * @brief Get current index
          *
-         * @return size_t current index in the sequence
+         * @return unsigned long current index in the sequence
          */
-        [[nodiscard]] constexpr auto get_index() const -> size_t {
+        [[nodiscard]] constexpr auto get_index() const -> unsigned long {
             return this->count;
         }
 
@@ -273,7 +273,7 @@ namespace lds {
          * @return GeneratorIterator<VdCorput, double>
          */
         [[nodiscard]] constexpr auto end() const -> GeneratorIterator<VdCorput, double> {
-            return GeneratorIterator<VdCorput, double>(nullptr, std::numeric_limits<size_t>::max());
+            return GeneratorIterator<VdCorput, double>(nullptr, std::numeric_limits<unsigned long>::max());
         }
 
         VdCorput(VdCorput&&) noexcept = delete;
@@ -304,7 +304,7 @@ namespace lds {
      *     than random sampling
      * @endverbatim
      */
-    template <size_t Base = 2>
+    template <unsigned long Base = 2>
     class Circle {
         VdCorput<Base> vdc;
 
@@ -347,10 +347,10 @@ namespace lds {
          * @param[in] n number of values to generate
          * @return std::vector<std::array<double, 2>> vector of points
          */
-        [[nodiscard]] constexpr auto batch(size_t n) -> std::vector<std::array<double, 2>> {
+        [[nodiscard]] constexpr auto batch(unsigned long n) -> std::vector<std::array<double, 2>> {
             std::vector<std::array<double, 2>> result;
             result.reserve(n);
-            for (size_t i = 0; i < n; ++i) {
+            for (unsigned long i = 0; i < n; ++i) {
                 result.emplace_back(this->pop());
             }
             return result;
@@ -361,7 +361,7 @@ namespace lds {
          *
          * @param[in] n number of values to skip
          */
-        constexpr auto skip(size_t n) -> void { this->vdc.skip(n); }
+        constexpr auto skip(unsigned long n) -> void { this->vdc.skip(n); }
 
         /**
          * @brief Reset the state of the Circle sequence generator
@@ -370,14 +370,14 @@ namespace lds {
          *
          * @param[in] seed the seed value to reset the sequence generator to
          */
-        constexpr auto reseed(const size_t seed) -> void { this->vdc.reseed(seed); }
+        constexpr auto reseed(const unsigned long& seed) -> void { this->vdc.reseed(seed); }
 
         /**
          * @brief Get current index
          *
-         * @return size_t current index in sequence
+         * @return unsigned long current index in sequence
          */
-        [[nodiscard]] constexpr auto get_index() const -> size_t { return this->vdc.get_index(); }
+        [[nodiscard]] constexpr auto get_index() const -> unsigned long { return this->vdc.get_index(); }
 
         /**
          * @brief Get iterator to beginning
@@ -395,7 +395,7 @@ namespace lds {
          */
         [[nodiscard]] constexpr auto end() const -> GeneratorIterator<Circle, std::array<double, 2>> {
             return GeneratorIterator<Circle, std::array<double, 2>>(
-                nullptr, std::numeric_limits<size_t>::max());
+                nullptr, std::numeric_limits<unsigned long>::max());
         }
     };
 
@@ -418,7 +418,7 @@ namespace lds {
      *     ...
      * @endverbatim
      */
-    template <size_t Base0 = 2, size_t Base1 = 3>
+    template <unsigned long Base0 = 2, unsigned long Base1 = 3>
     class Halton {
         VdCorput<Base0> vdc0;
         VdCorput<Base1> vdc1;
@@ -458,10 +458,10 @@ namespace lds {
          * @param[in] n number of values to generate
          * @return std::vector<std::array<double, 2>> vector of points
          */
-        [[nodiscard]] constexpr auto batch(size_t n) -> std::vector<std::array<double, 2>> {
+        [[nodiscard]] constexpr auto batch(unsigned long n) -> std::vector<std::array<double, 2>> {
             std::vector<std::array<double, 2>> result;
             result.reserve(n);
-            for (size_t i = 0; i < n; ++i) {
+            for (unsigned long i = 0; i < n; ++i) {
                 result.emplace_back(this->pop());
             }
             return result;
@@ -472,7 +472,7 @@ namespace lds {
          *
          * @param[in] n number of values to skip
          */
-        constexpr auto skip(size_t n) -> void {
+        constexpr auto skip(unsigned long n) -> void {
             this->vdc0.skip(n);
             this->vdc1.skip(n);
         }
@@ -484,7 +484,7 @@ namespace lds {
          *
          * @param[in] seed the seed value to reset the sequence generator to
          */
-        constexpr auto reseed(const size_t seed) -> void {
+        constexpr auto reseed(const unsigned long& seed) -> void {
             this->vdc0.reseed(seed);
             this->vdc1.reseed(seed);
         }
@@ -492,9 +492,9 @@ namespace lds {
         /**
          * @brief Get current index
          *
-         * @return size_t current index in the sequence
+         * @return unsigned long current index in the sequence
          */
-        [[nodiscard]] constexpr auto get_index() const -> size_t { return this->vdc0.get_index(); }
+        [[nodiscard]] constexpr auto get_index() const -> unsigned long { return this->vdc0.get_index(); }
 
         /**
          * @brief Get iterator to beginning
@@ -512,7 +512,7 @@ namespace lds {
          */
         [[nodiscard]] constexpr auto end() const -> GeneratorIterator<Halton, std::array<double, 2>> {
             return GeneratorIterator<Halton, std::array<double, 2>>(
-                nullptr, std::numeric_limits<size_t>::max());
+                nullptr, std::numeric_limits<unsigned long>::max());
         }
     };
 
@@ -540,7 +540,7 @@ namespace lds {
      *         *****
      * @endverbatim
      */
-    template <size_t Base0 = 2, size_t Base1 = 3>
+    template <unsigned long Base0 = 2, unsigned long Base1 = 3>
     class Disk {
         VdCorput<Base0> vdc0;
         VdCorput<Base1> vdc1;
@@ -586,10 +586,10 @@ namespace lds {
          * @param[in] n number of values to generate
          * @return std::vector<std::array<double, 2>> vector of points
          */
-        [[nodiscard]] constexpr auto batch(size_t n) -> std::vector<std::array<double, 2>> {
+        [[nodiscard]] constexpr auto batch(unsigned long n) -> std::vector<std::array<double, 2>> {
             std::vector<std::array<double, 2>> result;
             result.reserve(n);
-            for (size_t i = 0; i < n; ++i) {
+            for (unsigned long i = 0; i < n; ++i) {
                 result.emplace_back(this->pop());
             }
             return result;
@@ -600,7 +600,7 @@ namespace lds {
          *
          * @param[in] n number of values to skip
          */
-        constexpr auto skip(size_t n) -> void {
+        constexpr auto skip(unsigned long n) -> void {
             this->vdc0.skip(n);
             this->vdc1.skip(n);
         }
@@ -612,7 +612,7 @@ namespace lds {
          *
          * @param[in] seed the seed value to reset the sequence generator to
          */
-        constexpr auto reseed(const size_t seed) -> void {
+        constexpr auto reseed(const unsigned long& seed) -> void {
             this->vdc0.reseed(seed);
             this->vdc1.reseed(seed);
         }
@@ -620,9 +620,9 @@ namespace lds {
         /**
          * @brief Get current index
          *
-         * @return size_t current index in sequence
+         * @return unsigned long current index in sequence
          */
-        [[nodiscard]] constexpr auto get_index() const -> size_t { return this->vdc0.get_index(); }
+        [[nodiscard]] constexpr auto get_index() const -> unsigned long { return this->vdc0.get_index(); }
 
         /**
          * @brief Get iterator to beginning
@@ -640,7 +640,7 @@ namespace lds {
          */
         [[nodiscard]] constexpr auto end() const -> GeneratorIterator<Disk, std::array<double, 2>> {
             return GeneratorIterator<Disk, std::array<double, 2>>(
-                nullptr, std::numeric_limits<size_t>::max());
+                nullptr, std::numeric_limits<unsigned long>::max());
         }
     };
 
@@ -673,7 +673,7 @@ namespace lds {
      * @tparam Base0 the base for the van der Corput generator (phi coordinate)
      * @tparam Base1 the base for the Circle generator (theta coordinate)
      */
-    template <size_t Base0 = 2, size_t Base1 = 3>    
+    template <unsigned long Base0 = 2, unsigned long Base1 = 3>    
     class Sphere {
         VdCorput<Base0> vdcgen;
         Circle<Base1> cirgen;
@@ -719,10 +719,10 @@ namespace lds {
          * @param[in] n number of values to generate
          * @return std::vector<std::array<double, 3>> vector of points
          */
-        [[nodiscard]] constexpr auto batch(size_t n) -> std::vector<std::array<double, 3>> {
+        [[nodiscard]] constexpr auto batch(unsigned long n) -> std::vector<std::array<double, 3>> {
             std::vector<std::array<double, 3>> result;
             result.reserve(n);
-            for (size_t i = 0; i < n; ++i) {
+            for (unsigned long i = 0; i < n; ++i) {
                 result.emplace_back(this->pop());
             }
             return result;
@@ -733,7 +733,7 @@ namespace lds {
          *
          * @param[in] n number of values to skip
          */
-        constexpr auto skip(size_t n) -> void {
+        constexpr auto skip(unsigned long n) -> void {
             this->vdcgen.skip(n);
             this->cirgen.skip(n);
         }
@@ -745,7 +745,7 @@ namespace lds {
          *
          * @param[in] seed the seed value to reset the sequence generator to
          */
-        constexpr auto reseed(const size_t seed) -> void {
+        constexpr auto reseed(const unsigned long& seed) -> void {
             this->cirgen.reseed(seed);
             this->vdcgen.reseed(seed);
         }
@@ -753,9 +753,9 @@ namespace lds {
         /**
          * @brief Get current index
          *
-         * @return size_t current index in sequence
+         * @return unsigned long current index in sequence
          */
-        [[nodiscard]] constexpr auto get_index() const -> size_t { return this->vdcgen.get_index(); }
+        [[nodiscard]] constexpr auto get_index() const -> unsigned long { return this->vdcgen.get_index(); }
 
         /**
          * @brief Get iterator to beginning
@@ -773,7 +773,7 @@ namespace lds {
          */
         [[nodiscard]] constexpr auto end() const -> GeneratorIterator<Sphere, std::array<double, 3>> {
             return GeneratorIterator<Sphere, std::array<double, 3>>(
-                nullptr, std::numeric_limits<size_t>::max());
+                nullptr, std::numeric_limits<unsigned long>::max());
         }
     };
 
@@ -809,7 +809,7 @@ namespace lds {
      * @tparam Base1 the base for the second van der Corput generator (psi coordinate)
      * @tparam Base2 the base for the third van der Corput generator (eta coordinate)
      */
-    template <size_t Base0 = 2, size_t Base1 = 3, size_t Base2 = 5>
+    template <unsigned long Base0 = 2, unsigned long Base1 = 3, unsigned long Base2 = 5>
     class Sphere3Hopf {
         VdCorput<Base0> vdc0;
         VdCorput<Base1> vdc1;
@@ -871,10 +871,10 @@ namespace lds {
          * @param[in] n number of values to generate
          * @return std::vector<std::array<double, 4>> vector of points
          */
-        [[nodiscard]] constexpr auto batch(size_t n) -> std::vector<std::array<double, 4>> {
+        [[nodiscard]] constexpr auto batch(unsigned long n) -> std::vector<std::array<double, 4>> {
             std::vector<std::array<double, 4>> result;
             result.reserve(n);
-            for (size_t i = 0; i < n; ++i) {
+            for (unsigned long i = 0; i < n; ++i) {
                 result.emplace_back(this->pop());
             }
             return result;
@@ -885,7 +885,7 @@ namespace lds {
          *
          * @param[in] n number of values to skip
          */
-        constexpr auto skip(size_t n) -> void {
+        constexpr auto skip(unsigned long n) -> void {
             this->vdc0.skip(n);
             this->vdc1.skip(n);
             this->vdc2.skip(n);
@@ -898,7 +898,7 @@ namespace lds {
          *
          * @param[in] seed the seed value to reset the sequence generator to
          */
-        constexpr auto reseed(size_t seed) -> void {
+        constexpr auto reseed(unsigned long seed) -> void {
             this->vdc0.reseed(seed);
             this->vdc1.reseed(seed);
             this->vdc2.reseed(seed);
@@ -907,9 +907,9 @@ namespace lds {
         /**
          * @brief Get current index
          *
-         * @return size_t current index in sequence
+         * @return unsigned long current index in sequence
          */
-        [[nodiscard]] constexpr auto get_index() const -> size_t { return this->vdc0.get_index(); }
+        [[nodiscard]] constexpr auto get_index() const -> unsigned long { return this->vdc0.get_index(); }
 
         /**
          * @brief Get iterator to beginning
@@ -927,9 +927,9 @@ namespace lds {
          */
         [[nodiscard]] constexpr auto end() const -> GeneratorIterator<Sphere3Hopf, std::array<double, 4>> {
             return GeneratorIterator<Sphere3Hopf, std::array<double, 4>>(
-                nullptr, std::numeric_limits<size_t>::max());
+                nullptr, std::numeric_limits<unsigned long>::max());
         }
     };
 
-    extern size_t dummy(size_t index);
+    extern unsigned long dummy(unsigned long index);
 }  // namespace lds

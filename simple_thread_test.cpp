@@ -40,7 +40,7 @@ int main() {
 
     std::sort(all_values.begin(), all_values.end());
     bool has_duplicates = false;
-    for (size_t i = 1; i < all_values.size(); ++i) {
+    for (unsigned long i = 1; i < all_values.size(); ++i) {
         if (all_values[i] == all_values[i - 1]) {
             has_duplicates = true;
             break;

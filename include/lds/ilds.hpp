@@ -2,7 +2,6 @@
 
 #include <array>
 #include <cmath>
-#include <cstddef>
 
 namespace ilds {
 
@@ -16,6 +15,7 @@ namespace ilds {
      * Default is 10 digits.
      */
     constexpr unsigned int DEFAULT_SCALE = 10;
+    constexpr unsigned int MAX_REVERSE_BITS = 64;
 
     /**
      * @brief van der Corput sequence generator
@@ -23,10 +23,11 @@ namespace ilds {
      * Implementation based on pre-calculating the scale factor.
      *
      */
-    template <size_t Base = 2>
+    template <unsigned long Base = 2>
     class VdCorput {
-        size_t _count;  ///< Current count in the sequence
-        size_t _factor;              ///< Precomputed scale factor (base^scale)
+        unsigned long _count;  ///< Current count in the sequence
+        std::array<unsigned long, MAX_REVERSE_BITS> factor_lst;  ///< Precomputed scale factors for each digit
+        static_assert(MAX_REVERSE_BITS >= sizeof(unsigned long) * 8, "MAX_REVERSE_BITS must be at least the number of bits in unsigned long");
 
       public:
         /**
@@ -35,23 +36,28 @@ namespace ilds {
          * @param[in] scale The number of digits (default: 10)
          */
         constexpr explicit VdCorput(unsigned int scale = DEFAULT_SCALE)
-            : _count{0}, _factor{static_cast<size_t>(std::pow(Base, scale))} {}
+            : _count{0},  factor_lst{} {
+            unsigned long factor = static_cast<unsigned long>(std::pow(Base, scale));
+            for (unsigned int i = 0; i < MAX_REVERSE_BITS; ++i) {
+                factor /= Base;
+                this->factor_lst[i] = factor;
+            }
+        }
 
         /**
          * @brief Increments count and calculates the next value in the sequence.
          *
-         * @return size_t
+         * @return unsigned long
          */
-        [[nodiscard]] constexpr auto pop() -> size_t {
-            size_t count = ++this->_count;
-            size_t reslt = 0;
-            size_t factor = this->_factor;
-
+        [[nodiscard]] constexpr auto pop() -> unsigned long {
+            unsigned long count = ++this->_count;
+            unsigned long reslt = 0;
+            unsigned int idx = 0;
             while (count != 0) {
-                const size_t remainder = count % Base;
-                factor /= Base;
+                const unsigned long remainder = count % Base;
                 count /= Base;
-                reslt += remainder * factor;
+                reslt += remainder * this->factor_lst[idx];
+                ++idx;
             }
             return reslt;
         }
@@ -61,7 +67,7 @@ namespace ilds {
          *
          * @param[in] seed
          */
-        constexpr auto reseed(const size_t seed) -> void {
+        constexpr auto reseed(const unsigned long& seed) -> void {
             this->_count = seed;
         }
 
@@ -79,7 +85,7 @@ namespace ilds {
      *     ...
      * @endverbatim
      */
-    template <size_t Base1, size_t Base2>
+    template <unsigned long Base1, unsigned long Base2>
     class Halton {
         VdCorput<Base1> vdc0;
         VdCorput<Base2> vdc1;
@@ -99,11 +105,11 @@ namespace ilds {
         /**
          * @brief Generate the next point in the Halton sequence
          *
-         * Returns the next point in the Halton sequence as an array of two size_t values.
+         * Returns the next point in the Halton sequence as an array of two unsigned long values.
          *
-         * @return array<size_t, 2> the next point in the sequence
+         * @return array<unsigned long, 2> the next point in the sequence
          */
-        constexpr auto pop() -> array<size_t, 2> {  //
+        constexpr auto pop() -> array<unsigned long, 2> {  //
             return {this->vdc0.pop(), this->vdc1.pop()};
         }
 
@@ -114,7 +120,7 @@ namespace ilds {
          *
          * @param[in] seed the seed value to reset the sequence generator to
          */
-        constexpr auto reseed(const size_t seed) -> void {
+        constexpr auto reseed(const unsigned long& seed) -> void {
             this->vdc0.reseed(seed);
             this->vdc1.reseed(seed);
         }

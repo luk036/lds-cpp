@@ -214,7 +214,7 @@ TEST_CASE("dummy") { CHECK_EQ(lds::dummy(15), 53); }
 //                 local_results.emplace_back(vgen.pop());
 //             }
 //             std::lock_guard<std::mutex> lock(mtx);
-//             results[static_cast<size_t>(i)] = std::move(local_results);
+//             results[static_cast<unsigned long>(i)] = std::move(local_results);
 //         });
 //     }
 
@@ -229,7 +229,7 @@ TEST_CASE("dummy") { CHECK_EQ(lds::dummy(15), 53); }
 //     }
 
 //     std::sort(all_values.begin(), all_values.end());
-//     for (size_t i = 1; i < all_values.size(); ++i) {
+//     for (unsigned long i = 1; i < all_values.size(); ++i) {
 //         CHECK_NE(all_values[i], all_values[i - 1]);
 //     }
 
@@ -252,7 +252,7 @@ TEST_CASE("dummy") { CHECK_EQ(lds::dummy(15), 53); }
 //                 local_results.emplace_back(hgen.pop());
 //             }
 //             std::lock_guard<std::mutex> lock(mtx);
-//             results[static_cast<size_t>(i)] = std::move(local_results);
+//             results[static_cast<unsigned long>(i)] = std::move(local_results);
 //         });
 //     }
 
@@ -261,7 +261,7 @@ TEST_CASE("dummy") { CHECK_EQ(lds::dummy(15), 53); }
 //     }
 
 //     // Check that we got the expected number of values
-//     size_t total_values = 0;
+//     unsigned long total_values = 0;
 //     for (const auto& thread_results : results) {
 //         total_values += thread_results.size();
 //     }
@@ -283,7 +283,7 @@ TEST_CASE("dummy") { CHECK_EQ(lds::dummy(15), 53); }
 //                 local_results.emplace_back(cgen.pop());
 //             }
 //             std::lock_guard<std::mutex> lock(mtx);
-//             results[static_cast<size_t>(i)] = std::move(local_results);
+//             results[static_cast<unsigned long>(i)] = std::move(local_results);
 //         });
 //     }
 
@@ -292,7 +292,7 @@ TEST_CASE("dummy") { CHECK_EQ(lds::dummy(15), 53); }
 //     }
 
 //     // Check that we got the expected number of values
-//     size_t total_values = 0;
+//     unsigned long total_values = 0;
 //     for (const auto& thread_results : results) {
 //         total_values += thread_results.size();
 //     }
@@ -322,7 +322,7 @@ TEST_CASE("dummy") { CHECK_EQ(lds::dummy(15), 53); }
 //                 local_results.emplace_back(dgen.pop());
 //             }
 //             std::lock_guard<std::mutex> lock(mtx);
-//             results[static_cast<size_t>(i)] = std::move(local_results);
+//             results[static_cast<unsigned long>(i)] = std::move(local_results);
 //         });
 //     }
 
@@ -331,7 +331,7 @@ TEST_CASE("dummy") { CHECK_EQ(lds::dummy(15), 53); }
 //     }
 
 //     // Check that we got the expected number of values
-//     size_t total_values = 0;
+//     unsigned long total_values = 0;
 //     for (const auto& thread_results : results) {
 //         total_values += thread_results.size();
 //     }
@@ -361,7 +361,7 @@ TEST_CASE("dummy") { CHECK_EQ(lds::dummy(15), 53); }
 //                 local_results.emplace_back(sgen.pop());
 //             }
 //             std::lock_guard<std::mutex> lock(mtx);
-//             results[static_cast<size_t>(i)] = std::move(local_results);
+//             results[static_cast<unsigned long>(i)] = std::move(local_results);
 //         });
 //     }
 
@@ -370,7 +370,7 @@ TEST_CASE("dummy") { CHECK_EQ(lds::dummy(15), 53); }
 //     }
 
 //     // Check that we got the expected number of values
-//     size_t total_values = 0;
+//     unsigned long total_values = 0;
 //     for (const auto& thread_results : results) {
 //         total_values += thread_results.size();
 //     }
@@ -400,7 +400,7 @@ TEST_CASE("dummy") { CHECK_EQ(lds::dummy(15), 53); }
 //                 local_results.emplace_back(shfgen.pop());
 //             }
 //             std::lock_guard<std::mutex> lock(mtx);
-//             results[static_cast<size_t>(i)] = std::move(local_results);
+//             results[static_cast<unsigned long>(i)] = std::move(local_results);
 //         });
 //     }
 
@@ -409,7 +409,7 @@ TEST_CASE("dummy") { CHECK_EQ(lds::dummy(15), 53); }
 //     }
 
 //     // Check that we got the expected number of values
-//     size_t total_values = 0;
+//     unsigned long total_values = 0;
 //     for (const auto& thread_results : results) {
 //         total_values += thread_results.size();
 //     }
@@ -440,7 +440,7 @@ TEST_CASE("dummy") { CHECK_EQ(lds::dummy(15), 53); }
 //             for (int j = 0; j < operations_per_thread; ++j) {
 //                 if (j % 10 == 0) {
 //                     // Occasionally reseed
-//                     vgen.reseed(static_cast<size_t>(i * 10 + j));
+//                     vgen.reseed(static_cast<unsigned long>(i * 10 + j));
 //                     reseed_count++;
 //                 } else {
 //                     // Mostly pop

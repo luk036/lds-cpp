@@ -30,7 +30,7 @@ namespace lds {
      * @param[in] num number of samples to generate
      * @return std::vector<double> vector of evenly spaced numbers
      */
-    std::vector<double> linspace(double start, double stop, std::size_t num);
+    std::vector<double> linspace(double start, double stop, std::unsigned long num);
 
     /**
      * @brief Perform one-dimensional linear interpolation

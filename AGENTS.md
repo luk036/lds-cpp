@@ -116,10 +116,10 @@ cmake --build build/test --target fix-format
 ```cpp
 // Use trailing return types for clarity
 auto pop() -> double;
-auto reseed(size_t seed) -> void;
+auto reseed(unsigned long seed) -> void;
 
 // Mark constructors explicit unless implicit conversion intended
-explicit VdCorput(size_t base);
+explicit VdCorput(unsigned long base);
 
 // Delete move operations if not thread-safe/reasonable
 VdCorput(VdCorput&&) noexcept = delete;

@@ -112,8 +112,8 @@ Created 16 property-based tests demonstrating various RapidCheck patterns:
 TEST_CASE("Property-based test: VdCorput values in [0,1]") {
     rc::check("vdc(n, base) returns values in [0, 1]",
               []() {
-                  auto base = static_cast<size_t>(*rc::gen::inRange(2, 101));
-                  for (size_t i = 0; i < 100; ++i) {
+                  auto base = static_cast<unsigned long>(*rc::gen::inRange(2, 101));
+                  for (unsigned long i = 0; i < 100; ++i) {
                       auto val = lds::vdc(i, base);
                       RC_ASSERT(val >= 0.0 && val < 1.0);
                   }
@@ -123,8 +123,8 @@ TEST_CASE("Property-based test: VdCorput values in [0,1]") {
 TEST_CASE("Property-based test: VdCorput sequence is deterministic") {
     rc::check("VdCorput produces same sequence after reseed",
               []() {
-                  auto base = static_cast<size_t>(*rc::gen::inRange(2, 51));
-                  auto seed = static_cast<size_t>(*rc::gen::inRange(0, 1000));
+                  auto base = static_cast<unsigned long>(*rc::gen::inRange(2, 51));
+                  auto seed = static_cast<unsigned long>(*rc::gen::inRange(0, 1000));
                   
                   lds::VdCorput gen1(base);
                   lds::VdCorput gen2(base);
@@ -132,7 +132,7 @@ TEST_CASE("Property-based test: VdCorput sequence is deterministic") {
                   gen1.reseed(seed);
                   gen2.reseed(seed);
                   
-                  for (size_t i = 0; i < 10; ++i) {
+                  for (unsigned long i = 0; i < 10; ++i) {
                       RC_ASSERT(gen1.pop() == gen2.pop());
                   }
               });
@@ -140,7 +140,7 @@ TEST_CASE("Property-based test: VdCorput sequence is deterministic") {
 
 TEST_CASE("Property-based test: VdCorput generates values in [0,1)") {
     lds::VdCorput gen(2);
-    for (size_t i = 0; i < 100; ++i) {
+    for (unsigned long i = 0; i < 100; ++i) {
         auto curr = gen.pop();
         CHECK_GE(curr, 0.0);
         CHECK_LT(curr, 1.0);
@@ -150,10 +150,10 @@ TEST_CASE("Property-based test: VdCorput generates values in [0,1)") {
 TEST_CASE("Property-based test: Circle points on unit circle") {
     rc::check("All Circle points lie on unit circle",
               []() {
-                  auto base = static_cast<size_t>(*rc::gen::inRange(2, 101));
+                  auto base = static_cast<unsigned long>(*rc::gen::inRange(2, 101));
                   lds::Circle gen(base);
                   
-                  for (size_t i = 0; i < 50; ++i) {
+                  for (unsigned long i = 0; i < 50; ++i) {
                       auto point = gen.pop();
                       double radius_squared = point[0] * point[0] + point[1] * point[1];
                       RC_ASSERT(radius_squared == doctest::Approx(1.0));
@@ -164,11 +164,11 @@ TEST_CASE("Property-based test: Circle points on unit circle") {
 TEST_CASE("Property-based test: Disk points inside unit disk") {
     rc::check("All Disk points lie inside unit disk",
               []() {
-                  auto base0 = static_cast<size_t>(*rc::gen::inRange(2, 51));
-                  auto base1 = static_cast<size_t>(*rc::gen::inRange(2, 51));
+                  auto base0 = static_cast<unsigned long>(*rc::gen::inRange(2, 51));
+                  auto base1 = static_cast<unsigned long>(*rc::gen::inRange(2, 51));
                   lds::Disk gen(base0, base1);
                   
-                  for (size_t i = 0; i < 50; ++i) {
+                  for (unsigned long i = 0; i < 50; ++i) {
                       auto point = gen.pop();
                       double radius_squared = point[0] * point[0] + point[1] * point[1];
                       RC_ASSERT(radius_squared >= 0.0 && radius_squared <= 1.0);
@@ -179,11 +179,11 @@ TEST_CASE("Property-based test: Disk points inside unit disk") {
 TEST_CASE("Property-based test: Sphere points on unit sphere") {
     rc::check("All Sphere points lie on unit sphere",
               []() {
-                  auto base0 = static_cast<size_t>(*rc::gen::inRange(2, 51));
-                  auto base1 = static_cast<size_t>(*rc::gen::inRange(2, 51));
+                  auto base0 = static_cast<unsigned long>(*rc::gen::inRange(2, 51));
+                  auto base1 = static_cast<unsigned long>(*rc::gen::inRange(2, 51));
                   lds::Sphere gen(base0, base1);
                   
-                  for (size_t i = 0; i < 50; ++i) {
+                  for (unsigned long i = 0; i < 50; ++i) {
                       auto point = gen.pop();
                       double radius_squared = point[0] * point[0] + 
                                             point[1] * point[1] + 
@@ -196,11 +196,11 @@ TEST_CASE("Property-based test: Sphere points on unit sphere") {
 TEST_CASE("Property-based test: Halton points in [0,1]^2") {
     rc::check("All Halton points lie in unit square [0,1]x[0,1]",
               []() {
-                  auto base0 = static_cast<size_t>(*rc::gen::inRange(2, 51));
-                  auto base1 = static_cast<size_t>(*rc::gen::inRange(2, 51));
+                  auto base0 = static_cast<unsigned long>(*rc::gen::inRange(2, 51));
+                  auto base1 = static_cast<unsigned long>(*rc::gen::inRange(2, 51));
                   lds::Halton gen(base0, base1);
                   
-                  for (size_t i = 0; i < 50; ++i) {
+                  for (unsigned long i = 0; i < 50; ++i) {
                       auto point = gen.pop();
                       RC_ASSERT(point[0] >= 0.0 && point[0] < 1.0);
                       RC_ASSERT(point[1] >= 0.0 && point[1] < 1.0);
@@ -211,12 +211,12 @@ TEST_CASE("Property-based test: Halton points in [0,1]^2") {
 TEST_CASE("Property-based test: Sphere3Hopf points on unit 3-sphere") {
     rc::check("All Sphere3Hopf points lie on unit 3-sphere",
               []() {
-                  auto base0 = static_cast<size_t>(*rc::gen::inRange(2, 31));
-                  auto base1 = static_cast<size_t>(*rc::gen::inRange(2, 31));
-                  auto base2 = static_cast<size_t>(*rc::gen::inRange(2, 31));
+                  auto base0 = static_cast<unsigned long>(*rc::gen::inRange(2, 31));
+                  auto base1 = static_cast<unsigned long>(*rc::gen::inRange(2, 31));
+                  auto base2 = static_cast<unsigned long>(*rc::gen::inRange(2, 31));
                   lds::Sphere3Hopf gen(base0, base1, base2);
                   
-                  for (size_t i = 0; i < 50; ++i) {
+                  for (unsigned long i = 0; i < 50; ++i) {
                       auto point = gen.pop();
                       double radius_squared = point[0] * point[0] + 
                                             point[1] * point[1] + 
@@ -230,10 +230,10 @@ TEST_CASE("Property-based test: Sphere3Hopf points on unit 3-sphere") {
 TEST_CASE("Property-based test: peek does not advance state") {
     rc::check("peek() returns same value as subsequent pop()",
               []() {
-                  auto base = static_cast<size_t>(*rc::gen::inRange(2, 51));
+                  auto base = static_cast<unsigned long>(*rc::gen::inRange(2, 51));
                   lds::VdCorput gen(base);
                   
-                  for (size_t i = 0; i < 10; ++i) {
+                  for (unsigned long i = 0; i < 10; ++i) {
                       auto peeked = gen.peek();
                       auto popped = gen.pop();
                       RC_ASSERT(peeked == popped);
@@ -244,15 +244,15 @@ TEST_CASE("Property-based test: peek does not advance state") {
 TEST_CASE("Property-based test: skip advances state correctly") {
     rc::check("skip(n) advances state by n positions",
               []() {
-                  auto base = static_cast<size_t>(*rc::gen::inRange(2, 51));
-                  auto skip_count = static_cast<size_t>(*rc::gen::inRange(0, 100));
+                  auto base = static_cast<unsigned long>(*rc::gen::inRange(2, 51));
+                  auto skip_count = static_cast<unsigned long>(*rc::gen::inRange(0, 100));
                   
                   lds::VdCorput gen1(base);
                   lds::VdCorput gen2(base);
                   
                   gen2.skip(skip_count);
                   
-                  for (size_t i = 0; i < skip_count; ++i) {
+                  for (unsigned long i = 0; i < skip_count; ++i) {
                       gen1.pop();
                   }
                   
@@ -263,15 +263,15 @@ TEST_CASE("Property-based test: skip advances state correctly") {
 TEST_CASE("Property-based test: batch returns correct number of values") {
     rc::check("batch(n) returns exactly n values",
               []() {
-                  auto base = static_cast<size_t>(*rc::gen::inRange(2, 51));
-                  auto batch_size = static_cast<size_t>(*rc::gen::inRange(1, 100));
+                  auto base = static_cast<unsigned long>(*rc::gen::inRange(2, 51));
+                  auto batch_size = static_cast<unsigned long>(*rc::gen::inRange(1, 100));
                   
                   lds::VdCorput gen(base);
                   auto batch = gen.batch(batch_size);
                   
                   RC_ASSERT(batch.size() == batch_size);
                   
-                  for (size_t i = 0; i < batch_size; ++i) {
+                  for (unsigned long i = 0; i < batch_size; ++i) {
                       RC_ASSERT(batch[i] >= 0.0 && batch[i] < 1.0);
                   }
               });
@@ -280,8 +280,8 @@ TEST_CASE("Property-based test: batch returns correct number of values") {
 TEST_CASE("Property-based test: reseed resets generator state") {
     rc::check("reseed(n) produces deterministic sequence",
               []() {
-                  auto base = static_cast<size_t>(*rc::gen::inRange(2, 51));
-                  auto seed = static_cast<size_t>(*rc::gen::inRange(0, 1000));
+                  auto base = static_cast<unsigned long>(*rc::gen::inRange(2, 51));
+                  auto seed = static_cast<unsigned long>(*rc::gen::inRange(0, 1000));
                   
                   lds::VdCorput gen1(base);
                   lds::VdCorput gen2(base);
@@ -289,7 +289,7 @@ TEST_CASE("Property-based test: reseed resets generator state") {
                   gen1.reseed(seed);
                   gen2.reseed(seed);
                   
-                  for (size_t i = 0; i < 10; ++i) {
+                  for (unsigned long i = 0; i < 10; ++i) {
                       RC_ASSERT(gen1.pop() == gen2.pop());
                   }
               });
@@ -298,13 +298,13 @@ TEST_CASE("Property-based test: reseed resets generator state") {
 TEST_CASE("Property-based test: iterator produces same values as pop") {
     rc::check("Iterator produces same sequence as pop()",
               []() {
-                  auto base = static_cast<size_t>(*rc::gen::inRange(2, 51));
+                  auto base = static_cast<unsigned long>(*rc::gen::inRange(2, 51));
                   
                   lds::VdCorput gen1(base);
                   lds::VdCorput gen2(base);
                   
                   auto it = gen1.begin();
-                  for (size_t i = 0; i < 50; ++i, ++it) {
+                  for (unsigned long i = 0; i < 50; ++i, ++it) {
                       RC_ASSERT(*it == gen2.pop());
                   }
               });
@@ -313,12 +313,12 @@ TEST_CASE("Property-based test: iterator produces same values as pop") {
 TEST_CASE("Property-based test: Circle iterator produces points on unit circle") {
     rc::check("Circle iterator produces points on unit circle",
               []() {
-                  auto base = static_cast<size_t>(*rc::gen::inRange(2, 51));
+                  auto base = static_cast<unsigned long>(*rc::gen::inRange(2, 51));
                   
                   lds::Circle gen(base);
                   auto it = gen.begin();
                   
-                  for (size_t i = 0; i < 50; ++i, ++it) {
+                  for (unsigned long i = 0; i < 50; ++i, ++it) {
                       auto point = *it;
                       double radius_squared = point[0] * point[0] + point[1] * point[1];
                       RC_ASSERT(radius_squared == doctest::Approx(1.0));
@@ -329,13 +329,13 @@ TEST_CASE("Property-based test: Circle iterator produces points on unit circle")
 TEST_CASE("Property-based test: Halton iterator produces points in unit square") {
     rc::check("Halton iterator produces points in [0,1]^2",
               []() {
-                  auto base0 = static_cast<size_t>(*rc::gen::inRange(2, 51));
-                  auto base1 = static_cast<size_t>(*rc::gen::inRange(2, 51));
+                  auto base0 = static_cast<unsigned long>(*rc::gen::inRange(2, 51));
+                  auto base1 = static_cast<unsigned long>(*rc::gen::inRange(2, 51));
                   
                   lds::Halton gen(base0, base1);
                   auto it = gen.begin();
                   
-                  for (size_t i = 0; i < 50; ++i, ++it) {
+                  for (unsigned long i = 0; i < 50; ++i, ++it) {
                       auto point = *it;
                       RC_ASSERT(point[0] >= 0.0 && point[0] < 1.0);
                       RC_ASSERT(point[1] >= 0.0 && point[1] < 1.0);
@@ -346,14 +346,14 @@ TEST_CASE("Property-based test: Halton iterator produces points in unit square")
 TEST_CASE("Property-based test: get_index reflects correct position") {
     rc::check("get_index() returns current sequence position",
               []() {
-                  auto base = static_cast<size_t>(*rc::gen::inRange(2, 51));
+                  auto base = static_cast<unsigned long>(*rc::gen::inRange(2, 51));
                   
                   lds::VdCorput gen(base);
-                  RC_ASSERT(gen.get_index() == static_cast<size_t>(0));
+                  RC_ASSERT(gen.get_index() == static_cast<unsigned long>(0));
                   
-                  for (size_t i = 0; i < 100; ++i) {
+                  for (unsigned long i = 0; i < 100; ++i) {
                       gen.pop();
-                      RC_ASSERT(gen.get_index() == i + static_cast<size_t>(1));
+                      RC_ASSERT(gen.get_index() == i + static_cast<unsigned long>(1));
                   }
               });
 }
@@ -361,8 +361,8 @@ TEST_CASE("Property-based test: get_index reflects correct position") {
 TEST_CASE("Property-based test: reseed and get_index consistency") {
     rc::check("reseed(n) sets index to n",
               []() {
-                  auto base = static_cast<size_t>(*rc::gen::inRange(2, 51));
-                  auto seed = static_cast<size_t>(*rc::gen::inRange(0, 1000));
+                  auto base = static_cast<unsigned long>(*rc::gen::inRange(2, 51));
+                  auto seed = static_cast<unsigned long>(*rc::gen::inRange(0, 1000));
                   
                   lds::VdCorput gen(base);
                   gen.reseed(seed);
@@ -370,7 +370,7 @@ TEST_CASE("Property-based test: reseed and get_index consistency") {
                   RC_ASSERT(gen.get_index() == seed);
                   
                   gen.pop();
-                  RC_ASSERT(gen.get_index() == seed + static_cast<size_t>(1));
+                  RC_ASSERT(gen.get_index() == seed + static_cast<unsigned long>(1));
               });
 }
 
@@ -417,30 +417,30 @@ This is the most reliable approach when mixing doctest with other testing framew
 
 #### Challenge 2: Signed/Unsigned Comparison on Linux/macOS
 
-**Problem:** The `-Werror` flag on Linux/macOS treated signed/unsigned integer comparisons as compilation errors. The issue occurred when `size_t` values from `rc::gen::inRange()` were being compared with integer literals or passed to functions expecting different types.
+**Problem:** The `-Werror` flag on Linux/macOS treated signed/unsigned integer comparisons as compilation errors. The issue occurred when `unsigned long` values from `rc::gen::inRange()` were being compared with integer literals or passed to functions expecting different types.
 
 **Examples of errors:**
 ```cpp
-// Line 153: size_t vs int
-for (size_t i = 0; i < skip_count; ++i) {  // skip_count is int from rc::gen::inRange()
+// Line 153: unsigned long vs int
+for (unsigned long i = 0; i < skip_count; ++i) {  // skip_count is int from rc::gen::inRange()
 
-// Line 249: size_t vs int
-RC_ASSERT(gen.get_index() == 0);  // 0 is int, get_index() returns size_t
+// Line 249: unsigned long vs int
+RC_ASSERT(gen.get_index() == 0);  // 0 is int, get_index() returns unsigned long
 
-// Line 259: size_t vs int
-RC_ASSERT(gen.get_index() == seed + 1);  // 1 is int, seed is size_t
+// Line 259: unsigned long vs int
+RC_ASSERT(gen.get_index() == seed + 1);  // 1 is int, seed is unsigned long
 ```
 
-**Solution:** Added explicit `static_cast<size_t>()` conversions to all `rc::gen::inRange()` results and integer literals used in comparisons with size_t:
+**Solution:** Added explicit `static_cast<unsigned long>()` conversions to all `rc::gen::inRange()` results and integer literals used in comparisons with unsigned long:
 
 ```cpp
 // Convert generator results
-auto base = static_cast<size_t>(*rc::gen::inRange(2, 51));
-auto skip_count = static_cast<size_t>(*rc::gen::inRange(0, 100));
+auto base = static_cast<unsigned long>(*rc::gen::inRange(2, 51));
+auto skip_count = static_cast<unsigned long>(*rc::gen::inRange(0, 100));
 
 // Convert integer literals in comparisons
-RC_ASSERT(gen.get_index() == static_cast<size_t>(0));
-RC_ASSERT(gen.get_index() == seed + static_cast<size_t>(1));
+RC_ASSERT(gen.get_index() == static_cast<unsigned long>(0));
+RC_ASSERT(gen.get_index() == seed + static_cast<unsigned long>(1));
 ```
 
 #### Challenge 3: Incorrect Test Assertion
@@ -454,7 +454,7 @@ RC_ASSERT(gen.get_index() == seed + static_cast<size_t>(1));
 ```cpp
 TEST_CASE("Property-based test: VdCorput generates values in [0,1)") {
     lds::VdCorput gen(2);
-    for (size_t i = 0; i < 100; ++i) {
+    for (unsigned long i = 0; i < 100; ++i) {
         auto curr = gen.pop();
         CHECK_GE(curr, 0.0);
         CHECK_LT(curr, 1.0);
@@ -645,7 +645,7 @@ RapidCheck discovered a critical misconception about van der Corput sequences be
 ### 4. Generator Function Usage
 
 When using `rc::gen::inRange()`:
-- Always cast results to the target type (especially `size_t`)
+- Always cast results to the target type (especially `unsigned long`)
 - Be aware that it returns `int` by default
 - Use `static_cast<>()` rather than C-style casts for clarity
 

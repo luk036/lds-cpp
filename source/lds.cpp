@@ -1,11 +1,11 @@
 #include <array>
-#include <cstddef>  // for size_t
+#include <cstddef>  // for unsigned long
 
 namespace lds {
 
     /// @brief First 1000 prime numbers
     /// @details Used as lookup table for selecting bases in low-discrepancy sequences
-    constexpr std::array<size_t, 1000> PRIME_TABLE = {
+    constexpr std::array<unsigned long, 1000> PRIME_TABLE = {
         2,    3,    5,    7,    11,   13,   17,   19,   23,   29,   31,   37,   41,   43,   47,
         53,   59,   61,   67,   71,   73,   79,   83,   89,   97,   101,  103,  107,  109,  113,
         127,  131,  137,  139,  149,  151,  157,  163,  167,  173,  179,  181,  191,  193,  197,
@@ -79,6 +79,6 @@ namespace lds {
     /// @brief Dummy function to prevent unused variable warnings
     /// @param index Index into the prime table
     /// @return The prime number at the given index
-    size_t dummy(size_t index) { return PRIME_TABLE[index]; }
+    unsigned long dummy(unsigned long index) { return PRIME_TABLE[index]; }
 
 }  // namespace lds

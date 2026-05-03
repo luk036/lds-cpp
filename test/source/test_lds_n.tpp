@@ -3,7 +3,7 @@
 #include <lds/lds_n.hpp>  // for halton_n
 #include <vector>
 TEST_CASE("HaltonN") {
-    auto hgen = lds::HaltonN({2, 3, 5});
+    auto hgen = lds::HaltonN<3>({2, 3, 5});
     hgen.reseed(1);
     auto res = hgen.pop();
     CHECK_EQ(res[0], doctest::Approx(0.25));

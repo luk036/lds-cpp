@@ -111,8 +111,8 @@ TEST_CASE("Test Sphere3 reseed functionality") {
     }
 
     // Should be identical
-    for (size_t i = 0; i < 3; ++i) {
-        for (size_t j = 0; j < 4; ++j) {
+    for (unsigned long i = 0; i < 3; ++i) {
+        for (unsigned long j = 0; j < 4; ++j) {
             CHECK_EQ(seq1[i][j], doctest::Approx(seq2[i][j]).epsilon(1e-10));
         }
     }
@@ -126,8 +126,8 @@ TEST_CASE("Test Sphere3 reseed functionality") {
 
     // Should be different from seed 0
     bool different = false;
-    for (size_t i = 0; i < 3 && !different; ++i) {
-        for (size_t j = 0; j < 4; ++j) {
+    for (unsigned long i = 0; i < 3 && !different; ++i) {
+        for (unsigned long j = 0; j < 4; ++j) {
             if (std::abs(seq1[i][j] - seq3[i][j]) > 1e-10) {
                 different = true;
                 break;
@@ -184,8 +184,8 @@ TEST_CASE("Test SphereN reseed functionality") {
     }
 
     // Should be identical
-    for (size_t i = 0; i < 3; ++i) {
-        for (size_t j = 0; j < 4; ++j) {
+    for (unsigned long i = 0; i < 3; ++i) {
+        for (unsigned long j = 0; j < 4; ++j) {
             CHECK_EQ(seq1[i][j], doctest::Approx(seq2[i][j]).epsilon(1e-10));
         }
     }
@@ -207,7 +207,7 @@ TEST_CASE("Test comparison with Python implementation") {
     auto result3 = sgen3.pop();
 
     REQUIRE(result3.size() == expected_sphere3.size());
-    for (std::size_t i = 0; i < result3.size(); ++i) {
+    for (std::unsigned long i = 0; i < result3.size(); ++i) {
         CHECK_EQ(result3[i], doctest::Approx(expected_sphere3[i]).epsilon(1e-10));
     }
 
@@ -218,7 +218,7 @@ TEST_CASE("Test comparison with Python implementation") {
     auto resultN = sgenN.pop();
 
     REQUIRE(resultN.size() == expected_spheren.size());
-    for (std::size_t i = 0; i < resultN.size(); ++i) {
+    for (std::unsigned long i = 0; i < resultN.size(); ++i) {
         CHECK_EQ(resultN[i], doctest::Approx(expected_spheren[i]).epsilon(1e-10));
     }
 }
@@ -244,7 +244,7 @@ TEST_CASE("Sphere3 thread safety") {
                 local_results.emplace_back(sgen.pop());
             }
             std::lock_guard<std::mutex> lock(mtx);
-            results[static_cast<size_t>(i)] = std::move(local_results);
+            results[static_cast<unsigned long>(i)] = std::move(local_results);
         });
     }
 
@@ -253,7 +253,7 @@ TEST_CASE("Sphere3 thread safety") {
     }
 
     // Check that we got the expected number of values
-    size_t total_points = 0;
+    unsigned long total_points = 0;
     for (const auto& thread_results : results) {
         total_points += thread_results.size();
         // Verify all points are on unit 3-sphere
@@ -282,7 +282,7 @@ TEST_CASE("SphereN thread safety") {
                 local_results.emplace_back(sgen.pop());
             }
             std::lock_guard<std::mutex> lock(mtx);
-            results[static_cast<size_t>(i)] = std::move(local_results);
+            results[static_cast<unsigned long>(i)] = std::move(local_results);
         });
     }
 
@@ -291,7 +291,7 @@ TEST_CASE("SphereN thread safety") {
     }
 
     // Check that we got the expected number of values
-    size_t total_points = 0;
+    unsigned long total_points = 0;
     for (const auto& thread_results : results) {
         total_points += thread_results.size();
         // Verify all points are on unit N-sphere
@@ -320,7 +320,7 @@ TEST_CASE("SphereWrapper thread safety") {
                 local_results.emplace_back(sgen.pop());
             }
             std::lock_guard<std::mutex> lock(mtx);
-            results[static_cast<size_t>(i)] = std::move(local_results);
+            results[static_cast<unsigned long>(i)] = std::move(local_results);
         });
     }
 
@@ -329,7 +329,7 @@ TEST_CASE("SphereWrapper thread safety") {
     }
 
     // Check that we got the expected number of values
-    size_t total_points = 0;
+    unsigned long total_points = 0;
     for (const auto& thread_results : results) {
         total_points += thread_results.size();
         // Verify all points are on unit sphere
@@ -361,9 +361,9 @@ TEST_CASE("Concurrent reseed thread safety for sphere classes") {
                 if (j % 5 == 0) {
                     // Occasionally reseed
                     if (i % 2 == 0) {
-                        sgen3.reseed(static_cast<size_t>(i * 10 + j));
+                        sgen3.reseed(static_cast<unsigned long>(i * 10 + j));
                     } else {
-                        sgenN.reseed(static_cast<size_t>(i * 10 + j));
+                        sgenN.reseed(static_cast<unsigned long>(i * 10 + j));
                     }
                     reseed_count++;
                 } else {

@@ -531,11 +531,11 @@ int main() {
 #include <lds/logger.hpp>
 #include <lds/lds.hpp>
 
-void generate_vd_corput_sequence(size_t count) {
+void generate_vd_corput_sequence(unsigned long count) {
     lds::log_with_spdlog("Starting VdCorput sequence generation");
     
     lds::VdCorput<2> vdc{};
-    for (size_t i = 0; i < count; ++i) {
+    for (unsigned long i = 0; i < count; ++i) {
         auto point = vdc.pop();
         // Process point
     }
@@ -996,12 +996,12 @@ auto logger = spdlog::rotating_logger_mt("rotating", "logs/rotating.log", 1024 *
 
 4. **Async Logging Support:**
    ```cpp
-   void init_async_logging(size_t queue_size = 8192, size_t thread_count = 1);
+   void init_async_logging(unsigned long queue_size = 8192, unsigned long thread_count = 1);
    ```
 
 5. **Log Rotation:**
    ```cpp
-   void init_rotating_logger(const std::string& base_name, size_t max_size, size_t max_files);
+   void init_rotating_logger(const std::string& base_name, unsigned long max_size, unsigned long max_files);
    ```
 
 6. **Console + File Logging:**

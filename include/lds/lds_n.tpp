@@ -1,6 +1,6 @@
 #pragma once
 
-#include <cstddef>  // for size_t
+#include <cstddef>  // for unsigned long
 #include <memory>   // for unique_ptr
 
 // #include <algorithm>  // for std::transform
@@ -41,9 +41,9 @@ namespace lds {
          *
          * Constructs an N-dimensional Halton sequence generator with the specified bases.
          *
-         * @param[in] base vector of size_t values representing the bases for each dimension
+         * @param[in] base vector of unsigned long values representing the bases for each dimension
          */
-        explicit HaltonN(const vector<size_t>& base) {
+        explicit HaltonN(const vector<unsigned long>& base) {
             for (const auto& base_value : base) {
                 this->vdcs.emplace_back(std::make_unique<lds::VdCorput>(base_value));
             }
@@ -71,7 +71,7 @@ namespace lds {
          *
          * @param[in] seed the seed value to reset the sequence generator to
          */
-        auto reseed(size_t seed) -> void {
+        auto reseed(unsigned long seed) -> void {
             for (auto& vdc : this->vdcs) {
                 vdc->reseed(seed);
             }

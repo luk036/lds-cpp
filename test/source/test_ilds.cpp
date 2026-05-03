@@ -36,7 +36,7 @@ TEST_CASE("VdCorput_i different base and scale") {
 }
 
 TEST_CASE("Halton_i") {
-    // const std::array<size_t, 2> base = {2, 3};
+    // const std::array<unsigned long, 2> base = {2, 3};
     const std::array<unsigned int, 2> scale = {11, 7};
     auto hgen = ilds::Halton<2, 3>(scale);
     const auto arr = hgen.pop();
