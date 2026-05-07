@@ -2,9 +2,8 @@
 
 #include <array>
 #include <cstddef>
-#include <memory>
-
 #include <lds/lds.hpp>
+#include <memory>
 
 namespace lds {
 
@@ -18,8 +17,7 @@ namespace lds {
         virtual auto get_index() const -> unsigned long = 0;
     };
 
-    template <unsigned long Base>
-    class VdCorputWrap : public VdCorputBase {
+    template <unsigned long Base> class VdCorputWrap : public VdCorputBase {
         VdCorput<Base> vdc;
 
       public:
@@ -27,8 +25,12 @@ namespace lds {
         constexpr auto pop() -> double override { return this->vdc.pop(); }
         constexpr auto peek() -> double override { return this->vdc.peek(); }
         constexpr auto skip(unsigned long n) -> void override { this->vdc.skip(n); }
-        constexpr auto reseed(const unsigned long& seed) -> void override { this->vdc.reseed(seed); }
-        [[nodiscard]] constexpr auto get_index() const -> unsigned long override { return this->vdc.get_index(); }
+        constexpr auto reseed(const unsigned long& seed) -> void override {
+            this->vdc.reseed(seed);
+        }
+        [[nodiscard]] constexpr auto get_index() const -> unsigned long override {
+            return this->vdc.get_index();
+        }
     };
 
     class VdCorputDynamic : public VdCorputBase {
@@ -56,9 +58,7 @@ namespace lds {
             return vdc(this->count - 1, this->base_);
         }
 
-        auto peek() -> double override {
-            return vdc(this->count, this->base_);
-        }
+        auto peek() -> double override { return vdc(this->count, this->base_); }
 
         auto skip(unsigned long n) -> void override { this->count += n; }
 
@@ -67,8 +67,7 @@ namespace lds {
         auto get_index() const -> unsigned long override { return this->count; }
     };
 
-    template <std::size_t N>
-    class HaltonN {
+    template <std::size_t N> class HaltonN {
         std::array<std::unique_ptr<VdCorputBase>, N> vdcs;
 
       public:

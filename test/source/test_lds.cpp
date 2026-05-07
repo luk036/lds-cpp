@@ -379,8 +379,8 @@ TEST_CASE("dummy") { CHECK_EQ(lds::dummy(15), 53); }
 //     // Verify points are on unit sphere
 //     for (const auto& thread_results : results) {
 //         for (const auto& point : thread_results) {
-//             double radius_squared = point[0] * point[0] + point[1] * point[1] + point[2] * point[2];
-//             CHECK_EQ(radius_squared, doctest::Approx(1.0));
+//             double radius_squared = point[0] * point[0] + point[1] * point[1] + point[2] *
+//             point[2]; CHECK_EQ(radius_squared, doctest::Approx(1.0));
 //         }
 //     }
 // }
@@ -418,7 +418,8 @@ TEST_CASE("dummy") { CHECK_EQ(lds::dummy(15), 53); }
 //     // Verify points are on unit 3-sphere
 //     for (const auto& thread_results : results) {
 //         for (const auto& point : thread_results) {
-//             double radius_squared = point[0] * point[0] + point[1] * point[1] + point[2] * point[2]
+//             double radius_squared = point[0] * point[0] + point[1] * point[1] + point[2] *
+//             point[2]
 //                                     + point[3] * point[3];
 //             CHECK_EQ(radius_squared, doctest::Approx(1.0));
 //         }

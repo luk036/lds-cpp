@@ -16,10 +16,12 @@ int main() {
     // // clang-format off
     // options.add_options()
     //     ("h,help", "Show help")
-    //     ("s,sequence", "Sequence type (vdc, halton, circle, disk, sphere)", cxxopts::value(sequence_type)->default_value("vdc"))
+    //     ("s,sequence", "Sequence type (vdc, halton, circle, disk, sphere)",
+    //     cxxopts::value(sequence_type)->default_value("vdc"))
     //     ("n,count", "Number of points to generate", cxxopts::value(count)->default_value("10"))
     //     ("b,base", "Base for VdCorput sequence", cxxopts::value(base)->default_value("2"))
-    //     ("l,logger", "Enable logging to file", cxxopts::value(use_logger)->default_value("false"))
+    //     ("l,logger", "Enable logging to file",
+    //     cxxopts::value(use_logger)->default_value("false"))
     // ;
     // // clang-format on
 
@@ -35,7 +37,8 @@ int main() {
     //     lds::log_with_spdlog("Generating " + std::to_string(count) + " points");
     // }
 
-    // std::cout << "Generating " << count << " points using " << sequence_type << " sequence" << '\n';
+    // std::cout << "Generating " << count << " points using " << sequence_type << " sequence" <<
+    // '\n';
 
     // if (sequence_type == "vdc") {
     //     lds::VdCorput vdc(base);

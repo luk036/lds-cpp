@@ -44,7 +44,8 @@ namespace lds {
         using pointer = const value_type*;
         using reference = value_type;
 
-        explicit GeneratorIterator(Generator* g = nullptr, unsigned long idx = 0) : gen{g}, index{idx} {}
+        explicit GeneratorIterator(Generator* g = nullptr, unsigned long idx = 0)
+            : gen{g}, index{idx} {}
 
         /**
          * @brief Dereference operator
@@ -115,8 +116,7 @@ namespace lds {
      * @param[in] base base of the sequence
      * @return double
      */
-    template <unsigned long Base = 2>
-    constexpr auto vdc(unsigned long cnt) -> double {
+    template <unsigned long Base = 2> constexpr auto vdc(unsigned long cnt) -> double {
         auto reslt = 0.0;
         auto denom = 1.0;
         auto count = cnt;
@@ -148,8 +148,7 @@ namespace lds {
      *     ...
      * @endverbatim
      */
-    template <unsigned long Base = 2>
-    class VdCorput {
+    template <unsigned long Base = 2> class VdCorput {
         unsigned long count;
         std::array<double, MAX_REVERSE_BITS> rev_lst;
 
@@ -228,18 +227,14 @@ namespace lds {
          *
          * @param[in] seed the seed value to reset the sequence generator to
          */
-        constexpr auto reseed(const unsigned long& seed) -> void {
-            this->count = seed;
-        }
+        constexpr auto reseed(const unsigned long& seed) -> void { this->count = seed; }
 
         /**
          * @brief Get current index
          *
          * @return unsigned long current index in the sequence
          */
-        [[nodiscard]] constexpr auto get_index() const -> unsigned long {
-            return this->count;
-        }
+        [[nodiscard]] constexpr auto get_index() const -> unsigned long { return this->count; }
 
         /**
          * @brief Get iterator to beginning
@@ -258,7 +253,8 @@ namespace lds {
          * @return GeneratorIterator<VdCorput, double>
          */
         [[nodiscard]] constexpr auto end() const -> GeneratorIterator<VdCorput, double> {
-            return GeneratorIterator<VdCorput, double>(nullptr, std::numeric_limits<unsigned long>::max());
+            return GeneratorIterator<VdCorput, double>(nullptr,
+                                                       std::numeric_limits<unsigned long>::max());
         }
 
         VdCorput(VdCorput&&) noexcept = delete;
@@ -289,8 +285,7 @@ namespace lds {
      *     than random sampling
      * @endverbatim
      */
-    template <unsigned long Base = 2>
-    class Circle {
+    template <unsigned long Base = 2> class Circle {
         VdCorput<Base> vdc;
 
       public:
@@ -347,7 +342,9 @@ namespace lds {
          *
          * @return unsigned long current index in sequence
          */
-        [[nodiscard]] constexpr auto get_index() const -> unsigned long { return this->vdc.get_index(); }
+        [[nodiscard]] constexpr auto get_index() const -> unsigned long {
+            return this->vdc.get_index();
+        }
 
         /**
          * @brief Get iterator to beginning
@@ -363,7 +360,8 @@ namespace lds {
          *
          * @return GeneratorIterator<Circle, std::array<double, 2>>
          */
-        [[nodiscard]] constexpr auto end() const -> GeneratorIterator<Circle, std::array<double, 2>> {
+        [[nodiscard]] constexpr auto end() const
+            -> GeneratorIterator<Circle, std::array<double, 2>> {
             return GeneratorIterator<Circle, std::array<double, 2>>(
                 nullptr, std::numeric_limits<unsigned long>::max());
         }
@@ -388,8 +386,7 @@ namespace lds {
      *     ...
      * @endverbatim
      */
-    template <unsigned long Base0 = 2, unsigned long Base1 = 3>
-    class Halton {
+    template <unsigned long Base0 = 2, unsigned long Base1 = 3> class Halton {
         VdCorput<Base0> vdc0;
         VdCorput<Base1> vdc1;
 
@@ -449,7 +446,9 @@ namespace lds {
          *
          * @return unsigned long current index in the sequence
          */
-        [[nodiscard]] constexpr auto get_index() const -> unsigned long { return this->vdc0.get_index(); }
+        [[nodiscard]] constexpr auto get_index() const -> unsigned long {
+            return this->vdc0.get_index();
+        }
 
         /**
          * @brief Get iterator to beginning
@@ -465,7 +464,8 @@ namespace lds {
          *
          * @return GeneratorIterator<Halton, std::array<double, 2>>
          */
-        [[nodiscard]] constexpr auto end() const -> GeneratorIterator<Halton, std::array<double, 2>> {
+        [[nodiscard]] constexpr auto end() const
+            -> GeneratorIterator<Halton, std::array<double, 2>> {
             return GeneratorIterator<Halton, std::array<double, 2>>(
                 nullptr, std::numeric_limits<unsigned long>::max());
         }
@@ -495,8 +495,7 @@ namespace lds {
      *         *****
      * @endverbatim
      */
-    template <unsigned long Base0 = 2, unsigned long Base1 = 3>
-    class Disk {
+    template <unsigned long Base0 = 2, unsigned long Base1 = 3> class Disk {
         VdCorput<Base0> vdc0;
         VdCorput<Base1> vdc1;
 
@@ -518,8 +517,8 @@ namespace lds {
          *
          * @return std::array<double, 2> the next point in the unit disk
          */
-        constexpr auto pop() -> std::array<double, 2> {        //
-            auto theta = this->vdc0.pop() * TWO_PI;  // map to [0, 2*pi];
+        constexpr auto pop() -> std::array<double, 2> {  //
+            auto theta = this->vdc0.pop() * TWO_PI;      // map to [0, 2*pi];
             auto radius = std::sqrt(this->vdc1.pop());
             return {radius * std::cos(theta), radius * std::sin(theta)};
         }
@@ -562,7 +561,9 @@ namespace lds {
          *
          * @return unsigned long current index in sequence
          */
-        [[nodiscard]] constexpr auto get_index() const -> unsigned long { return this->vdc0.get_index(); }
+        [[nodiscard]] constexpr auto get_index() const -> unsigned long {
+            return this->vdc0.get_index();
+        }
 
         /**
          * @brief Get iterator to beginning
@@ -613,8 +614,7 @@ namespace lds {
      * @tparam Base0 the base for the van der Corput generator (phi coordinate)
      * @tparam Base1 the base for the Circle generator (theta coordinate)
      */
-    template <unsigned long Base0 = 2, unsigned long Base1 = 3>    
-    class Sphere {
+    template <unsigned long Base0 = 2, unsigned long Base1 = 3> class Sphere {
         VdCorput<Base0> vdcgen;
         Circle<Base1> cirgen;
 
@@ -680,7 +680,9 @@ namespace lds {
          *
          * @return unsigned long current index in sequence
          */
-        [[nodiscard]] constexpr auto get_index() const -> unsigned long { return this->vdcgen.get_index(); }
+        [[nodiscard]] constexpr auto get_index() const -> unsigned long {
+            return this->vdcgen.get_index();
+        }
 
         /**
          * @brief Get iterator to beginning
@@ -696,7 +698,8 @@ namespace lds {
          *
          * @return GeneratorIterator<Sphere, std::array<double, 3>>
          */
-        [[nodiscard]] constexpr auto end() const -> GeneratorIterator<Sphere, std::array<double, 3>> {
+        [[nodiscard]] constexpr auto end() const
+            -> GeneratorIterator<Sphere, std::array<double, 3>> {
             return GeneratorIterator<Sphere, std::array<double, 3>>(
                 nullptr, std::numeric_limits<unsigned long>::max());
         }
@@ -747,7 +750,7 @@ namespace lds {
          * Constructs a 3-sphere sequence generator using the Hopf fibration with the specified
          * bases.
          */
-        constexpr Sphere3Hopf(): vdc0(), vdc1(), vdc2() {}
+        constexpr Sphere3Hopf() : vdc0(), vdc1(), vdc2() {}
 
         /**
          * @brief Generate the next point on the 3-sphere using Hopf fibration
@@ -819,7 +822,9 @@ namespace lds {
          *
          * @return unsigned long current index in sequence
          */
-        [[nodiscard]] constexpr auto get_index() const -> unsigned long { return this->vdc0.get_index(); }
+        [[nodiscard]] constexpr auto get_index() const -> unsigned long {
+            return this->vdc0.get_index();
+        }
 
         /**
          * @brief Get iterator to beginning
@@ -835,7 +840,8 @@ namespace lds {
          *
          * @return GeneratorIterator<Sphere3Hopf, std::array<double, 4>>
          */
-        [[nodiscard]] constexpr auto end() const -> GeneratorIterator<Sphere3Hopf, std::array<double, 4>> {
+        [[nodiscard]] constexpr auto end() const
+            -> GeneratorIterator<Sphere3Hopf, std::array<double, 4>> {
             return GeneratorIterator<Sphere3Hopf, std::array<double, 4>>(
                 nullptr, std::numeric_limits<unsigned long>::max());
         }
