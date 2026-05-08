@@ -52,10 +52,9 @@ int main() {
             }
             std::cout << "    Contains " << line_count << " lines\n";
             return true;
-        } 
-            std::cout << "  - " << filename << " NOT found\n";
-            return false;
-       
+        }
+        std::cout << "  - " << filename << " NOT found\n";
+        return false;
     };
 
     check_file("lds.log");

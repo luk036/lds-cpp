@@ -159,7 +159,7 @@ namespace lds {
          *
          * @param[in] base the base of the van der Corput sequence
          */
-        constexpr VdCorput()  {
+        constexpr VdCorput() {
             double reverse = 1.0;
             for (unsigned long i = 0; i < MAX_REVERSE_BITS; ++i) {
                 reverse /= double(Base);
