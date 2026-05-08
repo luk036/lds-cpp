@@ -20,7 +20,7 @@ int main() {
     std::cout << "Logging third message...\n";
     lds::log_with_spdlog("Testing message 3");
 
-    std::cout << "Check build\\windows\\x64\\debug\\lds.log for the logged messages" << '\n';
+    std::cout << R"(Check build\windows\x64\debug\lds.log for the logged messages)" << '\n';
 
     // Also test direct spdlog usage
     std::cout << "\nTesting direct spdlog usage...\n";
