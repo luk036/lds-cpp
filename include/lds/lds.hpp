@@ -5,15 +5,12 @@
 #include <cstddef>
 #include <iterator>
 #include <limits>
+#include <numbers>
 // #include <vector>
-
-#ifndef M_PI
-#    define M_PI 3.14159265358979323846264338327950288
-#endif
 
 namespace lds {
 
-    constexpr const auto TWO_PI = 2.0 * M_PI;
+    constexpr const auto TWO_PI = 2.0 * std::numbers::pi;
 
     // Constants for magic numbers
     constexpr unsigned long MAX_REVERSE_BITS = 64;
@@ -149,8 +146,8 @@ namespace lds {
      * @endverbatim
      */
     template <unsigned long Base = 2> class VdCorput {
-        unsigned long count;
-        std::array<double, MAX_REVERSE_BITS> rev_lst;
+        unsigned long count{0};
+        std::array<double, MAX_REVERSE_BITS> rev_lst{};
 
       public:
         /**
@@ -162,7 +159,7 @@ namespace lds {
          *
          * @param[in] base the base of the van der Corput sequence
          */
-        constexpr VdCorput() : count{0}, rev_lst{} {
+        constexpr VdCorput()  {
             double reverse = 1.0;
             for (unsigned long i = 0; i < MAX_REVERSE_BITS; ++i) {
                 reverse /= double(Base);

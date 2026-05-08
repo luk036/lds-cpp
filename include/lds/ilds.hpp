@@ -24,9 +24,9 @@ namespace ilds {
      *
      */
     template <unsigned long Base = 2> class VdCorput {
-        unsigned long _count;  ///< Current count in the sequence
+        unsigned long _count{0};  ///< Current count in the sequence
         std::array<unsigned long, MAX_REVERSE_BITS>
-            factor_lst;  ///< Precomputed scale factors for each digit
+            factor_lst{};  ///< Precomputed scale factors for each digit
         static_assert(MAX_REVERSE_BITS >= sizeof(unsigned long) * 8,
                       "MAX_REVERSE_BITS must be at least the number of bits in unsigned long");
 
@@ -36,8 +36,8 @@ namespace ilds {
          *
          * @param[in] scale The number of digits (default: 10)
          */
-        constexpr explicit VdCorput(unsigned int scale = DEFAULT_SCALE) : _count{0}, factor_lst{} {
-            unsigned long factor = static_cast<unsigned long>(std::pow(Base, scale));
+        constexpr explicit VdCorput(unsigned int scale = DEFAULT_SCALE)  {
+            auto factor = static_cast<unsigned long>(std::pow(Base, scale));
             for (unsigned int i = 0; i < MAX_REVERSE_BITS; ++i) {
                 factor /= Base;
                 this->factor_lst[i] = factor;

@@ -1,0 +1,81 @@
+[
+{
+  "directory": "D:\\github\\cpp\\lds-cpp",
+  "arguments": ["C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/MDd", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\compile.test_lds.pdb", "/Od", "/std:c++20", "/Iinclude", "/EHsc", "/IC:\\Users\\luk03\\AppData\\Local\\.xmake\\packages\\d\\doctest\\2.5.2\\188f3429bb1e4181b9b1943a88527969\\include", "/IC:\\Users\\luk03\\AppData\\Local\\.xmake\\packages\\d\\doctest\\2.5.2\\188f3429bb1e4181b9b1943a88527969\\include\\doctest", "/IC:\\Users\\luk03\\AppData\\Local\\.xmake\\packages\\f\\fmt\\12.1.0\\b1f1378a031443f888fcd038ad9d6857\\include", "/IC:\\Users\\luk03\\AppData\\Local\\.xmake\\packages\\s\\spdlog\\v1.17.0\\4eceeb5b8b49457aaf3fefccdf405994\\include", "/utf-8", "/EHsc", "/W4", "/WX", "/wd4459", "/Fobuild\\.objs\\test_lds\\windows\\x64\\debug\\test\\source\\main.cpp.obj", "test\\source\\main.cpp"],
+  "file": "test\\source\\main.cpp"
+},
+{
+  "directory": "D:\\github\\cpp\\lds-cpp",
+  "arguments": ["C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/MDd", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\compile.test_lds.pdb", "/Od", "/std:c++20", "/Iinclude", "/EHsc", "/IC:\\Users\\luk03\\AppData\\Local\\.xmake\\packages\\d\\doctest\\2.5.2\\188f3429bb1e4181b9b1943a88527969\\include", "/IC:\\Users\\luk03\\AppData\\Local\\.xmake\\packages\\d\\doctest\\2.5.2\\188f3429bb1e4181b9b1943a88527969\\include\\doctest", "/IC:\\Users\\luk03\\AppData\\Local\\.xmake\\packages\\f\\fmt\\12.1.0\\b1f1378a031443f888fcd038ad9d6857\\include", "/IC:\\Users\\luk03\\AppData\\Local\\.xmake\\packages\\s\\spdlog\\v1.17.0\\4eceeb5b8b49457aaf3fefccdf405994\\include", "/utf-8", "/EHsc", "/W4", "/WX", "/wd4459", "/Fobuild\\.objs\\test_lds\\windows\\x64\\debug\\test\\source\\test_ilds.cpp.obj", "test\\source\\test_ilds.cpp"],
+  "file": "test\\source\\test_ilds.cpp"
+},
+{
+  "directory": "D:\\github\\cpp\\lds-cpp",
+  "arguments": ["C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/MDd", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\compile.test_lds.pdb", "/Od", "/std:c++20", "/Iinclude", "/EHsc", "/IC:\\Users\\luk03\\AppData\\Local\\.xmake\\packages\\d\\doctest\\2.5.2\\188f3429bb1e4181b9b1943a88527969\\include", "/IC:\\Users\\luk03\\AppData\\Local\\.xmake\\packages\\d\\doctest\\2.5.2\\188f3429bb1e4181b9b1943a88527969\\include\\doctest", "/IC:\\Users\\luk03\\AppData\\Local\\.xmake\\packages\\f\\fmt\\12.1.0\\b1f1378a031443f888fcd038ad9d6857\\include", "/IC:\\Users\\luk03\\AppData\\Local\\.xmake\\packages\\s\\spdlog\\v1.17.0\\4eceeb5b8b49457aaf3fefccdf405994\\include", "/utf-8", "/EHsc", "/W4", "/WX", "/wd4459", "/Fobuild\\.objs\\test_lds\\windows\\x64\\debug\\test\\source\\test_lds.cpp.obj", "test\\source\\test_lds.cpp"],
+  "file": "test\\source\\test_lds.cpp"
+},
+{
+  "directory": "D:\\github\\cpp\\lds-cpp",
+  "arguments": ["C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/MDd", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\compile.test_lds.pdb", "/Od", "/std:c++20", "/Iinclude", "/EHsc", "/IC:\\Users\\luk03\\AppData\\Local\\.xmake\\packages\\d\\doctest\\2.5.2\\188f3429bb1e4181b9b1943a88527969\\include", "/IC:\\Users\\luk03\\AppData\\Local\\.xmake\\packages\\d\\doctest\\2.5.2\\188f3429bb1e4181b9b1943a88527969\\include\\doctest", "/IC:\\Users\\luk03\\AppData\\Local\\.xmake\\packages\\f\\fmt\\12.1.0\\b1f1378a031443f888fcd038ad9d6857\\include", "/IC:\\Users\\luk03\\AppData\\Local\\.xmake\\packages\\s\\spdlog\\v1.17.0\\4eceeb5b8b49457aaf3fefccdf405994\\include", "/utf-8", "/EHsc", "/W4", "/WX", "/wd4459", "/Fobuild\\.objs\\test_lds\\windows\\x64\\debug\\test\\source\\test_lds_n.cpp.obj", "test\\source\\test_lds_n.cpp"],
+  "file": "test\\source\\test_lds_n.cpp"
+},
+{
+  "directory": "D:\\github\\cpp\\lds-cpp",
+  "arguments": ["C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/MDd", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\compile.test_final_spdlogger.pdb", "/Od", "/std:c++20", "/Iinclude", "/EHsc", "/IC:\\Users\\luk03\\AppData\\Local\\.xmake\\packages\\s\\spdlog\\v1.17.0\\4eceeb5b8b49457aaf3fefccdf405994\\include", "/IC:\\Users\\luk03\\AppData\\Local\\.xmake\\packages\\f\\fmt\\12.1.0\\b1f1378a031443f888fcd038ad9d6857\\include", "/utf-8", "/EHsc", "/W4", "/WX", "/wd4459", "/Fobuild\\.objs\\test_final_spdlogger\\windows\\x64\\debug\\test_final_spdlogger.cpp.obj", "test_final_spdlogger.cpp"],
+  "file": "test_final_spdlogger.cpp"
+},
+{
+  "directory": "D:\\github\\cpp\\lds-cpp",
+  "arguments": ["C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/MDd", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\compile.test_final_spdlogger.pdb", "/Od", "/std:c++20", "/Iinclude", "/EHsc", "/IC:\\Users\\luk03\\AppData\\Local\\.xmake\\packages\\s\\spdlog\\v1.17.0\\4eceeb5b8b49457aaf3fefccdf405994\\include", "/IC:\\Users\\luk03\\AppData\\Local\\.xmake\\packages\\f\\fmt\\12.1.0\\b1f1378a031443f888fcd038ad9d6857\\include", "/utf-8", "/EHsc", "/W4", "/WX", "/wd4459", "/Fobuild\\.objs\\test_final_spdlogger\\windows\\x64\\debug\\source\\logger.cpp.obj", "source\\logger.cpp"],
+  "file": "source\\logger.cpp"
+},
+{
+  "directory": "D:\\github\\cpp\\lds-cpp",
+  "arguments": ["C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/MDd", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\compile.test_spdlogger_simple.pdb", "/Od", "/std:c++20", "/EHsc", "/IC:\\Users\\luk03\\AppData\\Local\\.xmake\\packages\\s\\spdlog\\v1.17.0\\4eceeb5b8b49457aaf3fefccdf405994\\include", "/utf-8", "/EHsc", "/W4", "/WX", "/wd4459", "/Fobuild\\.objs\\test_spdlogger_simple\\windows\\x64\\debug\\test_spdlogger_simple.cpp.obj", "test_spdlogger_simple.cpp"],
+  "file": "test_spdlogger_simple.cpp"
+},
+{
+  "directory": "D:\\github\\cpp\\lds-cpp",
+  "arguments": ["C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/MDd", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\compile.test_spdlogger_debug.pdb", "/Od", "/std:c++20", "/Iinclude", "/EHsc", "/IC:\\Users\\luk03\\AppData\\Local\\.xmake\\packages\\s\\spdlog\\v1.17.0\\4eceeb5b8b49457aaf3fefccdf405994\\include", "/IC:\\Users\\luk03\\AppData\\Local\\.xmake\\packages\\f\\fmt\\12.1.0\\b1f1378a031443f888fcd038ad9d6857\\include", "/utf-8", "/EHsc", "/W4", "/WX", "/wd4459", "/Fobuild\\.objs\\test_spdlogger_debug\\windows\\x64\\debug\\test_spdlogger_debug.cpp.obj", "test_spdlogger_debug.cpp"],
+  "file": "test_spdlogger_debug.cpp"
+},
+{
+  "directory": "D:\\github\\cpp\\lds-cpp",
+  "arguments": ["C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/MDd", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\compile.test_spdlogger_debug.pdb", "/Od", "/std:c++20", "/Iinclude", "/EHsc", "/IC:\\Users\\luk03\\AppData\\Local\\.xmake\\packages\\s\\spdlog\\v1.17.0\\4eceeb5b8b49457aaf3fefccdf405994\\include", "/IC:\\Users\\luk03\\AppData\\Local\\.xmake\\packages\\f\\fmt\\12.1.0\\b1f1378a031443f888fcd038ad9d6857\\include", "/utf-8", "/EHsc", "/W4", "/WX", "/wd4459", "/Fobuild\\.objs\\test_spdlogger_debug\\windows\\x64\\debug\\source\\logger.cpp.obj", "source\\logger.cpp"],
+  "file": "source\\logger.cpp"
+},
+{
+  "directory": "D:\\github\\cpp\\lds-cpp",
+  "arguments": ["C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/MDd", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\compile.test_wrapper_only.pdb", "/Od", "/std:c++20", "/Iinclude", "/ID:\\github\\cpp\\lds-cpp\\build\\_deps\\rapidcheck-src\\include", "/DRAPIDCHECK_H", "/EHsc", "/IC:\\Users\\luk03\\AppData\\Local\\.xmake\\packages\\s\\spdlog\\v1.17.0\\4eceeb5b8b49457aaf3fefccdf405994\\include", "/IC:\\Users\\luk03\\AppData\\Local\\.xmake\\packages\\f\\fmt\\12.1.0\\b1f1378a031443f888fcd038ad9d6857\\include", "/utf-8", "/EHsc", "/W4", "/WX", "/wd4459", "/Fobuild\\.objs\\test_wrapper_only\\windows\\x64\\debug\\test_wrapper_only.cpp.obj", "test_wrapper_only.cpp"],
+  "file": "test_wrapper_only.cpp"
+},
+{
+  "directory": "D:\\github\\cpp\\lds-cpp",
+  "arguments": ["C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/MDd", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\compile.test_wrapper_only.pdb", "/Od", "/std:c++20", "/Iinclude", "/ID:\\github\\cpp\\lds-cpp\\build\\_deps\\rapidcheck-src\\include", "/DRAPIDCHECK_H", "/EHsc", "/IC:\\Users\\luk03\\AppData\\Local\\.xmake\\packages\\s\\spdlog\\v1.17.0\\4eceeb5b8b49457aaf3fefccdf405994\\include", "/IC:\\Users\\luk03\\AppData\\Local\\.xmake\\packages\\f\\fmt\\12.1.0\\b1f1378a031443f888fcd038ad9d6857\\include", "/utf-8", "/EHsc", "/W4", "/WX", "/wd4459", "/Fobuild\\.objs\\test_wrapper_only\\windows\\x64\\debug\\source\\logger.cpp.obj", "source\\logger.cpp"],
+  "file": "source\\logger.cpp"
+},
+{
+  "directory": "D:\\github\\cpp\\lds-cpp",
+  "arguments": ["C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/MDd", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\compile.test_spdlogger.pdb", "/Od", "/std:c++20", "/Iinclude", "/EHsc", "/IC:\\Users\\luk03\\AppData\\Local\\.xmake\\packages\\s\\spdlog\\v1.17.0\\4eceeb5b8b49457aaf3fefccdf405994\\include", "/IC:\\Users\\luk03\\AppData\\Local\\.xmake\\packages\\f\\fmt\\12.1.0\\b1f1378a031443f888fcd038ad9d6857\\include", "/utf-8", "/EHsc", "/W4", "/WX", "/wd4459", "/Fobuild\\.objs\\test_spdlogger\\windows\\x64\\debug\\test_spdlogger.cpp.obj", "test_spdlogger.cpp"],
+  "file": "test_spdlogger.cpp"
+},
+{
+  "directory": "D:\\github\\cpp\\lds-cpp",
+  "arguments": ["C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/MDd", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\compile.test_spdlogger.pdb", "/Od", "/std:c++20", "/Iinclude", "/EHsc", "/IC:\\Users\\luk03\\AppData\\Local\\.xmake\\packages\\s\\spdlog\\v1.17.0\\4eceeb5b8b49457aaf3fefccdf405994\\include", "/IC:\\Users\\luk03\\AppData\\Local\\.xmake\\packages\\f\\fmt\\12.1.0\\b1f1378a031443f888fcd038ad9d6857\\include", "/utf-8", "/EHsc", "/W4", "/WX", "/wd4459", "/Fobuild\\.objs\\test_spdlogger\\windows\\x64\\debug\\source\\logger.cpp.obj", "source\\logger.cpp"],
+  "file": "source\\logger.cpp"
+},
+{
+  "directory": "D:\\github\\cpp\\lds-cpp",
+  "arguments": ["C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/MDd", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\Lds.pdb", "/Od", "/std:c++20", "/Iinclude", "/EHsc", "/IC:\\Users\\luk03\\AppData\\Local\\.xmake\\packages\\f\\fmt\\12.1.0\\b1f1378a031443f888fcd038ad9d6857\\include", "/IC:\\Users\\luk03\\AppData\\Local\\.xmake\\packages\\s\\spdlog\\v1.17.0\\4eceeb5b8b49457aaf3fefccdf405994\\include", "/utf-8", "/EHsc", "/W4", "/WX", "/wd4459", "/Fobuild\\.objs\\Lds\\windows\\x64\\debug\\source\\lds.cpp.obj", "source\\lds.cpp"],
+  "file": "source\\lds.cpp"
+},
+{
+  "directory": "D:\\github\\cpp\\lds-cpp",
+  "arguments": ["C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/MDd", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\Lds.pdb", "/Od", "/std:c++20", "/Iinclude", "/EHsc", "/IC:\\Users\\luk03\\AppData\\Local\\.xmake\\packages\\f\\fmt\\12.1.0\\b1f1378a031443f888fcd038ad9d6857\\include", "/IC:\\Users\\luk03\\AppData\\Local\\.xmake\\packages\\s\\spdlog\\v1.17.0\\4eceeb5b8b49457aaf3fefccdf405994\\include", "/utf-8", "/EHsc", "/W4", "/WX", "/wd4459", "/Fobuild\\.objs\\Lds\\windows\\x64\\debug\\source\\logger.cpp.obj", "source\\logger.cpp"],
+  "file": "source\\logger.cpp"
+},
+{
+  "directory": "D:\\github\\cpp\\lds-cpp",
+  "arguments": ["C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/MDd", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\compile.test_logger_diagnostic.pdb", "/Od", "/std:c++20", "/EHsc", "/IC:\\Users\\luk03\\AppData\\Local\\.xmake\\packages\\s\\spdlog\\v1.17.0\\4eceeb5b8b49457aaf3fefccdf405994\\include", "/utf-8", "/EHsc", "/W4", "/WX", "/wd4459", "/Fobuild\\.objs\\test_logger_diagnostic\\windows\\x64\\debug\\test_logger_diagnostic.cpp.obj", "test_logger_diagnostic.cpp"],
+  "file": "test_logger_diagnostic.cpp"
+}]
