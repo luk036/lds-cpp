@@ -198,7 +198,7 @@ namespace csd {
         auto logger = spdlog::basic_logger_mt("file_logger", "csd.log");
         spdlog::set_default_logger(logger);
         spdlog::set_level(spdlog::level::info);
-        
+
         spdlog::info("Csd message: {}", message);
         spdlog::flush_on(spdlog::level::info);
     }
@@ -403,6 +403,6 @@ xmake run test_csd
 
 ---
 
-*Document Version: 1.0*  
-*Last Updated: 2026-02-16*  
+*Document Version: 1.0*
+*Last Updated: 2026-02-16*
 *Project: csd-cpp v1.1*
