@@ -38,6 +38,7 @@ file(GLOB sources CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/source/*.cpp)
 add_executable(${PROJECT_NAME} ${sources})
 target_link_libraries(${PROJECT_NAME} doctest::doctest Lds::Lds ${SPECIFIC_LIBS})
 set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 20)
+set_property(TARGET ${PROJECT_NAME} PROPERTY INTERPROCEDURAL_OPTIMIZATION TRUE)
 
 if(rapidcheck_ADDED)
   target_compile_definitions(${PROJECT_NAME} PRIVATE RAPIDCHECK_H)

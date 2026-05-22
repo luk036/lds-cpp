@@ -4,6 +4,7 @@
 #include <cstddef>
 #include <lds/lds.hpp>
 #include <memory>
+#include <vector>
 
 namespace lds {
 
@@ -36,29 +37,39 @@ namespace lds {
     class VdCorputDynamic : public VdCorputBase {
         unsigned long base_;
         unsigned long count = 0;
+        std::vector<double> rev_lst_;
+
+        static constexpr unsigned long MAX_REVERSE_BITS = 64;
+
+        auto pop_impl(unsigned long cnt) -> double {
+            unsigned long count_value = cnt;
+            unsigned long idx = 0;
+            double res = 0.0;
+            while (count_value != 0) {
+                const auto remainder = count_value % this->base_;
+                count_value /= this->base_;
+                res += this->rev_lst_[idx] * static_cast<double>(remainder);
+                ++idx;
+            }
+            return res;
+        }
 
       public:
-        explicit VdCorputDynamic(unsigned long base) : base_(base) {}
-
-        static auto vdc(unsigned long cnt, unsigned long base) -> double {
-            auto reslt = 0.0;
-            auto denom = 1.0;
-            auto count = cnt;
-            while (count != 0) {
-                const auto remainder = count % base;
-                count /= base;
-                denom *= static_cast<double>(base);
-                reslt += static_cast<double>(remainder) / denom;
+        explicit VdCorputDynamic(unsigned long base) : base_(base) {
+            double reverse = 1.0;
+            rev_lst_.reserve(MAX_REVERSE_BITS);
+            for (unsigned long i = 0; i < MAX_REVERSE_BITS; ++i) {
+                reverse /= static_cast<double>(base_);
+                rev_lst_.push_back(reverse);
             }
-            return reslt;
         }
 
         auto pop() -> double override {
             ++this->count;
-            return vdc(this->count - 1, this->base_);
+            return pop_impl(this->count);
         }
 
-        auto peek() -> double override { return vdc(this->count, this->base_); }
+        auto peek() -> double override { return pop_impl(this->count + 1); }
 
         auto skip(unsigned long n) -> void override { this->count += n; }
 

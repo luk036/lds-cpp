@@ -1,7 +1,6 @@
 #pragma once
 
 #include <array>
-#include <cmath>
 
 namespace ilds {
 
@@ -37,7 +36,10 @@ namespace ilds {
          * @param[in] scale The number of digits (default: 10)
          */
         constexpr explicit VdCorput(unsigned int scale = DEFAULT_SCALE) {
-            auto factor = static_cast<unsigned long>(std::pow(Base, scale));
+            unsigned long factor = 1;
+            for (unsigned int i = 0; i < scale; ++i) {
+                factor *= Base;
+            }
             for (unsigned int i = 0; i < MAX_REVERSE_BITS; ++i) {
                 factor /= Base;
                 this->factor_lst[i] = factor;

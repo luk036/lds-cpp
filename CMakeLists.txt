@@ -64,6 +64,11 @@ target_include_directories(
                          $<INSTALL_INTERFACE:include/${PROJECT_NAME}-${PROJECT_VERSION}>
 )
 
+# ---- Performance ----
+
+# Enable interprocedural optimization (LTO) for better inlining and code generation
+set_property(TARGET ${PROJECT_NAME} PROPERTY INTERPROCEDURAL_OPTIMIZATION TRUE)
+
 # ---- Create an installable target ----
 # this allows users to install and find the library via `find_package()`.
 

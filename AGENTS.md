@@ -128,10 +128,11 @@ VdCorput& operator=(VdCorput&&) noexcept = delete;
 
 ### Thread Safety
 
-- Use `std::atomic<T>` for thread-safe counters
-- Use `std::mutex` + `std::lock_guard` for protecting sections
-- Use `std::memory_order_relaxed` for atomic operations when synchronization not needed
-- Always test thread safety (see `test_lds.cpp` for examples)
+The template generators (`VdCorput<Base>`, `Halton<Base0, Base1>`, etc.) are **not thread-safe internally**. Their mutating methods (`pop()`, `reseed()`, `skip()`) are `constexpr` and use plain `unsigned long` counters. To use these generators across threads, wrap them with `std::mutex` externally.
+
+The runtime polymorphic classes (`Sphere3`, `SphereN`, `SphereWrapper`) use `std::mutex` internally for thread safety.
+
+See [Design Decisions](#design-decisions) for the rationale.
 
 ### Error Handling
 
@@ -198,7 +199,6 @@ The project uses:
 - **NO empty catch blocks** (`catch(e) {}`)
 - Always run format target before committing
 - Tests must pass before merging
-- Thread safety is a requirement for generators
 - **DO NOT delete the build/ directory directly** - use CMake targets or `xmake clean` instead
 - C++ standard: **C++20 minimum**
 - Compiler warnings as errors enabled (`-Werror`, `/WX`)
@@ -223,3 +223,22 @@ cmake -S test -B build/test -DUSE_STATIC_ANALYZER=clang-tidy
 cmake -S test -B build/test -DENABLE_TEST_COVERAGE=1
 cmake --build build/test
 ```
+
+---
+
+## Design Decisions
+
+### constexpr vs Thread Safety
+
+This project prioritizes `constexpr` on mutating generator methods (`pop()`, `peek()`, `reseed()`, `skip()`, `get_index()`), enabling compile-time sequence evaluation. This is incompatible with `std::atomic` because atomic operations (`fetch_add`, `load`, `store`) are not `constexpr`.
+
+The sibling project [`lds-gen-cpp`](https://github.com/luk036/lds-gen-cpp) makes the opposite choice: runtime `VdCorput` with `std::atomic<unsigned long> count` and `std::memory_order_relaxed` for built-in thread safety, at the cost of `constexpr` on mutating methods.
+
+| Aspect | `lds-cpp` (this project) | `lds-gen-cpp` |
+|--------|--------------------------|---------------|
+| `constexpr pop()` | ✅ Yes | ❌ No |
+| `std::atomic count` | ❌ No (`unsigned long`) | ✅ Yes |
+| Thread-safe internally | ❌ No (use external `std::mutex`) | ✅ Yes |
+| Compile-time evaluation | ✅ Supported | ❌ Not supported |
+
+**Implication**: Template generators in this project (`VdCorput<Base>`, `Halton<B0, B1>`, etc.) are not safe for concurrent use without external synchronization. The runtime polymorphic classes (`Sphere3`, `SphereN`) use `std::mutex` internally and are thread-safe.

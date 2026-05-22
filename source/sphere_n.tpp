@@ -1,5 +1,6 @@
 #include "lds/sphere_n.hpp"
 
+#include <algorithm>
 #include <cmath>
 #include <cstdint>
 #include <memory>
@@ -40,15 +41,13 @@ namespace lds {
             return y_points.back();
         }
 
-        for (std::unsigned long i = 0; i < x_points.size() - 1; ++i) {
-            if (x_points[i] <= x_value && x_value <= x_points[i + 1]) {
-                // Linear interpolation
-                double t = (x_value - x_points[i]) / (x_points[i + 1] - x_points[i]);
-                return y_points[i] + t * (y_points[i + 1] - y_points[i]);
-            }
-        }
+        // Binary search for the interval (O(log n) instead of O(n) linear scan)
+        auto it = std::upper_bound(x_points.begin(), x_points.end(), x_value);
+        auto i = static_cast<std::size_t>(std::distance(x_points.begin(), it) - 1);
 
-        return y_points.back();  // fallback
+        // Linear interpolation
+        double t = (x_value - x_points[i]) / (x_points[i + 1] - x_points[i]);
+        return y_points[i] + t * (y_points[i + 1] - y_points[i]);
     }
 
     // Precomputed tables (similar to Python version)
@@ -88,7 +87,7 @@ namespace lds {
         const std::vector<double> F2 = compute_f2(NEG_COSINE, SINE);
     }  // namespace
 
-    // Recursive helper function for get_tp
+    // Iterative helper for get_tp — avoids deep recursion and vector copies
     static std::vector<double> get_tp_recursive(int n) {
         if (n == 0) {
             return X;
@@ -97,16 +96,27 @@ namespace lds {
             return NEG_COSINE;
         }
 
-        std::vector<double> tp_minus2 = get_tp_recursive(n - 2);
-        std::vector<double> result;
-        result.reserve(tp_minus2.size());
+        // Bottom-up iteration: compute tp[2..n] using tp[i-2] and tp[i-1]
+        std::vector<double> prev2 = X;          // tp[0]
+        std::vector<double> prev1 = NEG_COSINE; // tp[1]
+        std::vector<double> current;
+        current.reserve(X.size());
 
-        for (std::unsigned long i = 0; i < tp_minus2.size(); ++i) {
-            double value = ((n - 1) * tp_minus2[i] + NEG_COSINE[i] * std::pow(SINE[i], n - 1)) / n;
-            result.emplace_back(value);
+        for (int i = 2; i <= n; ++i) {
+            current.clear();
+            for (std::size_t j = 0; j < X.size(); ++j) {
+                double value = (static_cast<double>(i - 1) * prev2[j]
+                              + NEG_COSINE[j] * std::pow(SINE[j], i - 1))
+                              / static_cast<double>(i);
+                current.emplace_back(value);
+            }
+            if (i < n) {
+                prev2 = std::move(prev1);
+                prev1 = std::move(current);
+                current.reserve(X.size());
+            }
         }
-
-        return result;
+        return current;
     }
 
     std::vector<double> get_tp(int n) {
