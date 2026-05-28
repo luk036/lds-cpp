@@ -84,8 +84,8 @@ namespace lds {
     /// @tparam N Number of values to generate
     /// @tparam Base Base of the van der Corput sequence
     /// @return std::array<double, N> with precomputed sequence values
-    template <unsigned long N, unsigned long Base = 2>
-    constexpr auto make_vdc_table() -> std::array<double, N> {
+    template <unsigned long N, unsigned long Base = 2> constexpr auto make_vdc_table()
+        -> std::array<double, N> {
         std::array<double, N> table{};
         VdCorput<Base> gen;
         for (unsigned long i = 0; i < N; ++i) {
