@@ -1,4 +1,5 @@
 #include <array>
+#include <lds/lds.hpp>
 
 namespace lds {
 
@@ -74,10 +75,57 @@ namespace lds {
         7841, 7853, 7867, 7873, 7877, 7879, 7883, 7901, 7907, 7919,
     };
 
-    // make macOS compiler happy
-    /// @brief Dummy function to prevent unused variable warnings
+    /// @brief Function to access the prime table
     /// @param index Index into the prime table
     /// @return The prime number at the given index
-    unsigned long dummy(unsigned long index) { return PRIME_TABLE[index]; }
+    unsigned long prime_table(unsigned long index) { return PRIME_TABLE[index]; }
+
+    /// @brief Helper to generate a constexpr table of VdCorput<Base> values
+    /// @tparam N Number of values to generate
+    /// @tparam Base Base of the van der Corput sequence
+    /// @return std::array<double, N> with precomputed sequence values
+    template <unsigned long N, unsigned long Base = 2>
+    constexpr auto make_vdc_table() -> std::array<double, N> {
+        std::array<double, N> table{};
+        VdCorput<Base> gen;
+        for (unsigned long i = 0; i < N; ++i) {
+            table[i] = gen.pop();
+        }
+        return table;
+    }
+
+    /// @brief Size of the precomputed VdCorput base-2 table
+    constexpr const auto VDC_TABLE_SIZE = 1000UL;
+
+    /// @brief Precomputed table of VdCorput sequence values (base 2)
+    /// @details Generated at compile-time using VdCorput<2>
+    constexpr std::array<double, VDC_TABLE_SIZE> VDC_TABLE_2 = make_vdc_table<VDC_TABLE_SIZE, 2>();
+
+    /// @brief Access the precomputed VdCorput base-2 table
+    /// @param index Index into the table
+    /// @return The VDC value at the given index
+    double vdc2_table(unsigned long index) { return VDC_TABLE_2[index]; }
+
+    /// @brief Precomputed table of 1000 Circle<2> points
+    /// @details Generated using precomputed VDC_TABLE_2 mapped to unit circle.
+    ///          Not constexpr: std::cos/std::sin lack portable constexpr support in C++20.
+    static const auto CIRCLE_TABLE_2 = []() {
+        std::array<std::array<double, 2>, VDC_TABLE_SIZE> table{};
+        for (unsigned long i = 0; i < VDC_TABLE_SIZE; ++i) {
+            auto theta = VDC_TABLE_2[i] * TWO_PI;
+            table[i] = {std::cos(theta), std::sin(theta)};
+        }
+        return table;
+    }();
+
+    /// @brief Access the precomputed Circle base-2 table x-coordinate
+    /// @param index Index into the table
+    /// @return The circle point x-coordinate at the given index
+    double circle2_table_x(unsigned long index) { return CIRCLE_TABLE_2[index][0]; }
+
+    /// @brief Access the precomputed Circle base-2 table y-coordinate
+    /// @param index Index into the table
+    /// @return The circle point y-coordinate at the given index
+    double circle2_table_y(unsigned long index) { return CIRCLE_TABLE_2[index][1]; }
 
 }  // namespace lds

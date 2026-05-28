@@ -844,5 +844,8 @@ namespace lds {
         }
     };
 
-    extern unsigned long dummy(unsigned long index);
+    extern unsigned long prime_table(unsigned long index);
+    extern double vdc2_table(unsigned long index);
+    extern double circle2_table_x(unsigned long index);
+    extern double circle2_table_y(unsigned long index);
 }  // namespace lds
