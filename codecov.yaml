@@ -1,5 +1,7 @@
 ignore:
   - "test"
+  - "cpm_modules"
+  - "/usr/*"
 
 comment:
   require_changes: true
