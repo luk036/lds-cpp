@@ -12,7 +12,7 @@ if is_plat("linux") then
     set_warnings("all", "error")
     add_cxflags("-Wconversion", {force = true})
 elseif is_plat("windows") then
-    add_cxflags("/EHsc /W4 /WX /wd5285 /wd4459 /wd4819 /wd4996", {force = true})
+    add_cxflags("/EHsc /W4 /WX /wd5285 /wd4819 /wd4996", {force = true})
 end
 
 rule("cppfront")
