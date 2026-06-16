@@ -1,5 +1,9 @@
 #pragma once
 
+/** @file lds.hpp
+ *  @brief Low-discrepancy sequence generators (van der Corput, Halton, Circle, Disk, Sphere).
+ */
+
 #include <array>
 #include <cmath>
 #include <cstddef>
@@ -29,6 +33,15 @@ namespace lds {
      *
      * @tparam Generator The generator class
      * @tparam Value The value type (double or array)
+     */
+    /**
+     * @brief Forward iterator for sequence generators.
+     *
+     * Provides STL-compatible iterator interface for all generators.
+     * Allows use in range-based for loops and STL algorithms.
+     *
+     * @tparam Generator The generator class type.
+     * @tparam Value The value type (double or array).
      */
     template <typename Generator, typename Value> class GeneratorIterator {
         Generator* gen;
@@ -844,8 +857,31 @@ namespace lds {
         }
     };
 
+    /**
+     * @brief Look up the n-th prime number from a precomputed table.
+     * @param[in] index Zero-based index into the prime table.
+     * @return The prime number at the given index.
+     */
     extern unsigned long prime_table(unsigned long index);
+
+    /**
+     * @brief Look up a precomputed van der Corput value for base 2.
+     * @param[in] index The sequence index.
+     * @return The van der Corput value for base 2 at the given index.
+     */
     extern double vdc2_table(unsigned long index);
+
+    /**
+     * @brief Look up a precomputed Circle x-coordinate for base 2.
+     * @param[in] index The sequence index.
+     * @return The x-coordinate on the unit circle.
+     */
     extern double circle2_table_x(unsigned long index);
+
+    /**
+     * @brief Look up a precomputed Circle y-coordinate for base 2.
+     * @param[in] index The sequence index.
+     * @return The y-coordinate on the unit circle.
+     */
     extern double circle2_table_y(unsigned long index);
 }  // namespace lds

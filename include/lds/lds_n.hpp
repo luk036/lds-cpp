@@ -1,5 +1,9 @@
 #pragma once
 
+/** @file lds_n.hpp
+ *  @brief N-dimensional Halton sequence generator with runtime polymorphism.
+ */
+
 #include <array>
 #include <cstddef>
 #include <lds/lds.hpp>
@@ -8,20 +12,41 @@
 
 namespace lds {
 
+    /**
+     * @brief Abstract base class for polymorphic van der Corput sequence generators.
+     *
+     * Provides a common interface for both compile-time (template) and
+     * runtime-dispatch van der Corput generators used in N-dimensional sequences.
+     */
     class VdCorputBase {
       public:
         virtual ~VdCorputBase() = default;
+
+        /** @brief Generate the next value in the sequence. */
         virtual auto pop() -> double = 0;
+
+        /** @brief Peek at the next value without advancing state. */
         virtual auto peek() -> double = 0;
+
+        /** @brief Skip n values in the sequence. */
         virtual auto skip(unsigned long n) -> void = 0;
+
+        /** @brief Reset the generator to a specific seed value. */
         virtual auto reseed(const unsigned long& seed) -> void = 0;
+
+        /** @brief Get the current index in the sequence. */
         virtual auto get_index() const -> unsigned long = 0;
     };
 
+    /**
+     * @brief Compile-time-polymorphic wrapper around VdCorput<Base>.
+     * @tparam Base The numeric base for the van der Corput sequence.
+     */
     template <unsigned long Base> class VdCorputWrap : public VdCorputBase {
         VdCorput<Base> vdc;
 
       public:
+        /** @brief Construct a VdCorputWrap with precomputed reverse powers of Base. */
         constexpr VdCorputWrap() : vdc() {}
         constexpr auto pop() -> double override { return this->vdc.pop(); }
         constexpr auto peek() -> double override { return this->vdc.peek(); }
@@ -34,6 +59,12 @@ namespace lds {
         }
     };
 
+    /**
+     * @brief Runtime-polymorphic van der Corput generator with dynamic base.
+     *
+     * Unlike VdCorputWrap (which requires a compile-time base), this class
+     * accepts the base as a constructor argument, enabling fully dynamic dispatch.
+     */
     class VdCorputDynamic : public VdCorputBase {
         unsigned long base_;
         unsigned long count = 0;
@@ -41,6 +72,11 @@ namespace lds {
 
         static constexpr unsigned long MAX_REVERSE_BITS = 64;
 
+        /**
+         * @brief Internal implementation of the van der Corput computation.
+         * @param[in] cnt The sequence index to compute.
+         * @return The van der Corput value for index cnt.
+         */
         auto pop_impl(unsigned long cnt) -> double {
             unsigned long count_value = cnt;
             unsigned long idx = 0;
@@ -55,6 +91,10 @@ namespace lds {
         }
 
       public:
+        /**
+         * @brief Construct a VdCorputDynamic with a given base.
+         * @param[in] base The numeric base for the sequence.
+         */
         explicit VdCorputDynamic(unsigned long base) : base_(base) {
             double reverse = 1.0;
             rev_lst_.reserve(MAX_REVERSE_BITS);
@@ -78,16 +118,33 @@ namespace lds {
         auto get_index() const -> unsigned long override { return this->count; }
     };
 
+    /**
+     * @brief N-dimensional Halton sequence generator with runtime-polymorphic bases.
+     *
+     * Uses VdCorputBase pointers to support arbitrary prime bases at runtime,
+     * dispatching to the optimal compile-time (VdCorputWrap) or runtime
+     * (VdCorputDynamic) implementation depending on the base value.
+     *
+     * @tparam N Number of dimensions.
+     */
     template <std::size_t N> class HaltonN {
         std::array<std::unique_ptr<VdCorputBase>, N> vdcs;
 
       public:
+        /**
+         * @brief Construct an N-dimensional Halton generator.
+         * @param[in] bases Array of N base values (one per dimension).
+         */
         constexpr HaltonN(const std::array<unsigned long, N>& bases) : vdcs() {
             for (std::size_t i = 0; i < N; ++i) {
                 this->vdcs[i] = create_vdc(bases[i]);
             }
         }
 
+        /**
+         * @brief Generate the next N-dimensional Halton point.
+         * @return Array of N double values, one per dimension.
+         */
         constexpr auto pop() -> std::array<double, N> {
             std::array<double, N> result;
             for (std::size_t i = 0; i < N; ++i) {
@@ -96,6 +153,10 @@ namespace lds {
             return result;
         }
 
+        /**
+         * @brief Peek at the next point without advancing state.
+         * @return Array of N double values, one per dimension.
+         */
         [[nodiscard]] constexpr auto peek() -> std::array<double, N> {
             std::array<double, N> result;
             for (std::size_t i = 0; i < N; ++i) {
@@ -104,18 +165,30 @@ namespace lds {
             return result;
         }
 
+        /**
+         * @brief Skip n values in the sequence.
+         * @param[in] n Number of values to skip.
+         */
         constexpr auto skip(unsigned long n) -> void {
             for (auto& vdc : this->vdcs) {
                 vdc->skip(n);
             }
         }
 
+        /**
+         * @brief Reset all dimension generators to a specific seed.
+         * @param[in] seed The seed value to reset to.
+         */
         constexpr auto reseed(const unsigned long& seed) -> void {
             for (auto& vdc : this->vdcs) {
                 vdc->reseed(seed);
             }
         }
 
+        /**
+         * @brief Get the current index from the first dimension generator.
+         * @return Current sequence index.
+         */
         [[nodiscard]] constexpr auto get_index() const -> unsigned long {
             return this->vdcs[0]->get_index();
         }

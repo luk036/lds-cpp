@@ -1,5 +1,9 @@
 #pragma once
 
+/** @file ilds.hpp
+ *  @brief Integer low-discrepancy sequence generators (van der Corput, Halton).
+ */
+
 #include <array>
 
 namespace ilds {
