@@ -122,8 +122,8 @@ namespace lds {
      *     count=4 -> 0.125(0.001 in base 2)
      * @endverbatim
      *
-     * @param[in] count index of the sequence
-     * @param[in] base base of the sequence
+     * @param[in] cnt index of the sequence
+     * @tparam Base base of the sequence
      * @return double
      */
     template <unsigned long Base = 2> constexpr auto vdc(unsigned long cnt) -> double {
@@ -163,15 +163,14 @@ namespace lds {
         std::array<double, MAX_REVERSE_BITS> rev_lst{};
 
       public:
-        /**
-         * @brief Construct a new VdCorput object
-         *
-         * The `VdCorput(unsigned long base)` constructor is initializing a `VdCorput`
-         * object with a given base. The base is used to generate the van der Corput
-         * sequence.
-         *
-         * @param[in] base the base of the van der Corput sequence
-         */
+         /**
+          * @brief Construct a new VdCorput object
+          *
+          * Constructs a VdCorput sequence generator using the template parameter
+          * `Base` to generate the van der Corput sequence.
+          *
+          * @tparam Base the base of the van der Corput sequence
+          */
         constexpr VdCorput() {
             double reverse = 1.0;
             for (unsigned long i = 0; i < MAX_REVERSE_BITS; ++i) {
@@ -300,13 +299,13 @@ namespace lds {
 
       public:
         /**
-         * @brief Construct a new Circle object
-         *
-         * Constructs a Circle sequence generator with the specified base for generating
-         * the van der Corput sequence, which is then mapped to points on the unit circle.
-         *
-         * @param[in] base the base for the van der Corput sequence generator
-         */
+          * @brief Construct a new Circle object
+          *
+          * Constructs a Circle sequence generator with the specified base for generating
+          * the van der Corput sequence, which is then mapped to points on the unit circle.
+          *
+          * @tparam Base the base for the van der Corput sequence generator
+          */
         constexpr Circle<Base>() : vdc() {}
 
         /**
@@ -511,13 +510,13 @@ namespace lds {
 
       public:
         /**
-         * @brief Construct a new Disk object
-         *
-         * Constructs a Disk sequence generator with the specified bases for the two dimensions.
-         *
-         * @param[in] base0 the base for the first dimension (angle)
-         * @param[in] base1 the base for the second dimension (radius)
-         */
+          * @brief Construct a new Disk object
+          *
+          * Constructs a Disk sequence generator with the specified bases for the two dimensions.
+          *
+          * @tparam Base0 the base for the first dimension (angle)
+          * @tparam Base1 the base for the second dimension (radius)
+          */
         constexpr Disk() : vdc0(), vdc1() {}
 
         /**
