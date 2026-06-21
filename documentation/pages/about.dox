@@ -1,5 +1,13 @@
 /** @page about About
-  @section doc ModernCppStarter Documentation
-  This is the auto-generated documentation for the initial project of the ModernCppStater.
-  It shows how we can use Doxygen to automatically build a browsable documentation for your projects.
+  @section doc lds-cpp Documentation
+
+  This library provides low-discrepancy sequence (LDS) generators for quasi-Monte Carlo methods.
+
+  The fundamental building block is the van der Corput sequence in base \f$b\f$:
+  @f[
+      \phi_b(n) = \sum_{k=0}^{\infty} a_k(n) \, b^{-k-1}
+  @f]
+  where \f$a_k(n)\f$ are the base-\f$b\f$ digits of \f$n\f$.
+
+  See the \ref lds "lds" namespace for the full API.
 */
