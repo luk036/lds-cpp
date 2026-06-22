@@ -5,7 +5,7 @@ cmake_minimum_required(VERSION 3.14...3.22)
 # Note: update this to your new project's name and version
 project(
   Lds
-  VERSION 1.2.1
+  VERSION 1.2.2
   LANGUAGES CXX
 )
 
