@@ -164,6 +164,23 @@ namespace lds {
      * @f]
      * where \f$a_k(n)\f$ are the base-\f$b\f$ digits of \f$n\f$.
      *
+     * @dot
+     *   digraph vdc_flow {
+     *     rankdir=LR;
+     *     bgcolor="transparent";
+     *     node [shape=box, style=filled, fillcolor="#d4e6f1"];
+     *     n [label="Input n\n(index)", fillcolor="#a9cce3"];
+     *     base [label="Base b", fillcolor="#a9cce3"];
+     *     digits [label="Extract base-b\ndigits a_k"];
+     *     ratio [label="Compute\nratio a_k / b^{k+1}"];
+     *     sum [label="Sum\nphi_b(n)", fillcolor="#7fb3d8"];
+     *     n -> digits;
+     *     base -> digits;
+     *     digits -> ratio;
+     *     ratio -> sum;
+     *   }
+     * @enddot
+     *
      * @verbatim
      *     VdCorput(2) sequence:
      *     pop() -> 0.5   (0.1 base 2)
@@ -777,6 +794,21 @@ namespace lds {
      * generator to a specific seed value.
      *
      * The Hopf fibration parametrizes \f$S^3\f$ using angles \f$\phi, \psi, \eta\f$:
+     *
+     * @dot
+     *   digraph hopf_fibration {
+     *     rankdir=LR;
+     *     bgcolor="transparent";
+     *     node [shape=box, style=filled, fillcolor="#d5f5e3"];
+     *     vdc0 [label="phi\n= 2pi * VdC(b0)", fillcolor="#a9dfbf"];
+     *     vdc1 [label="psi\n= 2pi * VdC(b1)", fillcolor="#a9dfbf"];
+     *     vdc2 [label="eta\n= arccos(sqrt(VdC(b2)))", fillcolor="#a9dfbf"];
+     *     s3 [label="S^3 point\n(x,y,z,w)", fillcolor="#7dcea0"];
+     *     vdc0 -> s3 [label="phi + psi"];
+     *     vdc1 -> s3;
+     *     vdc2 -> s3;
+     *   }
+     * @enddot
      * @f[
      *     \begin{aligned}
      *     x &= \cos\eta \cos\psi \\
