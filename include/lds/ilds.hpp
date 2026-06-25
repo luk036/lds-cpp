@@ -75,6 +75,32 @@ namespace ilds {
          */
         constexpr auto reseed(const unsigned long& seed) -> void { this->_count = seed; }
 
+        /**
+         * @brief Get current index in the sequence.
+         */
+        [[nodiscard]] constexpr auto get_index() const -> unsigned long { return this->_count; }
+
+        /**
+         * @brief Skip n values in the sequence.
+         */
+        constexpr auto skip(unsigned long n) -> void { this->_count += n; }
+
+        /**
+         * @brief Peek at the next value without advancing state.
+         */
+        [[nodiscard]] constexpr auto peek() -> unsigned long {
+            unsigned long count = this->_count + 1;
+            unsigned long reslt = 0;
+            unsigned int idx = 0;
+            while (count != 0) {
+                const unsigned long remainder = count % Base;
+                count /= Base;
+                reslt += remainder * this->factor_lst[idx];
+                ++idx;
+            }
+            return reslt;
+        }
+
         VdCorput(VdCorput&&) noexcept = delete;
         VdCorput& operator=(VdCorput&&) noexcept = delete;
     };
