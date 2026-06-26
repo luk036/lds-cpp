@@ -74,6 +74,12 @@ namespace lds {
 
         /**
          * @brief Internal implementation of the van der Corput computation.
+         *
+         * @f[
+         *     \phi_b(\mathrm{cnt}) = \sum_{k=0}^{\infty} a_k(\mathrm{cnt}) \, b^{-k-1}
+         * @f]
+         * where \f$a_k(\mathrm{cnt})\f$ are the base-\f$b\f$ digits of cnt.
+         *
          * @param[in] cnt The sequence index to compute.
          * @return The van der Corput value for index cnt.
          */
@@ -143,6 +149,30 @@ namespace lds {
 
         /**
          * @brief Generate the next N-dimensional Halton point.
+         *
+         * @f[
+         *     H(n) = (\phi_{b_1}(n), \phi_{b_2}(n), \dots, \phi_{b_N}(n))
+         * @f]
+         *
+         * @dot
+         *   digraph halton_n_flow {
+         *     rankdir=LR;
+         *     bgcolor="transparent";
+         *     node [shape=box, style=filled, fillcolor="#d4e6f1"];
+         *     n [label="Index n", fillcolor="#a9cce3"];
+         *     dim1 [label="VdC b_1", fillcolor="#d4e6f1"];
+         *     dim2 [label="VdC b_2", fillcolor="#d4e6f1"];
+         *     dimN [label="VdC b_N", fillcolor="#d4e6f1"];
+         *     result [label="Halton N-D\npoint", fillcolor="#7fb3d8"];
+         *     n -> dim1;
+         *     n -> dim2;
+         *     n -> dimN;
+         *     dim1 -> result [label="phi_{b1}(n)"];
+         *     dim2 -> result [label="phi_{b2}(n)"];
+         *     dimN -> result [label="phi_{bN}(n)"];
+         *   }
+         * @enddot
+         *
          * @return Array of N double values, one per dimension.
          */
         constexpr auto pop() -> std::array<double, N> {

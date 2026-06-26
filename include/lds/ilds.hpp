@@ -25,6 +25,22 @@ namespace ilds {
      *
      * Implementation based on pre-calculating the scale factor.
      *
+     * @dot
+     *   digraph ilds_flow {
+     *     rankdir=LR;
+     *     bgcolor="transparent";
+     *     node [shape=box, style=filled, fillcolor="#d4e6f1"];
+     *     input [label="Integer n", fillcolor="#a9cce3"];
+     *     base [label="Base b"];
+     *     digits [label="Extract base-b\ndigits"];
+     *     factor [label="Multiply by\nprecomputed factor"];
+     *     sum [label="Sum results\nphi_b(n)", fillcolor="#7fb3d8"];
+     *     input -> digits;
+     *     base -> digits;
+     *     digits -> factor -> sum;
+     *   }
+     * @enddot
+     *
      */
     template <unsigned long Base = 2> class VdCorput {
         unsigned long _count{0};  ///< Current count in the sequence
@@ -52,6 +68,10 @@ namespace ilds {
 
         /**
          * @brief Increments count and calculates the next value in the sequence.
+         *
+         * @f[
+         *     \phi_b^{\mathbb{Z}}(n) = \sum_{k=0}^{\infty} a_k(n) \cdot \mathrm{factor}_k
+         * @f]
          *
          * @return unsigned long
          */
@@ -87,6 +107,11 @@ namespace ilds {
 
         /**
          * @brief Peek at the next value without advancing state.
+         *
+         * @f[
+         *     \phi_b^{\mathbb{Z}}(n+1) = \sum_{k=0}^{\infty} a_k(n+1) \cdot \mathrm{factor}_k
+         * @f]
+         *
          */
         [[nodiscard]] constexpr auto peek() -> unsigned long {
             unsigned long count = this->_count + 1;
@@ -135,6 +160,10 @@ namespace ilds {
          * @brief Generate the next point in the Halton sequence
          *
          * Returns the next point in the Halton sequence as an array of two unsigned long values.
+         *
+         * @f[
+         *     H(n) = (\phi_{b_1}^{\mathbb{Z}}(n), \phi_{b_2}^{\mathbb{Z}}(n))
+         * @f]
          *
          * @return array<unsigned long, 2> the next point in the sequence
          */
