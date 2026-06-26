@@ -34,15 +34,6 @@ namespace lds {
      * @tparam Generator The generator class
      * @tparam Value The value type (double or array)
      */
-    /**
-     * @brief Forward iterator for sequence generators.
-     *
-     * Provides STL-compatible iterator interface for all generators.
-     * Allows use in range-based for loops and STL algorithms.
-     *
-     * @tparam Generator The generator class type.
-     * @tparam Value The value type (double or array).
-     */
     template <typename Generator, typename Value> class GeneratorIterator {
         Generator* gen;
         unsigned long index;
