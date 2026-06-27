@@ -57,12 +57,10 @@ namespace ilds {
          */
         constexpr explicit VdCorput(unsigned int scale = DEFAULT_SCALE) {
             unsigned long factor = 1;
-            for (unsigned int i = 0; i < scale; ++i) {
+            unsigned int n = scale < MAX_REVERSE_BITS ? scale : MAX_REVERSE_BITS;
+            for (unsigned int i = 0; i < n; ++i) {
+                factor_lst[n - 1 - i] = factor;
                 factor *= Base;
-            }
-            for (unsigned int i = 0; i < MAX_REVERSE_BITS; ++i) {
-                factor /= Base;
-                this->factor_lst[i] = factor;
             }
         }
 
