@@ -243,13 +243,11 @@ TEST_CASE("Sphere3Hopf reseed consistency") {
 
 // --- prime_table edge cases ---
 
-TEST_CASE("prime_table first prime") {
-    CHECK_EQ(lds::prime_table(0), 2UL);
-}
+TEST_CASE("prime_table first prime") { CHECK_EQ(lds::prime_table(0), 2UL); }
 
 TEST_CASE("prime_table first 20 primes") {
-    unsigned long expected[] = {2,  3,  5,  7,  11, 13, 17, 19, 23, 29,
-                                31, 37, 41, 43, 47, 53, 59, 61, 67, 71};
+    unsigned long expected[]
+        = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71};
     for (unsigned long i = 0; i < 20; ++i) {
         CHECK_EQ(lds::prime_table(i), expected[i]);
     }
