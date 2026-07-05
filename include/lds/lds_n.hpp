@@ -8,7 +8,6 @@
 #include <cstddef>
 #include <lds/lds.hpp>
 #include <memory>
-#include <vector>
 
 namespace lds {
 
@@ -68,24 +67,21 @@ namespace lds {
     class VdCorputDynamic : public VdCorputBase {
         unsigned long base_;
         unsigned long count = 0;
-        std::vector<double> rev_lst_;
-
-        static constexpr unsigned long MAX_REVERSE_BITS = 64;
+        std::array<double, 64> rev_lst_{};
 
         /**
          * @brief Internal implementation of the van der Corput computation.
          *
-         * @f[
-         *     \phi_b(\mathrm{cnt}) = \sum_{k=0}^{\infty} a_k(\mathrm{cnt}) \, b^{-k-1}
-         * @f]
-         * where \f$a_k(\mathrm{cnt})\f$ are the base-\f$b\f$ digits of cnt.
+         * Reverse powers of the base are precomputed once in the constructor
+         * for fast lookup during pop()/peek(). The array is fixed at 64 entries,
+         * sufficient for double precision (53 mantissa bits).
          *
          * @param[in] cnt The sequence index to compute.
          * @return The van der Corput value for index cnt.
          */
         auto pop_impl(unsigned long cnt) -> double {
-            unsigned long count_value = cnt;
-            unsigned long idx = 0;
+            auto count_value = cnt;
+            std::size_t idx = 0;
             double res = 0.0;
             while (count_value != 0) {
                 const auto remainder = count_value % this->base_;
@@ -103,10 +99,9 @@ namespace lds {
          */
         explicit VdCorputDynamic(unsigned long base) : base_(base) {
             double reverse = 1.0;
-            rev_lst_.reserve(MAX_REVERSE_BITS);
-            for (unsigned long i = 0; i < MAX_REVERSE_BITS; ++i) {
+            for (auto& v : rev_lst_) {
                 reverse /= static_cast<double>(base_);
-                rev_lst_.push_back(reverse);
+                v = reverse;
             }
         }
 

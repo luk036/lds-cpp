@@ -192,6 +192,9 @@ namespace lds {
          * Constructs a VdCorput sequence generator using the template parameter
          * `Base` to generate the van der Corput sequence.
          *
+         * Precomputes reverse powers of Base for fast lookup in pop()/peek(),
+         * avoiding repeated division at the cost of 512 bytes per instance.
+         *
          * @tparam Base the base of the van der Corput sequence
          */
         constexpr VdCorput() {

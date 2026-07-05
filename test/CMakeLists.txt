@@ -7,14 +7,11 @@ project(LdsTests LANGUAGES CXX)
 option(ENABLE_TEST_COVERAGE "Enable test coverage" OFF)
 option(TEST_INSTALLED_VERSION "Test the version found by find_package" OFF)
 
-# --- Import tools ----
-
-include(../cmake/tools.cmake)
-
-# ---- Dependencies ----
+# --- Import tools and dependencies ----
 
 include(../cmake/CPM.cmake)
 include(../cmake/specific.cmake)
+include(../cmake/tools.cmake)
 
 CPMAddPackage("gh:doctest/doctest@2.5.2")
 CPMAddPackage("gh:TheLartians/Format.cmake@1.7.3")

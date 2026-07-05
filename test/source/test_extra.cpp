@@ -317,3 +317,44 @@ TEST_CASE("ilds VdCorput peek") {
     auto popped = vgen.pop();
     CHECK_EQ(peeked, popped);
 }
+
+// --- Memory regression tests: class sizes ---
+// sizeof(unsigned long) is platform-dependent (4 on MSVC, 8 on GCC/Clang).
+// These tests use relationship checks to be cross-platform.
+
+TEST_CASE("sizeof VdCorput<2>") {
+    // unsigned long count (4) + padding (4) + double[64] rev_lst (512) = 520
+    // The actual size depends on alignment, so use the compiler's value
+    // as baseline. If this changes, the class layout has changed.
+    CHECK_EQ(sizeof(lds::VdCorput<2>), 520);
+}
+
+TEST_CASE("sizeof VdCorput<3>") {
+    CHECK_EQ(sizeof(lds::VdCorput<3>), 520);
+}
+
+TEST_CASE("sizeof Circle<2>") {
+    CHECK_EQ(sizeof(lds::Circle<2>), sizeof(lds::VdCorput<2>));
+}
+
+TEST_CASE("sizeof Halton<2,3>") {
+    CHECK_EQ(sizeof(lds::Halton<2, 3>), 2 * sizeof(lds::VdCorput<2>));
+}
+
+TEST_CASE("sizeof Disk<2,3>") {
+    CHECK_EQ(sizeof(lds::Disk<2, 3>), 2 * sizeof(lds::VdCorput<2>));
+}
+
+TEST_CASE("sizeof Sphere<2,3>") {
+    CHECK_EQ(sizeof(lds::Sphere<2, 3>),
+             sizeof(lds::VdCorput<2>) + sizeof(lds::Circle<3>));
+}
+
+TEST_CASE("sizeof Sphere3Hopf<2,3,5>") {
+    CHECK_EQ(sizeof(lds::Sphere3Hopf<2, 3, 5>), 3 * sizeof(lds::VdCorput<2>));
+}
+
+TEST_CASE("sizeof ilds::VdCorput<2>") {
+    // unsigned long _count + unsigned long[64] factor_lst = sizeof(ul) * 65
+    CHECK_EQ(sizeof(ilds::VdCorput<2>), sizeof(unsigned long) * 65);
+}
