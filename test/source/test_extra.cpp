@@ -329,25 +329,18 @@ TEST_CASE("sizeof VdCorput<2>") {
     CHECK_EQ(sizeof(lds::VdCorput<2>), 520);
 }
 
-TEST_CASE("sizeof VdCorput<3>") {
-    CHECK_EQ(sizeof(lds::VdCorput<3>), 520);
-}
+TEST_CASE("sizeof VdCorput<3>") { CHECK_EQ(sizeof(lds::VdCorput<3>), 520); }
 
-TEST_CASE("sizeof Circle<2>") {
-    CHECK_EQ(sizeof(lds::Circle<2>), sizeof(lds::VdCorput<2>));
-}
+TEST_CASE("sizeof Circle<2>") { CHECK_EQ(sizeof(lds::Circle<2>), sizeof(lds::VdCorput<2>)); }
 
 TEST_CASE("sizeof Halton<2,3>") {
     CHECK_EQ(sizeof(lds::Halton<2, 3>), 2 * sizeof(lds::VdCorput<2>));
 }
 
-TEST_CASE("sizeof Disk<2,3>") {
-    CHECK_EQ(sizeof(lds::Disk<2, 3>), 2 * sizeof(lds::VdCorput<2>));
-}
+TEST_CASE("sizeof Disk<2,3>") { CHECK_EQ(sizeof(lds::Disk<2, 3>), 2 * sizeof(lds::VdCorput<2>)); }
 
 TEST_CASE("sizeof Sphere<2,3>") {
-    CHECK_EQ(sizeof(lds::Sphere<2, 3>),
-             sizeof(lds::VdCorput<2>) + sizeof(lds::Circle<3>));
+    CHECK_EQ(sizeof(lds::Sphere<2, 3>), sizeof(lds::VdCorput<2>) + sizeof(lds::Circle<3>));
 }
 
 TEST_CASE("sizeof Sphere3Hopf<2,3,5>") {
