@@ -134,7 +134,7 @@ class lds::VdCorput&lt; Base &gt;</div><p>van der Corput sequence generator </p>
 </p>
 <p> where \(a_k(n)\) are the base- \(b\) digits of \(n\).</p>
 <div class="dotgraph">
-<iframe scrolling="no" frameborder="0" src="dot_inline_dotgraph_2.svg" width="719" height="134"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<iframe scrolling="no" frameborder="0" src="dot_inline_dotgraph_4.svg" width="719" height="134"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <pre class="fragment">*     VdCorput(2) sequence:
 *     pop() -&gt; 0.5   (0.1 base 2)
 *     pop() -&gt; 0.25  (0.01 base 2)
@@ -169,6 +169,7 @@ template&lt;unsigned long Base = 2&gt; </div>
 
 <p>Construct a new <a class="el" href="classlds_1_1VdCorput.html" title="van der Corput sequence generator">VdCorput</a> object. </p>
 <p>Constructs a <a class="el" href="classlds_1_1VdCorput.html" title="van der Corput sequence generator">VdCorput</a> sequence generator using the template parameter <code>Base</code> to generate the van der Corput sequence.</p>
+<p>Precomputes reverse powers of Base for fast lookup in <a class="el" href="classlds_1_1VdCorput.html#a0685d70e8cfdda79ab83d07a850f5c32" title="Generate the next value in the van der Corput sequence.">pop()</a>/peek(), avoiding repeated division at the cost of 512 bytes per instance.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">Base</td><td>the base of the van der Corput sequence </td></tr>

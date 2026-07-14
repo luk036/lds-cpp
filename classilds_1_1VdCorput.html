@@ -103,6 +103,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ad1ad1c2af5c9ef2513a8dd13ee3d6660" id="r_ad1ad1c2af5c9ef2513a8dd13ee3d6660"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classilds_1_1VdCorput.html#ad1ad1c2af5c9ef2513a8dd13ee3d6660">reseed</a> (const unsigned long &amp;seed) -&gt; void</td></tr>
 <tr class="memdesc:ad1ad1c2af5c9ef2513a8dd13ee3d6660"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets the state of the sequence generator.  <br /></td></tr>
 <tr class="separator:ad1ad1c2af5c9ef2513a8dd13ee3d6660"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada83cfc16cbbc2f4117b5a61dfc62f10" id="r_ada83cfc16cbbc2f4117b5a61dfc62f10"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classilds_1_1VdCorput.html#ada83cfc16cbbc2f4117b5a61dfc62f10">get_index</a> () const -&gt; unsigned long</td></tr>
+<tr class="memdesc:ada83cfc16cbbc2f4117b5a61dfc62f10"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get current index in the sequence.  <br /></td></tr>
+<tr class="separator:ada83cfc16cbbc2f4117b5a61dfc62f10"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac14b78c6e26064b0f1c916e07ca0e319" id="r_ac14b78c6e26064b0f1c916e07ca0e319"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classilds_1_1VdCorput.html#ac14b78c6e26064b0f1c916e07ca0e319">skip</a> (unsigned long n) -&gt; void</td></tr>
+<tr class="memdesc:ac14b78c6e26064b0f1c916e07ca0e319"><td class="mdescLeft">&#160;</td><td class="mdescRight">Skip n values in the sequence.  <br /></td></tr>
+<tr class="separator:ac14b78c6e26064b0f1c916e07ca0e319"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd2aba630686e645c30d623353a656da" id="r_afd2aba630686e645c30d623353a656da"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classilds_1_1VdCorput.html#afd2aba630686e645c30d623353a656da">peek</a> () -&gt; unsigned long</td></tr>
+<tr class="memdesc:afd2aba630686e645c30d623353a656da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Peek at the next value without advancing state.  <br /></td></tr>
+<tr class="separator:afd2aba630686e645c30d623353a656da"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae3c1a545a331e643bf5ebffb04a2c87c" id="r_ae3c1a545a331e643bf5ebffb04a2c87c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classilds_1_1VdCorput.html#ae3c1a545a331e643bf5ebffb04a2c87c">VdCorput</a> (<a class="el" href="classilds_1_1VdCorput.html">VdCorput</a> &amp;&amp;) noexcept=delete</td></tr>
 <tr class="separator:ae3c1a545a331e643bf5ebffb04a2c87c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa31a21a0b49d4c8ba75ae594146014ef" id="r_aa31a21a0b49d4c8ba75ae594146014ef"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classilds_1_1VdCorput.html">VdCorput</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classilds_1_1VdCorput.html#aa31a21a0b49d4c8ba75ae594146014ef">operator=</a> (<a class="el" href="classilds_1_1VdCorput.html">VdCorput</a> &amp;&amp;) noexcept=delete</td></tr>
@@ -111,8 +120,10 @@ Public Member Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;unsigned long Base = 2&gt;<br />
 class ilds::VdCorput&lt; Base &gt;</div><p>van der Corput sequence generator </p>
-<p>Implementation based on pre-calculating the scale factor. </p>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<p>Implementation based on pre-calculating the scale factor.</p>
+<div class="dotgraph">
+<iframe scrolling="no" frameborder="0" src="dot_inline_dotgraph_1.svg" width="775" height="131"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+ </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a1b736178d11220aedb7f052921bef501" name="a1b736178d11220aedb7f052921bef501"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1b736178d11220aedb7f052921bef501">&#9670;&#160;</a></span>VdCorput() <span class="overload">[1/2]</span></h2>
 
@@ -178,6 +189,35 @@ template&lt;unsigned long Base = 2&gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="ada83cfc16cbbc2f4117b5a61dfc62f10" name="ada83cfc16cbbc2f4117b5a61dfc62f10"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada83cfc16cbbc2f4117b5a61dfc62f10">&#9670;&#160;</a></span>get_index()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned long Base = 2&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto <a class="el" href="classilds_1_1VdCorput.html">ilds::VdCorput</a>&lt; Base &gt;::get_index </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const -&gt; unsigned long </td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get current index in the sequence. </p>
+
+</div>
+</div>
 <a id="aa31a21a0b49d4c8ba75ae594146014ef" name="aa31a21a0b49d4c8ba75ae594146014ef"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa31a21a0b49d4c8ba75ae594146014ef">&#9670;&#160;</a></span>operator=()</h2>
 
@@ -206,6 +246,40 @@ template&lt;unsigned long Base = 2&gt; </div>
 
 </div>
 </div>
+<a id="afd2aba630686e645c30d623353a656da" name="afd2aba630686e645c30d623353a656da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afd2aba630686e645c30d623353a656da">&#9670;&#160;</a></span>peek()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned long Base = 2&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto <a class="el" href="classilds_1_1VdCorput.html">ilds::VdCorput</a>&lt; Base &gt;::peek </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> -&gt; unsigned long </td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Peek at the next value without advancing state. </p>
+<p class="formulaDsp">
+\[
+    \phi_b^{\mathbb{Z}}(n+1) = \sum_{k=0}^{\infty} a_k(n+1) \cdot \mathrm{factor}_k
+\]
+</p>
+ 
+</div>
+</div>
 <a id="aaec845f4e52eb87c479d936f61c4cf29" name="aaec845f4e52eb87c479d936f61c4cf29"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aaec845f4e52eb87c479d936f61c4cf29">&#9670;&#160;</a></span>pop()</h2>
 
@@ -232,6 +306,11 @@ template&lt;unsigned long Base = 2&gt; </div>
 </div><div class="memdoc">
 
 <p>Increments count and calculates the next value in the sequence. </p>
+<p class="formulaDsp">
+\[
+    \phi_b^{\mathbb{Z}}(n) = \sum_{k=0}^{\infty} a_k(n) \cdot \mathrm{factor}_k
+\]
+</p>
 <dl class="section return"><dt>Returns</dt><dd>unsigned long </dd></dl>
 
 </div>
@@ -269,6 +348,36 @@ template&lt;unsigned long Base = 2&gt; </div>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="ac14b78c6e26064b0f1c916e07ca0e319" name="ac14b78c6e26064b0f1c916e07ca0e319"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac14b78c6e26064b0f1c916e07ca0e319">&#9670;&#160;</a></span>skip()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned long Base = 2&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto <a class="el" href="classilds_1_1VdCorput.html">ilds::VdCorput</a>&lt; Base &gt;::skip </td>
+          <td>(</td>
+          <td class="paramtype">unsigned long&#160;</td>
+          <td class="paramname"><em>n</em></td><td>)</td>
+          <td> -&gt; void </td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Skip n values in the sequence. </p>
 
 </div>
 </div>
