@@ -20,6 +20,15 @@ namespace lds {
     class VdCorputBase {
       public:
         virtual ~VdCorputBase() = default;
+        /** Ensure an explicit default constructor is available for derived classes */
+        VdCorputBase() = default;
+
+        // Non-copyable and non-movable: polymorphic base should not be
+        // accidentally copied or moved (prevents slicing and ownership issues).
+        VdCorputBase(const VdCorputBase&) = delete;
+        VdCorputBase& operator=(const VdCorputBase&) = delete;
+        VdCorputBase(VdCorputBase&&) = delete;
+        VdCorputBase& operator=(VdCorputBase&&) = delete;
 
         /** @brief Generate the next value in the sequence. */
         virtual auto pop() -> double = 0;
