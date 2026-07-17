@@ -123,12 +123,6 @@ namespace ilds {
             }
             return reslt;
         }
-
-        constexpr VdCorput(const VdCorput&) = default;
-        constexpr auto operator=(const VdCorput&) -> VdCorput& = default;
-        constexpr VdCorput(VdCorput&&) noexcept = default;
-        constexpr auto operator=(VdCorput&&) noexcept -> VdCorput& = default;
-        ~VdCorput() = default;
     };
 
     /**

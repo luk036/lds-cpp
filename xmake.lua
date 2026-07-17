@@ -86,20 +86,6 @@ target("test_wrapper_only")
     add_includedirs("include", {public = true})
     add_packages("spdlog", "fmt")
 
-    -- Check if rapidcheck was downloaded by CMake
-    local rapidcheck_dir = path.join(os.projectdir(), "build", "_deps", "rapidcheck-src")
-    local rapidcheck_lib_dir = path.join(os.projectdir(), "build", "_deps", "rapidcheck-build")
-    if is_plat("windows") then
-        rapidcheck_lib_dir = path.join(rapidcheck_lib_dir, "Release")
-    end
-
-    if os.isdir(rapidcheck_dir) and os.isdir(rapidcheck_lib_dir) then
-        add_includedirs(path.join(rapidcheck_dir, "include"))
-        add_linkdirs(rapidcheck_lib_dir)
-        add_links("rapidcheck")
-        add_defines("RAPIDCHECK_H")
-    end
-
 -- If you want to known more usage about xmake, please see https://xmake.io
 --
 -- ## FAQ

@@ -291,12 +291,6 @@ namespace lds {
             return GeneratorIterator<VdCorput, double>(nullptr,
                                                        std::numeric_limits<unsigned long>::max());
         }
-
-        constexpr VdCorput(const VdCorput&) = default;
-        constexpr auto operator=(const VdCorput&) -> VdCorput& = default;
-        constexpr VdCorput(VdCorput&&) noexcept = default;
-        constexpr auto operator=(VdCorput&&) noexcept -> VdCorput& = default;
-        ~VdCorput() = default;
     };
 
     /**

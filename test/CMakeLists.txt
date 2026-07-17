@@ -16,13 +16,6 @@ include(../cmake/tools.cmake)
 CPMAddPackage("gh:doctest/doctest@2.5.2")
 CPMAddPackage("gh:TheLartians/Format.cmake@1.7.3")
 
-CPMAddPackage(
-  NAME rapidcheck
-  GITHUB_REPOSITORY emil-e/rapidcheck
-  GIT_TAG master
-  OPTIONS "RC_BUILD_TESTS OFF" "RC_BUILD_EXAMPLES OFF" "RC_INSTALL OFF"
-)
-
 if(TEST_INSTALLED_VERSION)
   find_package(Lds REQUIRED)
 else()
@@ -36,18 +29,6 @@ add_executable(${PROJECT_NAME} ${sources})
 target_link_libraries(${PROJECT_NAME} doctest::doctest Lds::Lds ${SPECIFIC_LIBS})
 set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 20)
 set_property(TARGET ${PROJECT_NAME} PROPERTY INTERPROCEDURAL_OPTIMIZATION TRUE)
-
-if(rapidcheck_ADDED)
-  target_compile_definitions(${PROJECT_NAME} PRIVATE RAPIDCHECK_H)
-  if(TARGET rapidcheck::rapidcheck)
-    target_link_libraries(${PROJECT_NAME} rapidcheck::rapidcheck)
-  else()
-    target_include_directories(${PROJECT_NAME} PRIVATE ${rapidcheck_SOURCE_DIR}/include)
-    if(TARGET rapidcheck)
-      target_link_libraries(${PROJECT_NAME} rapidcheck)
-    endif()
-  endif()
-endif()
 
 # enable compiler warnings
 if(NOT TEST_INSTALLED_VERSION)
