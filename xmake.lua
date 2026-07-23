@@ -31,6 +31,22 @@ target("Lds")
         add_syslinks("pthread")
     end
 
+target("bench_all")
+    set_languages("c++20")
+    set_kind("binary")
+    add_deps("Lds")
+    add_files("examples/bench_all.cpp")
+    add_includedirs("include", {public = true})
+    add_packages("fmt", "spdlog")
+
+target("verify_basic")
+    set_languages("c++20")
+    set_kind("binary")
+    add_deps("Lds")
+    add_files("examples/verify_basic.cpp")
+    add_includedirs("include", {public = true})
+    add_packages("fmt", "spdlog")
+
 target("test_lds")
     set_languages("c++20")
     set_kind("binary")
