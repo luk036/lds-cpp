@@ -1,5 +1,5 @@
-#include <cstdio>
 #include <cmath>
+#include <cstdio>
 #include <lds/lds.hpp>
 
 int main() {
@@ -9,8 +9,7 @@ int main() {
     std::printf("1. van der Corput sequence (base 2):\n");
     lds::VdCorput<2> vgen;
     vgen.reseed(0);
-    for (int i = 0; i < 5; ++i)
-        std::printf("  Value %d: %.15f\n", i + 1, vgen.pop());
+    for (int i = 0; i < 5; ++i) std::printf("  Value %d: %.15f\n", i + 1, vgen.pop());
 
     // 2. Halton bases [2,3]
     std::printf("\n2. Halton sequence (bases [2, 3]):\n");
@@ -47,7 +46,8 @@ int main() {
     for (int i = 0; i < 3; ++i) {
         auto p = sgen.pop();
         auto r = std::sqrt(p[0] * p[0] + p[1] * p[1] + p[2] * p[2]);
-        std::printf("  Point %d: [%.15f, %.15f, %.15f] (radius: %.15f)\n", i + 1, p[0], p[1], p[2], r);
+        std::printf("  Point %d: [%.15f, %.15f, %.15f] (radius: %.15f)\n", i + 1, p[0], p[1], p[2],
+                    r);
     }
 
     // 6. Sphere3Hopf bases [2,3,5]
@@ -57,7 +57,8 @@ int main() {
     for (int i = 0; i < 3; ++i) {
         auto p = s3hgen.pop();
         auto r = std::sqrt(p[0] * p[0] + p[1] * p[1] + p[2] * p[2] + p[3] * p[3]);
-        std::printf("  Point %d: [%.15f, %.15f, %.15f, %.15f] (radius: %.15f)\n", i + 1, p[0], p[1], p[2], p[3], r);
+        std::printf("  Point %d: [%.15f, %.15f, %.15f, %.15f] (radius: %.15f)\n", i + 1, p[0], p[1],
+                    p[2], p[3], r);
     }
 
     return 0;
