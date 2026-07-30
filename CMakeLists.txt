@@ -38,6 +38,9 @@ else()
   )
 endif()
 
+# Remember whether fmt is system — used by specific.cmake for spdlog's SPDLOG_FMT_EXTERNAL
+set(FMT_FROM_SYSTEM ${fmt_FOUND})
+
 # ---- Specific dependencies ----
 
 include(cmake/specific.cmake)
