@@ -13,7 +13,8 @@ include(../cmake/CPM.cmake)
 include(../cmake/specific.cmake)
 include(../cmake/tools.cmake)
 
-# Try system-installed doctest first (Ubuntu: doctest-dev, macOS: brew install doctest, Termux: doctest)
+# Try system-installed doctest first (Ubuntu: doctest-dev, macOS: brew install doctest, Termux:
+# doctest)
 find_package(doctest CONFIG QUIET)
 
 if(NOT doctest_FOUND)

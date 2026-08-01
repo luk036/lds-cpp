@@ -5,8 +5,8 @@ find_package(spdlog CONFIG QUIET)
 if(spdlog_FOUND)
   message(STATUS "Found system spdlog: ${spdlog_DIR}")
 else()
-  # Only set SPDLOG_FMT_EXTERNAL when fmt is from system (not CPM).
-  # When fmt is also built via CPM, spdlog bundles its own fmt copy.
+  # Only set SPDLOG_FMT_EXTERNAL when fmt is from system (not CPM). When fmt is also built via CPM,
+  # spdlog bundles its own fmt copy.
   set(SPDLOG_OPTS "SPDLOG_INSTALL YES")
   if(FMT_FROM_SYSTEM)
     list(APPEND SPDLOG_OPTS "SPDLOG_FMT_EXTERNAL YES")
