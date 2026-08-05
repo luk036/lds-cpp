@@ -28,7 +28,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Lds<span id="projectnumber">&#160;1.2.1</span>
+   <div id="projectname">Lds<span id="projectnumber">&#160;1.2.4</span>
    </div>
   </td>
  </tr>
@@ -112,10 +112,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:afd2aba630686e645c30d623353a656da" id="r_afd2aba630686e645c30d623353a656da"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classilds_1_1VdCorput.html#afd2aba630686e645c30d623353a656da">peek</a> () -&gt; unsigned long</td></tr>
 <tr class="memdesc:afd2aba630686e645c30d623353a656da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Peek at the next value without advancing state.  <br /></td></tr>
 <tr class="separator:afd2aba630686e645c30d623353a656da"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae3c1a545a331e643bf5ebffb04a2c87c" id="r_ae3c1a545a331e643bf5ebffb04a2c87c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classilds_1_1VdCorput.html#ae3c1a545a331e643bf5ebffb04a2c87c">VdCorput</a> (<a class="el" href="classilds_1_1VdCorput.html">VdCorput</a> &amp;&amp;) noexcept=delete</td></tr>
-<tr class="separator:ae3c1a545a331e643bf5ebffb04a2c87c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa31a21a0b49d4c8ba75ae594146014ef" id="r_aa31a21a0b49d4c8ba75ae594146014ef"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classilds_1_1VdCorput.html">VdCorput</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classilds_1_1VdCorput.html#aa31a21a0b49d4c8ba75ae594146014ef">operator=</a> (<a class="el" href="classilds_1_1VdCorput.html">VdCorput</a> &amp;&amp;) noexcept=delete</td></tr>
-<tr class="separator:aa31a21a0b49d4c8ba75ae594146014ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;unsigned long Base = 2&gt;<br />
@@ -125,7 +121,7 @@ class ilds::VdCorput&lt; Base &gt;</div><p>van der Corput sequence generator </p
 <iframe scrolling="no" frameborder="0" src="dot_inline_dotgraph_1.svg" width="775" height="131"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
  </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a1b736178d11220aedb7f052921bef501" name="a1b736178d11220aedb7f052921bef501"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1b736178d11220aedb7f052921bef501">&#9670;&#160;</a></span>VdCorput() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b736178d11220aedb7f052921bef501">&#9670;&#160;</a></span>VdCorput()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -160,34 +156,6 @@ template&lt;unsigned long Base = 2&gt; </div>
 
 </div>
 </div>
-<a id="ae3c1a545a331e643bf5ebffb04a2c87c" name="ae3c1a545a331e643bf5ebffb04a2c87c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae3c1a545a331e643bf5ebffb04a2c87c">&#9670;&#160;</a></span>VdCorput() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;unsigned long Base = 2&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classilds_1_1VdCorput.html">ilds::VdCorput</a>&lt; Base &gt;::VdCorput </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classilds_1_1VdCorput.html">VdCorput</a>&lt; Base &gt; &amp;&amp;&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">delete</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="ada83cfc16cbbc2f4117b5a61dfc62f10" name="ada83cfc16cbbc2f4117b5a61dfc62f10"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ada83cfc16cbbc2f4117b5a61dfc62f10">&#9670;&#160;</a></span>get_index()</h2>
@@ -215,34 +183,6 @@ template&lt;unsigned long Base = 2&gt; </div>
 </div><div class="memdoc">
 
 <p>Get current index in the sequence. </p>
-
-</div>
-</div>
-<a id="aa31a21a0b49d4c8ba75ae594146014ef" name="aa31a21a0b49d4c8ba75ae594146014ef"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa31a21a0b49d4c8ba75ae594146014ef">&#9670;&#160;</a></span>operator=()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;unsigned long Base = 2&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classilds_1_1VdCorput.html">VdCorput</a> &amp; <a class="el" href="classilds_1_1VdCorput.html">ilds::VdCorput</a>&lt; Base &gt;::operator= </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classilds_1_1VdCorput.html">VdCorput</a>&lt; Base &gt; &amp;&amp;&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">delete</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
 
 </div>
 </div>

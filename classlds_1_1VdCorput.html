@@ -28,7 +28,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Lds<span id="projectnumber">&#160;1.2.1</span>
+   <div id="projectname">Lds<span id="projectnumber">&#160;1.2.4</span>
    </div>
   </td>
  </tr>
@@ -118,10 +118,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a3f5356c7e66f668b5e0ef1ee0d36b13f" id="r_a3f5356c7e66f668b5e0ef1ee0d36b13f"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlds_1_1VdCorput.html#a3f5356c7e66f668b5e0ef1ee0d36b13f">end</a> () const -&gt; <a class="el" href="classlds_1_1GeneratorIterator.html">GeneratorIterator</a>&lt; <a class="el" href="classlds_1_1VdCorput.html">VdCorput</a>, double &gt;</td></tr>
 <tr class="memdesc:a3f5356c7e66f668b5e0ef1ee0d36b13f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get iterator to end (infinite sequence)  <br /></td></tr>
 <tr class="separator:a3f5356c7e66f668b5e0ef1ee0d36b13f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2192667db8c134e81ca8fa9e98e6a1ca" id="r_a2192667db8c134e81ca8fa9e98e6a1ca"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlds_1_1VdCorput.html#a2192667db8c134e81ca8fa9e98e6a1ca">VdCorput</a> (<a class="el" href="classlds_1_1VdCorput.html">VdCorput</a> &amp;&amp;) noexcept=delete</td></tr>
-<tr class="separator:a2192667db8c134e81ca8fa9e98e6a1ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5d97eda4bb7d54e8afa69885d0a21f06" id="r_a5d97eda4bb7d54e8afa69885d0a21f06"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classlds_1_1VdCorput.html">VdCorput</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlds_1_1VdCorput.html#a5d97eda4bb7d54e8afa69885d0a21f06">operator=</a> (<a class="el" href="classlds_1_1VdCorput.html">VdCorput</a> &amp;&amp;) noexcept=delete</td></tr>
-<tr class="separator:a5d97eda4bb7d54e8afa69885d0a21f06"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;unsigned long Base = 2&gt;<br />
@@ -143,7 +139,7 @@ class lds::VdCorput&lt; Base &gt;</div><p>van der Corput sequence generator </p>
 *     ...
 * </pre> </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a7e5ebd22112fd14b7d78b2b95b8b4098" name="a7e5ebd22112fd14b7d78b2b95b8b4098"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7e5ebd22112fd14b7d78b2b95b8b4098">&#9670;&#160;</a></span>VdCorput() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e5ebd22112fd14b7d78b2b95b8b4098">&#9670;&#160;</a></span>VdCorput()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -176,34 +172,6 @@ template&lt;unsigned long Base = 2&gt; </div>
   </table>
   </dd>
 </dl>
-
-</div>
-</div>
-<a id="a2192667db8c134e81ca8fa9e98e6a1ca" name="a2192667db8c134e81ca8fa9e98e6a1ca"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2192667db8c134e81ca8fa9e98e6a1ca">&#9670;&#160;</a></span>VdCorput() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;unsigned long Base = 2&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classlds_1_1VdCorput.html">lds::VdCorput</a>&lt; Base &gt;::VdCorput </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classlds_1_1VdCorput.html">VdCorput</a>&lt; Base &gt; &amp;&amp;&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">delete</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
 
 </div>
 </div>
@@ -296,34 +264,6 @@ template&lt;unsigned long Base = 2&gt; </div>
 
 <p>Get current index. </p>
 <dl class="section return"><dt>Returns</dt><dd>unsigned long current index in the sequence </dd></dl>
-
-</div>
-</div>
-<a id="a5d97eda4bb7d54e8afa69885d0a21f06" name="a5d97eda4bb7d54e8afa69885d0a21f06"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5d97eda4bb7d54e8afa69885d0a21f06">&#9670;&#160;</a></span>operator=()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;unsigned long Base = 2&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classlds_1_1VdCorput.html">VdCorput</a> &amp; <a class="el" href="classlds_1_1VdCorput.html">lds::VdCorput</a>&lt; Base &gt;::operator= </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classlds_1_1VdCorput.html">VdCorput</a>&lt; Base &gt; &amp;&amp;&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">delete</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
 
 </div>
 </div>
