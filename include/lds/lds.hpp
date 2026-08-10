@@ -133,8 +133,8 @@ namespace lds {
         while (count != 0) {
             const auto remainder = count % Base;
             count /= Base;
-            denom *= double(Base);
-            reslt += double(remainder) / denom;
+            denom *= static_cast<double>(Base);
+            reslt += static_cast<double>(remainder) / denom;
         }
         return reslt;
     }
@@ -200,7 +200,7 @@ namespace lds {
         constexpr VdCorput() {
             double reverse = 1.0;
             for (unsigned long i = 0; i < MAX_REVERSE_BITS; ++i) {
-                reverse /= double(Base);
+                reverse /= static_cast<double>(Base);
                 this->rev_lst[i] = reverse;
             }
         }
@@ -221,7 +221,7 @@ namespace lds {
             while (count_value != 0) {
                 const auto remainder = count_value % Base;
                 count_value /= Base;
-                res += this->rev_lst[idx] * double(remainder);
+                res += this->rev_lst[idx] * static_cast<double>(remainder);
                 ++idx;
             }
             return res;
@@ -239,7 +239,7 @@ namespace lds {
             while (count_value != 0) {
                 const auto remainder = count_value % Base;
                 count_value /= Base;
-                res += this->rev_lst[idx] * double(remainder);
+                res += this->rev_lst[idx] * static_cast<double>(remainder);
                 ++idx;
             }
             return res;

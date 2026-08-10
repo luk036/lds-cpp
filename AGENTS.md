@@ -215,7 +215,9 @@ cmake -S test -B build/test -DUSE_SANITIZER=Thread
 
 ### Static Analyzers
 ```bash
-cmake -S test -B build/test -DUSE_STATIC_ANALYZER=clang-tidy
+# clang-tidy over the public headers (uses the checks in .clang-tidy)
+cmake -S . -B build -DLDS_ENABLE_CLANG_TIDY=ON
+cmake --build build --target clang-tidy
 ```
 
 ### Code Coverage
