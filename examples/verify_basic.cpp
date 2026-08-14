@@ -1,5 +1,6 @@
-#include <cmath>
 #include <fmt/format.h>
+
+#include <cmath>
 #include <lds/lds.hpp>
 
 int main() {
@@ -46,8 +47,8 @@ int main() {
     for (int i = 0; i < 3; ++i) {
         auto p = sgen.pop();
         auto r = std::sqrt(p[0] * p[0] + p[1] * p[1] + p[2] * p[2]);
-        fmt::print("  Point {}: [{:.15f}, {:.15f}, {:.15f}] (radius: {:.15f})\n", i + 1, p[0], p[1], p[2],
-                    r);
+        fmt::print("  Point {}: [{:.15f}, {:.15f}, {:.15f}] (radius: {:.15f})\n", i + 1, p[0], p[1],
+                   p[2], r);
     }
 
     // 6. Sphere3Hopf bases [2,3,5]
@@ -57,8 +58,8 @@ int main() {
     for (int i = 0; i < 3; ++i) {
         auto p = s3hgen.pop();
         auto r = std::sqrt(p[0] * p[0] + p[1] * p[1] + p[2] * p[2] + p[3] * p[3]);
-        fmt::print("  Point {}: [{:.15f}, {:.15f}, {:.15f}, {:.15f}] (radius: {:.15f})\n", i + 1, p[0], p[1],
-                    p[2], p[3], r);
+        fmt::print("  Point {}: [{:.15f}, {:.15f}, {:.15f}, {:.15f}] (radius: {:.15f})\n", i + 1,
+                   p[0], p[1], p[2], p[3], r);
     }
 
     return 0;
