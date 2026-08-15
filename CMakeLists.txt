@@ -58,12 +58,20 @@ include(${CPM_DOWNLOAD_LOCATION})
 # PackageProject.cmake will be used to make our target installable
 CPMAddPackage("gh:TheLartians/PackageProject.cmake@1.8.0")
 
-# fmt is a transitive dependency of spdlog; prefer a system-installed fmt when available.
-find_package(fmt CONFIG QUIET)
-if(fmt_FOUND)
-  message(STATUS "Found system fmt: ${fmt_DIR}")
-  set(CPM_fmt_ADDED YES)
-else()
+# fmt is a transitive dependency of spdlog. Prefer a system-installed fmt when available.
+# On MSVC, skip prebuilt system packages (e.g. conda): they are Release-only shared
+# libraries whose std::string ABI (_ITERATOR_DEBUG_LEVEL=0) mismatches Debug builds
+# (_ITERATOR_DEBUG_LEVEL=2), corrupting std::strings returned by fmt::format. Build fmt
+# from source on MSVC so the ABI always matches (same as CI's windows-latest runner).
+if(NOT MSVC)
+  find_package(fmt CONFIG QUIET)
+  if(fmt_FOUND)
+    message(STATUS "Found system fmt: ${fmt_DIR}")
+    set(CPM_fmt_ADDED YES)
+  endif()
+endif()
+
+if(NOT fmt_FOUND)
   CPMAddPackage(
     NAME fmt
     GIT_TAG 12.1.0
@@ -74,12 +82,17 @@ endif()
 
 # spdlog is used by the compiled logger source; prefer a system-installed spdlog when available.
 # SPDLOG_FMT_EXTERNAL is always set so spdlog uses the external fmt and avoids duplicate symbols
-# when fmt is a shared library.
-find_package(spdlog CONFIG QUIET)
-if(spdlog_FOUND)
-  message(STATUS "Found system spdlog: ${spdlog_DIR}")
-  set(CPM_spdlog_ADDED YES)
-else()
+# when fmt is a shared library. On MSVC, build spdlog from source for the same std::string ABI
+# reason as fmt.
+if(NOT MSVC)
+  find_package(spdlog CONFIG QUIET)
+  if(spdlog_FOUND)
+    message(STATUS "Found system spdlog: ${spdlog_DIR}")
+    set(CPM_spdlog_ADDED YES)
+  endif()
+endif()
+
+if(NOT spdlog_FOUND)
   CPMAddPackage(
     NAME spdlog
     GIT_TAG v1.17.0
