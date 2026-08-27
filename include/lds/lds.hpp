@@ -33,6 +33,13 @@ namespace lds {
      *
      * @tparam Generator The generator class
      * @tparam Value The value type (double or array)
+     *
+     * @note Iterator pattern: decouples traversal (STL algorithms, range-for) from
+     * the stateful generator "container"; dereference generates a value on demand
+     * from the underlying generator. The `gen` pointer plus the `index` cursor
+     * realize the iteration state, and the class provides the full iterator
+     * protocol (iterator_category, value_type, operator*, operator++, comparisons)
+     * so generators can be consumed with std::begin/std::end and range-for.
      */
     template <typename Generator, typename Value> class GeneratorIterator {
         Generator* gen;

@@ -16,6 +16,13 @@ namespace lds {
      *
      * Provides a common interface for both compile-time (template) and
      * runtime-dispatch van der Corput generators used in N-dimensional sequences.
+     *
+     * @note Strategy/Abstract interface pattern: this abstract class defines the
+     * runtime-polymorphic interface (pop, peek, skip, reseed, get_index) through
+     * which interchangeable generator strategies are invoked. The caller holds a
+     * VdCorputBase pointer and dispatches virtually, so the concrete strategy can
+     * be swapped at runtime (e.g. compile-time VdCorputWrap vs runtime
+     * VdCorputDynamic) without changing the client code.
      */
     class VdCorputBase {
       public:
@@ -49,6 +56,13 @@ namespace lds {
     /**
      * @brief Compile-time-polymorphic wrapper around VdCorput<Base>.
      * @tparam Base The numeric base for the van der Corput sequence.
+     *
+     * @note Adapter pattern: this class adapts the compile-time-polymorphic
+     * VdCorput<Base> template behind the runtime interface VdCorputBase, bridging
+     * template-based and runtime dispatch. The `vdc` member holds the adaptee and
+     * every VdCorputBase method is forwarded to it, translating the compile-time
+     * template parameter Base into an object whose behavior is selected at runtime
+     * via virtual dispatch.
      */
     template <unsigned long Base> class VdCorputWrap : public VdCorputBase {
         VdCorput<Base> vdc;
@@ -228,6 +242,17 @@ namespace lds {
         }
 
       private:
+        /**
+         * @brief Create a runtime-polymorphic van der Corput generator for a base.
+         * @param[in] base The numeric base for the sequence.
+         * @return A unique_ptr to the VdCorputBase implementation selected for base.
+         *
+         * @note Factory Method pattern: returns a VdCorputBase (unique_ptr) selecting
+         * the implementation at runtime — compile-time VdCorputWrap<N> for small
+         * prime bases, VdCorputDynamic otherwise. The switch on base hides the
+         * construction logic from the caller, so HaltonN clients receive an
+         * interchangeable strategy without knowing which concrete class was created.
+         */
         static auto create_vdc(unsigned long base) -> std::unique_ptr<VdCorputBase> {
             switch (base) {
                 case 2:
