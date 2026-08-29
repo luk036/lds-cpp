@@ -5,6 +5,7 @@
  */
 
 #include <array>
+#include <lds/lds.hpp>
 
 namespace ilds {
 
@@ -42,8 +43,8 @@ namespace ilds {
      * @enddot
      *
      */
-    template <unsigned long Base = 2> class VdCorput {
-        unsigned long _count{0};  ///< Current count in the sequence
+    template <unsigned long Base = 2> class VdCorput
+        : public lds::GeneratorBase<VdCorput<Base>, unsigned long> {
         std::array<unsigned long, MAX_REVERSE_BITS>
             factor_lst{};  ///< Precomputed scale factors for each digit
         static_assert(MAX_REVERSE_BITS >= sizeof(unsigned long) * 8,
@@ -65,63 +66,19 @@ namespace ilds {
         }
 
         /**
-         * @brief Increments count and calculates the next value in the sequence.
+         * @brief Evaluate the integer sequence value at a given index (pure, no state change)
          *
          * @f[
          *     \phi_b^{\mathbb{Z}}(n) = \sum_{k=0}^{\infty} a_k(n) \cdot \mathrm{factor}_k
          * @f]
+         * where \f$\mathrm{factor}_k = b^{\mathrm{scale}-1-k}\f$ scales the reversed
+         * base-b digits into an integer.
          *
-         * @return unsigned long
+         * @param[in] n The sequence index.
+         * @return The integer van der Corput value for index n.
          */
-        [[nodiscard]] constexpr auto pop() -> unsigned long {
-            unsigned long count = ++this->_count;
-            unsigned long reslt = 0;
-            unsigned int idx = 0;
-            while (count != 0) {
-                const unsigned long remainder = count % Base;
-                count /= Base;
-                reslt += remainder * this->factor_lst[idx];
-                ++idx;
-            }
-            return reslt;
-        }
-
-        /**
-         * @brief Resets the state of the sequence generator.
-         *
-         * @param[in] seed
-         */
-        constexpr auto reseed(const unsigned long& seed) -> void { this->_count = seed; }
-
-        /**
-         * @brief Get current index in the sequence.
-         */
-        [[nodiscard]] constexpr auto get_index() const -> unsigned long { return this->_count; }
-
-        /**
-         * @brief Skip n values in the sequence.
-         */
-        constexpr auto skip(unsigned long n) -> void { this->_count += n; }
-
-        /**
-         * @brief Peek at the next value without advancing state.
-         *
-         * @f[
-         *     \phi_b^{\mathbb{Z}}(n+1) = \sum_{k=0}^{\infty} a_k(n+1) \cdot \mathrm{factor}_k
-         * @f]
-         *
-         */
-        [[nodiscard]] constexpr auto peek() -> unsigned long {
-            unsigned long count = this->_count + 1;
-            unsigned long reslt = 0;
-            unsigned int idx = 0;
-            while (count != 0) {
-                const unsigned long remainder = count % Base;
-                count /= Base;
-                reslt += remainder * this->factor_lst[idx];
-                ++idx;
-            }
-            return reslt;
+        [[nodiscard]] constexpr auto value_at(unsigned long n) const -> unsigned long {
+            return lds::detail::vdc_digit_sum<unsigned long>(n, Base, this->factor_lst);
         }
     };
 
@@ -135,7 +92,8 @@ namespace ilds {
      *     ...
      * @endverbatim
      */
-    template <unsigned long Base1, unsigned long Base2> class Halton {
+    template <unsigned long Base1, unsigned long Base2> class Halton
+        : public lds::GeneratorBase<Halton<Base1, Base2>, array<unsigned long, 2>> {
         VdCorput<Base1> vdc0;
         VdCorput<Base2> vdc1;
 
@@ -152,30 +110,17 @@ namespace ilds {
             : vdc0(scale[0]), vdc1(scale[1]) {}
 
         /**
-         * @brief Generate the next point in the Halton sequence
-         *
-         * Returns the next point in the Halton sequence as an array of two unsigned long values.
+         * @brief Evaluate the integer 2D Halton point at a given index (pure)
          *
          * @f[
          *     H(n) = (\phi_{b_1}^{\mathbb{Z}}(n), \phi_{b_2}^{\mathbb{Z}}(n))
          * @f]
          *
-         * @return array<unsigned long, 2> the next point in the sequence
+         * @param[in] n The sequence index.
+         * @return The integer 2D Halton point for index n.
          */
-        constexpr auto pop() -> array<unsigned long, 2> {  //
-            return {this->vdc0.pop(), this->vdc1.pop()};
-        }
-
-        /**
-         * @brief Reset the state of the Halton sequence generator
-         *
-         * Resets the state of the sequence generator to a specific seed value.
-         *
-         * @param[in] seed the seed value to reset the sequence generator to
-         */
-        constexpr auto reseed(const unsigned long& seed) -> void {
-            this->vdc0.reseed(seed);
-            this->vdc1.reseed(seed);
+        [[nodiscard]] constexpr auto value_at(unsigned long n) const -> array<unsigned long, 2> {
+            return {this->vdc0.value_at(n), this->vdc1.value_at(n)};
         }
     };
 

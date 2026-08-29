@@ -97,22 +97,14 @@ namespace lds {
          *
          * Reverse powers of the base are precomputed once in the constructor
          * for fast lookup during pop()/peek(). The array is fixed at 64 entries,
-         * sufficient for double precision (53 mantissa bits).
+         * sufficient for double precision (53 mantissa bits). Delegates the
+         * digit/weight summation to the shared core in lds::detail.
          *
          * @param[in] cnt The sequence index to compute.
          * @return The van der Corput value for index cnt.
          */
         auto pop_impl(unsigned long cnt) -> double {
-            auto count_value = cnt;
-            std::size_t idx = 0;
-            double res = 0.0;
-            while (count_value != 0) {
-                const auto remainder = count_value % this->base_;
-                count_value /= this->base_;
-                res += this->rev_lst_[idx] * static_cast<double>(remainder);
-                ++idx;
-            }
-            return res;
+            return detail::vdc_digit_sum<double>(cnt, this->base_, this->rev_lst_);
         }
 
       public:
@@ -242,6 +234,28 @@ namespace lds {
         }
 
       private:
+        using Creator = std::unique_ptr<VdCorputBase> (*)();
+
+        /// @brief Factory registry entry: maps a numeric base to its compile-time creator.
+        struct VdcFactory {
+            unsigned long base;
+            Creator create;
+        };
+
+        template <unsigned long Base> static auto make_wrap() -> std::unique_ptr<VdCorputBase> {
+            return std::make_unique<VdCorputWrap<Base>>();
+        }
+
+        /// @brief Build the constexpr factory registry from a pack of compile-time bases.
+        template <unsigned long... Bases> static constexpr auto factory_table()
+            -> std::array<VdcFactory, sizeof...(Bases)> {
+            return {VdcFactory{Bases, &make_wrap<Bases>}...};
+        }
+
+        /// Compile-time-specialized bases (first 11 primes); any other base is dynamic.
+        static constexpr auto VDC_FACTORIES
+            = factory_table<2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31>();
+
         /**
          * @brief Create a runtime-polymorphic van der Corput generator for a base.
          * @param[in] base The numeric base for the sequence.
@@ -249,38 +263,24 @@ namespace lds {
          *
          * @note Factory Method pattern: returns a VdCorputBase (unique_ptr) selecting
          * the implementation at runtime — compile-time VdCorputWrap<N> for small
-         * prime bases, VdCorputDynamic otherwise. The switch on base hides the
-         * construction logic from the caller, so HaltonN clients receive an
-         * interchangeable strategy without knowing which concrete class was created.
+         * prime bases, VdCorputDynamic otherwise. The registry maps each
+         * compile-time-specialized base to its creator, hiding the construction
+         * logic from the caller, so HaltonN clients receive an interchangeable
+         * strategy without knowing which concrete class was created.
          */
         static auto create_vdc(unsigned long base) -> std::unique_ptr<VdCorputBase> {
-            switch (base) {
-                case 2:
-                    return std::make_unique<VdCorputWrap<2>>();
-                case 3:
-                    return std::make_unique<VdCorputWrap<3>>();
-                case 5:
-                    return std::make_unique<VdCorputWrap<5>>();
-                case 7:
-                    return std::make_unique<VdCorputWrap<7>>();
-                case 11:
-                    return std::make_unique<VdCorputWrap<11>>();
-                case 13:
-                    return std::make_unique<VdCorputWrap<13>>();
-                case 17:
-                    return std::make_unique<VdCorputWrap<17>>();
-                case 19:
-                    return std::make_unique<VdCorputWrap<19>>();
-                case 23:
-                    return std::make_unique<VdCorputWrap<23>>();
-                case 29:
-                    return std::make_unique<VdCorputWrap<29>>();
-                case 31:
-                    return std::make_unique<VdCorputWrap<31>>();
-                default:
-                    return std::make_unique<VdCorputDynamic>(base);
+            for (const auto& factory : VDC_FACTORIES) {
+                if (factory.base == base) {
+                    return factory.create();
+                }
             }
+            return std::make_unique<VdCorputDynamic>(base);
         }
     };
+
+    // Compile-time contract checks: the runtime family also satisfies the protocol concept,
+    // so template and polymorphic generators are interchangeable in generic code.
+    static_assert(SequenceGenerator<VdCorputBase, double>);
+    static_assert(SequenceGenerator<HaltonN<3>, std::array<double, 3>>);
 
 }  // namespace lds
