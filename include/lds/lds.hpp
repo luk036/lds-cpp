@@ -180,6 +180,10 @@ namespace lds {
      * @tparam Value The value type produced by pop()/peek().
      */
     template <typename Derived, typename Value> class GeneratorBase {
+      protected:
+        GeneratorBase() = default;
+        friend Derived;
+
       public:
         /**
          * @brief Generate the next value in the sequence (advances state).
@@ -237,6 +241,10 @@ namespace lds {
      */
     template <typename Derived, typename Value> class GeneratorIterable
         : public GeneratorBase<Derived, Value> {
+      protected:
+        GeneratorIterable() = default;
+        friend Derived;
+
       public:
         /**
          * @brief Get iterator to beginning
