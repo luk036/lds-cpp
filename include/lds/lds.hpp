@@ -37,23 +37,23 @@ namespace lds {
          *
          * @tparam T Accumulator/result type (e.g. double or unsigned long).
          * @tparam Table Random-access table type (e.g. std::array).
-         * @param[in] n The sequence index to evaluate.
+         * @param[in] num The sequence index to evaluate.
          * @param[in] base The numeric base.
          * @param[in] weights Precomputed digit weights.
-         * @return The weighted digit sum for index `n`.
+         * @return The weighted digit sum for index `num`.
          */
         template <typename T, typename Table>
-        constexpr auto vdc_digit_sum(unsigned long n, unsigned long base, const Table& weights)
+        constexpr auto vdc_digit_sum(unsigned long num, unsigned long base, const Table& weights)
             -> T {
-            T reslt{};
+            T res{};
             std::size_t idx = 0;
-            while (n != 0) {
-                const auto remainder = n % base;
-                n /= base;
-                reslt += static_cast<T>(remainder) * weights[idx];
+            while (num != 0) {
+                const auto remainder = num % base;
+                num /= base;
+                res += static_cast<T>(remainder) * weights[idx];
                 ++idx;
             }
-            return reslt;
+            return res;
         }
 
     }  // namespace detail
