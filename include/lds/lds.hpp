@@ -164,6 +164,8 @@ namespace lds {
         { g.get_index() } -> std::convertible_to<unsigned long>;
     };
 
+    template <typename Derived, typename Value> class GeneratorIterable;
+
     /**
      * @brief CRTP base implementing the sequence generator protocol
      *
@@ -180,9 +182,10 @@ namespace lds {
      * @tparam Value The value type produced by pop()/peek().
      */
     template <typename Derived, typename Value> class GeneratorBase {
-      protected:
+      private:
         GeneratorBase() = default;
         friend Derived;
+        friend GeneratorIterable<Derived, Value>;  // middle CRTP layer constructs the base
 
       public:
         /**
@@ -241,7 +244,7 @@ namespace lds {
      */
     template <typename Derived, typename Value> class GeneratorIterable
         : public GeneratorBase<Derived, Value> {
-      protected:
+      private:
         GeneratorIterable() = default;
         friend Derived;
 
