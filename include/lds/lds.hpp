@@ -796,18 +796,4 @@ namespace lds {
      * @return The van der Corput value for base 2 at the given index.
      */
     extern double vdc2_table(unsigned long index);
-
-    /**
-     * @brief Look up a precomputed Circle x-coordinate for base 2.
-     * @param[in] index The sequence index.
-     * @return The x-coordinate on the unit circle.
-     */
-    extern double circle2_table_x(unsigned long index);
-
-    /**
-     * @brief Look up a precomputed Circle y-coordinate for base 2.
-     * @param[in] index The sequence index.
-     * @return The y-coordinate on the unit circle.
-     */
-    extern double circle2_table_y(unsigned long index);
 }  // namespace lds
