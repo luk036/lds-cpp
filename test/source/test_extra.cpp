@@ -359,3 +359,38 @@ TEST_CASE("sizeof ilds::VdCorput<2>") {
     // unsigned long _count + unsigned long[64] factor_lst = sizeof(ul) * 65
     CHECK_EQ(sizeof(ilds::VdCorput<2>), sizeof(unsigned long) * 65);
 }
+
+TEST_CASE("GeneratorIterator different generators are not equal") {
+    auto gen1 = lds::VdCorput<2>();
+    auto gen2 = lds::VdCorput<2>();
+    auto it1 = gen1.begin();
+    auto it2 = gen2.begin();
+    CHECK(it1 != it2);
+    CHECK(it1 == gen1.begin());
+}
+
+TEST_CASE("GeneratorIterator dereference is read-only") {
+    auto vgen = lds::VdCorput<2>();
+    auto it = vgen.begin();
+    CHECK_EQ(*it, doctest::Approx(0.5));
+    CHECK_EQ(vgen.get_index(), 0);
+    ++it;
+    CHECK_EQ(*it, doctest::Approx(0.25));
+    CHECK_EQ(vgen.get_index(), 0);
+}
+
+TEST_CASE("ilds VdCorput iterator") {
+    auto vgen = ilds::VdCorput<2>(10);
+    auto it = vgen.begin();
+    CHECK_EQ(*it, 512UL);
+    ++it;
+    CHECK_EQ(*it, 256UL);
+}
+
+TEST_CASE("ilds Halton iterator") {
+    auto hgen = ilds::Halton<2, 3>({10, 10});
+    auto it = hgen.begin();
+    auto v = *it;
+    CHECK_EQ(v[0], 512UL);
+    CHECK_EQ(v[1], 19683UL);
+}

@@ -44,7 +44,7 @@ namespace ilds {
      *
      */
     template <unsigned long Base = 2> class VdCorput
-        : public lds::GeneratorBase<VdCorput<Base>, unsigned long> {
+        : public lds::GeneratorIterable<VdCorput<Base>, unsigned long> {
         std::array<unsigned long, MAX_REVERSE_BITS>
             factor_lst{};  ///< Precomputed scale factors for each digit
         static_assert(MAX_REVERSE_BITS >= sizeof(unsigned long) * 8,
@@ -93,7 +93,7 @@ namespace ilds {
      * @endverbatim
      */
     template <unsigned long Base1, unsigned long Base2> class Halton
-        : public lds::GeneratorBase<Halton<Base1, Base2>, array<unsigned long, 2>> {
+        : public lds::GeneratorIterable<Halton<Base1, Base2>, array<unsigned long, 2>> {
         VdCorput<Base1> vdc0;
         VdCorput<Base2> vdc1;
 
@@ -123,5 +123,10 @@ namespace ilds {
             return {this->vdc0.value_at(n), this->vdc1.value_at(n)};
         }
     };
+
+    // Compile-time contract checks: integer generators share the same protocol and
+    // read-only traversal support as the floating-point family.
+    static_assert(lds::IndexableGenerator<VdCorput<2>, unsigned long>);
+    static_assert(lds::IndexableGenerator<Halton<2, 3>, array<unsigned long, 2>>);
 
 }  // namespace ilds

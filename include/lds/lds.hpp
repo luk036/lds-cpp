@@ -80,7 +80,7 @@ namespace lds {
      * so generators can be consumed with std::begin/std::end and range-for.
      */
     template <typename Generator, typename Value> class GeneratorIterator {
-        Generator* gen;
+        const Generator* gen;
         unsigned long index;
 
       public:
@@ -90,19 +90,24 @@ namespace lds {
         using pointer = const value_type*;
         using reference = value_type;
 
-        explicit GeneratorIterator(Generator* g = nullptr, unsigned long idx = 0)
+        explicit GeneratorIterator(const Generator* g = nullptr, unsigned long idx = 0)
             : gen{g}, index{idx} {}
 
         /**
-         * @brief Dereference operator
+         * @brief Dereference operator (read-only)
+         *
+         * Reads the value at the current sequence position through the generator's
+         * pure `value_at()` computation. Because `pop()` is defined as
+         * `value_at(++count_)` and the `begin()` index is 0, the value at iterator
+         * position `index` is `value_at(index + 1)`. Dereferencing therefore never
+         * mutates the generator, keeping iteration a read-only operation (and free
+         * of the previous reseed/pop/reseed state churn).
+         *
+         * @note Requires the IndexableGenerator refinement (pure `value_at`).
          */
         auto operator*() const -> Value {
             if (gen) {
-                auto temp_idx = gen->get_index();
-                gen->reseed(index);
-                auto value = gen->pop();
-                gen->reseed(temp_idx);
-                return value;
+                return gen->value_at(index + 1);
             }
             return Value{};
         }
@@ -126,17 +131,18 @@ namespace lds {
 
         /**
          * @brief Equality comparison
+         *
+         * @note Compares both the sequence position and the underlying generator,
+         * so iterators over different generators never compare equal.
          */
         auto operator==(const GeneratorIterator& other) const -> bool {
-            return index == other.index;
+            return index == other.index && gen == other.gen;
         }
 
         /**
          * @brief Inequality comparison
          */
-        auto operator!=(const GeneratorIterator& other) const -> bool {
-            return index != other.index;
-        }
+        auto operator!=(const GeneratorIterator& other) const -> bool { return !(*this == other); }
 
         /**
          * @brief Get current index
@@ -162,6 +168,22 @@ namespace lds {
         g.skip(n);
         g.reseed(n);
         { g.get_index() } -> std::convertible_to<unsigned long>;
+    };
+
+    /**
+     * @brief Concept refinement for generators exposing a pure index-to-value map.
+     *
+     * Interface Segregation: the stateful protocol (SequenceGenerator) stays
+     * minimal, while read-only traversal (GeneratorIterator) depends only on this
+     * refinement, which requires `value_at(n)` to be callable on a const generator
+     * without mutating state.
+     *
+     * @tparam G The candidate generator type.
+     * @tparam V The value type it produces.
+     */
+    template <typename G, typename V>
+    concept IndexableGenerator = SequenceGenerator<G, V> && requires(const G g, unsigned long n) {
+        { g.value_at(n) } -> std::convertible_to<V>;
     };
 
     template <typename Derived, typename Value> class GeneratorIterable;
@@ -782,6 +804,14 @@ namespace lds {
     static_assert(SequenceGenerator<Disk<2, 3>, std::array<double, 2>>);
     static_assert(SequenceGenerator<Sphere<2, 3>, std::array<double, 3>>);
     static_assert(SequenceGenerator<Sphere3Hopf<2, 3, 5>, std::array<double, 4>>);
+
+    // Every template generator also supports read-only traversal (Iterator pattern).
+    static_assert(IndexableGenerator<VdCorput<2>, double>);
+    static_assert(IndexableGenerator<Circle<2>, std::array<double, 2>>);
+    static_assert(IndexableGenerator<Halton<2, 3>, std::array<double, 2>>);
+    static_assert(IndexableGenerator<Disk<2, 3>, std::array<double, 2>>);
+    static_assert(IndexableGenerator<Sphere<2, 3>, std::array<double, 3>>);
+    static_assert(IndexableGenerator<Sphere3Hopf<2, 3, 5>, std::array<double, 4>>);
 
     /**
      * @brief Look up the n-th prime number from a precomputed table.

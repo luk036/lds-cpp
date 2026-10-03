@@ -15,3 +15,25 @@ TEST_CASE("HaltonN") {
     CHECK_EQ(res[1], doctest::Approx(1.0 / 3.0));
     CHECK_EQ(res[2], doctest::Approx(1.0 / 5.0));
 }
+
+TEST_CASE("HaltonN compile-time base") {
+    auto hgen = lds::HaltonN<1>({2});
+    hgen.reseed(0);
+    CHECK_EQ(hgen.pop()[0], doctest::Approx(0.5));
+}
+
+TEST_CASE("HaltonN dynamic base") {
+    auto hgen = lds::HaltonN<1>({37});
+    hgen.reseed(0);
+    CHECK_EQ(hgen.pop()[0], doctest::Approx(1.0 / 37.0));
+}
+
+TEST_CASE("HaltonN polymorphic interface") {
+    auto hgen = lds::HaltonN<3>({2, 3, 5});
+    lds::GeneratorInterface<std::array<double, 3>>& base = hgen;
+    hgen.reseed(0);
+    auto res = base.pop();
+    CHECK_EQ(res[0], doctest::Approx(0.5));
+    CHECK_EQ(res[1], doctest::Approx(1.0 / 3.0));
+    CHECK_EQ(res[2], doctest::Approx(1.0 / 5.0));
+}
