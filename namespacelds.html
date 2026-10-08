@@ -28,7 +28,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Lds<span id="projectnumber">&#160;1.2.5</span>
+   <div id="projectname">Lds<span id="projectnumber">&#160;1.2.6</span>
    </div>
   </td>
  </tr>
@@ -77,13 +77,21 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#namespaces">Namespaces</a> &#124;
 <a href="#nested-classes">Classes</a> &#124;
+<a href="#concepts">Concepts</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a> &#124;
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle"><div class="title">lds Namespace Reference</div></div>
 </div><!--header-->
 <div class="contents">
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:namespacelds_1_1detail" id="r_namespacelds_1_1detail"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacelds_1_1detail.html">detail</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlds_1_1Circle.html">Circle</a></td></tr>
@@ -91,6 +99,15 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlds_1_1Disk.html">Disk</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classlds_1_1Disk.html" title="Disk sequence generator.">Disk</a> sequence generator.  <a href="classlds_1_1Disk.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlds_1_1GeneratorBase.html">GeneratorBase</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">CRTP base implementing the sequence generator protocol.  <a href="classlds_1_1GeneratorBase.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlds_1_1GeneratorInterface.html">GeneratorInterface</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abstract base class for polymorphic sequence generators.  <a href="classlds_1_1GeneratorInterface.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlds_1_1GeneratorIterable.html">GeneratorIterable</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">CRTP mixin adding STL iterator support to a <a class="el" href="classlds_1_1GeneratorBase.html" title="CRTP base implementing the sequence generator protocol.">GeneratorBase</a>.  <a href="classlds_1_1GeneratorIterable.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlds_1_1GeneratorIterator.html">GeneratorIterator</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Forward iterator for sequence generators.  <a href="classlds_1_1GeneratorIterator.html#details">More...</a><br /></td></tr>
@@ -110,15 +127,27 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlds_1_1VdCorput.html">VdCorput</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">van der Corput sequence generator  <a href="classlds_1_1VdCorput.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlds_1_1VdCorputBase.html">VdCorputBase</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abstract base class for polymorphic van der Corput sequence generators.  <a href="classlds_1_1VdCorputBase.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlds_1_1VdCorputDynamic.html">VdCorputDynamic</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runtime-polymorphic van der Corput generator with dynamic base.  <a href="classlds_1_1VdCorputDynamic.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlds_1_1VdCorputWrap.html">VdCorputWrap</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compile-time-polymorphic wrapper around <a class="el" href="classlds_1_1VdCorput.html">VdCorput&lt;Base&gt;</a>.  <a href="classlds_1_1VdCorputWrap.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="concepts" name="concepts"></a>
+Concepts</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="conceptlds_1_1SequenceGenerator.html">SequenceGenerator</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for the sequence generator protocol. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="conceptlds_1_1IndexableGenerator.html">IndexableGenerator</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept refinement for generators exposing a pure index-to-value map. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a82fa855b5a9d16c28c2682ab7884ee2c" id="r_a82fa855b5a9d16c28c2682ab7884ee2c"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacelds.html#a82fa855b5a9d16c28c2682ab7884ee2c">VdCorputBase</a> = <a class="el" href="classlds_1_1GeneratorInterface.html">GeneratorInterface</a>&lt; double &gt;</td></tr>
+<tr class="memdesc:a82fa855b5a9d16c28c2682ab7884ee2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runtime-polymorphic scalar (double) generator interface.  <br /></td></tr>
+<tr class="separator:a82fa855b5a9d16c28c2682ab7884ee2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
@@ -132,12 +161,6 @@ Functions</h2></td></tr>
 <tr class="memitem:ac38d30e895686353ba6d221a45a1aa5b" id="r_ac38d30e895686353ba6d221a45a1aa5b"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacelds.html#ac38d30e895686353ba6d221a45a1aa5b">vdc2_table</a> (unsigned long index)</td></tr>
 <tr class="memdesc:ac38d30e895686353ba6d221a45a1aa5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Look up a precomputed van der Corput value for base 2.  <br /></td></tr>
 <tr class="separator:ac38d30e895686353ba6d221a45a1aa5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeeb29e6ad78ab182fe2ff8be3cb8eb48" id="r_aeeb29e6ad78ab182fe2ff8be3cb8eb48"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacelds.html#aeeb29e6ad78ab182fe2ff8be3cb8eb48">circle2_table_x</a> (unsigned long index)</td></tr>
-<tr class="memdesc:aeeb29e6ad78ab182fe2ff8be3cb8eb48"><td class="mdescLeft">&#160;</td><td class="mdescRight">Look up a precomputed <a class="el" href="classlds_1_1Circle.html" title="Circle sequence generator.">Circle</a> x-coordinate for base 2.  <br /></td></tr>
-<tr class="separator:aeeb29e6ad78ab182fe2ff8be3cb8eb48"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a58fcc2d4312ec56f3bf074e4aa1620b4" id="r_a58fcc2d4312ec56f3bf074e4aa1620b4"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacelds.html#a58fcc2d4312ec56f3bf074e4aa1620b4">circle2_table_y</a> (unsigned long index)</td></tr>
-<tr class="memdesc:a58fcc2d4312ec56f3bf074e4aa1620b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Look up a precomputed <a class="el" href="classlds_1_1Circle.html" title="Circle sequence generator.">Circle</a> y-coordinate for base 2.  <br /></td></tr>
-<tr class="separator:a58fcc2d4312ec56f3bf074e4aa1620b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af935f4ac995ede756c433f853bc97d92" id="r_af935f4ac995ede756c433f853bc97d92"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacelds.html#af935f4ac995ede756c433f853bc97d92">log_with_spdlog</a> (const std::string &amp;message)</td></tr>
 <tr class="memdesc:af935f4ac995ede756c433f853bc97d92"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log a message using spdlog.  <br /></td></tr>
 <tr class="separator:af935f4ac995ede756c433f853bc97d92"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -151,77 +174,24 @@ Variables</h2></td></tr>
 <tr class="memitem:ab19c83e265b0f2d10c066ccd14aa6cf4" id="r_ab19c83e265b0f2d10c066ccd14aa6cf4"><td class="memItemLeft" align="right" valign="top">constexpr double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacelds.html#ab19c83e265b0f2d10c066ccd14aa6cf4">MAPPING_FACTOR</a> = 2.0</td></tr>
 <tr class="separator:ab19c83e265b0f2d10c066ccd14aa6cf4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Typedef Documentation</h2>
+<a id="a82fa855b5a9d16c28c2682ab7884ee2c" name="a82fa855b5a9d16c28c2682ab7884ee2c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a82fa855b5a9d16c28c2682ab7884ee2c">&#9670;&#160;</a></span>VdCorputBase</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespacelds.html#a82fa855b5a9d16c28c2682ab7884ee2c">lds::VdCorputBase</a> = typedef <a class="el" href="classlds_1_1GeneratorInterface.html">GeneratorInterface</a>&lt;double&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Runtime-polymorphic scalar (double) generator interface. </p>
+
+</div>
+</div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="aeeb29e6ad78ab182fe2ff8be3cb8eb48" name="aeeb29e6ad78ab182fe2ff8be3cb8eb48"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aeeb29e6ad78ab182fe2ff8be3cb8eb48">&#9670;&#160;</a></span>circle2_table_x()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">double lds::circle2_table_x </td>
-          <td>(</td>
-          <td class="paramtype">unsigned long&#160;</td>
-          <td class="paramname"><em>index</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">extern</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Look up a precomputed <a class="el" href="classlds_1_1Circle.html" title="Circle sequence generator.">Circle</a> x-coordinate for base 2. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">index</td><td>The sequence index. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>The x-coordinate on the unit circle. </dd></dl>
-
-</div>
-</div>
-<a id="a58fcc2d4312ec56f3bf074e4aa1620b4" name="a58fcc2d4312ec56f3bf074e4aa1620b4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a58fcc2d4312ec56f3bf074e4aa1620b4">&#9670;&#160;</a></span>circle2_table_y()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">double lds::circle2_table_y </td>
-          <td>(</td>
-          <td class="paramtype">unsigned long&#160;</td>
-          <td class="paramname"><em>index</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">extern</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Look up a precomputed <a class="el" href="classlds_1_1Circle.html" title="Circle sequence generator.">Circle</a> y-coordinate for base 2. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">index</td><td>The sequence index. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>The y-coordinate on the unit circle. </dd></dl>
-
-</div>
-</div>
 <a id="af935f4ac995ede756c433f853bc97d92" name="af935f4ac995ede756c433f853bc97d92"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af935f4ac995ede756c433f853bc97d92">&#9670;&#160;</a></span>log_with_spdlog()</h2>
 

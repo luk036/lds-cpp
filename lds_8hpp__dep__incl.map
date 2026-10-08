@@ -1,5 +1,7 @@
 <map id="lds/lds.hpp" name="lds/lds.hpp">
-<area shape="rect" id="Node000001" title="Low&#45;discrepancy sequence generators (van der Corput, Halton, Circle, Disk, Sphere)." alt="" coords="13,5,105,31"/>
-<area shape="rect" id="Node000002" href="$lds__n_8hpp.html" title="N&#45;dimensional Halton sequence generator with runtime polymorphism." alt="" coords="5,79,112,104"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="61,44,61,79,56,79,56,44"/>
+<area shape="rect" id="Node000001" title="Low&#45;discrepancy sequence generators (van der Corput, Halton, Circle, Disk, Sphere)." alt="" coords="70,5,162,31"/>
+<area shape="rect" id="Node000002" href="$ilds_8hpp.html" title="Integer low&#45;discrepancy sequence generators (van der Corput, Halton)." alt="" coords="5,79,101,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="99,43,65,80,61,77,95,39"/>
+<area shape="rect" id="Node000003" href="$lds__n_8hpp.html" title="N&#45;dimensional Halton sequence generator with runtime polymorphism." alt="" coords="125,79,232,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="137,39,171,77,167,80,133,43"/>
 </map>

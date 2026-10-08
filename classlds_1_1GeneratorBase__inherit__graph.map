@@ -1,0 +1,57 @@
+<map id="lds::GeneratorBase&lt; Derived, Value &gt;" name="lds::GeneratorBase&lt; Derived, Value &gt;">
+<area shape="rect" id="Node000001" title="CRTP base implementing the sequence generator protocol." alt="" coords="5,446,152,486"/>
+<area shape="rect" id="Node000002" href="$classlds_1_1GeneratorIterable.html" title=" " alt="" coords="200,5,431,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="78,432,84,358,101,261,117,210,137,159,164,112,198,69,212,58,215,62,202,73,169,115,142,162,122,212,107,263,89,359,83,432"/>
+<area shape="rect" id="Node000004" href="$classlds_1_1GeneratorIterable.html" title=" " alt="" coords="214,84,417,139"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="81,432,91,372,112,296,127,256,146,217,170,180,198,148,213,137,216,141,202,152,174,184,151,220,132,258,117,297,96,373,86,433"/>
+<area shape="rect" id="Node000005" href="$classlds_1_1GeneratorIterable.html" title=" " alt="" coords="224,163,407,217"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="86,432,100,386,123,331,155,275,175,250,198,227,222,211,225,215,202,231,179,253,160,278,128,334,105,388,91,434"/>
+<area shape="rect" id="Node000006" href="$classlds_1_1GeneratorIterable.html" title=" " alt="" coords="220,241,411,296"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="94,432,136,368,165,334,198,305,218,293,221,298,202,309,169,338,140,371,99,435"/>
+<area shape="rect" id="Node000007" href="$classlds_1_1GeneratorIterable.html" title=" " alt="" coords="231,320,400,375"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="116,435,155,409,199,384,229,371,231,375,201,388,158,413,119,440"/>
+<area shape="rect" id="Node000008" href="$classlds_1_1GeneratorIterable.html" title=" " alt="" coords="231,399,400,453"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="165,449,230,438,231,443,166,454"/>
+<area shape="rect" id="Node000009" href="$classlds_1_1GeneratorIterable.html" title=" " alt="" coords="209,477,421,532"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="166,477,209,485,209,490,165,483"/>
+<area shape="rect" id="Node000010" href="$classlds_1_1GeneratorIterable.html" title=" " alt="" coords="214,557,417,597"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="119,492,158,518,201,541,235,554,233,559,199,546,155,522,116,496"/>
+<area shape="rect" id="Node000011" href="$classlds_1_1GeneratorIterable.html" title=" " alt="" coords="202,621,429,676"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="102,496,144,552,171,581,202,606,223,619,220,623,198,611,167,585,139,556,97,499"/>
+<area shape="rect" id="Node000014" href="$classlds_1_1GeneratorIterable.html" title=" " alt="" coords="202,701,429,741"/>
+<area shape="poly" id="edge13_Node000001_Node000014" title=" " alt="" coords="92,499,107,542,130,592,161,642,202,685,223,698,220,703,198,689,157,646,125,594,102,544,87,501"/>
+<area shape="rect" id="Node000019" href="$classlds_1_1GeneratorIterable.html" title=" " alt="" coords="231,803,400,857"/>
+<area shape="poly" id="edge18_Node000001_Node000019" title=" " alt="" coords="90,499,104,551,127,617,160,687,202,751,230,778,262,800,259,805,227,782,198,754,155,689,122,619,99,553,85,500"/>
+<area shape="rect" id="Node000021" href="$classlds_1_1GeneratorIterable.html" title="CRTP mixin adding STL iterator support to a GeneratorBase." alt="" coords="233,999,397,1039"/>
+<area shape="poly" id="edge20_Node000001_Node000021" title=" " alt="" coords="88,499,103,568,126,662,159,766,202,867,224,905,250,941,297,997,293,1001,246,944,220,908,198,870,154,768,121,663,97,570,83,500"/>
+<area shape="rect" id="Node000003" href="$classilds_1_1Halton.html" title="Halton sequence generator." alt="" coords="499,13,654,53"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="444,30,499,30,499,35,444,35"/>
+<area shape="rect" id="Node000012" href="$classilds_1_1VdCorput.html" title=" " alt="" coords="485,535,668,560"/>
+<area shape="poly" id="edge11_Node000011_Node000012" title=" " alt="" coords="416,613,429,606,453,587,477,569,508,558,509,563,480,574,456,592,432,611,418,618"/>
+<area shape="rect" id="Node000013" href="$classilds_1_1VdCorput.html" title=" " alt="" coords="485,584,668,609"/>
+<area shape="poly" id="edge12_Node000011_Node000013" title=" " alt="" coords="442,621,512,607,513,612,443,626"/>
+<area shape="rect" id="Node000015" href="$classlds_1_1VdCorput.html" title=" " alt="" coords="503,633,650,659"/>
+<area shape="poly" id="edge14_Node000014_Node000015" title=" " alt="" coords="400,694,430,685,478,667,519,656,521,661,479,673,432,690,402,699"/>
+<area shape="rect" id="Node000016" href="$classlds_1_1VdCorput.html" title=" " alt="" coords="503,683,650,708"/>
+<area shape="poly" id="edge15_Node000014_Node000016" title=" " alt="" coords="442,706,503,700,503,705,443,711"/>
+<area shape="rect" id="Node000017" href="$classlds_1_1VdCorput.html" title=" " alt="" coords="491,732,662,757"/>
+<area shape="poly" id="edge16_Node000014_Node000017" title=" " alt="" coords="443,730,491,734,491,740,442,735"/>
+<area shape="rect" id="Node000018" href="$classlds_1_1VdCorput.html" title=" " alt="" coords="503,781,650,807"/>
+<area shape="poly" id="edge17_Node000014_Node000018" title=" " alt="" coords="397,742,479,766,526,779,525,784,478,771,395,747"/>
+<area shape="rect" id="Node000020" href="$classlds_1_1Circle.html" title=" " alt="" coords="515,831,639,856"/>
+<area shape="poly" id="edge19_Node000019_Node000020" title=" " alt="" coords="414,832,515,838,514,843,414,838"/>
+<area shape="rect" id="Node000022" href="$classilds_1_1VdCorput.html" title="van der Corput sequence generator" alt="" coords="489,880,664,905"/>
+<area shape="poly" id="edge21_Node000021_Node000022" title=" " alt="" coords="352,989,409,950,478,914,511,903,512,908,480,919,412,955,355,993"/>
+<area shape="rect" id="Node000023" href="$classlds_1_1Circle.html" title="Circle sequence generator." alt="" coords="503,929,651,955"/>
+<area shape="poly" id="edge22_Node000021_Node000023" title=" " alt="" coords="386,992,478,963,520,952,522,957,479,969,388,998"/>
+<area shape="rect" id="Node000024" href="$classlds_1_1Disk.html" title="Disk sequence generator." alt="" coords="479,979,675,1004"/>
+<area shape="poly" id="edge23_Node000021_Node000024" title=" " alt="" coords="411,1006,478,999,479,1004,411,1012"/>
+<area shape="rect" id="Node000025" href="$classlds_1_1Halton.html" title="Halton sequence generator." alt="" coords="501,1029,652,1069"/>
+<area shape="poly" id="edge24_Node000021_Node000025" title=" " alt="" coords="411,1027,502,1038,501,1043,411,1033"/>
+<area shape="rect" id="Node000026" href="$classlds_1_1Sphere.html" title="Sphere sequence generator." alt="" coords="500,1093,653,1133"/>
+<area shape="poly" id="edge25_Node000021_Node000026" title=" " alt="" coords="382,1042,480,1078,514,1090,512,1095,478,1083,380,1047"/>
+<area shape="rect" id="Node000027" href="$classlds_1_1Sphere3Hopf.html" title="S(3) sequence generator by Hopf fibration." alt="" coords="481,1157,673,1197"/>
+<area shape="poly" id="edge26_Node000021_Node000027" title=" " alt="" coords="350,1047,408,1095,480,1142,506,1154,504,1159,477,1147,405,1100,347,1051"/>
+<area shape="rect" id="Node000028" href="$classlds_1_1VdCorput.html" title="van der Corput sequence generator" alt="" coords="491,1221,662,1247"/>
+<area shape="poly" id="edge27_Node000021_Node000028" title=" " alt="" coords="337,1050,362,1086,395,1129,434,1171,480,1206,507,1219,504,1224,477,1211,431,1175,390,1132,357,1089,333,1052"/>
+</map>

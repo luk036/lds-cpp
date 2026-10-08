@@ -1,0 +1,7 @@
+<map id="lds::VdCorput&lt; Base &gt;" name="lds::VdCorput&lt; Base &gt;">
+<area shape="rect" id="Node000001" title="van der Corput sequence generator" alt="" coords="5,181,176,207"/>
+<area shape="rect" id="Node000002" href="$classlds_1_1GeneratorIterable.html" title="CRTP mixin adding STL iterator support to a GeneratorBase." alt="" coords="9,93,173,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="93,147,93,181,88,181,88,147"/>
+<area shape="rect" id="Node000003" href="$classlds_1_1GeneratorBase.html" title="CRTP base implementing the sequence generator protocol." alt="" coords="17,5,164,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="93,59,93,93,88,93,88,59"/>
+</map>

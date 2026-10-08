@@ -1,21 +1,25 @@
 <map id="lds/lds_n.hpp" name="lds/lds_n.hpp">
-<area shape="rect" id="Node000001" title="N&#45;dimensional Halton sequence generator with runtime polymorphism." alt="" coords="111,5,217,31"/>
+<area shape="rect" id="Node000001" title="N&#45;dimensional Halton sequence generator with runtime polymorphism." alt="" coords="168,5,275,31"/>
 <area shape="rect" id="Node000002" title=" " alt="" coords="5,152,61,177"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="155,33,55,143,51,140,151,29"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="207,33,144,81,61,145,58,141,141,77,204,29"/>
 <area shape="rect" id="Node000003" title=" " alt="" coords="86,152,157,177"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="163,32,131,139,126,138,158,30"/>
-<area shape="rect" id="Node000004" href="$lds_8hpp.html" title="Low&#45;discrepancy sequence generators (van der Corput, Halton, Circle, Disk, Sphere)." alt="" coords="163,79,255,104"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="174,30,197,66,192,69,169,32"/>
-<area shape="rect" id="Node000009" title=" " alt="" coords="280,79,357,104"/>
-<area shape="poly" id="edge10_Node000001_Node000009" title=" " alt="" coords="190,28,282,70,280,75,188,33"/>
-<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="182,106,75,149,73,144,180,102"/>
-<area shape="poly" id="edge6_Node000004_Node000003" title=" " alt="" coords="197,106,148,145,145,141,194,102"/>
-<area shape="rect" id="Node000005" title=" " alt="" coords="367,152,430,177"/>
-<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="241,102,356,144,354,149,239,107"/>
-<area shape="rect" id="Node000006" title=" " alt="" coords="454,152,525,177"/>
-<area shape="poly" id="edge7_Node000004_Node000006" title=" " alt="" coords="255,101,441,149,440,154,254,107"/>
-<area shape="rect" id="Node000007" title=" " alt="" coords="181,152,240,177"/>
-<area shape="poly" id="edge8_Node000004_Node000007" title=" " alt="" coords="212,104,213,138,208,139,207,104"/>
-<area shape="rect" id="Node000008" title=" " alt="" coords="265,152,343,177"/>
-<area shape="poly" id="edge9_Node000004_Node000008" title=" " alt="" coords="226,102,279,141,276,146,223,106"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="209,33,187,54,165,80,147,111,133,140,128,138,142,108,160,77,183,50,206,29"/>
+<area shape="rect" id="Node000004" href="$lds_8hpp.html" title="Low&#45;discrepancy sequence generators (van der Corput, Halton, Circle, Disk, Sphere)." alt="" coords="175,79,267,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="224,31,224,65,219,65,219,31"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="292,79,369,104"/>
+<area shape="poly" id="edge11_Node000001_Node000010" title=" " alt="" coords="240,28,303,69,300,73,237,33"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="394,79,454,104"/>
+<area shape="poly" id="edge12_Node000001_Node000011" title=" " alt="" coords="255,28,382,72,380,77,253,33"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="192,107,75,150,73,145,190,102"/>
+<area shape="poly" id="edge7_Node000004_Node000003" title=" " alt="" coords="207,106,150,146,147,142,204,102"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="567,152,630,177"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="268,99,280,101,416,123,554,149,553,154,415,129,280,107,267,104"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="181,152,261,177"/>
+<area shape="poly" id="edge6_Node000004_Node000006" title=" " alt="" coords="224,104,224,138,219,138,219,104"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="286,152,357,177"/>
+<area shape="poly" id="edge8_Node000004_Node000007" title=" " alt="" coords="239,102,295,142,292,146,236,106"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="381,152,440,177"/>
+<area shape="poly" id="edge9_Node000004_Node000008" title=" " alt="" coords="253,102,369,145,367,150,251,107"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="465,152,543,177"/>
+<area shape="poly" id="edge10_Node000004_Node000009" title=" " alt="" coords="267,101,452,148,451,153,266,107"/>
 </map>

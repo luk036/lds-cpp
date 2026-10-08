@@ -1,0 +1,7 @@
+<map id="lds::Sphere3Hopf&lt; Base0, Base1, Base2 &gt;" name="lds::Sphere3Hopf&lt; Base0, Base1, Base2 &gt;">
+<area shape="rect" id="Node000001" title="S(3) sequence generator by Hopf fibration." alt="" coords="5,181,197,221"/>
+<area shape="rect" id="Node000002" href="$classlds_1_1GeneratorIterable.html" title="CRTP mixin adding STL iterator support to a GeneratorBase." alt="" coords="19,93,183,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="104,147,104,181,99,181,99,147"/>
+<area shape="rect" id="Node000003" href="$classlds_1_1GeneratorBase.html" title="CRTP base implementing the sequence generator protocol." alt="" coords="28,5,175,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="104,59,104,93,99,93,99,59"/>
+</map>

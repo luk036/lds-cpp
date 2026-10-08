@@ -28,7 +28,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Lds<span id="projectnumber">&#160;1.2.5</span>
+   <div id="projectname">Lds<span id="projectnumber">&#160;1.2.6</span>
    </div>
   </td>
  </tr>
@@ -91,38 +91,60 @@ $(function() {
  <a href="classlds_1_1Halton.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="lds_8hpp_source.html">lds.hpp</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for lds::Halton&lt; Base0, Base1 &gt;:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classlds_1_1Halton__inherit__graph.svg" width="175" height="227"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<div class="dynheader">
+Collaboration diagram for lds::Halton&lt; Base0, Base1 &gt;:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classlds_1_1Halton__coll__graph.svg" width="175" height="227"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a60d993caf7eb900e62f5509aef5993b6" id="r_a60d993caf7eb900e62f5509aef5993b6"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlds_1_1Halton.html#a60d993caf7eb900e62f5509aef5993b6">Halton</a> ()</td></tr>
 <tr class="memdesc:a60d993caf7eb900e62f5509aef5993b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="classlds_1_1Halton.html" title="Halton sequence generator.">Halton</a> object.  <br /></td></tr>
 <tr class="separator:a60d993caf7eb900e62f5509aef5993b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeca89d1f9c635f9fcd6d681ac873bb05" id="r_aeca89d1f9c635f9fcd6d681ac873bb05"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlds_1_1Halton.html#aeca89d1f9c635f9fcd6d681ac873bb05">pop</a> () -&gt; std::array&lt; double, 2 &gt;</td></tr>
-<tr class="memdesc:aeca89d1f9c635f9fcd6d681ac873bb05"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate the next point in the <a class="el" href="classlds_1_1Halton.html" title="Halton sequence generator.">Halton</a> sequence.  <br /></td></tr>
-<tr class="separator:aeca89d1f9c635f9fcd6d681ac873bb05"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a24624dbe375e49549fcd42a09f5d29f6" id="r_a24624dbe375e49549fcd42a09f5d29f6"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlds_1_1Halton.html#a24624dbe375e49549fcd42a09f5d29f6">peek</a> () -&gt; std::array&lt; double, 2 &gt;</td></tr>
-<tr class="memdesc:a24624dbe375e49549fcd42a09f5d29f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Peek at the next value without advancing state.  <br /></td></tr>
-<tr class="separator:a24624dbe375e49549fcd42a09f5d29f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad282a2f9941ce6ea3d9a5a3e90523e1f" id="r_ad282a2f9941ce6ea3d9a5a3e90523e1f"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlds_1_1Halton.html#ad282a2f9941ce6ea3d9a5a3e90523e1f">skip</a> (unsigned long n) -&gt; void</td></tr>
-<tr class="memdesc:ad282a2f9941ce6ea3d9a5a3e90523e1f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Skip n values in the sequence.  <br /></td></tr>
-<tr class="separator:ad282a2f9941ce6ea3d9a5a3e90523e1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2bcc390475ee6884a003367036461954" id="r_a2bcc390475ee6884a003367036461954"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlds_1_1Halton.html#a2bcc390475ee6884a003367036461954">reseed</a> (const unsigned long &amp;seed) -&gt; void</td></tr>
-<tr class="memdesc:a2bcc390475ee6884a003367036461954"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset the state of the <a class="el" href="classlds_1_1Halton.html" title="Halton sequence generator.">Halton</a> sequence generator.  <br /></td></tr>
-<tr class="separator:a2bcc390475ee6884a003367036461954"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a99a694905fcf5a9afadd523b2e4274bc" id="r_a99a694905fcf5a9afadd523b2e4274bc"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlds_1_1Halton.html#a99a694905fcf5a9afadd523b2e4274bc">get_index</a> () const -&gt; unsigned long</td></tr>
-<tr class="memdesc:a99a694905fcf5a9afadd523b2e4274bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get current index.  <br /></td></tr>
-<tr class="separator:a99a694905fcf5a9afadd523b2e4274bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a580228ea539bda39ce7c66fa4c116a4f" id="r_a580228ea539bda39ce7c66fa4c116a4f"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlds_1_1Halton.html#a580228ea539bda39ce7c66fa4c116a4f">begin</a> () -&gt; <a class="el" href="classlds_1_1GeneratorIterator.html">GeneratorIterator</a>&lt; <a class="el" href="classlds_1_1Halton.html">Halton</a>, std::array&lt; double, 2 &gt; &gt;</td></tr>
-<tr class="memdesc:a580228ea539bda39ce7c66fa4c116a4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get iterator to beginning.  <br /></td></tr>
-<tr class="separator:a580228ea539bda39ce7c66fa4c116a4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8ecc9bd9cadff16b109918a39827c8a1" id="r_a8ecc9bd9cadff16b109918a39827c8a1"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlds_1_1Halton.html#a8ecc9bd9cadff16b109918a39827c8a1">end</a> () const -&gt; <a class="el" href="classlds_1_1GeneratorIterator.html">GeneratorIterator</a>&lt; <a class="el" href="classlds_1_1Halton.html">Halton</a>, std::array&lt; double, 2 &gt; &gt;</td></tr>
-<tr class="memdesc:a8ecc9bd9cadff16b109918a39827c8a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get iterator to end (infinite sequence)  <br /></td></tr>
-<tr class="separator:a8ecc9bd9cadff16b109918a39827c8a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a13803ebd9c827f46fa78b374c09f3e5c" id="r_a13803ebd9c827f46fa78b374c09f3e5c"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlds_1_1Halton.html#a13803ebd9c827f46fa78b374c09f3e5c">value_at</a> (unsigned long n) const -&gt; std::array&lt; double, 2 &gt;</td></tr>
+<tr class="memdesc:a13803ebd9c827f46fa78b374c09f3e5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate the 2D <a class="el" href="classlds_1_1Halton.html" title="Halton sequence generator.">Halton</a> point at a given index (pure)  <br /></td></tr>
+<tr class="separator:a13803ebd9c827f46fa78b374c09f3e5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classlds_1_1GeneratorIterable"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classlds_1_1GeneratorIterable')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classlds_1_1GeneratorIterable.html">lds::GeneratorIterable&lt; Derived, Value &gt;</a></td></tr>
+<tr class="memitem:a95b620d0a95a000012546ab93b190c21 inherit pub_methods_classlds_1_1GeneratorIterable" id="r_a95b620d0a95a000012546ab93b190c21"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlds_1_1GeneratorIterable.html#a95b620d0a95a000012546ab93b190c21">begin</a> () -&gt; <a class="el" href="classlds_1_1GeneratorIterator.html">GeneratorIterator</a>&lt; Derived, Value &gt;</td></tr>
+<tr class="memdesc:a95b620d0a95a000012546ab93b190c21 inherit pub_methods_classlds_1_1GeneratorIterable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get iterator to beginning.  <br /></td></tr>
+<tr class="separator:a95b620d0a95a000012546ab93b190c21 inherit pub_methods_classlds_1_1GeneratorIterable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af04908fce5660537c05e22d246b809da inherit pub_methods_classlds_1_1GeneratorIterable" id="r_af04908fce5660537c05e22d246b809da"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlds_1_1GeneratorIterable.html#af04908fce5660537c05e22d246b809da">end</a> () const -&gt; <a class="el" href="classlds_1_1GeneratorIterator.html">GeneratorIterator</a>&lt; Derived, Value &gt;</td></tr>
+<tr class="memdesc:af04908fce5660537c05e22d246b809da inherit pub_methods_classlds_1_1GeneratorIterable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get iterator to end (infinite sequence)  <br /></td></tr>
+<tr class="separator:af04908fce5660537c05e22d246b809da inherit pub_methods_classlds_1_1GeneratorIterable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classlds_1_1GeneratorBase"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classlds_1_1GeneratorBase')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classlds_1_1GeneratorBase.html">lds::GeneratorBase&lt; Derived, Value &gt;</a></td></tr>
+<tr class="memitem:aa6a2961e767e1ee10889592edf3f8af4 inherit pub_methods_classlds_1_1GeneratorBase" id="r_aa6a2961e767e1ee10889592edf3f8af4"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlds_1_1GeneratorBase.html#aa6a2961e767e1ee10889592edf3f8af4">pop</a> () -&gt; Value</td></tr>
+<tr class="memdesc:aa6a2961e767e1ee10889592edf3f8af4 inherit pub_methods_classlds_1_1GeneratorBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate the next value in the sequence (advances state).  <br /></td></tr>
+<tr class="separator:aa6a2961e767e1ee10889592edf3f8af4 inherit pub_methods_classlds_1_1GeneratorBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf820d7d95574dbda6dde874d7db8347 inherit pub_methods_classlds_1_1GeneratorBase" id="r_acf820d7d95574dbda6dde874d7db8347"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlds_1_1GeneratorBase.html#acf820d7d95574dbda6dde874d7db8347">peek</a> () -&gt; Value</td></tr>
+<tr class="memdesc:acf820d7d95574dbda6dde874d7db8347 inherit pub_methods_classlds_1_1GeneratorBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Peek at the next value without advancing state.  <br /></td></tr>
+<tr class="separator:acf820d7d95574dbda6dde874d7db8347 inherit pub_methods_classlds_1_1GeneratorBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c0afacc4f9f60db0c2189c0af87d7fe inherit pub_methods_classlds_1_1GeneratorBase" id="r_a4c0afacc4f9f60db0c2189c0af87d7fe"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlds_1_1GeneratorBase.html#a4c0afacc4f9f60db0c2189c0af87d7fe">skip</a> (unsigned long n) -&gt; void</td></tr>
+<tr class="memdesc:a4c0afacc4f9f60db0c2189c0af87d7fe inherit pub_methods_classlds_1_1GeneratorBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Skip n values in the sequence.  <br /></td></tr>
+<tr class="separator:a4c0afacc4f9f60db0c2189c0af87d7fe inherit pub_methods_classlds_1_1GeneratorBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a7dffa4105372275868469ae43051bc inherit pub_methods_classlds_1_1GeneratorBase" id="r_a0a7dffa4105372275868469ae43051bc"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlds_1_1GeneratorBase.html#a0a7dffa4105372275868469ae43051bc">reseed</a> (const unsigned long &amp;seed) -&gt; void</td></tr>
+<tr class="memdesc:a0a7dffa4105372275868469ae43051bc inherit pub_methods_classlds_1_1GeneratorBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset the generator to a specific seed value.  <br /></td></tr>
+<tr class="separator:a0a7dffa4105372275868469ae43051bc inherit pub_methods_classlds_1_1GeneratorBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f551f987235e7fc0cd7dbf51b428be0 inherit pub_methods_classlds_1_1GeneratorBase" id="r_a2f551f987235e7fc0cd7dbf51b428be0"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlds_1_1GeneratorBase.html#a2f551f987235e7fc0cd7dbf51b428be0">get_index</a> () const -&gt; unsigned long</td></tr>
+<tr class="memdesc:a2f551f987235e7fc0cd7dbf51b428be0 inherit pub_methods_classlds_1_1GeneratorBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get current index in the sequence.  <br /></td></tr>
+<tr class="separator:a2f551f987235e7fc0cd7dbf51b428be0 inherit pub_methods_classlds_1_1GeneratorBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_attribs_classlds_1_1GeneratorBase"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classlds_1_1GeneratorBase')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classlds_1_1GeneratorBase.html">lds::GeneratorBase&lt; Derived, Value &gt;</a></td></tr>
+<tr class="memitem:af3540b25530e142ba9ef82a7b5ca18af inherit pro_attribs_classlds_1_1GeneratorBase" id="r_af3540b25530e142ba9ef82a7b5ca18af"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlds_1_1GeneratorBase.html#af3540b25530e142ba9ef82a7b5ca18af">count_</a> {0}</td></tr>
+<tr class="memdesc:af3540b25530e142ba9ef82a7b5ca18af inherit pro_attribs_classlds_1_1GeneratorBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current sequence index (single source of state)  <br /></td></tr>
+<tr class="separator:af3540b25530e142ba9ef82a7b5ca18af inherit pro_attribs_classlds_1_1GeneratorBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;unsigned long Base0 = 2, unsigned long Base1 = 3&gt;<br />
 class lds::Halton&lt; Base0, Base1 &gt;</div><p><a class="el" href="classlds_1_1Halton.html" title="Halton sequence generator.">Halton</a> sequence generator. </p>
-<p>The <code><a class="el" href="classlds_1_1Halton.html" title="Halton sequence generator.">Halton</a></code> class is a sequence generator that generates points in a 2-dimensional space using the <a class="el" href="classlds_1_1Halton.html" title="Halton sequence generator.">Halton</a> sequence. The <a class="el" href="classlds_1_1Halton.html" title="Halton sequence generator.">Halton</a> sequence is a low-discrepancy sequence that is commonly used in quasi-Monte Carlo methods. It is generated by iterating over two different bases and calculating the fractional parts of the numbers in those bases. The <code><a class="el" href="classlds_1_1Halton.html" title="Halton sequence generator.">Halton</a></code> class keeps track of the current count and bases, and provides a <code><a class="el" href="classlds_1_1Halton.html#aeca89d1f9c635f9fcd6d681ac873bb05" title="Generate the next point in the Halton sequence.">pop()</a></code> method that returns the next point in the sequence as a <code>std::array&lt;double, 2&gt;</code>.</p>
+<p>The <code><a class="el" href="classlds_1_1Halton.html" title="Halton sequence generator.">Halton</a></code> class is a sequence generator that generates points in a 2-dimensional space using the <a class="el" href="classlds_1_1Halton.html" title="Halton sequence generator.">Halton</a> sequence. The <a class="el" href="classlds_1_1Halton.html" title="Halton sequence generator.">Halton</a> sequence is a low-discrepancy sequence that is commonly used in quasi-Monte Carlo methods. It is generated by iterating over two different bases and calculating the fractional parts of the numbers in those bases. The <code><a class="el" href="classlds_1_1Halton.html" title="Halton sequence generator.">Halton</a></code> class keeps track of the current count and bases, and provides a <code><a class="el" href="classlds_1_1GeneratorBase.html#aa6a2961e767e1ee10889592edf3f8af4" title="Generate the next value in the sequence (advances state).">pop()</a></code> method that returns the next point in the sequence as a <code>std::array&lt;double, 2&gt;</code>.</p>
 <p>The <a class="el" href="classlds_1_1Halton.html" title="Halton sequence generator.">Halton</a> sequence in \(d\) dimensions is defined as:  </p><p class="formulaDsp">
 \[
       H_b(n) = \bigl(\phi_{b_1}(n), \phi_{b_2}(n), \dots, \phi_{b_d}(n)\bigr)
@@ -166,8 +188,8 @@ template&lt;unsigned long Base0 = 2, unsigned long Base1 = 3&gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a580228ea539bda39ce7c66fa4c116a4f" name="a580228ea539bda39ce7c66fa4c116a4f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a580228ea539bda39ce7c66fa4c116a4f">&#9670;&#160;</a></span>begin()</h2>
+<a id="a13803ebd9c827f46fa78b374c09f3e5c" name="a13803ebd9c827f46fa78b374c09f3e5c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a13803ebd9c827f46fa78b374c09f3e5c">&#9670;&#160;</a></span>value_at()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -178,199 +200,11 @@ template&lt;unsigned long Base0 = 2, unsigned long Base1 = 3&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr auto <a class="el" href="classlds_1_1Halton.html">lds::Halton</a>&lt; Base0, Base1 &gt;::begin </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> -&gt; <a class="el" href="classlds_1_1GeneratorIterator.html">GeneratorIterator</a>&lt;<a class="el" href="classlds_1_1Halton.html">Halton</a>, std::array&lt;double, 2&gt;&gt; </td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Get iterator to beginning. </p>
-<dl class="section return"><dt>Returns</dt><dd>GeneratorIterator&lt;Halton, std::array&lt;double, 2&gt;&gt; </dd></dl>
-
-</div>
-</div>
-<a id="a8ecc9bd9cadff16b109918a39827c8a1" name="a8ecc9bd9cadff16b109918a39827c8a1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8ecc9bd9cadff16b109918a39827c8a1">&#9670;&#160;</a></span>end()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;unsigned long Base0 = 2, unsigned long Base1 = 3&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr auto <a class="el" href="classlds_1_1Halton.html">lds::Halton</a>&lt; Base0, Base1 &gt;::end </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const -&gt; <a class="el" href="classlds_1_1GeneratorIterator.html">GeneratorIterator</a>&lt;<a class="el" href="classlds_1_1Halton.html">Halton</a>, std::array&lt;double, 2&gt;&gt; </td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Get iterator to end (infinite sequence) </p>
-<dl class="section return"><dt>Returns</dt><dd>GeneratorIterator&lt;Halton, std::array&lt;double, 2&gt;&gt; </dd></dl>
-
-</div>
-</div>
-<a id="a99a694905fcf5a9afadd523b2e4274bc" name="a99a694905fcf5a9afadd523b2e4274bc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a99a694905fcf5a9afadd523b2e4274bc">&#9670;&#160;</a></span>get_index()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;unsigned long Base0 = 2, unsigned long Base1 = 3&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr auto <a class="el" href="classlds_1_1Halton.html">lds::Halton</a>&lt; Base0, Base1 &gt;::get_index </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const -&gt; unsigned long </td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Get current index. </p>
-<dl class="section return"><dt>Returns</dt><dd>unsigned long current index in the sequence </dd></dl>
-
-</div>
-</div>
-<a id="a24624dbe375e49549fcd42a09f5d29f6" name="a24624dbe375e49549fcd42a09f5d29f6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a24624dbe375e49549fcd42a09f5d29f6">&#9670;&#160;</a></span>peek()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;unsigned long Base0 = 2, unsigned long Base1 = 3&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr auto <a class="el" href="classlds_1_1Halton.html">lds::Halton</a>&lt; Base0, Base1 &gt;::peek </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> -&gt; std::array&lt;double, 2&gt; </td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Peek at the next value without advancing state. </p>
-<dl class="section return"><dt>Returns</dt><dd>std::array&lt;double, 2&gt; the next point in the sequence </dd></dl>
-
-</div>
-</div>
-<a id="aeca89d1f9c635f9fcd6d681ac873bb05" name="aeca89d1f9c635f9fcd6d681ac873bb05"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aeca89d1f9c635f9fcd6d681ac873bb05">&#9670;&#160;</a></span>pop()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;unsigned long Base0 = 2, unsigned long Base1 = 3&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr auto <a class="el" href="classlds_1_1Halton.html">lds::Halton</a>&lt; Base0, Base1 &gt;::pop </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> -&gt; std::array&lt;double, 2&gt; </td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Generate the next point in the <a class="el" href="classlds_1_1Halton.html" title="Halton sequence generator.">Halton</a> sequence. </p>
-<p>Returns the next point in the <a class="el" href="classlds_1_1Halton.html" title="Halton sequence generator.">Halton</a> sequence as an array of two double values.</p>
-<dl class="section return"><dt>Returns</dt><dd>std::array&lt;double, 2&gt; the next point in the sequence </dd></dl>
-
-</div>
-</div>
-<a id="a2bcc390475ee6884a003367036461954" name="a2bcc390475ee6884a003367036461954"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2bcc390475ee6884a003367036461954">&#9670;&#160;</a></span>reseed()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;unsigned long Base0 = 2, unsigned long Base1 = 3&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr auto <a class="el" href="classlds_1_1Halton.html">lds::Halton</a>&lt; Base0, Base1 &gt;::reseed </td>
-          <td>(</td>
-          <td class="paramtype">const unsigned long &amp;&#160;</td>
-          <td class="paramname"><em>seed</em></td><td>)</td>
-          <td> -&gt; void </td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Reset the state of the <a class="el" href="classlds_1_1Halton.html" title="Halton sequence generator.">Halton</a> sequence generator. </p>
-<p>Resets the state of the sequence generator to a specific seed value.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">seed</td><td>the seed value to reset the sequence generator to </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="ad282a2f9941ce6ea3d9a5a3e90523e1f" name="ad282a2f9941ce6ea3d9a5a3e90523e1f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad282a2f9941ce6ea3d9a5a3e90523e1f">&#9670;&#160;</a></span>skip()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;unsigned long Base0 = 2, unsigned long Base1 = 3&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr auto <a class="el" href="classlds_1_1Halton.html">lds::Halton</a>&lt; Base0, Base1 &gt;::skip </td>
+          <td class="memname">constexpr auto <a class="el" href="classlds_1_1Halton.html">lds::Halton</a>&lt; Base0, Base1 &gt;::value_at </td>
           <td>(</td>
           <td class="paramtype">unsigned long&#160;</td>
           <td class="paramname"><em>n</em></td><td>)</td>
-          <td> -&gt; void </td>
+          <td> const -&gt; std::array&lt;double, 2&gt; </td>
         </tr>
       </table>
   </td>
@@ -380,13 +214,19 @@ template&lt;unsigned long Base0 = 2, unsigned long Base1 = 3&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Skip n values in the sequence. </p>
+<p>Evaluate the 2D <a class="el" href="classlds_1_1Halton.html" title="Halton sequence generator.">Halton</a> point at a given index (pure) </p>
+<p class="formulaDsp">
+\[
+    H(n) = (\phi_{b_0}(n), \phi_{b_1}(n))
+\]
+</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">n</td><td>number of values to skip </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">n</td><td>The sequence index. </td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>The 2D <a class="el" href="classlds_1_1Halton.html" title="Halton sequence generator.">Halton</a> point for index n. </dd></dl>
 
 </div>
 </div>

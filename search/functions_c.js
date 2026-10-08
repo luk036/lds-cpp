@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['_7evdcorputbase_0',['~VdCorputBase',['../classlds_1_1VdCorputBase.html#aaf6e216c96598e060fbde6348f5d1221',1,'lds::VdCorputBase']]]
+  ['_7egeneratorinterface_0',['~GeneratorInterface',['../classlds_1_1GeneratorInterface.html#ae99c6c884cb5dca42c069198a5dd3ee8',1,'lds::GeneratorInterface']]]
 ];

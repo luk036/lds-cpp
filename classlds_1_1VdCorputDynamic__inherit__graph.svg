@@ -20,9 +20,9 @@
 <!-- Node2 -->
 <g id="Node000002" class="node">
 <title>Node2</title>
-<g id="a_Node000002"><a xlink:href="classlds_1_1VdCorputBase.html" target="_top" xlink:title="Abstract base class for polymorphic van der Corput sequence generators.">
-<polygon fill="white" stroke="#666666" points="115.5,-74 9.5,-74 9.5,-55 115.5,-55 115.5,-74"/>
-<text text-anchor="middle" x="62.5" y="-62" font-family="Helvetica,sans-Serif" font-size="10.00">lds::VdCorputBase</text>
+<g id="a_Node000002"><a xlink:href="classlds_1_1GeneratorInterface.html" target="_top" xlink:title="Abstract base class for polymorphic sequence generators.">
+<polygon fill="white" stroke="#666666" points="105.5,-74 19.5,-74 19.5,-55 105.5,-55 105.5,-74"/>
+<text text-anchor="middle" x="62.5" y="-62" font-family="Helvetica,sans-Serif" font-size="10.00">VdCorputBase</text>
 </a>
 </g>
 </g>

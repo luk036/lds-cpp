@@ -1,4 +1,30 @@
 var searchData=
 [
-  ['generatoriterator_0',['GeneratorIterator',['../classlds_1_1GeneratorIterator.html',1,'lds']]]
+  ['generatorbase_0',['GeneratorBase',['../classlds_1_1GeneratorBase.html',1,'lds']]],
+  ['generatorbase_3c_20circle_3c_202_20_3e_2c_20std_3a_3aarray_3c_20double_2c_202_20_3e_20_3e_1',['GeneratorBase&lt; Circle&lt; 2 &gt;, std::array&lt; double, 2 &gt; &gt;',['../classlds_1_1GeneratorBase.html',1,'lds']]],
+  ['generatorbase_3c_20circle_3c_20base_20_3e_2c_20std_3a_3aarray_3c_20double_2c_202_20_3e_20_3e_2',['GeneratorBase&lt; Circle&lt; Base &gt;, std::array&lt; double, 2 &gt; &gt;',['../classlds_1_1GeneratorBase.html',1,'lds']]],
+  ['generatorbase_3c_20disk_3c_202_2c_203_20_3e_2c_20std_3a_3aarray_3c_20double_2c_202_20_3e_20_3e_3',['GeneratorBase&lt; Disk&lt; 2, 3 &gt;, std::array&lt; double, 2 &gt; &gt;',['../classlds_1_1GeneratorBase.html',1,'lds']]],
+  ['generatorbase_3c_20halton_3c_202_2c_203_20_3e_2c_20std_3a_3aarray_3c_20double_2c_202_20_3e_20_3e_4',['GeneratorBase&lt; Halton&lt; 2, 3 &gt;, std::array&lt; double, 2 &gt; &gt;',['../classlds_1_1GeneratorBase.html',1,'lds']]],
+  ['generatorbase_3c_20halton_3c_20base1_2c_20base2_20_3e_2c_20array_3c_20unsigned_20long_2c_202_20_3e_20_3e_5',['GeneratorBase&lt; Halton&lt; Base1, Base2 &gt;, array&lt; unsigned long, 2 &gt; &gt;',['../classlds_1_1GeneratorBase.html',1,'lds']]],
+  ['generatorbase_3c_20sphere3hopf_3c_202_2c_203_2c_205_20_3e_2c_20std_3a_3aarray_3c_20double_2c_204_20_3e_20_3e_6',['GeneratorBase&lt; Sphere3Hopf&lt; 2, 3, 5 &gt;, std::array&lt; double, 4 &gt; &gt;',['../classlds_1_1GeneratorBase.html',1,'lds']]],
+  ['generatorbase_3c_20sphere_3c_202_2c_203_20_3e_2c_20std_3a_3aarray_3c_20double_2c_203_20_3e_20_3e_7',['GeneratorBase&lt; Sphere&lt; 2, 3 &gt;, std::array&lt; double, 3 &gt; &gt;',['../classlds_1_1GeneratorBase.html',1,'lds']]],
+  ['generatorbase_3c_20vdcorput_3c_202_20_3e_2c_20double_20_3e_8',['GeneratorBase&lt; VdCorput&lt; 2 &gt;, double &gt;',['../classlds_1_1GeneratorBase.html',1,'lds']]],
+  ['generatorbase_3c_20vdcorput_3c_202_20_3e_2c_20unsigned_20long_20_3e_9',['GeneratorBase&lt; VdCorput&lt; 2 &gt;, unsigned long &gt;',['../classlds_1_1GeneratorBase.html',1,'lds']]],
+  ['generatorbase_3c_20vdcorput_3c_20base_20_3e_2c_20double_20_3e_10',['GeneratorBase&lt; VdCorput&lt; Base &gt;, double &gt;',['../classlds_1_1GeneratorBase.html',1,'lds']]],
+  ['generatorbase_3c_20vdcorput_3c_20base_20_3e_2c_20unsigned_20long_20_3e_11',['GeneratorBase&lt; VdCorput&lt; Base &gt;, unsigned long &gt;',['../classlds_1_1GeneratorBase.html',1,'lds']]],
+  ['generatorinterface_12',['GeneratorInterface',['../classlds_1_1GeneratorInterface.html',1,'lds']]],
+  ['generatorinterface_3c_20std_3a_3aarray_3c_20double_2c_20n_20_3e_20_3e_13',['GeneratorInterface&lt; std::array&lt; double, N &gt; &gt;',['../classlds_1_1GeneratorInterface.html',1,'lds']]],
+  ['generatoriterable_14',['GeneratorIterable',['../classlds_1_1GeneratorIterable.html',1,'lds']]],
+  ['generatoriterable_3c_20circle_3c_202_20_3e_2c_20std_3a_3aarray_3c_20double_2c_202_20_3e_20_3e_15',['GeneratorIterable&lt; Circle&lt; 2 &gt;, std::array&lt; double, 2 &gt; &gt;',['../classlds_1_1GeneratorIterable.html',1,'lds']]],
+  ['generatoriterable_3c_20circle_3c_20base_20_3e_2c_20std_3a_3aarray_3c_20double_2c_202_20_3e_20_3e_16',['GeneratorIterable&lt; Circle&lt; Base &gt;, std::array&lt; double, 2 &gt; &gt;',['../classlds_1_1GeneratorIterable.html',1,'lds']]],
+  ['generatoriterable_3c_20disk_3c_202_2c_203_20_3e_2c_20std_3a_3aarray_3c_20double_2c_202_20_3e_20_3e_17',['GeneratorIterable&lt; Disk&lt; 2, 3 &gt;, std::array&lt; double, 2 &gt; &gt;',['../classlds_1_1GeneratorIterable.html',1,'lds']]],
+  ['generatoriterable_3c_20halton_3c_202_2c_203_20_3e_2c_20std_3a_3aarray_3c_20double_2c_202_20_3e_20_3e_18',['GeneratorIterable&lt; Halton&lt; 2, 3 &gt;, std::array&lt; double, 2 &gt; &gt;',['../classlds_1_1GeneratorIterable.html',1,'lds']]],
+  ['generatoriterable_3c_20halton_3c_20base1_2c_20base2_20_3e_2c_20array_3c_20unsigned_20long_2c_202_20_3e_20_3e_19',['GeneratorIterable&lt; Halton&lt; Base1, Base2 &gt;, array&lt; unsigned long, 2 &gt; &gt;',['../classlds_1_1GeneratorIterable.html',1,'lds']]],
+  ['generatoriterable_3c_20sphere3hopf_3c_202_2c_203_2c_205_20_3e_2c_20std_3a_3aarray_3c_20double_2c_204_20_3e_20_3e_20',['GeneratorIterable&lt; Sphere3Hopf&lt; 2, 3, 5 &gt;, std::array&lt; double, 4 &gt; &gt;',['../classlds_1_1GeneratorIterable.html',1,'lds']]],
+  ['generatoriterable_3c_20sphere_3c_202_2c_203_20_3e_2c_20std_3a_3aarray_3c_20double_2c_203_20_3e_20_3e_21',['GeneratorIterable&lt; Sphere&lt; 2, 3 &gt;, std::array&lt; double, 3 &gt; &gt;',['../classlds_1_1GeneratorIterable.html',1,'lds']]],
+  ['generatoriterable_3c_20vdcorput_3c_202_20_3e_2c_20double_20_3e_22',['GeneratorIterable&lt; VdCorput&lt; 2 &gt;, double &gt;',['../classlds_1_1GeneratorIterable.html',1,'lds']]],
+  ['generatoriterable_3c_20vdcorput_3c_202_20_3e_2c_20unsigned_20long_20_3e_23',['GeneratorIterable&lt; VdCorput&lt; 2 &gt;, unsigned long &gt;',['../classlds_1_1GeneratorIterable.html',1,'lds']]],
+  ['generatoriterable_3c_20vdcorput_3c_20base_20_3e_2c_20double_20_3e_24',['GeneratorIterable&lt; VdCorput&lt; Base &gt;, double &gt;',['../classlds_1_1GeneratorIterable.html',1,'lds']]],
+  ['generatoriterable_3c_20vdcorput_3c_20base_20_3e_2c_20unsigned_20long_20_3e_25',['GeneratorIterable&lt; VdCorput&lt; Base &gt;, unsigned long &gt;',['../classlds_1_1GeneratorIterable.html',1,'lds']]],
+  ['generatoriterator_26',['GeneratorIterator',['../classlds_1_1GeneratorIterator.html',1,'lds']]]
 ];

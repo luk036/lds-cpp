@@ -28,7 +28,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Lds<span id="projectnumber">&#160;1.2.5</span>
+   <div id="projectname">Lds<span id="projectnumber">&#160;1.2.6</span>
    </div>
   </td>
  </tr>
@@ -83,6 +83,7 @@ $(function() {
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
+<a href="#concepts">Concepts</a> &#124;
 <a href="#func-members">Functions</a> &#124;
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle"><div class="title">lds.hpp File Reference</div></div>
@@ -93,6 +94,7 @@ $(function() {
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;array&gt;</code><br />
 <code>#include &lt;cmath&gt;</code><br />
+<code>#include &lt;concepts&gt;</code><br />
 <code>#include &lt;cstddef&gt;</code><br />
 <code>#include &lt;iterator&gt;</code><br />
 <code>#include &lt;limits&gt;</code><br />
@@ -100,12 +102,12 @@ $(function() {
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for lds.hpp:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="lds_8hpp__incl.svg" width="531" height="110"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="lds_8hpp__incl.svg" width="636" height="110"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="lds_8hpp__dep__incl.svg" width="118" height="110"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="lds_8hpp__dep__incl.svg" width="238" height="110"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 <p><a href="lds_8hpp_source.html">Go to the source code of this file.</a></p>
@@ -114,6 +116,12 @@ This graph shows which files directly or indirectly include this file:</div>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlds_1_1GeneratorIterator.html">lds::GeneratorIterator&lt; Generator, Value &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Forward iterator for sequence generators.  <a href="classlds_1_1GeneratorIterator.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlds_1_1GeneratorBase.html">lds::GeneratorBase&lt; Derived, Value &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">CRTP base implementing the sequence generator protocol.  <a href="classlds_1_1GeneratorBase.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlds_1_1GeneratorIterable.html">lds::GeneratorIterable&lt; Derived, Value &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">CRTP mixin adding STL iterator support to a <a class="el" href="classlds_1_1GeneratorBase.html" title="CRTP base implementing the sequence generator protocol.">GeneratorBase</a>.  <a href="classlds_1_1GeneratorIterable.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlds_1_1VdCorput.html">lds::VdCorput&lt; Base &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">van der Corput sequence generator  <a href="classlds_1_1VdCorput.html#details">More...</a><br /></td></tr>
@@ -138,9 +146,24 @@ Classes</h2></td></tr>
 Namespaces</h2></td></tr>
 <tr class="memitem:namespacelds" id="r_namespacelds"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacelds.html">lds</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespacelds_1_1detail" id="r_namespacelds_1_1detail"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacelds_1_1detail.html">lds::detail</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="concepts" name="concepts"></a>
+Concepts</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="conceptlds_1_1SequenceGenerator.html">lds::SequenceGenerator</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for the sequence generator protocol. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="conceptlds_1_1IndexableGenerator.html">lds::IndexableGenerator</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept refinement for generators exposing a pure index-to-value map. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:ab879eabff4b84c9630d06207a5bd2cbb" id="r_ab879eabff4b84c9630d06207a5bd2cbb"><td class="memTemplParams" colspan="2">template&lt;typename T , typename Table &gt; </td></tr>
+<tr class="memitem:ab879eabff4b84c9630d06207a5bd2cbb"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacelds_1_1detail.html#ab879eabff4b84c9630d06207a5bd2cbb">lds::detail::vdc_digit_sum</a> (unsigned long num, unsigned long base, const Table &amp;weights) -&gt; T</td></tr>
+<tr class="memdesc:ab879eabff4b84c9630d06207a5bd2cbb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Core base-b digit/weight summation shared by all van der Corput generators.  <br /></td></tr>
+<tr class="separator:ab879eabff4b84c9630d06207a5bd2cbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab68519d54a5c5bca52252ba76d07bd40" id="r_ab68519d54a5c5bca52252ba76d07bd40"><td class="memTemplParams" colspan="2">template&lt;unsigned long Base = 2&gt; </td></tr>
 <tr class="memitem:ab68519d54a5c5bca52252ba76d07bd40"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacelds.html#ab68519d54a5c5bca52252ba76d07bd40">lds::vdc</a> (unsigned long cnt) -&gt; double</td></tr>
 <tr class="memdesc:ab68519d54a5c5bca52252ba76d07bd40"><td class="mdescLeft">&#160;</td><td class="mdescRight">van der Corput sequence  <br /></td></tr>
@@ -151,12 +174,6 @@ Functions</h2></td></tr>
 <tr class="memitem:ac38d30e895686353ba6d221a45a1aa5b" id="r_ac38d30e895686353ba6d221a45a1aa5b"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacelds.html#ac38d30e895686353ba6d221a45a1aa5b">lds::vdc2_table</a> (unsigned long index)</td></tr>
 <tr class="memdesc:ac38d30e895686353ba6d221a45a1aa5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Look up a precomputed van der Corput value for base 2.  <br /></td></tr>
 <tr class="separator:ac38d30e895686353ba6d221a45a1aa5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeeb29e6ad78ab182fe2ff8be3cb8eb48" id="r_aeeb29e6ad78ab182fe2ff8be3cb8eb48"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacelds.html#aeeb29e6ad78ab182fe2ff8be3cb8eb48">lds::circle2_table_x</a> (unsigned long index)</td></tr>
-<tr class="memdesc:aeeb29e6ad78ab182fe2ff8be3cb8eb48"><td class="mdescLeft">&#160;</td><td class="mdescRight">Look up a precomputed <a class="el" href="classlds_1_1Circle.html" title="Circle sequence generator.">Circle</a> x-coordinate for base 2.  <br /></td></tr>
-<tr class="separator:aeeb29e6ad78ab182fe2ff8be3cb8eb48"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a58fcc2d4312ec56f3bf074e4aa1620b4" id="r_a58fcc2d4312ec56f3bf074e4aa1620b4"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacelds.html#a58fcc2d4312ec56f3bf074e4aa1620b4">lds::circle2_table_y</a> (unsigned long index)</td></tr>
-<tr class="memdesc:a58fcc2d4312ec56f3bf074e4aa1620b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Look up a precomputed <a class="el" href="classlds_1_1Circle.html" title="Circle sequence generator.">Circle</a> y-coordinate for base 2.  <br /></td></tr>
-<tr class="separator:a58fcc2d4312ec56f3bf074e4aa1620b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
