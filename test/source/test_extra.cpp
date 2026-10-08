@@ -323,7 +323,8 @@ TEST_CASE("ilds VdCorput peek") {
 // These tests use relationship checks to be cross-platform.
 
 TEST_CASE("sizeof VdCorput<2>") {
-    // unsigned long count (4) + padding (4) + double[64] rev_lst (512) = 520
+    // GeneratorBase count_ (8) + double[64] rev_lst (512) = 520
+    // The base's count_ replaces the old member count, so the size is unchanged.
     // The actual size depends on alignment, so use the compiler's value
     // as baseline. If this changes, the class layout has changed.
     CHECK_EQ(sizeof(lds::VdCorput<2>), 520);
@@ -331,23 +332,65 @@ TEST_CASE("sizeof VdCorput<2>") {
 
 TEST_CASE("sizeof VdCorput<3>") { CHECK_EQ(sizeof(lds::VdCorput<3>), 520); }
 
-TEST_CASE("sizeof Circle<2>") { CHECK_EQ(sizeof(lds::Circle<2>), sizeof(lds::VdCorput<2>)); }
-
-TEST_CASE("sizeof Halton<2,3>") {
-    CHECK_EQ(sizeof(lds::Halton<2, 3>), 2 * sizeof(lds::VdCorput<2>));
+TEST_CASE("sizeof Circle<2>") {
+    // GeneratorBase count_ (8) + VdCorput<2> member (520) = 528
+    // The +8 over sizeof(VdCorput<2>) is the composite's own sequence counter.
+    CHECK_EQ(sizeof(lds::Circle<2>), 528);
 }
 
-TEST_CASE("sizeof Disk<2,3>") { CHECK_EQ(sizeof(lds::Disk<2, 3>), 2 * sizeof(lds::VdCorput<2>)); }
+TEST_CASE("sizeof Halton<2,3>") {
+    // GeneratorBase count_ (8) + 2 * VdCorput<2> members (1040) = 1048
+    CHECK_EQ(sizeof(lds::Halton<2, 3>), 1048);
+}
+
+TEST_CASE("sizeof Disk<2,3>") { CHECK_EQ(sizeof(lds::Disk<2, 3>), 1048); }
 
 TEST_CASE("sizeof Sphere<2,3>") {
-    CHECK_EQ(sizeof(lds::Sphere<2, 3>), sizeof(lds::VdCorput<2>) + sizeof(lds::Circle<3>));
+    // GeneratorBase count_ (8) + VdCorput<2> (520) + Circle<3> (528) = 1056
+    CHECK_EQ(sizeof(lds::Sphere<2, 3>), 1056);
 }
 
 TEST_CASE("sizeof Sphere3Hopf<2,3,5>") {
-    CHECK_EQ(sizeof(lds::Sphere3Hopf<2, 3, 5>), 3 * sizeof(lds::VdCorput<2>));
+    // GeneratorBase count_ (8) + 3 * VdCorput<2> members (1560) = 1568
+    CHECK_EQ(sizeof(lds::Sphere3Hopf<2, 3, 5>), 1568);
 }
 
 TEST_CASE("sizeof ilds::VdCorput<2>") {
     // unsigned long _count + unsigned long[64] factor_lst = sizeof(ul) * 65
     CHECK_EQ(sizeof(ilds::VdCorput<2>), sizeof(unsigned long) * 65);
+}
+
+TEST_CASE("GeneratorIterator different generators are not equal") {
+    auto gen1 = lds::VdCorput<2>();
+    auto gen2 = lds::VdCorput<2>();
+    auto it1 = gen1.begin();
+    auto it2 = gen2.begin();
+    CHECK(it1 != it2);
+    CHECK(it1 == gen1.begin());
+}
+
+TEST_CASE("GeneratorIterator dereference is read-only") {
+    auto vgen = lds::VdCorput<2>();
+    auto it = vgen.begin();
+    CHECK_EQ(*it, doctest::Approx(0.5));
+    CHECK_EQ(vgen.get_index(), 0);
+    ++it;
+    CHECK_EQ(*it, doctest::Approx(0.25));
+    CHECK_EQ(vgen.get_index(), 0);
+}
+
+TEST_CASE("ilds VdCorput iterator") {
+    auto vgen = ilds::VdCorput<2>(10);
+    auto it = vgen.begin();
+    CHECK_EQ(*it, 512UL);
+    ++it;
+    CHECK_EQ(*it, 256UL);
+}
+
+TEST_CASE("ilds Halton iterator") {
+    auto hgen = ilds::Halton<2, 3>({10, 10});
+    auto it = hgen.begin();
+    auto v = *it;
+    CHECK_EQ(v[0], 512UL);
+    CHECK_EQ(v[1], 19683UL);
 }

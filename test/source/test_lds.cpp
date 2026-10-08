@@ -647,33 +647,3 @@ TEST_CASE("VDC_TABLE_2 matches vdc function") {
         CHECK_EQ(lds::vdc2_table(i), doctest::Approx(lds::vdc<2>(i + 1)));
     }
 }
-
-TEST_CASE("CIRCLE_TABLE_2 first values") {
-    CHECK_EQ(lds::circle2_table_x(0), doctest::Approx(-1.0));
-    CHECK_EQ(lds::circle2_table_y(0), doctest::Approx(0.0));
-    CHECK_EQ(lds::circle2_table_x(1), doctest::Approx(0.0));
-    CHECK_EQ(lds::circle2_table_y(1), doctest::Approx(1.0));
-    CHECK_EQ(lds::circle2_table_x(2), doctest::Approx(0.0));
-    CHECK_EQ(lds::circle2_table_y(2), doctest::Approx(-1.0));
-    auto inv_sqrt2 = 1.0 / std::numbers::sqrt2;
-    CHECK_EQ(lds::circle2_table_x(3), doctest::Approx(inv_sqrt2));
-    CHECK_EQ(lds::circle2_table_y(3), doctest::Approx(inv_sqrt2));
-}
-
-TEST_CASE("CIRCLE_TABLE_2 all on unit circle") {
-    for (unsigned long i = 0; i < 1000; ++i) {
-        auto x = lds::circle2_table_x(i);
-        auto y = lds::circle2_table_y(i);
-        CHECK_EQ(x * x + y * y, doctest::Approx(1.0));
-    }
-}
-
-TEST_CASE("CIRCLE_TABLE_2 matches Circle::pop") {
-    auto cgen = lds::Circle<2>();
-    cgen.reseed(0);
-    for (unsigned long i = 0; i < 1000; ++i) {
-        auto ref = cgen.pop();
-        CHECK_EQ(lds::circle2_table_x(i), doctest::Approx(ref[0]));
-        CHECK_EQ(lds::circle2_table_y(i), doctest::Approx(ref[1]));
-    }
-}

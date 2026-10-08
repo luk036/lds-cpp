@@ -8,33 +8,44 @@
 #include <cstddef>
 #include <lds/lds.hpp>
 #include <memory>
+#include <utility>
 
 namespace lds {
 
     /**
-     * @brief Abstract base class for polymorphic van der Corput sequence generators.
+     * @brief Abstract base class for polymorphic sequence generators.
      *
-     * Provides a common interface for both compile-time (template) and
-     * runtime-dispatch van der Corput generators used in N-dimensional sequences.
+     * Provides a common runtime-dispatch interface (pop, peek, skip, reseed,
+     * get_index) for interchangeable generator strategies. Parameterizing on
+     * `Value` lets a single interface describe both scalar generators and
+     * multi-dimensional ones, mirroring the SequenceGenerator concept on the
+     * compile-time side.
+     *
+     * @note Strategy/Abstract interface pattern: the caller holds a base pointer
+     * and dispatches virtually, so the concrete strategy can be swapped at runtime
+     * (e.g. compile-time VdCorputWrap vs runtime VdCorputDynamic) without changing
+     * the client code.
+     *
+     * @tparam Value The value type produced by pop()/peek().
      */
-    class VdCorputBase {
+    template <typename Value> class GeneratorInterface {
       public:
-        virtual ~VdCorputBase() = default;
+        virtual ~GeneratorInterface() = default;
         /** Ensure an explicit default constructor is available for derived classes */
-        VdCorputBase() = default;
+        GeneratorInterface() = default;
 
         // Non-copyable and non-movable: polymorphic base should not be
         // accidentally copied or moved (prevents slicing and ownership issues).
-        VdCorputBase(const VdCorputBase&) = delete;
-        VdCorputBase& operator=(const VdCorputBase&) = delete;
-        VdCorputBase(VdCorputBase&&) = delete;
-        VdCorputBase& operator=(VdCorputBase&&) = delete;
+        GeneratorInterface(const GeneratorInterface&) = delete;
+        GeneratorInterface& operator=(const GeneratorInterface&) = delete;
+        GeneratorInterface(GeneratorInterface&&) = delete;
+        GeneratorInterface& operator=(GeneratorInterface&&) = delete;
 
         /** @brief Generate the next value in the sequence. */
-        virtual auto pop() -> double = 0;
+        virtual auto pop() -> Value = 0;
 
         /** @brief Peek at the next value without advancing state. */
-        virtual auto peek() -> double = 0;
+        virtual auto peek() -> Value = 0;
 
         /** @brief Skip n values in the sequence. */
         virtual auto skip(unsigned long n) -> void = 0;
@@ -46,9 +57,19 @@ namespace lds {
         virtual auto get_index() const -> unsigned long = 0;
     };
 
+    /// @brief Runtime-polymorphic scalar (double) generator interface.
+    using VdCorputBase = GeneratorInterface<double>;
+
     /**
      * @brief Compile-time-polymorphic wrapper around VdCorput<Base>.
      * @tparam Base The numeric base for the van der Corput sequence.
+     *
+     * @note Adapter pattern: this class adapts the compile-time-polymorphic
+     * VdCorput<Base> template behind the runtime interface VdCorputBase, bridging
+     * template-based and runtime dispatch. The `vdc` member holds the adaptee and
+     * every VdCorputBase method is forwarded to it, translating the compile-time
+     * template parameter Base into an object whose behavior is selected at runtime
+     * via virtual dispatch.
      */
     template <unsigned long Base> class VdCorputWrap : public VdCorputBase {
         VdCorput<Base> vdc;
@@ -83,22 +104,14 @@ namespace lds {
          *
          * Reverse powers of the base are precomputed once in the constructor
          * for fast lookup during pop()/peek(). The array is fixed at 64 entries,
-         * sufficient for double precision (53 mantissa bits).
+         * sufficient for double precision (53 mantissa bits). Delegates the
+         * digit/weight summation to the shared core in lds::detail.
          *
          * @param[in] cnt The sequence index to compute.
          * @return The van der Corput value for index cnt.
          */
         auto pop_impl(unsigned long cnt) -> double {
-            auto count_value = cnt;
-            std::size_t idx = 0;
-            double res = 0.0;
-            while (count_value != 0) {
-                const auto remainder = count_value % this->base_;
-                count_value /= this->base_;
-                res += this->rev_lst_[idx] * static_cast<double>(remainder);
-                ++idx;
-            }
-            return res;
+            return detail::vdc_digit_sum<double>(cnt, this->base_, this->rev_lst_);
         }
 
       public:
@@ -137,7 +150,7 @@ namespace lds {
      *
      * @tparam N Number of dimensions.
      */
-    template <std::size_t N> class HaltonN {
+    template <std::size_t N> class HaltonN : public GeneratorInterface<std::array<double, N>> {
         std::array<std::unique_ptr<VdCorputBase>, N> vdcs;
 
       public:
@@ -179,7 +192,7 @@ namespace lds {
          *
          * @return Array of N double values, one per dimension.
          */
-        constexpr auto pop() -> std::array<double, N> {
+        constexpr auto pop() -> std::array<double, N> override {
             std::array<double, N> result;
             for (std::size_t i = 0; i < N; ++i) {
                 result[i] = this->vdcs[i]->pop();
@@ -191,7 +204,7 @@ namespace lds {
          * @brief Peek at the next point without advancing state.
          * @return Array of N double values, one per dimension.
          */
-        [[nodiscard]] constexpr auto peek() -> std::array<double, N> {
+        [[nodiscard]] constexpr auto peek() -> std::array<double, N> override {
             std::array<double, N> result;
             for (std::size_t i = 0; i < N; ++i) {
                 result[i] = this->vdcs[i]->peek();
@@ -203,7 +216,7 @@ namespace lds {
          * @brief Skip n values in the sequence.
          * @param[in] n Number of values to skip.
          */
-        constexpr auto skip(unsigned long n) -> void {
+        constexpr auto skip(unsigned long n) -> void override {
             for (auto& vdc : this->vdcs) {
                 vdc->skip(n);
             }
@@ -213,7 +226,7 @@ namespace lds {
          * @brief Reset all dimension generators to a specific seed.
          * @param[in] seed The seed value to reset to.
          */
-        constexpr auto reseed(const unsigned long& seed) -> void {
+        constexpr auto reseed(const unsigned long& seed) -> void override {
             for (auto& vdc : this->vdcs) {
                 vdc->reseed(seed);
             }
@@ -223,39 +236,63 @@ namespace lds {
          * @brief Get the current index from the first dimension generator.
          * @return Current sequence index.
          */
-        [[nodiscard]] constexpr auto get_index() const -> unsigned long {
+        [[nodiscard]] constexpr auto get_index() const -> unsigned long override {
             return this->vdcs[0]->get_index();
         }
 
       private:
+        using Creator = std::unique_ptr<VdCorputBase> (*)();
+
+        /// @brief Factory registry entry: maps a numeric base to its compile-time creator.
+        struct VdcFactory {
+            unsigned long base;
+            Creator create;
+        };
+
+        /// Compile-time-specialized bases (first 11 primes) — single source of truth;
+        /// any other base is handled by VdCorputDynamic.
+        static constexpr std::array<unsigned long, 11> VDC_BASES{2,  3,  5,  7,  11, 13,
+                                                                 17, 19, 23, 29, 31};
+
+        template <unsigned long Base> static auto make_wrap() -> std::unique_ptr<VdCorputBase> {
+            return std::make_unique<VdCorputWrap<Base>>();
+        }
+
+        /// @brief Build the constexpr factory registry from VDC_BASES.
+        template <std::size_t... Is>
+        static constexpr auto factory_table(std::index_sequence<Is...> /*unused*/)
+            -> std::array<VdcFactory, sizeof...(Is)> {
+            return {VdcFactory{VDC_BASES[Is], &make_wrap<VDC_BASES[Is]>}...};
+        }
+
+        static constexpr auto VDC_FACTORIES
+            = factory_table(std::make_index_sequence<VDC_BASES.size()>{});
+
+        /**
+         * @brief Create a runtime-polymorphic van der Corput generator for a base.
+         * @param[in] base The numeric base for the sequence.
+         * @return A unique_ptr to the VdCorputBase implementation selected for base.
+         *
+         * @note Factory Method pattern: returns a VdCorputBase (unique_ptr) selecting
+         * the implementation at runtime — compile-time VdCorputWrap<N> for small
+         * prime bases, VdCorputDynamic otherwise. The registry maps each
+         * compile-time-specialized base to its creator, hiding the construction
+         * logic from the caller, so HaltonN clients receive an interchangeable
+         * strategy without knowing which concrete class was created.
+         */
         static auto create_vdc(unsigned long base) -> std::unique_ptr<VdCorputBase> {
-            switch (base) {
-                case 2:
-                    return std::make_unique<VdCorputWrap<2>>();
-                case 3:
-                    return std::make_unique<VdCorputWrap<3>>();
-                case 5:
-                    return std::make_unique<VdCorputWrap<5>>();
-                case 7:
-                    return std::make_unique<VdCorputWrap<7>>();
-                case 11:
-                    return std::make_unique<VdCorputWrap<11>>();
-                case 13:
-                    return std::make_unique<VdCorputWrap<13>>();
-                case 17:
-                    return std::make_unique<VdCorputWrap<17>>();
-                case 19:
-                    return std::make_unique<VdCorputWrap<19>>();
-                case 23:
-                    return std::make_unique<VdCorputWrap<23>>();
-                case 29:
-                    return std::make_unique<VdCorputWrap<29>>();
-                case 31:
-                    return std::make_unique<VdCorputWrap<31>>();
-                default:
-                    return std::make_unique<VdCorputDynamic>(base);
+            for (const auto& factory : VDC_FACTORIES) {
+                if (factory.base == base) {
+                    return factory.create();
+                }
             }
+            return std::make_unique<VdCorputDynamic>(base);
         }
     };
+
+    // Compile-time contract checks: the runtime family also satisfies the protocol concept,
+    // so template and polymorphic generators are interchangeable in generic code.
+    static_assert(SequenceGenerator<VdCorputBase, double>);
+    static_assert(SequenceGenerator<HaltonN<3>, std::array<double, 3>>);
 
 }  // namespace lds

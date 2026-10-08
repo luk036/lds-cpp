@@ -106,29 +106,4 @@ namespace lds {
     /// @return The VDC value at the given index
     double vdc2_table(unsigned long index) { return VDC_TABLE_2[index]; }
 
-    /// @brief Helper to generate the precomputed Circle base-2 table
-    /// @details Mapped from VDC_TABLE_2 to the unit circle. Not constexpr:
-    ///          std::cos/std::sin lack portable constexpr support in C++20.
-    /// @return std::array<std::array<double, 2>, VDC_TABLE_SIZE> of unit-circle points
-    auto make_circle_table() noexcept -> std::array<std::array<double, 2>, VDC_TABLE_SIZE> {
-        std::array<std::array<double, 2>, VDC_TABLE_SIZE> table{};
-        for (unsigned long i = 0; i < VDC_TABLE_SIZE; ++i) {
-            auto theta = VDC_TABLE_2[i] * TWO_PI;
-            table[i] = {std::cos(theta), std::sin(theta)};
-        }
-        return table;
-    }
-
-    static const auto CIRCLE_TABLE_2 = make_circle_table();
-
-    /// @brief Access the precomputed Circle base-2 table x-coordinate
-    /// @param index Index into the table
-    /// @return The circle point x-coordinate at the given index
-    double circle2_table_x(unsigned long index) { return CIRCLE_TABLE_2[index][0]; }
-
-    /// @brief Access the precomputed Circle base-2 table y-coordinate
-    /// @param index Index into the table
-    /// @return The circle point y-coordinate at the given index
-    double circle2_table_y(unsigned long index) { return CIRCLE_TABLE_2[index][1]; }
-
 }  // namespace lds
