@@ -259,7 +259,8 @@ namespace lds {
         }
 
         /// @brief Build the constexpr factory registry from VDC_BASES.
-        template <std::size_t... Is> static constexpr auto factory_table(std::index_sequence<Is...>)
+        template <std::size_t... Is>
+        static constexpr auto factory_table(std::index_sequence<Is...> /*unused*/)
             -> std::array<VdcFactory, sizeof...(Is)> {
             return {VdcFactory{VDC_BASES[Is], &make_wrap<VDC_BASES[Is]>}...};
         }
