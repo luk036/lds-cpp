@@ -1,11 +1,12 @@
 var searchData=
 [
   ['see_20also_0',['👀 See also',['../index.html#autotoc_md2',1,'']]],
-  ['skip_1',['skip',['../classlds_1_1GeneratorBase.html#a4c0afacc4f9f60db0c2189c0af87d7fe',1,'lds::GeneratorBase::skip()'],['../classlds_1_1GeneratorInterface.html#a3a60e5bb4db0cc5700748630883f63af',1,'lds::GeneratorInterface::skip()'],['../classlds_1_1VdCorputWrap.html#a4a2a3b1f56c448a646c8ddc95bb87c50',1,'lds::VdCorputWrap::skip()'],['../classlds_1_1VdCorputDynamic.html#a5f3b7c8609b82f5cbf5d8f88fc4b4cc0',1,'lds::VdCorputDynamic::skip()'],['../classlds_1_1HaltonN.html#a70698d326d1d6476debfea92191b4d24',1,'lds::HaltonN::skip()']]],
-  ['sphere_2',['sphere',['../classlds_1_1Sphere.html',1,'lds::Sphere&lt; Base0, Base1 &gt;'],['../classlds_1_1Sphere.html#a3b093370d990f47c1a0d1c2222c1544c',1,'lds::Sphere::Sphere()']]],
-  ['sphere3hopf_3',['sphere3hopf',['../classlds_1_1Sphere3Hopf.html',1,'lds::Sphere3Hopf&lt; Base0, Base1, Base2 &gt;'],['../classlds_1_1Sphere3Hopf.html#aa472f5bd45f7c0a378b74a8d99b3a991',1,'lds::Sphere3Hopf::Sphere3Hopf()']]],
-  ['standalone_20target_4',['Build and run the standalone target',['../index.html#autotoc_md6',1,'']]],
-  ['star_20history_5',['Star History',['../index.html#autotoc_md13',1,'']]],
-  ['static_20analysis_6',['Static analysis',['../index.html#autotoc_md10',1,'']]],
-  ['suite_7',['Build and run test suite',['../index.html#autotoc_md7',1,'']]]
+  ['sequencegenerator_1',['SequenceGenerator',['../conceptlds_1_1SequenceGenerator.html',1,'lds']]],
+  ['skip_2',['skip',['../classlds_1_1GeneratorBase.html#a4c0afacc4f9f60db0c2189c0af87d7fe',1,'lds::GeneratorBase::skip()'],['../classlds_1_1GeneratorInterface.html#a3a60e5bb4db0cc5700748630883f63af',1,'lds::GeneratorInterface::skip()'],['../classlds_1_1VdCorputWrap.html#a4a2a3b1f56c448a646c8ddc95bb87c50',1,'lds::VdCorputWrap::skip()'],['../classlds_1_1VdCorputDynamic.html#a5f3b7c8609b82f5cbf5d8f88fc4b4cc0',1,'lds::VdCorputDynamic::skip()'],['../classlds_1_1HaltonN.html#a70698d326d1d6476debfea92191b4d24',1,'lds::HaltonN::skip()']]],
+  ['sphere_3',['Sphere',['../classlds_1_1Sphere.html',1,'lds::Sphere&lt; Base0, Base1 &gt;'],['../classlds_1_1Sphere.html#a3b093370d990f47c1a0d1c2222c1544c',1,'lds::Sphere::Sphere()']]],
+  ['sphere3hopf_4',['Sphere3Hopf',['../classlds_1_1Sphere3Hopf.html',1,'lds::Sphere3Hopf&lt; Base0, Base1, Base2 &gt;'],['../classlds_1_1Sphere3Hopf.html#aa472f5bd45f7c0a378b74a8d99b3a991',1,'lds::Sphere3Hopf::Sphere3Hopf()']]],
+  ['standalone_20target_5',['Build and run the standalone target',['../index.html#autotoc_md6',1,'']]],
+  ['star_20history_6',['Star History',['../index.html#autotoc_md13',1,'']]],
+  ['static_20analysis_7',['Static analysis',['../index.html#autotoc_md10',1,'']]],
+  ['suite_8',['Build and run test suite',['../index.html#autotoc_md7',1,'']]]
 ];

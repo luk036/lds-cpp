@@ -1,3 +1,9 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$classlds_1_1GeneratorBase.html" title=" " alt="" coords="5,5,168,60"/>
+<area shape="rect" id="Node000000" href="$classlds_1_1GeneratorBase.html" title=" " alt="" coords="5,15,168,77"/>
+<area shape="rect" id="Node000001" href="$classlds_1_1GeneratorIterable.html" title=" " alt="" coords="216,15,441,77"/>
+<area shape="poly" id="edge25_Node000000_Node000001" title=" " alt="" coords="183,43,218,45,212,46,183,48"/>
+<area shape="rect" id="Node000002" href="$classilds_1_1VdCorput.html" title=" " alt="" coords="489,5,671,33"/>
+<area shape="poly" id="edge26_Node000001_Node000002" title=" " alt="" coords="456,30,491,29,486,29,457,35"/>
+<area shape="rect" id="Node000003" href="$classilds_1_1VdCorput.html" title=" " alt="" coords="489,57,671,85"/>
+<area shape="poly" id="edge27_Node000001_Node000003" title=" " alt="" coords="457,56,491,62,486,62,457,61"/>
 </map>

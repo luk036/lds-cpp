@@ -1,17 +1,17 @@
 <map id="lds/lds.hpp" name="lds/lds.hpp">
-<area shape="rect" id="Node000001" title="Low&#45;discrepancy sequence generators (van der Corput, Halton, Circle, Disk, Sphere)." alt="" coords="267,5,359,31"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="5,79,61,104"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="268,33,75,81,74,76,267,28"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="86,79,149,104"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="283,33,162,77,161,72,281,28"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="173,79,253,104"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="299,33,242,73,239,68,296,29"/>
-<area shape="rect" id="Node000005" title=" " alt="" coords="278,79,349,104"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="316,31,316,65,311,65,311,31"/>
-<area shape="rect" id="Node000006" title=" " alt="" coords="373,79,443,104"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="330,29,383,68,380,72,327,33"/>
-<area shape="rect" id="Node000007" title=" " alt="" coords="468,79,527,104"/>
-<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="344,28,456,71,454,76,342,33"/>
-<area shape="rect" id="Node000008" title=" " alt="" coords="551,79,630,104"/>
-<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="359,28,539,74,538,79,357,33"/>
+<area shape="rect" id="Node000001" title="Low&#45;discrepancy sequence generators (van der Corput, Halton, Circle, Disk, Sphere)." alt="" coords="263,5,355,33"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,81,61,109"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="263,34,76,83,75,78,262,29"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="84,81,147,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="277,33,162,79,161,74,272,34"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="171,81,250,109"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="294,33,241,74,239,69,289,34"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="274,81,344,109"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="311,32,311,67,307,64,307,35"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="368,81,437,109"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="327,31,377,72,371,71,325,36"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="461,81,520,109"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="342,31,449,76,444,76,341,36"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="543,81,622,109"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="355,30,531,79,526,80,354,35"/>
 </map>

@@ -1,3 +1,7 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$classlds_1_1GeneratorBase.html" title=" " alt="" coords="5,5,167,60"/>
+<area shape="rect" id="Node000000" href="$classlds_1_1GeneratorBase.html" title=" " alt="" coords="5,5,166,67"/>
+<area shape="rect" id="Node000001" href="$classlds_1_1GeneratorIterable.html" title=" " alt="" coords="214,5,395,67"/>
+<area shape="poly" id="edge1_Node000000_Node000001" title=" " alt="" coords="181,34,216,36,210,36,182,39"/>
+<area shape="rect" id="Node000002" href="$classlds_1_1Circle.html" title="Circle sequence generator." alt="" coords="443,22,590,50"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="410,34,445,36,440,36,411,39"/>
 </map>
