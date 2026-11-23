@@ -1,7 +1,6 @@
 // #include <cxxopts.hpp>
 // #include <iostream>
 #include <lds/lds.hpp>
-#include <lds/logger.hpp>
 // #include <string>
 // #include <vector>
 

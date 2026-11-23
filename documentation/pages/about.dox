@@ -9,5 +9,22 @@
   @f]
   where \f$a_k(n)\f$ are the base-\f$b\f$ digits of \f$n\f$.
 
+  Halton sequences extend this to \f$[0,1]^n\f$ by pairing successive bases and are the basis for
+  numeric integration (QMC).
+
+  @section use-cases Mappings and applications
+
+  - LDS on the unit circle \f$S^1\f$: initial guesses for Aberth's root-finding method.
+  - LDS on the unit sphere \f$S^2\f$: graphics.
+  - Grid points on \f$SO(3)\f$ / \f$S^3\f$ (Hopf coordinates): robotics.
+  - LDS on the \f$n\f$-sphere \f$S^n\f$: filter-bank design and MIMO wireless channel models.
+
+  @section design Design notes
+
+  - Digits come from reversing the index's bits (base 2) and from bases of the form \f$2^k-1\f$.
+  - The generator methods are `constexpr`, so sequences can be evaluated at compile time. That rules
+    out `std::atomic` counters; see the sibling project
+    [lds-gen-cpp](https://github.com/luk036/lds-gen-cpp) for the runtime, thread-safe variant.
+
   See the \ref lds "lds" namespace for the full API.
 */

@@ -23,9 +23,6 @@ jobs:
           sudo cmake --install build
           rm -rf build
 
-      - name: Install system dependencies for consumer
-        run: sudo apt-get install -y libfmt-dev
-
       - name: Configure consumer
         run: cmake -Stest_installed -B build_installed -DCMAKE_BUILD_TYPE=Release
 

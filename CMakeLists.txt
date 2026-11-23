@@ -58,51 +58,6 @@ include(${CPM_DOWNLOAD_LOCATION})
 # PackageProject.cmake will be used to make our target installable
 CPMAddPackage("gh:TheLartians/PackageProject.cmake@1.8.0")
 
-# fmt is a transitive dependency of spdlog. Prefer a system-installed fmt when available. On MSVC,
-# skip prebuilt system packages (e.g. conda): they are Release-only shared libraries whose
-# std::string ABI (_ITERATOR_DEBUG_LEVEL=0) mismatches Debug builds (_ITERATOR_DEBUG_LEVEL=2),
-# corrupting std::strings returned by fmt::format. Build fmt from source on MSVC so the ABI always
-# matches (same as CI's windows-latest runner).
-if(NOT MSVC)
-  find_package(fmt CONFIG QUIET)
-  if(fmt_FOUND)
-    message(STATUS "Found system fmt: ${fmt_DIR}")
-    set(CPM_fmt_ADDED YES)
-  endif()
-endif()
-
-if(NOT fmt_FOUND)
-  CPMAddPackage(
-    NAME fmt
-    GIT_TAG 12.1.0
-    GITHUB_REPOSITORY fmtlib/fmt
-    OPTIONS "FMT_INSTALL YES" # create an installable target
-  )
-endif()
-
-# spdlog is used by the compiled logger source; prefer a system-installed spdlog when available.
-# SPDLOG_FMT_EXTERNAL is always set so spdlog uses the external fmt and avoids duplicate symbols
-# when fmt is a shared library. On MSVC, build spdlog from source for the same std::string ABI
-# reason as fmt.
-if(NOT MSVC)
-  find_package(spdlog CONFIG QUIET)
-  if(spdlog_FOUND)
-    message(STATUS "Found system spdlog: ${spdlog_DIR}")
-    set(CPM_spdlog_ADDED YES)
-  endif()
-endif()
-
-if(NOT spdlog_FOUND)
-  CPMAddPackage(
-    NAME spdlog
-    GIT_TAG v1.17.0
-    GITHUB_REPOSITORY gabime/spdlog
-    OPTIONS "SPDLOG_INSTALL YES" "SPDLOG_FMT_EXTERNAL YES"
-  )
-endif()
-
-set(SPECIFIC_LIBS fmt::fmt spdlog::spdlog)
-
 # ---------------------------------------------------------------------------
 # Library target
 # ---------------------------------------------------------------------------
@@ -119,15 +74,6 @@ set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 20)
 
 # being a cross-platform target, we enforce standards conformance on MSVC
 target_compile_options(${PROJECT_NAME} PUBLIC "$<$<COMPILE_LANG_AND_ID:CXX,MSVC>:/permissive->")
-
-target_link_libraries(${PROJECT_NAME} PRIVATE ${SPECIFIC_LIBS})
-
-# Any TU using spdlog must compile with spdlog's own interface definitions (SPDLOG_COMPILED_LIB,
-# SPDLOG_FMT_EXTERNAL) or the header-only and compiled registries diverge.
-get_target_property(SPDLOG_COMPILE_DEFS spdlog::spdlog INTERFACE_COMPILE_DEFINITIONS)
-if(SPDLOG_COMPILE_DEFS)
-  target_compile_definitions(${PROJECT_NAME} PRIVATE ${SPDLOG_COMPILE_DEFS})
-endif()
 
 target_include_directories(
   ${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
@@ -155,7 +101,6 @@ packageProject(
   INCLUDE_DESTINATION include/${PROJECT_NAME}-${PROJECT_VERSION}
   VERSION_HEADER "${VERSION_HEADER_LOCATION}"
   COMPATIBILITY SameMajorVersion
-  DEPENDENCIES "fmt 12.1.0"
 )
 
 # ---------------------------------------------------------------------------
@@ -182,7 +127,7 @@ if(LDS_BUILD_STANDALONE)
   add_executable(LdsStandalone ${LDS_STANDALONE_SOURCES})
   set_target_properties(LdsStandalone PROPERTIES OUTPUT_NAME "Lds" CXX_STANDARD 20)
   target_include_directories(LdsStandalone SYSTEM PRIVATE ${CXXOPTS_INCLUDE_DIRS})
-  target_link_libraries(LdsStandalone PRIVATE Lds::Lds cxxopts::cxxopts ${SPECIFIC_LIBS})
+  target_link_libraries(LdsStandalone PRIVATE Lds::Lds cxxopts::cxxopts)
   target_enable_warnings(LdsStandalone)
 endif()
 
@@ -211,7 +156,7 @@ if(LDS_BUILD_TESTS)
 
   file(GLOB_RECURSE TEST_SOURCES CONFIGURE_DEPENDS "test/source/*.cpp")
   add_executable(LdsTests ${TEST_SOURCES})
-  target_link_libraries(LdsTests PRIVATE doctest::doctest Lds::Lds ${SPECIFIC_LIBS})
+  target_link_libraries(LdsTests PRIVATE doctest::doctest Lds::Lds)
   set_target_properties(LdsTests PROPERTIES CXX_STANDARD 20)
   set_property(TARGET LdsTests PROPERTY INTERPROCEDURAL_OPTIMIZATION TRUE)
   target_enable_warnings(LdsTests)
@@ -252,7 +197,7 @@ if(LDS_BUILD_BENCHMARKS)
 
     add_executable(${TARGET_NAME} ${ONE_BENCH_CPP})
     set_target_properties(${TARGET_NAME} PROPERTIES OUTPUT_NAME ${ONE_BENCH_EXEC} CXX_STANDARD 20)
-    target_link_libraries(${TARGET_NAME} PRIVATE nanobench Lds::Lds ${SPECIFIC_LIBS})
+    target_link_libraries(${TARGET_NAME} PRIVATE nanobench Lds::Lds)
     target_enable_warnings(${TARGET_NAME})
     add_test(NAME ${ONE_BENCH_EXEC} COMMAND ${TARGET_NAME})
   endforeach()
@@ -336,7 +281,7 @@ if(LDS_ENABLE_COVERAGE AND CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang|AppleClang")
       COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/coverage
       COMMAND
         ${GCOVR_PATH} --root ${PROJECT_SOURCE_DIR} --html-details
-        ${CMAKE_BINARY_DIR}/coverage/index.html --exclude test/ --exclude build/ ${extra_gcovr_args}
+        ${CMAKE_BINARY_DIR}/coverage/index.html --exclude test/ --exclude build/ --exclude standalone/ --exclude examples/ --exclude-unreachable-branches --exclude-throw-branches ${extra_gcovr_args}
       WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
       COMMENT "Generating coverage report in ${CMAKE_BINARY_DIR}/coverage/index.html"
     )
